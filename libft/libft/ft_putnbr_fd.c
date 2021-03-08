@@ -3,38 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hhuhtane <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/17 14:08:44 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:31:01 by helvi            ###   ########.fr       */
+/*   Created: 2019/10/23 17:08:35 by hhuhtane          #+#    #+#             */
+/*   Updated: 2019/10/30 16:54:57 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** prints int n to fd
-*/
-
 void	ft_putnbr_fd(int n, int fd)
 {
-	if (fd >= 0)
+	if (!fd)
+		return ;
+	if (n < 0)
 	{
-		if (n == T_INT_MIN)
+		ft_putchar_fd('-', fd);
+		if (n == -2147483648)
 		{
-			ft_putchar_fd('-', fd);
 			ft_putchar_fd('2', fd);
-			n = 147483648;
+			n += 2000000000;
 		}
-		if (n < 0)
-		{
-			ft_putchar_fd('-', fd);
-			n = n * (-1);
-		}
-		if (n >= 10)
-		{
-			ft_putnbr_fd((n / 10), fd);
-		}
-		ft_putchar_fd(((n % 10) + '0'), fd);
+		n *= -1;
 	}
+	if (n > 9)
+		ft_putnbr_fd((n / 10), fd);
+	ft_putchar_fd(((n % 10) + '0'), fd);
 }

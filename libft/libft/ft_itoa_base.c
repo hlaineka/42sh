@@ -3,65 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/10 11:22:52 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:28:13 by helvi            ###   ########.fr       */
+/*   Created: 2020/03/24 11:47:20 by hhuhtane          #+#    #+#             */
+/*   Updated: 2020/08/07 12:17:31 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** turns intiger value to char, using the base given.
-*/
-
-int		ft_define_base_length(long long int n, int base)
+char		*ft_itoa_base(int n, int base)
 {
-	int				i;
-	long long int	int_min;
+	size_t		n_len;
+	size_t		temp;
+	char		*str;
 
-	int_min = -9223372036854775807;
-	i = 1;
-	if (n < int_min)
-		return (20);
+	n_len = ft_intlen_base(n, base);
+	if (!(str = ft_memalloc(sizeof(char) * (n_len + 1))))
+		return (NULL);
+	str[n_len--] = '\0';
 	if (n < 0)
+		str[0] = '-';
+	while (n >= base || n <= -base)
 	{
-		i++;
-		n = n * (-1);
-	}
-	while ((n / base) > 0)
-	{
-		i++;
+		temp = ft_abs(n % base);
+		if (temp < 10)
+			str[n_len--] = temp + '0';
+		else
+			str[n_len--] = temp - 10 + 'a';
 		n = n / base;
 	}
-	return (i);
-}
-
-char	*ft_itoa_base(long long int n, long long int base)
-{
-	static char	*str;
-	int			w;
-
-	w = ft_define_base_length(n, base) - 1;
-	if (n < -9223372036854775807)
-		return (ft_strdup("-9223372036854775808"));
-	if (NULL != (str = (char*)malloc(sizeof(char) *
-					(ft_define_base_length(n, base) + 1))))
-	{
-		str[w + 1] = ('\0');
-		if (n < 0)
-		{
-			str[0] = ('-');
-			n = n * (-1);
-		}
-		while (n >= base)
-		{
-			str[w--] = ((n % base) + '0');
-			n = n / base;
-		}
-		str[w] = n + '0';
-		return (str);
-	}
-	return (NULL);
+	temp = ft_abs(n);
+	if (temp < 10)
+		str[n_len] = temp + '0';
+	else
+		str[n_len] = temp - 10 + 'a';
+	return (str);
 }
