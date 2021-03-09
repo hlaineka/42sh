@@ -6,7 +6,7 @@
 #    By: helvi <helvi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/08 10:48:52 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/03/09 19:07:43 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ LIBFT_DIR = libft/
 LISTS_DIR = lists/
 MISC_DIR = misc/
 OBJS_DIR = objs/
-PRINTF_DIR = printf/
+PRINTHELVI_DIR = printf/
 STRINGARRAYS_DIR = stringarrays/
 STRINGS_DIR = strings/
 
@@ -209,6 +209,20 @@ _SRC_STRINGS = ft_char_str_join.c \
 			ft_strsub_freestr.c \
 			ft_strsub_mid.c
 
+_SRC_PRINT_HELVI = float_trim_and_round.c \
+			ft_printf.c \
+			helper_functions.c \
+			print_c.c \
+			print_d.c \
+			print_f.c \
+			print_o.c \
+			print_p.c \
+			print_s.c \
+			print_u.c \
+			print_x.c \
+			set_command_values.c \
+			va_arg_reader_functions.c
+
 SRC_FT_ERROR = $(addprefix $(FT_ERROR_DIR), $(_SRC_FT_ERROR))
 SRC_FT_EXIT = $(addprefix $(FT_EXIT_DIR), $(_SRC_FT_EXIT))
 SRC_FT_PRINTF = $(addprefix $(FT_PRINTF_DIR), $(_SRC_FT_PRINTF))
@@ -217,12 +231,15 @@ SRC_LISTS = $(addprefix $(LISTS_DIR), $(_SRC_LISTS))
 SRC_MISC = $(addprefix $(MISC_DIR), $(_SRC_MISC))
 SRC_STRINGARRAYS = $(addprefix $(STRINGARRAYS_DIR), $(_SRC_STRINGARRAYS))
 SRC_STRINGS = $(addprefix $(STRINGS_DIR), $(_SRC_STRINGS))
+SRC_PRINTHELVI = $(addprefix $(PRINTHELVI_DIR), $(_SRC_PRINTHELVI))
 
 SRC = $(SRC_FT_ERROR) $(SRC_FT_EXIT) $(SRC_FT_PRINTF) $(SRC_LIBFT) \
-		$(SRC_LISTS) $(SRC_MISC) $(SRC_STRINGARRAYS) $(SRC_STRINGS)
+		$(SRC_LISTS) $(SRC_MISC) $(SRC_STRINGARRAYS) $(SRC_STRINGS) \
+		$(SRC_PRINTHELVI)
 
 _SRC = $(_SRC_FT_ERROR) $(_SRC_FT_EXIT) $(_SRC_FT_PRINTF) $(_SRC_LIBFT) \
-		$(_SRC_LISTS) $(_SRC_MISC) $(_SRC_STRINGARRAYS) $(_SRC_STRINGS)
+		$(_SRC_LISTS) $(_SRC_MISC) $(_SRC_STRINGARRAYS) $(_SRC_STRINGS) \
+		$(_SRC_PRINTHELVI)
 
 OBJ_FILES = $(_SRC:.c=.o)
 OBJS = $(patsubst %, $(OBJS_DIR)%, $(_SRC:.c=.o))
@@ -233,7 +250,6 @@ _INC = 	ft_error.h \
 		ft_printf_helvi.h \
 		ft_printf_typedefs.h \
 		libft.h \
-		libft_heikki.h \
 		libft_shorthand.h \
 		lists.h \
 		misc.h \

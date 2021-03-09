@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_helvi.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 12:23:22 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/24 12:33:19 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/09 19:09:41 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef FT_PRINTF_HELVI_H
+# define FT_PRINTF_HELVI_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -99,7 +99,6 @@ typedef struct	s_tags
 ** The main function to handle printing
 */
 
-int				ft_printf(const char *format, ...);
 int				printer(const char *format, va_list *source);
 
 /*

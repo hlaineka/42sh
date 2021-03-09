@@ -6,11 +6,12 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 12:14:06 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/01 12:11:29 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/09 19:08:53 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_error.h"
+#include "ft_printf_helvi.h"
 
 /*
 ** functions ment to make manual error handling easier. A string array is

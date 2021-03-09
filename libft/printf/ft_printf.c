@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 12:23:03 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/24 12:37:01 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/09 18:11:08 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,16 +116,5 @@ int	printer(const char *format, va_list *source)
 		}
 	}
 	free(command);
-	return (printed);
-}
-
-int			ft_printf(const char *format, ...)
-{
-	va_list source;
-	int		printed;
-
-	va_start(source, format);
-	printed = printer(format, &source);
-	va_end(source);
 	return (printed);
 }

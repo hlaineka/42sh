@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 17:35:24 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:35:41 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/08 22:19:25 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 void	print_error_and_exit(char *name)
 {
 	ft_printf("ft_ls: %s: ", name);
-	perror("");
+//	perror("");
 	exit(0);
 }

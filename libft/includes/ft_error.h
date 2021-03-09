@@ -6,14 +6,13 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 13:02:36 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/06 13:09:08 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/09 15:43:32 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_ERROR_H
 # define FT_ERROR_H
 
-# include "ft_printf_helvi.h"
 # include "libft.h"
 # include "ft_exit.h"
 # include <stdarg.h>

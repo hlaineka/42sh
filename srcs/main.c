@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstappend.c                                     :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/27 19:13:22 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/09 15:17:46 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/03/09 13:58:42 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstappend(t_list **alst, t_list *new_lst)
+int		main(int argc, char **argv, char **envp)
 {
-	t_list		*tail;
+	(void)argc;
+	(void)argv;
+	(void)envp;
+	ft_putendl("TESTI");
 
-	if (!(*alst) | !new_lst)
-		return ;
-	tail = *alst;
-	while (tail->next)
-		tail = tail->next;
-	tail->next = new_lst;
+	return (0);
 }

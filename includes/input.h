@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstappend.c                                     :+:      :+:    :+:   */
+/*   input.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/27 19:13:22 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/09 15:17:46 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/03/09 14:53:10 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef INPUT_H
+# define INPUT_H
 
-void	ft_lstappend(t_list **alst, t_list *new_lst)
+# define ERR_READ 1
+# define ERR_MALLOC 2
+
+typedef struct		s_input
 {
-	t_list		*tail;
+	char			*ls; //left_side
+	char			*rrs; //reverse right_side
+	int				ls_i; //not needed?
+	int				rrs_i; //not needed?
+}					t_input;
 
-	if (!(*alst) | !new_lst)
-		return ;
-	tail = *alst;
-	while (tail->next)
-		tail = tail->next;
-	tail->next = new_lst;
-}
+void				init_input(t_input *input);
+
+#endif
