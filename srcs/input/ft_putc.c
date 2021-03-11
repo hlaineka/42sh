@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   ft_putc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/11 19:00:19 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/11 20:37:53 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/03/11 20:12:20 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/03/11 20:15:45 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
+#include "input.h"
 
-# include <curses.h>
-# include <fcntl.h>
-# include <signal.h>
-# include <sys/ioctl.h>
-# include <term.h>
-# include <termios.h>
-# include <unistd.h>
-
-# include "libft.h"
-
-#endif
+int			ft_putc(int c)
+{
+	write(g_term->fd_out, &c, 1);
+	return (1);
+}

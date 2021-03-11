@@ -6,12 +6,14 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/11 18:59:47 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/11 20:48:53 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_21_H
 # define STRUCTS_21_H
+
+# include <termios.h>
 
 typedef struct termios	t_termios;
 
@@ -90,11 +92,15 @@ typedef struct			s_term
 	char				*termtype;
 	char				*buffer;
 	t_termios			orig_termios;
+	char				*ti_string;
+	char				*te_string;
 	char				*cl_string;
+	char				*cd_string;
+	char				*ce_string;
 	char				*cm_string;
-	int					height;
-	int					width;
-	int					fd_term_out; // ?
+	int					nrows;
+	int					ncolumns;
+	int					fd_out; // ?
 }						t_term;
 
 typedef struct			s_itty
@@ -107,5 +113,10 @@ typedef struct			s_itty
 	//current location after prompt print
 	//current location after ls print
 }						t_itty;
+
+/*
+** GLOBALS
+*/
+t_term					*g_term;
 
 #endif

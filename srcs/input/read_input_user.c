@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/09 14:56:53 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/11 20:44:57 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int				read_input(t_input *input)
 }
 */
 
-void			init_input(t_input *input)
+void			init_input2(t_input *input)
 {
 	ft_bzero(input, sizeof(t_input));
 	if (!(input->ls = ft_memalloc(sizeof(char) * 2048)))

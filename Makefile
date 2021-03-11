@@ -6,7 +6,7 @@
 #    By: helvi <helvi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/11 19:06:05 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/03/11 20:48:25 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME = 21sh
 CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -g -I$(DIR_INC) -Ilibft/includes
+TERMCAPS = -ltermcap
 
 DIR_INC = includes/
 DIR_MAIN = srcs/
@@ -24,7 +25,11 @@ DIR_OBJS = objs/
 _SRC_MAIN = main.c
 
 _SRC_INPUT = read_input_user.c \
-			enable_raw_mode.c
+			disable_raw_mode.c \
+			enable_raw_mode.c \
+			errors.c \
+			ft_putc.c \
+			init_input.c
 
 SRC_INPUT = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))
 SRC_INPUT = $(addprefix $(DIR_INPUT), $(_SRC_INPUT))
@@ -45,17 +50,17 @@ INC = $(addprefix $(DIR_INC), $(_INC))
 all: libft $(NAME)
 
 $(NAME): $(DIR_OBJS) $(OBJS) libft
-		$(CC) $(CFLAGS) -o $(NAME) $(OBJS) libft.a
+		$(CC) $(CFLAGS) $(TERMCAPS) -o $(NAME) $(OBJS) libft.a
 
 $(DIR_OBJS):
 		make -C libft
 		cp libft/libft.a .
 		mkdir -p $(DIR_OBJS)
 
-$(DIR_OBJS)%.o: $(DIR_MAIN)%.c
+$(DIR_OBJS)%.o: $(DIR_MAIN)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
-$(DIR_OBJS)%.o: $(DIR_INPUT)%.c
+$(DIR_OBJS)%.o: $(DIR_INPUT)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 libft:
