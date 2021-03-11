@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 12:23:03 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/16 12:14:50 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/09 18:11:08 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,44 +88,33 @@ static int	check_command(const char *format, t_tags *command, va_list *source)
 	return (w);
 }
 
-static int	printer(const char *format, int *i, t_tags *command,
-			va_list *source)
+int	printer(const char *format, va_list *source)
 {
 	int		printed;
-
-	printed = 0;
-	if (format[*i] == '%')
-	{
-		initialize_command(command);
-		*i = *i + check_command(&format[*i], command, source) + 1;
-		if (command->empty)
-			return (-1);
-		printed = selector(command, source);
-	}
-	else
-	{
-		ft_putchar_fd(format[*i], command->flag_fd);
-		*i = *i + 1;
-		printed = 1;
-	}
-	return (printed);
-}
-
-int			ft_printf(const char *format, ...)
-{
-	va_list source;
-	int		i;
 	t_tags	*command;
-	int		printed;
+	int		i;
 
-	va_start(source, format);
 	command = (t_tags*)malloc(sizeof(t_tags));
-	initialize_command(command);
 	printed = 0;
 	i = 0;
+	initialize_command(command);
 	while (format[i] != '\0')
-		printed = printed + printer(format, &i, command, &source);
+	{
+		if (format[i] == '%')
+		{
+			initialize_command(command);
+			i = i + check_command(&format[i], command, source) + 1;
+			if (command->empty)
+				return (-1);
+			printed = printed + selector(command, source);
+		}
+		else
+		{
+			ft_putchar_fd(format[i], command->flag_fd);
+			i = i + 1;
+			printed =  printed + 1;
+		}
+	}
 	free(command);
-	va_end(source);
 	return (printed);
 }

@@ -6,92 +6,70 @@
 #    By: helvi <helvi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/02/19 11:54:11 by helvi            ###   ########.fr        #
+#    Updated: 2021/03/09 19:28:42 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
-
 NAME = 21sh
 
-_SRC = 	21sh.c \
-		rawmode.c \
-		screen_printing.c \
-		text_editing.c \
-		lexer.c \
-		arrows.c \
-		command_list.c \
-		scanner.c \
-		scanner_helpers.c \
-		scanner_helpers2.c \
-		env.c \
-		env_helpers.c \
-		setenv.c \
-		unsetenv.c \
-		cd.c \
-		cd_helpers.c \
-		command_execute.c \
-		echo.c \
-		pwd.c \
-		errors.c \
-		exit.c
+CC = gcc
 
-_OBJ = $(_SRC:.c=.o)
-_INC = 21sh.h
-_LIBFT = libft.a
+CFLAGS = -Wall -Wextra -Werror -g -I$(DIR_INC) -Ilibft/includes
 
-SRC_DIR = src
-OBJ_DIR = objs
-INC_DIR = includes
-LIBFT_DIR = libft
+DIR_INC = includes/
+DIR_MAIN = srcs/
+DIR_INPUT = srcs/input/
+DIR_OBJS = objs/
 
-SRC = $(patsubst %,$(SRC_DIR)/%,$(_SRC))
-OBJ = $(patsubst %,$(OBJ_DIR)/%,$(_OBJ))
-INC = $(patsubst %,$(INC_DIR)/%,$(_INC))
-LIBFT = $(patsubst %,$(LIBFT_DIR)/%,$(_LIBFT))
+_SRC_MAIN = main.c
 
-INC_LIBFT = -I libft/includes
+_SRC_INPUT = read_input_user.c \
+			enable_raw_mode.c
 
-FLAGS = -Wall -Wextra -Werror -I $(INC_DIR) $(INC_LIBFT)
-DEBUG_FLAGS = -Wall -Wextra -Werror -g -I $(INC_DIR) $(INC_LIBFT)
+SRC_INPUT = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))
+SRC_INPUT = $(addprefix $(DIR_INPUT), $(_SRC_INPUT))
 
-all: $(OBJ_DIR) $(NAME)
+SRC = $(SRC_MAIN) $(SRC_INPUT)
 
-$(NAME): $(OBJ)
-	@echo "\n"object files made."\n"
-	@cd $(LIBFT_DIR) && make -s
-	@echo libraries ready.
-	@$(CC) $(FLAGS) -o $(NAME) $(OBJ) $(LIBFT)
-	@echo compiled!
+_SRC = $(_SRC_MAIN) $(_SRC_INPUT)
 
-debug: $(OBJ_DIR) $(OBJ)
-	@echo "\n"object files made."\n"
-	@cd $(LIBFT_DIR) && make -s debug
-	@$(CC) $(DEBUG_FLAGS) -o $(NAME) $(OBJ) $(LIBFT)
-	@echo minishell compiled with -g.
+OBJ_FILES = $(_SRC:.c=.o)
+OBJS = $(patsubst %, $(DIR_OBJS)%, $(_SRC:.c=.o))
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC)
-	@printf "|"
-	@$(CC) $(DEBUG_FLAGS) -c -o $@ $<
+_INC = 	input.h \
 
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+INC = $(addprefix $(DIR_INC), $(_INC))
 
-lib:
-	@cd $(LIBFT_DIR) && make -s
+all: libft $(NAME)
+
+$(NAME): $(DIR_OBJS) $(OBJS) libft
+		$(CC) $(CFLAGS) -o $(NAME) $(OBJS) libft.a
+
+$(DIR_OBJS):
+		make -C libft
+		cp libft/libft.a .
+		mkdir -p $(DIR_OBJS)
+
+$(DIR_OBJS)%.o: $(DIR_MAIN)%.c
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(DIR_OBJS)%.o: $(DIR_INPUT)%.c
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+libft:
+	make -C libft
+	cp libft/libft.a .
 
 clean:
-	@rm -f $(OBJ)
-	@echo minishell object files removed.
-	@cd $(LIBFT_DIR) && make -s clean
-	@find . -type f -name '.DS_Store' -delete
-	@find . -type f -name '*~' -print -delete -o -name "#*#" -print -delete
+	@make -C libft clean
+	@rm -f $(OBJS)
+	@rm -f libft.a
+	@echo library object files removed.
 
-fclean: clean
+fclean:
+	@make -C libft fclean
 	@rm -f $(NAME)
-	@cd $(LIBFT_DIR) && make -s fclean
-	@rm -rf $(OBJ_DIR)
-	@echo minishell removed. Object folder removed.
-	
+	@rm -rf $(DIR_OBJS)
+	@echo library .a file removed. Object folder removed.
 
 re: fclean all
