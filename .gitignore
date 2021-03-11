@@ -1,0 +1,11 @@
+
+*.o
+*~
+*.dSYM
+*ft_ls
+*libft.a
+*.a
+*.gch
+21sh
+obj/
+libft/obj
