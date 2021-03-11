@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.h                                            :+:      :+:    :+:   */
+/*   includes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/11 19:04:54 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/03/11 19:00:19 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/03/11 19:04:03 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INPUT_H
-# define INPUT_H
+#ifndef INCLUDES_H
+# define INCLUDES_H
 
-# define ERR_READ 1
-# define ERR_MALLOC 2
+# include <curses.h>
+# include <term.h>
+# include <termios.h>
+# include <unistd.h>
+# include <sys/ioctl.h>
+# include <fcntl.h>
 
-# include "includes.h"
-# include "structs_21.h"
-
-void				init_input(t_input *input);
-
-/*
-** TERMINAL
-*/
-int					enable_raw_mode(t_term *term);
-int					disable_raw_mode(t_term *term);
+# include "libft.h"
 
 #endif

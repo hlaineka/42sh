@@ -6,7 +6,7 @@
 #    By: helvi <helvi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/09 19:28:42 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/03/11 19:06:05 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,8 @@ OBJ_FILES = $(_SRC:.c=.o)
 OBJS = $(patsubst %, $(DIR_OBJS)%, $(_SRC:.c=.o))
 
 _INC = 	input.h \
+		structs_21.h \
+		includes.h
 
 INC = $(addprefix $(DIR_INC), $(_INC))
 
