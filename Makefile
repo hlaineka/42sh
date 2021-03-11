@@ -6,7 +6,7 @@
 #    By: helvi <helvi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/09 15:26:24 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/03/09 19:28:42 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ DIR_OBJS = objs/
 
 _SRC_MAIN = main.c
 
-_SRC_INPUT = read_input_user.c
+_SRC_INPUT = read_input_user.c \
+			enable_raw_mode.c
 
 SRC_INPUT = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))
 SRC_INPUT = $(addprefix $(DIR_INPUT), $(_SRC_INPUT))
