@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/11 20:59:18 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/12 16:54:17 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,20 @@
 # include "includes.h"
 # include "structs_21.h"
 
-void				initialize(t_input *input, t_term *term);
+void		initialize(t_input *input, t_term *term);
 
-void				err_fatal(int error_no, char *s_str, t_term *term);
-void				err_quit(int error_no, char *s_str);
+void		err_fatal(int error_no, char *s_str, t_term *term);
+void		err_quit(int error_no, char *s_str);
 
 /*
 ** TERMINAL
 */
-void				enable_raw_mode(t_term *term);
-void				disable_raw_mode(t_term *term);
+void		enable_raw_mode(t_term *term);
+void		disable_raw_mode(t_term *term);
+void		print_prompt(int mode);
 
-int					ft_putc(int c);
+char		*get_input(int argc, char **argv, t_term *term, t_input *input);
+
+int			ft_putc(int c);
 
 #endif

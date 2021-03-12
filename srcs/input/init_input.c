@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/11 21:00:47 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/12 18:59:39 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,57 @@ void			init_input(t_input *input)
 		free(input->ls);
 		exit(1);
 	}
+	input->ls_size = 2048;
+	input->rrs_size = 2048;
 }
 
 void			init_term(t_term *term)
 {
+	int		success;
+	char	*buffer;
+
 	ft_bzero(term, sizeof(t_term));
+	term->termtype = getenv("TERM");
+	if (!isatty(1))
+		term->fd_stdout = open(ttyname(ttyslot()), O_RDWR);
+	else
+		term->fd_stdout = STDOUT_FILENO;
+	if (!term->termtype)
+		err_quit(ERR_TERMTYPE_NOT_SET, NULL);
+	success = tgetent(term->term_buffer, term->termtype);
+	if (success < 0)
+		err_quit(ERR_TERMCAPS_NO_ACCESS, NULL);
+	if (success == 0)
+		err_quit(ERR_TERMTYPE_NOT_FOUND, term->termtype);
+
+	if (!(term->buffer = ft_memalloc(sizeof(char) * 2048)))
+		err_fatal(ERR_MALLOC, NULL, term);
+	buffer = term->buffer;
+
+	term->ti_string = tgetstr("ti", &buffer);
+	term->te_string = tgetstr("te", &buffer);
+	term->cl_string = tgetstr("cl", &buffer);
+	term->cd_string = tgetstr("cd", &buffer);
+	term->ce_string = tgetstr("ce", &buffer);
+	term->cm_string = tgetstr("cm", &buffer);
+
+	term->nrows = tgetnum("li");
+	term->ncolumns = tgetnum("co");
+
+	term->fd_stdin = STDIN_FILENO;
+	term->fd_stdout = STDOUT_FILENO; // change to terminal output?
+	term->fd_stderr = STDERR_FILENO;
+/*
+	term->so_string = tgetstr("so", &buffer);
+	term->se_string = tgetstr("se", &buffer);
+	term->mr_string = tgetstr("mr", &buffer);
+	term->me_string = tgetstr("me", &buffer);
+	term->us_string = tgetstr("us", &buffer);
+	term->ue_string = tgetstr("ue", &buffer);
+	term->vi_string = tgetstr("vi", &buffer);
+	term->ve_string = tgetstr("ve", &buffer);
+*/
+
 	
 }
 
@@ -79,4 +125,6 @@ void			initialize(t_input *input, t_term *term)
 {
 	init_term(term);
 	init_input(input);
+	enable_raw_mode(term);
+	tputs(term->ti_string, 1, ft_putc);
 }

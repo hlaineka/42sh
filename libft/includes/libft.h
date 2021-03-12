@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 11:58:27 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/09 15:50:19 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/12 16:44:45 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ char				*ft_strdup(const char *s);
 char				*ft_strcpy(char *dest, const char *src);
 char				*ft_strncpy(char *dest, const char *src, size_t num);
 char				*ft_strcat(char *dest, const char *src);
+char				*ft_strrcat(char *s1, const char *s2);
 char				*ft_strncat(char *dest, const char *src, size_t num);
 char				*ft_strchr(const char *src, int c);
 char				*ft_strrchr(const char *src, int c);

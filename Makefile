@@ -6,7 +6,7 @@
 #    By: helvi <helvi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/11 20:48:25 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/03/12 16:10:06 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ _SRC_INPUT = read_input_user.c \
 			enable_raw_mode.c \
 			errors.c \
 			ft_putc.c \
-			init_input.c
+			init_input.c \
+			prompt.c
 
 SRC_INPUT = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))
 SRC_INPUT = $(addprefix $(DIR_INPUT), $(_SRC_INPUT))

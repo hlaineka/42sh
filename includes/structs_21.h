@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/11 20:48:53 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/12 18:23:35 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 
 # include <termios.h>
 
+# define KEY_ESC 27
+
 typedef struct termios	t_termios;
 
 typedef struct			s_input
 {
 	char				*ls;
 	char				*rrs;
-	int					ls_size;
-	int					rrs_size;
+	size_t				ls_size;
+	size_t				rrs_size;
 }						t_input;
 
 typedef struct			s_process
@@ -100,9 +102,12 @@ typedef struct			s_term
 	char				*cm_string;
 	int					nrows;
 	int					ncolumns;
-	int					fd_out; // ?
+	int					fd_stdin;
+	int					fd_stdout;
+	int					fd_stderr;
 }						t_term;
 
+// t_input already is!
 typedef struct			s_itty
 {
 	char				*ls;

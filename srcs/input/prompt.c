@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putc.c                                          :+:      :+:    :+:   */
+/*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/11 20:12:20 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/12 19:01:26 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/03/12 16:10:18 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/03/12 16:13:28 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
-int			ft_putc(int c)
+void	print_prompt(int mode)
 {
-//	write(g_term->fd_stdout, &c, 1);
-	return (write(STDIN_FILENO, &c, 1));
-//	return (1);
+	if (mode) // change 1 to QUOTED or something like that
+		ft_printf("$> ");
+	else
+		ft_printf("> "); // quote
 }

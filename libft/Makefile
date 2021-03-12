@@ -6,7 +6,7 @@
 #    By: helvi <helvi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/09 19:07:43 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/03/12 16:45:23 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -138,6 +138,7 @@ _SRC_LIBFT = ft_abs.c \
 			ft_strnequ.c \
 			ft_strnew.c \
 			ft_strnstr.c \
+			ft_strrcat.c \
 			ft_strrchr.c \
 			ft_strset.c \
 			ft_strsplit.c \
