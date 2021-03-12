@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/12 19:24:55 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/12 20:26:20 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ static int		do_special_keys(char *rc, t_input *input, t_term *term)
 //		autofill_last_word_from_ls(); // or program?
 	if (rc[0] == 13)
 	{
-		ft_printf("DING");
 		return (1);
 	}
 	return (0);
@@ -92,11 +91,11 @@ static int		shell_keypress(char *rc, t_input *input, t_term *term)
 		ft_strncat(input->ls, rc, 1);
 	tputs(tgoto(term->cm_string, 0, 0), 1, ft_putc);
 	tputs(term->cd_string, 1, ft_putc);
-	ft_putstr(input->ls);
-	ft_putchar('|');
-	ft_putstr(input->rrs);
+//	ft_putstr(input->ls);
+//	ft_putchar('|');
+//	ft_putstr(input->rrs);
 
-//	ft_printf("%s %s", input->ls, input->rrs);
+	ft_printf_fd(STDOUT_FILENO, "%s %s", input->ls, input->rrs);
 	return (ret);
 // some kind of print clear row, print prompt again, 
 }
