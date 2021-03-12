@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/11 20:40:05 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/11 20:58:54 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 int		main(int argc, char **argv, char **envp)
 {
 	t_term		term;
+	t_input		input;
 
 	g_term = &term;
+	initialize(&input, &term);
 	(void)argc;
 	(void)argv;
 	(void)envp;

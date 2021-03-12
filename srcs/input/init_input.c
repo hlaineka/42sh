@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/09 22:30:48 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/11 21:00:47 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,16 @@ void			init_input(t_input *input)
 		free(input->ls);
 		exit(1);
 	}
+}
+
+void			init_term(t_term *term)
+{
+	ft_bzero(term, sizeof(t_term));
+	
+}
+
+void			initialize(t_input *input, t_term *term)
+{
+	init_term(term);
+	init_input(input);
 }
