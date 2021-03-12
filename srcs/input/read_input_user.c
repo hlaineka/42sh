@@ -6,21 +6,12 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/12 20:26:20 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/12 20:36:05 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "input.h"
-
-/*
-static void		err_temp(int errorno, char *message, t_termios orig)
-{
-	disable_raw_mode(orig);
-	if (errorno == ERR_READ)
-		ft_printf_fd(2, "Read fail\n")
-}
-*/
 
 static int		is_special_key(char *rc)
 {
@@ -95,7 +86,7 @@ static int		shell_keypress(char *rc, t_input *input, t_term *term)
 //	ft_putchar('|');
 //	ft_putstr(input->rrs);
 
-	ft_printf_fd(STDOUT_FILENO, "%s %s", input->ls, input->rrs);
+	ft_printf_fd(STDOUT_FILENO, "left:|%s| reverse right:|%s|", input->ls, input->rrs);
 	return (ret);
 // some kind of print clear row, print prompt again, 
 }
