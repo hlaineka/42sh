@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_c.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 12:23:48 by hlaineka          #+#    #+#             */
-/*   Updated: 2020/12/01 17:29:03 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/03/13 22:28:41 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "ft_error.h"
 
 static int	char_width(char printable, t_tags *command)
 {

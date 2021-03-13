@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   helper_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 15:06:23 by hlaineka          #+#    #+#             */
-/*   Updated: 2020/12/01 17:06:50 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/03/13 22:28:35 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "ft_error.h"
 
 void	int_width_flag_zero(char *returnable, char *string, t_tags *command)
 {

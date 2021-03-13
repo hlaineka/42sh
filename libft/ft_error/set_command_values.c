@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_command_values.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 10:38:52 by hlaineka          #+#    #+#             */
-/*   Updated: 2020/12/01 16:50:11 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/03/13 22:29:31 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "ft_error.h"
 
 void	set_flag(t_tags *command, char flag)
 {

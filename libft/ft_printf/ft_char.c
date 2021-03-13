@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_char.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 12:23:17 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/09/17 15:57:42 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/13 23:46:08 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_heikki.h"
+#include "ft_printf.h"
 
 void		convert_char(void *param)
 {

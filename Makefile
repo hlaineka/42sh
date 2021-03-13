@@ -6,9 +6,10 @@
 #    By: helvi <helvi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/12 16:10:06 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/03/13 23:22:31 by helvi            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 NAME = 21sh
 
@@ -20,6 +21,7 @@ TERMCAPS = -ltermcap
 DIR_INC = includes/
 DIR_MAIN = srcs/
 DIR_INPUT = srcs/input/
+DIR_PARSER = srcs/parser/
 DIR_OBJS = objs/
 
 _SRC_MAIN = main.c
@@ -32,19 +34,25 @@ _SRC_INPUT = read_input_user.c \
 			init_input.c \
 			prompt.c
 
-SRC_INPUT = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))
+_SRC_PARSER = 	parser.c \
+				lexer.c
+
+SRC_MAIN = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))
 SRC_INPUT = $(addprefix $(DIR_INPUT), $(_SRC_INPUT))
+SRC_PARSER = $(addprefix $(DIR_PARSER), $(_SRC_PARSER))
 
-SRC = $(SRC_MAIN) $(SRC_INPUT)
+SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER)
 
-_SRC = $(_SRC_MAIN) $(_SRC_INPUT)
+_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER)
 
 OBJ_FILES = $(_SRC:.c=.o)
 OBJS = $(patsubst %, $(DIR_OBJS)%, $(_SRC:.c=.o))
 
 _INC = 	input.h \
 		structs_21.h \
-		includes.h
+		includes.h \
+		21sh.h \
+		parser.h
 
 INC = $(addprefix $(DIR_INC), $(_INC))
 
@@ -62,6 +70,9 @@ $(DIR_OBJS)%.o: $(DIR_MAIN)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 $(DIR_OBJS)%.o: $(DIR_INPUT)%.c $(INC)
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(DIR_OBJS)%.o: $(DIR_PARSER)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 libft:

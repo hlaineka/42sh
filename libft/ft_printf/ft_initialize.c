@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_initialize.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 13:16:47 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/01 07:43:37 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/13 23:46:34 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_heikki.h"
+#include "ft_printf.h"
 
 void	ft_init_flags_ptr(t_all *all)
 {

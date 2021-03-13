@@ -6,11 +6,11 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 10:25:02 by hlaineka          #+#    #+#             */
-/*   Updated: 2020/05/22 09:47:36 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/13 23:36:55 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "ft_error.h"
 
 char			*ft_trim(char *str, t_tags *command)
 {

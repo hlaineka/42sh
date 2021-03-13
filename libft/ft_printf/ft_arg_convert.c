@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arg_convert.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 17:42:56 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/08/11 15:13:59 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/13 23:45:59 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_heikki.h"
+#include "ft_printf.h"
 
 int			ft_arg_convert(t_all *all)
 {
