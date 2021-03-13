@@ -6,11 +6,11 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 12:25:10 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/12 19:20:40 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/13 22:29:25 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "ft_error.h"
 
 static char	*hexa_width(char *string, int width, t_tags *command)
 {

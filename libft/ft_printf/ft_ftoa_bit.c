@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ftoa_bit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 15:16:55 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/10/07 15:51:31 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/13 23:46:30 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_heikki.h"
+#include "ft_printf.h"
 
 static long double		round_float(long double f, int prec)
 {

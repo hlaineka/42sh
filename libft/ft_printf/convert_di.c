@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   convert_di.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 18:10:53 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/09/17 17:30:54 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/13 23:45:55 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_heikki.h"
+#include "ft_printf.h"
 
 void			combine_elements(t_all *all)
 {

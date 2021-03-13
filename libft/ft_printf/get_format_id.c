@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_format_id.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:22:37 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/10/07 11:17:06 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/13 23:47:30 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_heikki.h"
+#include "ft_printf.h"
 
 int			get_format_id(t_all *all)
 {

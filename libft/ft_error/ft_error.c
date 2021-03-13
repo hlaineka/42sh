@@ -6,12 +6,11 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 12:14:06 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/09 19:08:53 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/13 23:35:49 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_error.h"
-#include "ft_printf_helvi.h"
 
 /*
 ** functions ment to make manual error handling easier. A string array is
@@ -170,22 +169,21 @@ char	*ft_strerror(int errnum)
 void	ft_perror(const char *message)
 {
 	if (message && message[0] != '\0')
-		ft_printf("%r: ", message);
-	ft_printf("%r\r\n", g_errstrs[g_ft_errno]);
+		ft_printf_fd(2, ": ", message);
+	ft_printf_fd(2, "\r\n", g_errstrs[g_ft_errno]);
 }
 
 void	ft_error(int status, int errnum, const char *format, ...)
 {
 	va_list source;
 
-	g_program_name = "ft_select";
 	va_start(source, format);
 	if (g_program_name && g_program_name[0] != '\0')
-		ft_printf("%r%s: ", g_program_name);
+		ft_printf_fd(2, "%s: ", g_program_name);
 	if (errnum)
-		ft_printf("%r%s: ", g_errstrs[g_ft_errno]);
-	printer(format, &source);
-	ft_printf("%r\r\n");
+		ft_printf_fd(2, "%s: ", g_errstrs[errnum]);
+	ft_printer(format, &source);
+	ft_printf_fd(2, "\r\n");
 	if (status)
 		ft_exit(status);
 }

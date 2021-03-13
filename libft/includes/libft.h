@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 11:58:27 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/12 16:44:45 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/13 23:44:46 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdint.h>
+# include <fcntl.h>
+# include <stdarg.h>
+# include <stdio.h>
 # define T_INT_MAX 2147483647
 # define T_INT_MIN -2147483648
 # define BUFF_SIZE 8
@@ -23,9 +26,10 @@
 # define TRUE 1
 # define FALSE 0
 
-
 # include "libft_shorthand.h"
-# include "ft_printf_heikki.h"
+# include "ft_printf.h"
+# include "libft_shorthand.h"
+# include "ft_printf.h"
 # include "ft_exit.h"
 # include "ft_error.h"
 # include "lists.h"

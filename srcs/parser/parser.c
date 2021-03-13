@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_char.c                                          :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/09 12:23:17 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/13 23:46:08 by helvi            ###   ########.fr       */
+/*   Created: 2021/03/13 14:37:51 by helvi             #+#    #+#             */
+/*   Updated: 2021/03/13 17:36:18 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+# include "21sh.h"
 
-void		convert_char(void *param)
+t_job	*parser(char *input)
 {
-	t_all	*all;
+	t_job *returnable;
 
-	all = (t_all*)param;
-	all->convert_str = ft_strnew(2);
-	all->convert_str[0] = all->arg_int;
-	all->convert_str[1] = '\0';
-	all->arg_len = 1;
-}
-
-void		get_char(t_all *all)
-{
-	all->arg_int = va_arg(all->args, int);
+	returnable = NULL;
+	returnable->command = ft_strdup(input);
+	return(returnable);
 }

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_reset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 11:48:20 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/10/09 11:47:01 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/13 23:48:03 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_heikki.h"
+#include "ft_printf.h"
 
 int		ft_reset_format_info(t_all *all)
 {
-	bzero(all->prefix, PREFIX + 1);
+	ft_bzero(all->prefix, PREFIX + 1);
 	all->width = 0;
 	all->precision = 0;
 	all->format_info = 0;

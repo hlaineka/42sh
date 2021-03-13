@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 17:25:54 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/10/09 11:57:24 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/13 23:46:42 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_heikki.h"
+#include "ft_printf.h"
 
 /*
 ** GET_PLAIN_TXT check if there is '%' or '/' or if not it finds the ending

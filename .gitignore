@@ -1,11 +1,21 @@
+<<<<<<< Updated upstream
 *ft_ls
 21sh
+=======
+<<<<<<< Updated upstream
+=======
+*ft_ls
+>>>>>>> Stashed changes
 .DS_Store
 .bak
 *~
 
 # Prerequisites
 *.d
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
 # Object files
 *.o

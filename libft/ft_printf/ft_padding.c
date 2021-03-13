@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_padding.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 15:28:30 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/10/07 09:58:20 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/13 23:46:38 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_heikki.h"
+#include "ft_printf.h"
 
 int		ft_create_padding_str(t_all *all)
 {

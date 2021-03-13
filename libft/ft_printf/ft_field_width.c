@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_field_width.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/02 10:09:44 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/09/17 16:00:10 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/13 23:46:22 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_heikki.h"
+#include "ft_printf.h"
 
 /*
 ***************
