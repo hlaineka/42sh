@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 13:02:36 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/13 23:40:04 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/14 12:12:30 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -309,9 +309,9 @@ typedef struct	s_tags
 extern int			g_ft_errno;
 extern char			*g_program_name;
 
-char	*ft_strerror(int errnum);
-void	ft_perror(const char *message);
-void	ft_error(int status, int errnum, const char *format, ...);
+char			*ft_strerror(int errnum);
+void			ft_perror(const char *message);
+void			ft_error(int status, int errnum, const char *format, ...);
 
 /*
 ** The main function to handle printing
@@ -349,11 +349,11 @@ long long int	read_int(t_tags *command, va_list *source);
 long double		read_float(t_tags *command, va_list *source);
 uintmax_t		read_hexa(t_tags *command, va_list *source);
 void			int_width_flag_zero(char *returnable, char *string,
-					t_tags *command);
+				t_tags *command);
 void			float_width_flag_zero(char *returnable, char *string,
-					t_tags *command);
+				t_tags *command);
 void			uint_width_flag_zero(char *returnable, char *string,
-					t_tags *command);
+				t_tags *command);
 char			*ft_trim(char *str, t_tags *command);
 long double		ft_round(long double number, t_tags *command);
 char			*hexa_upperalpha(char *string);

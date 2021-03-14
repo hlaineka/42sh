@@ -6,7 +6,7 @@
 #    By: helvi <helvi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/13 23:22:31 by helvi            ###   ########.fr        #
+#    Updated: 2021/03/14 12:08:40 by helvi            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,6 @@ OBJS = $(patsubst %, $(DIR_OBJS)%, $(_SRC:.c=.o))
 _INC = 	input.h \
 		structs_21.h \
 		includes.h \
-		21sh.h \
 		parser.h
 
 INC = $(addprefix $(DIR_INC), $(_INC))
