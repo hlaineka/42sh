@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 19:00:19 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/13 23:50:56 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/14 12:05:07 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@
 # include "structs_21.h"
 # include "input.h"
 # include "parser.h"
+
+int 				g_ft_errno;
 
 #endif

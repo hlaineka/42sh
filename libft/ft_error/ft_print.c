@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 12:23:03 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/13 23:42:22 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/14 12:00:53 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static int	check_command(const char *format, t_tags *command, va_list *source)
 	return (w);
 }
 
-int	ft_printer(const char *format, va_list *source)
+int			ft_printer(const char *format, va_list *source)
 {
 	int		printed;
 	t_tags	*command;
