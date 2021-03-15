@@ -6,7 +6,7 @@
 #    By: helvi <helvi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/15 10:34:54 by helvi            ###   ########.fr        #
+#    Updated: 2021/03/15 11:40:52 by helvi            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ DIR_INC = includes/
 DIR_MAIN = srcs/
 DIR_INPUT = srcs/input/
 DIR_PARSER = srcs/parser/
+DIR_SIGNAL = srcs/signal/
 DIR_OBJS = objs/
 
 _SRC_MAIN = main.c
@@ -38,13 +39,16 @@ _SRC_PARSER = 	parser.c \
 				lexer.c \
 				tokens.c
 
+_SRC_SIGNAL = signal.c
+
 SRC_MAIN = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))
 SRC_INPUT = $(addprefix $(DIR_INPUT), $(_SRC_INPUT))
 SRC_PARSER = $(addprefix $(DIR_PARSER), $(_SRC_PARSER))
+SRC_SIGNAL = $(addprefix $(DIR_SIGNAL), $(_SRC_SIGNAL))
 
-SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER)
+SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER) $(SRC_SIGNAL)
 
-_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER)
+_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL)
 
 OBJ_FILES = $(_SRC:.c=.o)
 OBJS = $(patsubst %, $(DIR_OBJS)%, $(_SRC:.c=.o))
@@ -52,7 +56,8 @@ OBJS = $(patsubst %, $(DIR_OBJS)%, $(_SRC:.c=.o))
 _INC = 	input.h \
 		structs_21.h \
 		includes.h \
-		parser.h
+		parser.h \
+		ft_signal.h
 
 INC = $(addprefix $(DIR_INC), $(_INC))
 
@@ -73,6 +78,9 @@ $(DIR_OBJS)%.o: $(DIR_INPUT)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 $(DIR_OBJS)%.o: $(DIR_PARSER)%.c $(INC)
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(DIR_OBJS)%.o: $(DIR_SIGNAL)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 libft:

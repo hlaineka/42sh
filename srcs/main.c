@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/15 10:38:05 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/15 11:44:20 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ int		main(int argc, char **argv, char **envp)
 	t_job		*next_job;
 
 	g_term = &term;
-//	signals(); //signals not done;
+	start_signal(); //signals not done;
 	initialize(&input, &term);
+	ft_atexit(&disable_rawmode);
 	tputs(tgoto(term.cm_string, 0, 0), 1, ft_putc);
 	tputs(term.cd_string, 1, ft_putc);
 	while (1)
