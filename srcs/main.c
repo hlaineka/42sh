@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/12 18:45:02 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/15 11:32:03 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ int		main(int argc, char **argv, char **envp)
 	char		*input_str;
 
 	g_term = &term;
-//	signals(); //signals not done;
+	start_signal(); //signals not done;
 	initialize(&input, &term);
+	ft_atexit(&disable_rawmode);
 	tputs(tgoto(term.cm_string, 0, 0), 1, ft_putc);
 	tputs(term.cd_string, 1, ft_putc);
 	while (1)
