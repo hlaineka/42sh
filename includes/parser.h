@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/14 12:09:48 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/15 10:16:42 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,15 @@
 
 # include "includes.h"
 
+# define METACHARS "|&;()<> \t\n"
+# define OPCHARS "|&;()<>"
+# define SPECIALPARAMS "@*#?-$!0"
+# define EXPANSIONCHARS "~$`"
+
 enum e_token
 {	tkn_token,
 	tkn_word,
+	tkn_operator,
 	tkn_name,
 	tkn_assignment_word,
 	tkn_io_number,
@@ -97,8 +103,12 @@ t_job				*parser(char *input);
 ** lexer.c
 */
 
+t_list				*lexer(char *input);
+
 /*
 ** tokens.c
 */
+
+char				*ft_strtok_r(char *source, char *delimiters, char **current_ptr);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: helvi <helvi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/14 12:08:40 by helvi            ###   ########.fr        #
+#    Updated: 2021/03/15 10:34:54 by helvi            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ _SRC_INPUT = read_input_user.c \
 			prompt.c
 
 _SRC_PARSER = 	parser.c \
-				lexer.c
+				lexer.c \
+				tokens.c
 
 SRC_MAIN = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))
 SRC_INPUT = $(addprefix $(DIR_INPUT), $(_SRC_INPUT))
