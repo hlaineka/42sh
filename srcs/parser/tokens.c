@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 11:59:34 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/14 12:07:20 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/15 10:35:22 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char		*ft_strtok_r(char *source, char *delimiters, char **current_ptr)
 
 	returnable = NULL;
 	if (*current_ptr)
-		start = ft_strlen(current_ptr);
+		start = ft_strlen(*current_ptr);
 	else
 		start = 0;
 	i = 0;
@@ -40,4 +40,6 @@ char		*ft_strtok_r(char *source, char *delimiters, char **current_ptr)
 		}
 		i++;
 	}
+	*current_ptr = NULL;
+	return(returnable);
 }

@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 10:00:31 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/15 11:28:28 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/15 11:52:40 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,13 @@ void	start_signal(void)
 		(signal(SIGXCPU, sig_handler) == SIG_ERR) ||
 		(signal(SIGXFSZ, sig_handler) == SIG_ERR) ||
 		(signal(SIGVTALRM, sig_handler) == SIG_ERR) ||
-		(signal(SIGPROF, sig_handler) == SIG_ERR))
+		(signal(SIGPROF, sig_handler) == SIG_ERR) ||
+		(signal(SIGBUS, sig_handler) == SIG_ERR) ||
+		(signal(SIGILL, sig_handler) == SIG_ERR) ||
+		(signal(SIGABRT, sig_handler) == SIG_ERR) ||
+		(signal(SIGIOT, sig_handler) == SIG_ERR) ||
+		(signal(SIGTRAP, sig_handler) == SIG_ERR) ||
+		(signal(SIGSYS, sig_handler) == SIG_ERR) ||
+		(signal(SIGSEGV, sig_handler) == SIG_ERR))
 		ft_exit(0);
 }

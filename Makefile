@@ -6,7 +6,7 @@
 #    By: helvi <helvi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/15 11:29:09 by helvi            ###   ########.fr        #
+#    Updated: 2021/03/15 11:40:52 by helvi            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ _SRC_INPUT = read_input_user.c \
 			prompt.c
 
 _SRC_PARSER = 	parser.c \
-				lexer.c
+				lexer.c \
+				tokens.c
 
 _SRC_SIGNAL = signal.c
 
