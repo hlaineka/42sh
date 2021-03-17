@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 11:58:27 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/13 23:44:46 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/16 11:55:15 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@
 
 # include "libft_shorthand.h"
 # include "ft_printf.h"
-# include "libft_shorthand.h"
-# include "ft_printf.h"
 # include "ft_exit.h"
 # include "ft_error.h"
 # include "lists.h"
@@ -40,6 +38,7 @@
 /*
 ** Basic functions
 */
+
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
 void				ft_putnbr(int n);

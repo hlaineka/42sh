@@ -6,14 +6,13 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 10:00:31 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/15 11:52:40 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/16 12:55:50 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_signal.h"
 #include "includes.h"
-
-extern t_term *g_term;
+#include "libft.h"
 
 void	signwinch_handler(int signo)
 {
@@ -26,8 +25,12 @@ void	signwinch_handler(int signo)
 
 void	sig_handler(int signo)
 {
+	ft_printf("in sig_handler");
 	if (signo)
+	{
 		ft_exit(0);
+	}
+	ft_exit(0);
 }
 
 void	sigcont_handler(int signo)
@@ -37,8 +40,8 @@ void	sigcont_handler(int signo)
 		//check_tty(g_term);
 		if (tcsetattr(g_term->fd_stdout, TCSAFLUSH, &g_term->orig_termios) == -1)
 			die("tcsetattr");
-		tputs(g_term->ti_string, g_term->nrows, &ft_putc);
-		tputs(tgoto(g_term->cm_string, 0, 0), g_term->nrows, &ft_putc);
+		//tputs(g_term->ti_string, g_term->nrows, &ft_putc);
+		//tputs(tgoto(g_term->cm_string, 0, 0), g_term->nrows, &ft_putc);
 	}
 }
 
@@ -46,12 +49,10 @@ void	sigtstp_handler(int signo)
 {
 	if (signo == SIGTSTP)
 	{
-		if (tcsetattr(g_term->fd_stdout, TCSAFLUSH, &g_term->orig_termios)
-			== -1)
-			die("tcsetattr");
+		h_disable_rawmode();
 		signal(SIGTSTP, SIG_DFL);
 		ioctl(STDERR_FILENO, TIOCSTI, "\x1A");
-		tputs(g_term->te_string, g_term->nrows, &ft_putc);
+		//tputs(g_term->te_string, g_term->nrows, &ft_putc);
 	}
 }
 

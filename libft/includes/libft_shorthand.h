@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   libft_shorthand.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:05:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/12/02 13:37:50 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/16 12:27:16 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_SHORTHAND_H
 # define LIBFT_SHORTHAND_H
+
+#include <stdlib.h>
 
 /*
 ** SHORTHANDS FOR VARIABLE TYPES WITH BITSIZES
