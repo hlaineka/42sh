@@ -6,7 +6,7 @@
 #    By: helvi <helvi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/15 11:40:52 by helvi            ###   ########.fr        #
+#    Updated: 2021/03/17 20:52:34 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,10 @@ _SRC_INPUT = read_input_user.c \
 			errors.c \
 			ft_putc.c \
 			init_input.c \
-			prompt.c
+			prompt.c \
+			ft_isarrows.c \
+			ft_iskey.c \
+			ft_clstnew.c
 
 _SRC_PARSER = 	parser.c \
 				lexer.c \

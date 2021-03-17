@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/15 11:33:04 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/17 20:53:02 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,18 @@ char		*get_input(int argc, char **argv, t_term *term, t_input *input);
 
 int			ft_putc(int c);
 
+/*
+** CHECK WHICH KEY IT IS
+*/
+int			ft_is_up_key(char *str);
+int			ft_is_down_key(char *str);
+int			ft_is_left_key(char *str);
+int			ft_is_right_key(char *str);
+int			ft_is_home_key(char *str);
+int			ft_is_end_key(char *str);
+int			ft_is_altx_key(char *str);
+int			ft_is_altc_key(char *str);
+int			ft_is_altv_key(char *str);
+
+t_clist		*ft_clstnew(void const *content, size_t content_size);
 #endif

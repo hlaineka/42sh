@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/15 11:44:20 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/17 20:54:01 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,17 @@ int		main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		input_str = get_input(argc, argv, &term, &input); // not done, error check?
+		ft_printf_fd(STDOUT_FILENO, "\n\r%s\n\r", input_str);
+		if (!ft_strcmp(input_str, "exit"))
+		{
+			break;
+		}
 		next_job = parser(input_str);
 		ft_free(next_job);//job leaks
+		free(input_str);
+//		break;
+// input_str to lexer
+// token to scanner
 	}
 
 	(void)argc;
