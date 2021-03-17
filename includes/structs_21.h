@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/12 18:23:35 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/17 17:41:53 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,29 @@
 
 typedef struct termios	t_termios;
 
+typedef struct			s_clist
+{
+	void				*content;
+	size_t				content_size;
+	struct s_clist		*prev;
+	struct s_clist		*next;
+}						t_clist;
+
 typedef struct			s_input
 {
+	t_clist				*history;
+	t_clist				*last_comm;
 	char				*ls;
 	char				*rrs;
 	size_t				ls_size;
 	size_t				rrs_size;
+	size_t				prompt_length;
+	int					start_row;// no need yet
+	int					start_col;// no need yet
+	int					prompt_row; //limit y
+	int					prompt_col; //limit x
+	int					cursor_row;
+	int					cursor_col;
 }						t_input;
 
 typedef struct			s_process
@@ -79,6 +96,9 @@ typedef struct			s_job
 ** `ce'		String of commands to clear from the cursor to the end of the
 **			current line.
 **
+** `dc'		String of commands to delete one character position at the cursor.
+**			If `dc' is not present, the terminal cannot delete characters.
+**
 ***** CURSOR MOTION
 ** `cm'		String of commands to position the cursor at line l, column c.
 **			Both parameters are origin-zero, and are defined relative to the
@@ -86,6 +106,25 @@ typedef struct			s_job
 **			except a few very obsolete ones support `cm', so it is acceptable
 **			for an application program to refuse to operate on terminals
 **			lacking `cm'.
+**
+** `le'		String of commands to move the cursor left one column. Unless the
+**			`bw' flag capability is specified, the effect is undefined if the
+**			cursor is at the left margin; do not use this command there. If
+**			`bw' is present, this command may be used at the left margin, and
+**			it wraps the cursor to the last column of the preceding line.
+**
+** `nd'		String of commands to move the cursor right one column. The effect
+**			is undefined if the cursor is at the right margin; do not use this
+**			command there, not even if `am' is present.
+**
+** `sc'		String of commands to make the terminal save the current cursor
+**			position. Only the last saved position can be used. If this
+**			capability is present, `rc' should be provided also. Most
+**			terminals have neither.
+**
+** `rc'		String of commands to make the terminal restore the last saved
+**			cursor position. If this capability is present, `sc' should be
+**			provided also. Most terminals have neither.
 */
 
 typedef struct			s_term
@@ -100,8 +139,15 @@ typedef struct			s_term
 	char				*cd_string;
 	char				*ce_string;
 	char				*cm_string;
-	int					nrows;
-	int					ncolumns;
+	char				*le_string;
+	char				*nd_string;
+	char				*sc_string;
+	char				*rc_string;
+	char				*dc_string;
+	size_t				nrows;
+	size_t				ncolumns;
+	int					cursorcol;
+	int					cursorrow;
 	int					fd_stdin;
 	int					fd_stdout;
 	int					fd_stderr;

@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/12 18:45:02 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/17 18:31:20 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,13 @@ int		main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		input_str = get_input(argc, argv, &term, &input); // not done, error check?
-		break;
+		ft_printf_fd(STDOUT_FILENO, "\n\r%s\n\r", input_str);
+		if (!ft_strcmp(input_str, "exit"))
+		{
+			break;
+		}
+		free(input_str);
+//		break;
 // input_str to lexer
 // token to scanner
 
