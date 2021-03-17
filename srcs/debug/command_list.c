@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   disable_raw_mode.c                                 :+:      :+:    :+:   */
+/*   command_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/11 10:31:46 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/15 12:02:31 by helvi            ###   ########.fr       */
+/*   Created: 2020/10/21 11:19:46 by hlaineka          #+#    #+#             */
+/*   Updated: 2021/03/15 18:24:57 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "ft_debug.h"
 
-void		disable_raw_mode(t_term *term)
-{
-	tputs(term->te_string, 1, ft_putc);
-	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &term->orig_termios) == -1)
-		err_quit(ERR_MESSAGE, "tcsetattr"); // or other error?
-}
+/*
+** Adds a command to the list of commands. This list is used by lexer.
+*/
 
-int			disable_rawmode()
+void	add_command(char *command, t_editor *info)
 {
-	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &g_term->orig_termios) == -1)
-		die("tcsetattr");
-	return (1);
+	t_list	*new_command;
+
+	new_command = ft_lstnew(command, ft_strlen(command));
+	ft_lstadd(&(info->command_buf), new_command);
 }

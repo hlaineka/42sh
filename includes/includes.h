@@ -6,12 +6,12 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 19:00:19 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/15 11:28:54 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/16 12:23:56 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
+#ifndef FT_INCLUDES_H
+# define FT_INCLUDES_H
 
 # include <curses.h>
 # include <fcntl.h>
@@ -26,6 +26,7 @@
 # include "input.h"
 # include "parser.h"
 # include "ft_signal.h"
+# include "ft_debug.h"
 
 int 				g_ft_errno;
 

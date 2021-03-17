@@ -6,14 +6,16 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/15 10:16:42 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/17 09:13:28 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "includes.h"
+//# include "includes.h"
+# include "structs_21.h"
+# include <stdbool.h>
 
 # define METACHARS "|&;()<> \t\n"
 # define OPCHARS "|&;()<>"
@@ -94,6 +96,10 @@ typedef struct 		s_token
 {
 	int				token;
 	char			*value;
+	bool			single_quoted;
+	bool			double_quoted;
+	struct s_token	*next;
+	struct s_token	*prev;
 }					t_token;
 
 
@@ -103,12 +109,12 @@ t_job				*parser(char *input);
 ** lexer.c
 */
 
-t_list				*lexer(char *input);
+t_token				*lexer(char *input);
 
 /*
 ** tokens.c
 */
 
-char				*ft_strtok_r(char *source, char *delimiters, char **current_ptr);
+t_token				*get_token(char *delimiters, char **source);
 
 #endif

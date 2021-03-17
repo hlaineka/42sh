@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/15 11:44:20 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/15 12:02:10 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int		main(int argc, char **argv, char **envp)
 		next_job = parser(input_str);
 		ft_free(next_job);//job leaks
 	}
-
 	(void)argc;
 	(void)argv;
 	(void)envp;
