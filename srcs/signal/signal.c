@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 10:00:31 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/16 12:55:50 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/17 15:12:43 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	signwinch_handler(int signo)
 
 void	sig_handler(int signo)
 {
-	ft_printf("in sig_handler");
+	h_disable_rawmode();
 	if (signo)
 	{
 		ft_exit(0);

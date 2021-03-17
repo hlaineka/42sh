@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/17 09:13:28 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/17 19:27:02 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ enum e_token
 	tkn_dsemi,
 	tkn_dless,
 	tkn_dgreat,
-	tkn_essand,
+	tkn_lessand,
 	tkn_greatand,
 	tkn_lessgreat,
 	tkn_dlessdash,
@@ -94,7 +94,8 @@ enum e_token
 
 typedef struct 		s_token
 {
-	int				token;
+	int				*tokens;
+	int				maintoken;
 	char			*value;
 	bool			single_quoted;
 	bool			double_quoted;
