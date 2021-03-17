@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error_and_exit.c                             :+:      :+:    :+:   */
+/*   signal.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/23 17:35:24 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/08 22:19:25 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/03/15 11:12:09 by helvi             #+#    #+#             */
+/*   Updated: 2021/03/15 11:22:37 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef SIGNAL_H
+# define SIGNAL_H
 
-void	print_error_and_exit(char *name)
-{
-	ft_printf("ft_ls: %s: ", name);
-//	perror("");
-	exit(0);
-}
+# include <signal.h>
+# include "includes.h"
+
+void	start_signal(void);
+
+#endif

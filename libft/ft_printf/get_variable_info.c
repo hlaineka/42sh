@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_variable_info.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 21:00:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/09/17 12:31:20 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/13 23:47:34 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_heikki.h"
+#include "ft_printf.h"
 
 static int		get_flags(t_all *all)
 {

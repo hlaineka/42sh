@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_print.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 12:23:03 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/09 18:11:08 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/14 12:00:53 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "ft_error.h"
 
 static int	selector(t_tags *command, va_list *source)
 {
@@ -88,7 +88,7 @@ static int	check_command(const char *format, t_tags *command, va_list *source)
 	return (w);
 }
 
-int	printer(const char *format, va_list *source)
+int			ft_printer(const char *format, va_list *source)
 {
 	int		printed;
 	t_tags	*command;
@@ -96,13 +96,12 @@ int	printer(const char *format, va_list *source)
 
 	command = (t_tags*)malloc(sizeof(t_tags));
 	printed = 0;
-	i = 0;
-	initialize_command(command);
-	while (format[i] != '\0')
+	i = -1;
+	while (format[++i] != '\0')
 	{
+		initialize_command(command);
 		if (format[i] == '%')
 		{
-			initialize_command(command);
 			i = i + check_command(&format[i], command, source) + 1;
 			if (command->empty)
 				return (-1);
@@ -111,8 +110,7 @@ int	printer(const char *format, va_list *source)
 		else
 		{
 			ft_putchar_fd(format[i], command->flag_fd);
-			i = i + 1;
-			printed =  printed + 1;
+			printed = printed + 1;
 		}
 	}
 	free(command);

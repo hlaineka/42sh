@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_f.c                                          :+:      :+:    :+:   */
+/*   print_u.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/12 10:02:18 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/12 19:21:55 by helvi            ###   ########.fr       */
+/*   Created: 2020/01/16 12:24:57 by hlaineka          #+#    #+#             */
+/*   Updated: 2021/03/13 22:29:20 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "ft_error.h"
 
-static char	*float_width(char *string, int width, t_tags *command)
+static char	*uint_width(char *string, int width, t_tags *command)
 {
 	char	*returnable;
 
@@ -26,7 +26,7 @@ static char	*float_width(char *string, int width, t_tags *command)
 		if (command->flag_minus)
 			ft_strpaste(returnable, string);
 		else if (command->flag_zero)
-			float_width_flag_zero(returnable, string, command);
+			uint_width_flag_zero(returnable, string, command);
 		else
 			ft_strpaste(&returnable[width - ft_strlen(string)], string);
 	}
@@ -36,11 +36,13 @@ static char	*float_width(char *string, int width, t_tags *command)
 	return (returnable);
 }
 
-static char	*float_precision(char *string, t_tags *command)
+static char	*uint_precision(char *string, t_tags *command)
 {
 	char	*returnable;
 
-	if (ft_strequ(string, "+0") && command->precision == 0)
+	if (ft_strequ(string, "0") && command->precision == 0)
+		returnable = ft_strnew(0);
+	else if (ft_strequ(string, "+0") && command->precision == 0)
 		returnable = ft_strdup("+");
 	else if ((int)ft_strlen(string) <= command->precision)
 	{
@@ -56,50 +58,42 @@ static char	*float_precision(char *string, t_tags *command)
 	return (returnable);
 }
 
-static char	*add_floatspace(char *string, t_tags *command)
+static char	*uint_editor(char *printable, t_tags *command, int original)
 {
-	char	*returnable;
-
-	if (ft_isdigit(string[0]))
-	{
-		if (command->flag_zero)
-			returnable = ft_strjoin_frees2("0", string);
-		else
-			returnable = ft_strjoin_frees2(" ", string);
-	}
-	else
-		return (string);
-	return (returnable);
-}
-
-static char	*float_editor(char *printable, t_tags *command)
-{
-	printable = ft_trim(printable, command);
-	if (command->flag_plus && command->positive_value)
+	if (command->flag_plus && original >= 0)
 		printable = ft_strjoin_frees2("+", printable);
-	if (command->flag_space && command->positive_value)
-		printable = add_floatspace(printable, command);
 	if (command->precision != -1)
-		printable = float_precision(printable, command);
+		printable = uint_precision(printable, command);
 	if (command->width != -1)
-		printable = float_width(printable, command->width, command);
+		printable = uint_width(printable, command->width, command);
 	return (printable);
 }
 
-int			print_f(t_tags *command, va_list *source)
+uintmax_t	read_uint(t_tags *command, va_list *source)
+{
+	if (command->length_hh)
+		return (unsigned char)va_arg(*source, uintmax_t);
+	else if (command->length_h)
+		return (unsigned short int)va_arg(*source, uintmax_t);
+	else if (command->length_l)
+		return (unsigned long int)va_arg(*source, uintmax_t);
+	else if (command->length_ll)
+		return (unsigned long long int)va_arg(*source, uintmax_t);
+	else
+		return (unsigned int)va_arg(*source, uintmax_t);
+}
+
+int			print_u(t_tags *command, va_list *source)
 {
 	char		*printable;
-	long double	aquired;
+	uintmax_t	aquired;
 	int			returnable;
 
-	aquired = read_float(command, source);
-	if (aquired >= 0)
-		command->positive_value = TRUE;
-	aquired = ft_round(aquired, command);
-	printable = ft_itoa_float(aquired);
-	printable = float_editor(printable, command);
-	returnable = ft_strlen(printable);
+	aquired = read_uint(command, source);
+	printable = ft_itoa_uint(aquired, 10);
+	printable = uint_editor(printable, command, aquired);
 	ft_putstr_fd(printable, command->flag_fd);
+	returnable = ft_strlen(printable);
 	free(printable);
 	return (returnable);
 }

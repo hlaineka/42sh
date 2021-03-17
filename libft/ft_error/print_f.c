@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_d.c                                          :+:      :+:    :+:   */
+/*   print_f.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/16 12:23:57 by hlaineka          #+#    #+#             */
-/*   Updated: 2020/12/01 16:55:28 by hlaineka         ###   ########.fr       */
+/*   Created: 2020/03/12 10:02:18 by hlaineka          #+#    #+#             */
+/*   Updated: 2021/03/13 22:29:02 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "ft_error.h"
 
-static char	*int_width(char *string, int width, t_tags *command)
+static char	*float_width(char *string, int width, t_tags *command)
 {
 	char	*returnable;
 
 	if ((int)ft_strlen(string) < width)
 	{
-		if (command->flag_zero && !command->flag_minus &&
-				command->precision == -1)
+		if (command->flag_zero && !command->flag_minus
+				&& command->precision == -1)
 			returnable = ft_strset('0', width);
 		else
 			returnable = ft_strset(' ', width);
 		if (command->flag_minus)
 			ft_strpaste(returnable, string);
 		else if (command->flag_zero)
-			int_width_flag_zero(returnable, string, command);
+			float_width_flag_zero(returnable, string, command);
 		else
 			ft_strpaste(&returnable[width - ft_strlen(string)], string);
 	}
@@ -36,13 +36,11 @@ static char	*int_width(char *string, int width, t_tags *command)
 	return (returnable);
 }
 
-static char	*int_precision(char *string, t_tags *command)
+static char	*float_precision(char *string, t_tags *command)
 {
 	char	*returnable;
 
-	if (ft_strequ(string, "0") && command->precision == 0)
-		returnable = ft_strnew(0);
-	else if (ft_strequ(string, "+0") && command->precision == 0)
+	if (ft_strequ(string, "+0") && command->precision == 0)
 		returnable = ft_strdup("+");
 	else if ((int)ft_strlen(string) <= command->precision)
 	{
@@ -58,41 +56,48 @@ static char	*int_precision(char *string, t_tags *command)
 	return (returnable);
 }
 
-char		*add_intspace(char *string)
+static char	*add_floatspace(char *string, t_tags *command)
 {
 	char	*returnable;
 
 	if (ft_isdigit(string[0]))
-		returnable = ft_strjoin_frees2(" ", string);
+	{
+		if (command->flag_zero)
+			returnable = ft_strjoin_frees2("0", string);
+		else
+			returnable = ft_strjoin_frees2(" ", string);
+	}
 	else
 		return (string);
 	return (returnable);
 }
 
-static char	*int_editor(char *printable, t_tags *command)
+static char	*float_editor(char *printable, t_tags *command)
 {
+	printable = ft_trim(printable, command);
 	if (command->flag_plus && command->positive_value)
 		printable = ft_strjoin_frees2("+", printable);
 	if (command->flag_space && command->positive_value)
-		printable = add_intspace(printable);
+		printable = add_floatspace(printable, command);
 	if (command->precision != -1)
-		printable = int_precision(printable, command);
+		printable = float_precision(printable, command);
 	if (command->width != -1)
-		printable = int_width(printable, command->width, command);
+		printable = float_width(printable, command->width, command);
 	return (printable);
 }
 
-int			print_d(t_tags *command, va_list *source)
+int			print_f(t_tags *command, va_list *source)
 {
-	char			*printable;
-	long long int	aquired;
-	int				returnable;
+	char		*printable;
+	long double	aquired;
+	int			returnable;
 
-	aquired = read_int(command, source);
+	aquired = read_float(command, source);
 	if (aquired >= 0)
 		command->positive_value = TRUE;
-	printable = ft_itoa_base(aquired, 10);
-	printable = int_editor(printable, command);
+	aquired = ft_round(aquired, command);
+	printable = ft_itoa_float(aquired);
+	printable = float_editor(printable, command);
 	returnable = ft_strlen(printable);
 	ft_putstr_fd(printable, command->flag_fd);
 	free(printable);

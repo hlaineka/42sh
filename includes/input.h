@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/17 17:41:42 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/17 20:53:02 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void		err_quit(int error_no, char *s_str);
 */
 void		enable_raw_mode(t_term *term);
 void		disable_raw_mode(t_term *term);
+int			disable_rawmode();
 void		print_prompt(int mode);
 
 char		*get_input(int argc, char **argv, t_term *term, t_input *input);

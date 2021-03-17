@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:34:02 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/12 16:43:34 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/14 12:02:07 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_strrcat(char *s1, const char *s2)
 
 	i1 = ft_strlen(s1);
 	i2 = ft_strlen(s2);
-	while(--i2 >= 0)
+	while (--i2 >= 0)
 		s1[i1++] = s2[i2];
 	s1[i1] = '\0';
 	return (s1);

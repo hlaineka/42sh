@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/15 12:44:38 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/01/02 11:56:04 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/13 23:46:17 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
-#include "ft_printf_heikki.h"
+#include "ft_printf.h"
 
 static void		lst_delete(void *data, size_t i)
 {

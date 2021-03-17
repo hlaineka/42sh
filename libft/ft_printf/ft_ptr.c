@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ptr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 09:14:21 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/10/07 10:47:38 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/13 23:47:07 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_heikki.h"
+#include "ft_printf.h"
 
 static void		ptr_null_with_precision(size_t i, t_all *all)
 {

@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/23 20:14:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/08 22:19:04 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/03/13 14:37:51 by helvi             #+#    #+#             */
+/*   Updated: 2021/03/14 15:23:29 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
+# include "parser.h"
 
-void	print_error(char *directory_name)
+t_job		*parser(char *input)
 {
-	ft_printf("ft_ls: %s: ", directory_name);
-//	perror("");
+	t_job	*returnable;
+	t_list	*tokens;
+	t_token	*temp;
+
+	returnable = NULL;
+	tokens = lexer(input);
+	while (tokens)
+	{
+		temp = (t_token*)tokens->content;
+		ft_printf("%s ", temp->value);
+	}
+	returnable->command = ft_strdup(input);
+	return(returnable);
 }

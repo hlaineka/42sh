@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_p.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 12:24:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2020/12/01 16:57:01 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/03/13 22:29:10 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf.h"
+#include "ft_error.h"
 
 static void	ft_strpaste_pointer(char *dest, char *src)
 {
