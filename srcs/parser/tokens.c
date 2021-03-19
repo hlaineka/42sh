@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 11:59:34 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/17 19:38:22 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/18 16:30:52 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool		check_quotes(t_token *current, char c, bool *single_quoted, bool *double_q
 		current->double_quoted = TRUE;
 		*double_quoted = !*double_quoted;
 	}
-	if (c == 44)
+	if (c == 39)
 	{
 		current->single_quoted = TRUE;
 		*single_quoted = !*single_quoted;
@@ -59,8 +59,6 @@ bool		get_tokenstr(t_token *current, char *delimiters, char **source)
 	if (*source == NULL || source[0][0] == '\0')
 		return (FALSE);
 	i = 0;
-	current->single_quoted = FALSE;
-	current->double_quoted = FALSE;
 	single_quoted = FALSE;
 	double_quoted = FALSE;
 	while (source[0][i])
@@ -70,8 +68,7 @@ bool		get_tokenstr(t_token *current, char *delimiters, char **source)
 		{
 			if (!str_delimiter(current, source, i))
 				continue;
-			else
-				return(TRUE);
+			return(TRUE);
 		}
 		i++;
 	}
@@ -86,6 +83,8 @@ t_token				*get_token(char *delimiters, char **source)
 	
 	current = (t_token*)malloc(sizeof(t_token));
 	ft_bzero(current, sizeof(t_token));
+	current->single_quoted = FALSE;
+	current->double_quoted = FALSE;
 	if (!get_tokenstr(current, delimiters, source))
 	{
 		ft_free(current);

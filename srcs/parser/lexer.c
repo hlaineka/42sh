@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:32:48 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/17 19:48:41 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/18 16:31:11 by helvi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ void	check_tkn_quotes(t_token *current)
 		if (double_quote)
 			quote_values[i] = quote_values[i] + 34;
 		if (single_quote)
-			quote_values[i] = quote_values[i] + 44;
+			quote_values[i] = quote_values[i] + 39;
 		//add backslash handling here.
 		i++;			
 	}
-
+	current->tokens = quote_values;
 }
 
 void	free_token(t_token **to_free)
@@ -81,7 +81,7 @@ bool	combine_optokens(t_token **current, t_token *prev)
 	else if (ft_strequ(new_value, ">|"))
 		prev->maintoken = tkn_clobber;
 	else
-		return (FALSE);
+		return (TRUE);
 	ft_free(prev->value);
 	prev->value = new_value;
 	prev->next = (*current)->next;
@@ -191,7 +191,10 @@ t_token	*lexer(char *input)
 	{
 		current->prev = prev;
 		if (!prev)
+		{
 			first = current;
+			//assignment_word check
+		}
 		else
 			prev->next = current;
 		prev = current;
@@ -199,5 +202,7 @@ t_token	*lexer(char *input)
 	}
 	if (!check_tokens(&first))
 		return (NULL);
+	//comment handling here.
+	//IO_NUMBER handling
 	return (first);
 }
