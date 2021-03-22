@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/17 17:41:53 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/17 21:31:27 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct			s_clist
 
 typedef struct			s_input
 {
+	t_clist				*hist_cur;
 	t_clist				*history;
 	t_clist				*last_comm;
 	char				*ls;

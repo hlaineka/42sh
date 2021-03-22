@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 19:20:26 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/17 09:18:40 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/22 10:15:49 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,4 @@ void			enable_raw_mode(t_term *term)
 	raw.c_cc[VTIME] = 0;
 	if (tcsetattr(STDIN_FILENO, TCSANOW, &raw) == -1) //TCSANOW or TCSAFLUSH
 		err_fatal(ERR_MESSAGE, "tcsetattr", term);
-//	tputs(prog->ti_string, 1, ft_putc);
-//	tputs(prog->vi_string, 1, ft_putc);
 }
