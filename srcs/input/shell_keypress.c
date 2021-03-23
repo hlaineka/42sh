@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/22 13:52:38 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/23 17:50:35 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,27 @@ static int		is_special_key(char *rc)
 	return (0);
 }
 
+static char		*double_allocation(char *str, size_t size)
+{
+	char	*new;
+
+	if (!(new = ft_memalloc(sizeof(char) * size * 2)))
+		return (NULL);
+	ft_strcat(new, str);
+	free(str);
+	return (new);
+}
+
 static int		do_special_keys(char *rc, t_input *input, t_term *term)
 {
-	if (ft_is_home_key(rc))
-		home_keypress(input, term);
-	else if (ft_is_end_key(rc))
-		end_keypress(input, term);
-	else if (ft_is_up_key(rc))
-		history_up(input, term);
-	else if (ft_is_down_key(rc))
-		history_down(input, term);
-	else if (ft_is_left_key(rc))
-		left_keypress(input, term);
-	else if (ft_is_right_key(rc))
-		right_keypress(input, term);
-	else if (ft_is_delete_key(rc))
-		delete_keypress(input, term);
-	else if (rc[0] == KEY_ESC)
+	ft_is_home_key(rc) == TRUE ? home_keypress(input, term) : 0;
+	ft_is_end_key(rc) == TRUE ? end_keypress(input, term) : 0;
+	ft_is_up_key(rc) == TRUE ? history_up(input, term) : 0;
+	ft_is_down_key(rc) == TRUE ? history_down(input, term) : 0;
+	ft_is_left_key(rc) == TRUE ? left_keypress(input, term) : 0;
+	ft_is_right_key(rc) == TRUE ? right_keypress(input, term) : 0;
+	ft_is_delete_key(rc) == TRUE ? delete_keypress(input, term) : 0;
+	if (rc[0] == KEY_ESC)
 	{
 		if (ft_is_right_key(rc + 1))
 			move_next_word(input, term);
@@ -65,8 +69,15 @@ int				shell_keypress(char *rc, t_input *input, t_term *term)
 		return (0);
 	if (is_special_key(rc))
 		ret = do_special_keys(rc, input, term);
-	else if (ft_strlen(input->ls) < input->ls_size) //increase size if not large enough
+	else
 	{
+		if (ft_strlen(rc) > (input->ls_size - ft_strlen(input->ls)))
+		{
+			input->ls = double_allocation(input->ls, input->ls_size); //error check
+			input->rrs = double_allocation(input->rrs, input->rrs_size); //error chekc
+			input->ls_size *= 2;
+			input->rrs_size *= 2;
+		}
 		ft_strncat(input->ls, rc, 1024);
 		ft_putstr_input(rc, input, term);
 		get_pos(&input->cursor_row, &input->cursor_col);

@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/22 13:53:05 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/23 17:24:45 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void		move_next_word(t_input *input, t_term *term);
 
 void		history_up(t_input *input, t_term *term);
 void		history_down(t_input *input, t_term *term);
-void		home_keypress(t_input *input, t_term *term);
-void		end_keypress(t_input *input, t_term *term);
+int			home_keypress(t_input *input, t_term *term);
+int			end_keypress(t_input *input, t_term *term);
 void		alt_up_keypress(t_input *input, t_term *term);
 void		alt_down_keypress(t_input *input, t_term *term);
 void		left_keypress(t_input *input, t_term *term);
@@ -74,7 +74,6 @@ t_clist		*command_to_history(t_input *input, char *str);
 ** PRINT FUNCTIONS
 */
 int			ft_putc(int c);
-void		ft_putchar_input(char c, t_input *input, t_term *term);
 void		ft_putstr_input(char *str, t_input *input, t_term *term);
 void		ft_putrstr_input(char *str, t_input *input, t_term *term);
 

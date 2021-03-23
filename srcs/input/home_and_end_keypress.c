@@ -6,13 +6,13 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 11:03:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/22 11:05:46 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/23 17:24:11 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes.h"
 
-void			home_keypress(t_input *input, t_term *term)
+int			home_keypress(t_input *input, t_term *term)
 {
 	int		ls_len;
 	int		row;
@@ -24,9 +24,10 @@ void			home_keypress(t_input *input, t_term *term)
 	move_nchars_from_s1_to_s2(input->ls, input->rrs, input->rrs_size, ls_len);
 	tputs(tgoto(term->cm_string, col, row), 1, ft_putc);
 	get_pos(&input->cursor_row, &input->cursor_col);
+	return (0);
 }
 
-void			end_keypress(t_input *input, t_term *term)
+int			end_keypress(t_input *input, t_term *term)
 {
 	int		ls_len;
 	int		rrs_len;
@@ -42,4 +43,5 @@ void			end_keypress(t_input *input, t_term *term)
 	move_nchars_from_s1_to_s2(input->rrs, input->ls, input->ls_size, rrs_len);
 	tputs(tgoto(term->cm_string, x, y), 1, ft_putc);
 	get_pos(&input->cursor_row, &input->cursor_col);
+	return (0);
 }

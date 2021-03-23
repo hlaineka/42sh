@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/22 14:15:40 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/23 15:48:12 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ char			*read_input_tty(int prompt_mode, t_input *input, t_term *term)
 			if (!(str = ft_memalloc(sizeof(char) * len)))
 				err_fatal(ERR_MALLOC, NULL, term);
 			end_keypress(input, term);
+			tputs(tgoto(term->cm_string, input->prompt_col - 1, input->prompt_row - 1), 1, ft_putc);
+			ft_putstr_input(input->ls, input, term);
+//			get_pos(&input->cursor_row, &input->cursor_col);
 			ft_strcat(str, input->ls);
 			ft_strncat(str, "\n", 1);
 			ft_putstr_input("\n", input, term);

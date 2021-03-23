@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:31:46 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/15 11:33:30 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/22 14:44:06 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		disable_raw_mode(t_term *term)
 		err_quit(ERR_MESSAGE, "tcsetattr"); // or other error?
 }
 
-int			disable_rawmode()
+int			disable_rawmode(void)
 {
 	tputs(g_term->te_string, 1, ft_putc);
 	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &g_term->orig_termios) == -1)
