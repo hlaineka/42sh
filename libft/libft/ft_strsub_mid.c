@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:24:36 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:35:11 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 13:13:37 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strsub_mid(const char *s, unsigned int start, size_t end)
 	char			*returnable;
 	unsigned int	i;
 
-	returnable = (char*)malloc(sizeof(char) * end - start + 1);
+	returnable = (char *)malloc(sizeof(char) * end - start + 1);
 	i = 0;
 	if (returnable)
 	{

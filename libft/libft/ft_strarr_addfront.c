@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 17:01:02 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:32:04 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 16:38:13 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**ft_strarr_addfront(char **arr, char *str)
 	int		i;
 
 	i = 0;
-	returnable = (char**)malloc(sizeof(char*) * ft_array_length(arr) + 2);
+	returnable = (char **)malloc(sizeof(char *) * ft_array_length(arr) + 2);
 	returnable[i] = ft_strdup(str);
 	while (arr[i])
 	{

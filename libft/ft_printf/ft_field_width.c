@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/02 10:09:44 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/13 23:46:22 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 20:15:06 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 ******************************************************************************
 */
 
-int				ft_field_width(t_all *all)
+int	ft_field_width(t_all *all)
 {
 	size_t		padding_len;
 
@@ -31,7 +31,8 @@ int				ft_field_width(t_all *all)
 	if (padding_len > 0)
 	{
 		free(all->padding_str);
-		if (!(all->padding_str = ft_strnew(padding_len + 1)))
+		all->padding_str = ft_strnew(padding_len + 1);
+		if (!all->padding_str)
 			return (0);
 		ft_memset(all->padding_str, all->padding_char, padding_len);
 	}

@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 10:04:53 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:34:14 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 15:35:58 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ char	*ft_strnew(size_t size)
 	char			*returnable;
 
 	i = 0;
-	if ((returnable = (char*)malloc(sizeof(char) * size + 1)))
+	returnable = (char *)malloc(sizeof(char) * size + 1);
+	if (returnable)
 	{
 		while (i < size)
 		{

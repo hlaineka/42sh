@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 12:43:29 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:33:10 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 16:37:23 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ char	*ft_strjoin_frees1(char *s1, char *s2)
 
 	if (s1 && s2)
 	{
-		if (NULL == (returnable = (char*)malloc(sizeof(char)
-			* (ft_strlen(s1) + ft_strlen(s2) + 1))))
+		returnable = (char *)malloc(sizeof(char) * (ft_strlen(s1)
+					+ ft_strlen(s2) + 1));
+		if (!returnable)
 			print_error_and_exit("ft_strjoin_frees1");
 		i = 0;
 		w = 0;

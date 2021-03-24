@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 12:48:37 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:34:43 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 15:39:55 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ char	*ft_strset(char value, size_t num)
 	char			*returnable;
 
 	i = 0;
-	if ((returnable = (char*)malloc(sizeof(char) * (num + 1))) != NULL)
+	returnable = (char *)malloc(sizeof(char) * (num + 1));
+	if (returnable)
 	{
 		while (i < num)
 		{

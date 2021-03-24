@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 13:32:22 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:32:19 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 16:11:20 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 char	*ft_strcat(char *dest, const char *src)
 {
 	int	i;
-	int w;
+	int	w;
 
 	i = 0;
 	w = 0;

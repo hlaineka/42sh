@@ -6,14 +6,14 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 15:16:55 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/08/14 15:12:07 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/24 17:30:02 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-static long double		round_float(long double f, int prec)
+static long double	round_float(long double f, int prec)
 {
 	long double				round;
 
@@ -26,14 +26,17 @@ static long double		round_float(long double f, int prec)
 		return (f - round);
 }
 
-static char				*dot_float_str(long double f, int prec)
+static char	*dot_float_str(long double f, int prec)
 {
 	unsigned long long		num;
 	char					*f_part;
 	size_t					i;
 
 	i = 1;
-	if (prec < 1 || !(f_part = ft_strnew(prec + 2)))
+	if (prec < 1)
+		return (NULL);
+	f_part = ft_strnew(prec + 2);
+	if (!f_part)
 		return (NULL);
 	f_part[0] = '.';
 	while (prec-- > 0)
@@ -48,7 +51,7 @@ static char				*dot_float_str(long double f, int prec)
 	return (f_part);
 }
 
-char					*ft_ftoa(long double f, size_t prec)
+char	*ft_ftoa(long double f, size_t prec)
 {
 	char					*i_part;
 	char					*f_part;

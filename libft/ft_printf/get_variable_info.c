@@ -6,13 +6,13 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 21:00:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/13 23:47:34 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 19:53:53 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int		get_flags(t_all *all)
+static int	get_flags(t_all *all)
 {
 	int		i;
 
@@ -32,7 +32,7 @@ static int		get_flags(t_all *all)
 	return (0);
 }
 
-static int		get_width(t_all *all)
+static int	get_width(t_all *all)
 {
 	if (!(*all->format_ptr))
 		return (0);
@@ -54,7 +54,7 @@ static int		get_width(t_all *all)
 	return (0);
 }
 
-static int		get_precision(t_all *all)
+static int	get_precision(t_all *all)
 {
 	if (*all->format_ptr != '.')
 		return (0);
@@ -73,7 +73,7 @@ static int		get_precision(t_all *all)
 	return (1);
 }
 
-static int		get_l_modifier(t_all *all)
+static int	get_l_modifier(t_all *all)
 {
 	if (ft_strchr("hl", *all->format_ptr) && \
 		all->format_ptr[0] == all->format_ptr[1])
@@ -99,12 +99,12 @@ static int		get_l_modifier(t_all *all)
 	return (1);
 }
 
-int				get_variable_info(t_all *all)
+int	get_variable_info(t_all *all)
 {
 	all->format_ptr++;
 	ft_reset_format_info(all);
 	while (get_flags(all) || get_width(all) || get_precision(all))
-		continue;
+		continue ;
 	get_l_modifier(all);
 	return (get_format_id(all));
 }

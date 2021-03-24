@@ -6,7 +6,7 @@
 #    By: helvi <helvi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/13 23:25:48 by helvi            ###   ########.fr        #
+#    Updated: 2021/03/24 20:55:03 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libft.a
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g -I$(INC_DIR)
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -I$(INC_DIR)
 
 FT_ERROR_DIR = ft_error/
 FT_EXIT_DIR = ft_exit/
@@ -91,7 +91,6 @@ _SRC_LIBFT = ft_abs.c \
 			ft_itoa_base.c \
 			ft_itoa_base_prefix.c \
 			ft_log10.c \
-			ft_logbase2.c \
 			ft_longlonglen_base.c \
 			ft_lstadd.c \
 			ft_lstaddafter.c \

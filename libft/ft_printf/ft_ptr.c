@@ -6,13 +6,13 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 09:14:21 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/13 23:47:07 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 20:00:14 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void		ptr_null_with_precision(size_t i, t_all *all)
+static void	ptr_null_with_precision(size_t i, t_all *all)
 {
 	all->convert_str = ft_strnew(all->precision + 1);
 	while (i < all->precision)
@@ -20,7 +20,7 @@ static void		ptr_null_with_precision(size_t i, t_all *all)
 	all->convert_str[i] = '\0';
 }
 
-static void		fill_str_with_zeros(size_t i, int zeros, t_all *all)
+static void	fill_str_with_zeros(size_t i, int zeros, t_all *all)
 {
 	char			*temp;
 	char			*temp2;
@@ -35,7 +35,7 @@ static void		fill_str_with_zeros(size_t i, int zeros, t_all *all)
 	all->convert_str = temp2;
 }
 
-void			convert_ptr(void *param)
+void	convert_ptr(void *param)
 {
 	t_all			*all;
 	size_t			i;
@@ -43,7 +43,7 @@ void			convert_ptr(void *param)
 
 	i = 0;
 	zeros = 0;
-	all = (t_all*)param;
+	all = (t_all *)param;
 	if ((all->format_info & (1 << PRECISION_INDEX)) && all->arg_ptr == NULL)
 		ptr_null_with_precision(i, all);
 	else
@@ -56,7 +56,7 @@ void			convert_ptr(void *param)
 	all->arg_len = ft_strlen(all->convert_str);
 }
 
-void			get_ptr(t_all *all)
+void	get_ptr(t_all *all)
 {
-	all->arg_ptr = va_arg(all->args, void*);
+	all->arg_ptr = va_arg(all->args, void *);
 }

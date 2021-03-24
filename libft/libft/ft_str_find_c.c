@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 10:27:33 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:31:40 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 16:32:26 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** returns the index of the first occurance of c in src
 */
 
-int		ft_str_find_c(const char *src, int c)
+int	ft_str_find_c(const char *src, int c)
 {
 	int		i;
 

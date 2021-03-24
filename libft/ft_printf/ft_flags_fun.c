@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 18:47:20 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/13 23:46:26 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 20:14:17 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_flag_hash(void *param)
 {
 	t_all	*all;
 
-	all = (t_all*)param;
+	all = (t_all *)param;
 	if ((all->format_id & CDINPSU_MASK))
 		return ;
 	if (((all->format_id >> O_INDEX) & 1) && \
@@ -78,7 +78,7 @@ void	ft_flag_zero(void *param)
 {
 	t_all	*all;
 
-	all = (t_all*)param;
+	all = (t_all *)param;
 	if ((all->format_id & (1 << N_INDEX)))
 		return ;
 	if ((all->format_id & (DIOUXX_MASK)) && \
@@ -114,7 +114,7 @@ void	ft_flag_minus(void *param)
 {
 	t_all	*all;
 
-	all = (t_all*)param;
+	all = (t_all *)param;
 	all->padding_char = ' ';
 }
 
@@ -133,7 +133,7 @@ void	ft_flag_space(void *param)
 {
 	t_all	*all;
 
-	all = (t_all*)param;
+	all = (t_all *)param;
 	if ((all->format_info & (1 << PLUS_INDEX)))
 	{
 		all->format_info = all->format_info & ~(1 << SPACE_INDEX);
@@ -173,7 +173,7 @@ void	ft_flag_plus(void *param)
 {
 	t_all	*all;
 
-	all = (t_all*)param;
+	all = (t_all *)param;
 	if ((all->format_id & DI_MASK))
 	{
 		if (all->arg_int >= 0)

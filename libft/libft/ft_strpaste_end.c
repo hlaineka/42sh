@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 12:49:44 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:34:26 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 15:38:20 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** (from end to beginning)
 */
 
-void		ft_strpaste_end(char *dest, char *src)
+void	ft_strpaste_end(char *dest, char *src)
 {
 	int	i;
 	int	w;

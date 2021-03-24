@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 11:19:55 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:30:10 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 16:41:23 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*ft_memchr(const void *ptr, int c, size_t num)
 	unsigned char		*temp_ptr;
 	unsigned char		temp_c;
 
-	temp_ptr = (unsigned char*)ptr;
+	temp_ptr = (unsigned char *)ptr;
 	temp_c = c;
 	i = 0;
 	while (i < num)
