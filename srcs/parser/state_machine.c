@@ -3,62 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   state_machine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 16:33:13 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/18 21:27:44 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 19:45:06 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include "libft.h"
 
-handler g_states[4][40] = {
-	{NULL, complete_word, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL},
-	{NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL},
-	{NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL},
-	{NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL}
-};
-
-t_node	*tree_maker(t_token *tokens)
+t_node	*init_node()
 {
-	t_token	*current_token;
-	handler	next_function;
-	t_node	*root;
-	t_node	*current_node;
+	t_node	*returnable;
 
-	current_token = tokens;
-	root = initiate_node();
-	current_node = root;
-	while(current_token)
-	{
-		while (current_node && !(next_function = g_states[current_node->state][current_token->maintoken]))
-		{
-			current_node = current_node->parent;
-		}
-		if (!current_node)
-		{
-			ft_printf_fd("syntax error near token %s", current_token->value);
-			//free nodes
-			return (NULL);
-		}
-		if (-1 == (next_function(current_node, current_token)))
-			{
-				//free nodes
-				return(NULL);
-			}
-		}
-		current_token = current_token->next;
-	}
+	returnable = (t_node*)malloc(sizeof(t_node));
+	ft_bzero(returnable, sizeof(t_node));
+	return (returnable);
 }
+

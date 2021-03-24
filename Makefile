@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: helvi <helvi@student.42.fr>                +#+  +:+       +#+         #
+#    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/18 21:29:42 by helvi            ###   ########.fr        #
+#    Updated: 2021/03/23 13:20:01 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ _SRC_PARSER = 	parser.c \
 				lexer.c \
 				tokens.c \
 				state_machine.c \
-				stat_functions.c
+				state_functions.c
 
 _SRC_SIGNAL = signal.c
 

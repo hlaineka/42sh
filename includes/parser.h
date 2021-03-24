@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/18 21:29:13 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/23 19:31:21 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ typedef struct		s_node
 	int				status;
 }					t_node;
 
-typedef int (*handler)(t_node *current_node, t_token *current_token);
+typedef t_node *(*handler)(t_node *current_node, t_token *current_token);
 
 t_job				*parser(char *input);
 
@@ -168,13 +168,24 @@ t_token				*lexer(char *input);
 
 t_token				*get_token(char *delimiters, char **source);
 
+/*
+** state_machine.c
+*/
+
 t_node	*tree_maker(t_token *tokens);
+t_node	*init_node();
 
 /*
 ** state_functions.c
 */
 
-int		complete_word(t_node *current_node, t_token *current_token);
-int		command_word(t_node *current_node, t_token *current_token);
+t_node		*complete_word(t_node *current_node, t_token *current_token);
+t_node		*command_word(t_node *current_node, t_token *current_token);
+t_node		*command_operator(t_node *current_node, t_token *current_token);
+t_node		*command_redircetion(t_node *current_node, t_token *current_token);
+t_node		*cmd_suffix_word(t_node *current_node, t_token *current_token);
+t_node		*cmd_suffix_operator(t_node *current_node, t_token *current_token);
+t_node		*cmd_suffix_redirection(t_node *current_node, t_token *current_token);
+t_node		*redirection_word(t_node *current_node, t_token *current_token);
 
 #endif
