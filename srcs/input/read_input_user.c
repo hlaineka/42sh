@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/23 15:48:12 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/25 18:35:30 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ char			*get_input(int argc, char **argv, t_term *term, t_input *input)
 
 	str = NULL;
 	quote = 0;
+	enable_raw_mode(term);
 	if (argc == 1)
 	{
 		str = read_input_tty(PROMPT_NORMAL, input, term);
@@ -83,5 +84,6 @@ char			*get_input(int argc, char **argv, t_term *term, t_input *input)
 			err_fatal(ERR_MALLOC, NULL, term);
 	}
 	(void)argv;
+	disable_raw_mode_continue(term);
 	return (str);
 }

@@ -6,7 +6,7 @@
 #    By: helvi <helvi@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/22 13:51:21 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/03/25 09:09:20 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = 21sh
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g -I$(DIR_INC) -Ilibft/includes
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -I$(DIR_INC) -Ilibft/includes
 TERMCAPS = -ltermcap
 
 DIR_INC = includes/

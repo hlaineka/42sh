@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 19:20:26 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/22 10:15:49 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/25 18:35:52 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void		ft_cfmakeraw(t_termios *termios_p)
 	termios_p->c_cflag |= CS8;
 }
 
-void			enable_raw_mode(t_term *term)
+void			get_termios_modes(t_term *term)
 {
 	t_termios	raw;
 
@@ -32,6 +32,11 @@ void			enable_raw_mode(t_term *term)
 	ft_cfmakeraw(&raw);
 	raw.c_cc[VMIN] = 1;
 	raw.c_cc[VTIME] = 0;
-	if (tcsetattr(STDIN_FILENO, TCSANOW, &raw) == -1) //TCSANOW or TCSAFLUSH
+	term->raw = raw;
+}
+
+void			enable_raw_mode(t_term *term)
+{
+	if (tcsetattr(STDIN_FILENO, TCSANOW, &term->raw) == -1) //TCSANOW or TCSAFLUSH
 		err_fatal(ERR_MESSAGE, "tcsetattr", term);
 }

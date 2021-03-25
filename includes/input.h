@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/23 17:24:45 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/25 18:26:16 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ void		err_quit(int error_no, char *s_str);
 /*
 ** TERMINAL
 */
+void		get_termios_modes(t_term *term);
 void		enable_raw_mode(t_term *term);
+void		disable_raw_mode_continue(t_term *term);
 void		disable_raw_mode(t_term *term);
-int			disable_rawmode();
+int			disable_rawmode(void);
 int			print_prompt(int mode);
 
 int			move_cursor_up(int *row, int *col, t_term *term);

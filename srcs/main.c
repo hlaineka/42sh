@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/22 09:39:23 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/25 18:45:55 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ int		main(int argc, char **argv, char **envp)
 	start_signal(); //signals not done;
 	initialize(&input, &term);
 	ft_atexit(&disable_rawmode);
-	tputs(tgoto(term.cm_string, 0, 0), 1, ft_putc);
-	tputs(term.cd_string, 1, ft_putc);
+//	tputs(tgoto(term.cm_string, 0, 0), 1, ft_putc);
+//	tputs(term.cd_string, 1, ft_putc);
 	while (1)
 	{
 		input_str = get_input(argc, argv, &term, &input); // not done, error check?
-		ft_putstr_input(input_str, &input, &term);
+//		ft_putstr_input(input_str, &input, &term);
+		ft_printf("%s", input_str);
 //		ft_printf_fd(STDOUT_FILENO, "\n\r%s\n\r", input_str);
 //		ft_printf_fd(STDOUT_FILENO, "%s\n", input_str);
 		if (!ft_strcmp(input_str, "exit\n"))

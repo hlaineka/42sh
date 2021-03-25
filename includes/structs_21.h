@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/23 16:51:59 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/25 18:29:13 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ typedef struct			s_term
 	char				*termtype;
 	char				*buffer;
 	t_termios			orig_termios;
+	t_termios			raw;
 	char				*ti_string;
 	char				*te_string;
 	char				*cl_string;
