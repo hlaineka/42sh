@@ -6,21 +6,21 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/23 17:50:35 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/24 12:39:03 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "input.h"
 
-static int		is_special_key(char *rc)
+static int	is_special_key(char *rc)
 {
 	if (rc != 0 && (rc[0] < 32 || rc[0] == 127))
 		return (1);
 	return (0);
 }
 
-static char		*double_allocation(char *str, size_t size)
+static char	*double_allocation(char *str, size_t size)
 {
 	char	*new;
 
@@ -31,7 +31,7 @@ static char		*double_allocation(char *str, size_t size)
 	return (new);
 }
 
-static int		do_special_keys(char *rc, t_input *input, t_term *term)
+static int	do_special_keys(char *rc, t_input *input, t_term *term)
 {
 	ft_is_home_key(rc) == TRUE ? home_keypress(input, term) : 0;
 	ft_is_end_key(rc) == TRUE ? end_keypress(input, term) : 0;
@@ -58,7 +58,7 @@ static int		do_special_keys(char *rc, t_input *input, t_term *term)
 	return (0);
 }
 
-int				shell_keypress(char *rc, t_input *input, t_term *term)
+int			shell_keypress(char *rc, t_input *input, t_term *term)
 {
 	int		ret;
 	int		col;
