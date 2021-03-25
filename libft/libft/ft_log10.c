@@ -6,13 +6,13 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 18:00:06 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/08/25 18:04:32 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/24 17:05:40 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_log10(long double f)
+int	ft_log10(long double f)
 {
 	int		log;
 

@@ -6,13 +6,13 @@
 /*   By: hhuhtane <hhuhtane@student.hive.f...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 15:42:46 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/02/24 17:00:35 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/24 17:59:29 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_get_nbr_base(char c, int base)
+static int	ft_get_nbr_base(char c, int base)
 {
 	int		max_nb;
 
@@ -28,31 +28,31 @@ static int		ft_get_nbr_base(char c, int base)
 		return (-1);
 }
 
-int				ft_atoi_base(const char *str, int base)
+int	ft_atoi_base(const char *str, int base)
 {
-	int					sign;
-	int					i;
-	int					num;
-	size_t				result;
+	int			sign;
+	int			num;
+	size_t		result;
 
-	i = 0;
 	num = 0;
 	sign = 1;
 	result = 0;
-	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v' ||
-		str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
-		i++;
-	if (str[i] == '-')
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '-')
 	{
 		sign = -1;
-		i++;
+		str++;
 	}
-	else if (str[i] == '+')
-		i++;
-	while (str[i] && (num = ft_get_nbr_base(ft_tolower(str[i]), base)))
+	else if (*str == '+')
+		str++;
+	while (*str)
 	{
+		num = ft_get_nbr_base(ft_tolower(*str), base);
+		if (!num)
+			break ;
+		str++;
 		result = (result * base) + num;
-		i++;
 	}
 	return (sign * (int)result);
 }

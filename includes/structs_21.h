@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/17 17:41:53 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/25 18:29:13 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,15 @@ typedef struct			s_clist
 
 typedef struct			s_input
 {
+	t_clist				*hist_cur;
 	t_clist				*history;
 	t_clist				*last_comm;
 	char				*ls;
 	char				*rrs;
+	char				*clipboard;
 	size_t				ls_size;
 	size_t				rrs_size;
+	size_t				clipboard_size;
 	size_t				prompt_length;
 	int					start_row;// no need yet
 	int					start_col;// no need yet
@@ -129,10 +132,12 @@ typedef struct			s_job
 
 typedef struct			s_term
 {
+	t_input				*input;
 	char				*term_buffer;
 	char				*termtype;
 	char				*buffer;
 	t_termios			orig_termios;
+	t_termios			raw;
 	char				*ti_string;
 	char				*te_string;
 	char				*cl_string;

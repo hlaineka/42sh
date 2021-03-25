@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 11:19:46 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:27:26 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 17:30:47 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_getenv(char **envp_pointer, char *name)
 			temp = ft_strsub(temp_strarray[i], 0, i_of_equal);
 			if (ft_strequ(temp, name))
 				returnable = ft_strsub(temp_strarray[i], i_of_equal + 1,
-					ft_strlen(temp_strarray[i]) - i_of_equal);
+						ft_strlen(temp_strarray[i]) - i_of_equal);
 			free(temp);
 		}
 		i++;

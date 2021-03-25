@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 13:16:47 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/13 23:46:34 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 20:10:31 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,13 @@ void	ft_init_fun_ptr(t_all *all)
 ** pointers.
 */
 
-int		ft_initialize(t_all *all, const char *format, size_t *len)
+int	ft_initialize(t_all *all, const char *format, size_t *len)
 {
-	all->format_ptr = (char*)format;
+	all->format_ptr = (char *)format;
 	all->len = len;
 	*all->len = 0;
-	if (!(all->parsed_args = ft_lstnew(NULL, 0)))
+	all->parsed_args = ft_lstnew(NULL, 0);
+	if (!all->parsed_args)
 		return (0);
 	all->last_arg = all->parsed_args;
 	ft_strncpy(all->flags_str, FLAGS, FLAGS_SIZE + 1);

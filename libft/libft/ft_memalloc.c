@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 11:18:01 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:30:02 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 16:41:45 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	*ft_memalloc(size_t size)
 {
 	char	*returnable;
 
-	returnable = (char*)malloc(sizeof(char) * size);
+	returnable = (char *)malloc(sizeof(char) * size);
 	if (returnable == NULL)
 		return (NULL);
 	ft_bzero(returnable, size);
-	return ((void*)returnable);
+	return ((void *)returnable);
 }

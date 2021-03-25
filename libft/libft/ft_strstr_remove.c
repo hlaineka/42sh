@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 12:04:57 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:34:51 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 13:20:03 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ char	*ft_strstr_remove(char *str1, char *str2)
 
 	start = ft_strstri(str1, str2);
 	end = start + ft_strlen(str2);
-	returnable = (char*)malloc(sizeof(char) * (ft_strlen(str1) -
-			ft_strlen(str2) + 1));
+	returnable = (char *)malloc(sizeof(char) * (ft_strlen(str1)
+				- ft_strlen(str2) + 1));
 	i = 0;
 	w = 0;
 	while (str1[i])

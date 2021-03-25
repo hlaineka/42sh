@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 10:29:34 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:33:53 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 15:37:15 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	last_occurance(const char *src, int c)
 	return (-1);
 }
 
-char		*ft_strnchr(const char *src, int c)
+char	*ft_strnchr(const char *src, int c)
 {
 	char	*returnable;
 

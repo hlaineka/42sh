@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 11:13:32 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:27:01 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 15:41:48 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 ** minus and plus signs
 */
 
-int			ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
-	int i;
-	int	negative_multiplier;
-	int returnable;
+	int		i;
+	int		negative_multiplier;
+	int		returnable;
 
 	i = 0;
 	negative_multiplier = 1;

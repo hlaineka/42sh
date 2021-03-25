@@ -6,13 +6,13 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:56:57 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/01/15 12:58:29 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/24 17:02:04 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_lstlen(t_list *lst)
+int	ft_lstlen(t_list *lst)
 {
 	int		len;
 

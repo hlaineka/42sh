@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 12:33:21 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/10/16 16:24:48 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/24 21:05:30 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@
 **************
 */
 
-typedef struct			s_bitshift
+typedef struct s_bitshift
 {
 	unsigned long long	m : 63;
 	unsigned long long	integer : 1;
@@ -104,19 +104,19 @@ typedef struct			s_bitshift
 	unsigned short		sign : 1;
 }						t_bitshift;
 
-typedef union			u_ldbits
+typedef union u_ldbits
 {
 	long double			ld;
 	t_bitshift			bits;
 }						t_ldbits;
 
-typedef union			u_backtold
+typedef union u_backtold
 {
 	unsigned long long	m;
 	long double			ld;
 }						t_backtold;
 
-typedef struct			s_all
+typedef struct s_all
 {
 	char				*format_ptr;
 	va_list				args;
@@ -129,7 +129,6 @@ typedef struct			s_all
 	char				format_id_str[FORMAT_ID_SIZE + 1];
 	void				(*convert_fun_ptr[FORMAT_ID_SIZE])(void*);
 	void				(*flags_fun_ptr[FLAGS_SIZE])(void*);
-
 	int					format_info;
 	size_t				width;
 	size_t				precision;

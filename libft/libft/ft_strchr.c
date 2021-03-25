@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 11:33:07 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:32:23 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 15:55:22 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ char	*ft_strchr(const char *src, int c)
 		while (src[i] != '\0')
 		{
 			if (src[i] == c)
-				return (char*)&src[i];
+				return ((char *)&src[i]);
 			i++;
 		}
 		if (src[i] == c)
-			return (char*)&src[i];
+			return ((char *)&src[i]);
 	}
 	return (NULL);
 }

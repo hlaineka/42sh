@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 17:57:06 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/02/12 10:35:47 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/24 16:51:00 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,23 @@ static size_t	longlonglen_prefix(long long n, int base)
 	return (len);
 }
 
-char			*ft_ltoa_base_prefix(long long n, int base, char *prefix)
+static char	*get_len_and_allocate(size_t *n_len, int base, long long n)
+{
+	*n_len = longlonglen_prefix(n, base);
+	return (ft_strnew(*n_len + 1));
+}
+
+char	*ft_ltoa_base_prefix(long long n, int base, char *prefix)
 {
 	size_t		n_len;
 	size_t		temp;
 	char		*str;
 
-	n_len = longlonglen_prefix(n, base);
+	str = get_len_and_allocate(&n_len, base, n);
+	if (!str)
+		return (NULL);
 	if (n < 0)
 		prefix[0] = '-';
-	if (!(str = ft_strnew(n_len + 1)))
-		return (NULL);
 	str[n_len--] = '\0';
 	while (n >= base || n <= -base)
 	{

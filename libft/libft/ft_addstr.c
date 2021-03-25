@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 11:54:01 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:26:38 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 17:32:20 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	**ft_addstr(char **dest, char *src)
 		while (dest[i] != NULL)
 			i++;
 	}
-	returnable = (char**)malloc(sizeof(char*) * (i + 1));
+	returnable = (char **)malloc(sizeof(char *) * (i + 1));
 	w = 0;
 	while (w < i)
 	{

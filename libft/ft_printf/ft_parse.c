@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 17:25:54 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/13 23:46:42 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 20:34:02 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,28 @@
 ** characters.
 */
 
-static int		get_plain_txt(t_all *all)
+static size_t	get_text_len(t_all *all)
 {
-	intmax_t	len;
 	char		*end_ptr;
+	char		*end_ptr_two;
+
+	end_ptr = ft_strchr(all->format_ptr, '%');
+	end_ptr_two = ft_strchr(all->format_ptr, '\\');
+	if (end_ptr)
+		return (end_ptr - all->format_ptr);
+	else if (end_ptr_two)
+		return (end_ptr - all->format_ptr);
+	return (ft_strlen(all->format_ptr));
+}
+
+static int	get_plain_txt(t_all *all)
+{
+	size_t		len;
 	t_list		*txt_list;
 
-	if (!(end_ptr = ft_strchr(all->format_ptr, '%')) &&
-		!(end_ptr = ft_strchr(all->format_ptr, '\\')))
-		len = ft_strlen(all->format_ptr);
-	else
-		len = end_ptr - all->format_ptr;
-	if (!(txt_list = ft_lstnew(all->format_ptr, len)))
+	len = get_text_len(all);
+	txt_list = ft_lstnew(all->format_ptr, len);
+	if (!txt_list)
 		return (0);
 	ft_lstappend(&all->last_arg, txt_list);
 	all->last_arg = all->last_arg->next;
@@ -44,7 +54,7 @@ static int		get_plain_txt(t_all *all)
 ** linked list.
 */
 
-int				ft_parse(t_all *all)
+int	ft_parse(t_all *all)
 {
 	while (all->format_ptr && *all->format_ptr)
 	{

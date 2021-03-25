@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 16:54:09 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:32:09 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 16:12:33 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 #include "libft.h"
 
-char		**ft_strarr_copy(char **src)
+char	**ft_strarr_copy(char **src)
 {
 	int		i;
 	char	**returnable;
@@ -26,7 +26,7 @@ char		**ft_strarr_copy(char **src)
 	i = 0;
 	if (!src)
 		return (NULL);
-	returnable = (char**)malloc(sizeof(char*) * (ft_array_length(src) + 1));
+	returnable = (char **)malloc(sizeof(char *) * (ft_array_length(src) + 1));
 	while (src && src[i])
 	{
 		returnable[i] = ft_strdup(src[i]);

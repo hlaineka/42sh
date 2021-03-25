@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 12:46:59 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:34:31 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 15:37:55 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** pastes the string in src to the beginning of the dest. Does not add \0
 */
 
-void		ft_strpaste(char *dest, char *src)
+void	ft_strpaste(char *dest, char *src)
 {
 	int	i;
 

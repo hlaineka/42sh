@@ -6,17 +6,17 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 14:47:54 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/13 23:47:21 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 19:56:18 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		convert_str(void *param)
+void	convert_str(void *param)
 {
 	t_all		*all;
 
-	all = (t_all*)param;
+	all = (t_all *)param;
 	if (!all->arg_str)
 	{
 		all->convert_str = ft_strdup("(null)");
@@ -36,7 +36,7 @@ void		convert_str(void *param)
 	}
 }
 
-void		get_str(t_all *all)
+void	get_str(t_all *all)
 {
-	all->arg_str = va_arg(all->args, char*);
+	all->arg_str = va_arg(all->args, char *);
 }

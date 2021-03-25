@@ -6,20 +6,20 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/15 12:44:38 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/13 23:47:02 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 20:02:01 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "ft_printf.h"
 
-static void		lst_delete(void *data, size_t i)
+static void	lst_delete(void *data, size_t i)
 {
 	ft_bzero(data, i);
 	free(data);
 }
 
-static void		ft_write_lst(t_list *lst, size_t *len)
+static void	ft_write_lst(t_list *lst, size_t *len)
 {
 	t_list		*ptr;
 
@@ -33,7 +33,7 @@ static void		ft_write_lst(t_list *lst, size_t *len)
 	ft_lstdel(&ptr, &lst_delete);
 }
 
-static int		ft_lst_to_str(t_list *lst, char **ret, size_t *len)
+static int	ft_lst_to_str(t_list *lst, char **ret, size_t *len)
 {
 	t_list		*ptr;
 	size_t		i;
@@ -47,7 +47,8 @@ static int		ft_lst_to_str(t_list *lst, char **ret, size_t *len)
 		lst = lst->next;
 	}
 	lst = ptr;
-	if (!(*ret = ft_strnew(*len + 1)))
+	*ret = ft_strnew(*len + 1);
+	if (!(*ret))
 		return (0);
 	while (lst)
 	{
@@ -65,7 +66,7 @@ static int		ft_lst_to_str(t_list *lst, char **ret, size_t *len)
 ** it returns. Otherwise it works as normal printf.
 */
 
-int				ft_asprintf(char **ret, const char *format, ...)
+int	ft_asprintf(char **ret, const char *format, ...)
 {
 	t_all		all;
 	size_t		len;
@@ -88,7 +89,7 @@ int				ft_asprintf(char **ret, const char *format, ...)
 ** FT_PRINTF parses the format string and prints the string according to it.
 */
 
-int				ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
 	t_all		all;
 	size_t		len;

@@ -6,13 +6,13 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 14:05:56 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/13 23:47:25 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 19:55:32 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			ft_variable_len(t_all *all)
+int	ft_variable_len(t_all *all)
 {
 	all->combined_len = all->arg_len + all->prefix_len;
 	if (all->combined_len < all->width)
@@ -23,7 +23,7 @@ int			ft_variable_len(t_all *all)
 	return (all->combined_len);
 }
 
-int			get_first_decimal(long double f)
+int	get_first_decimal(long double f)
 {
 	unsigned long long		num;
 
@@ -38,11 +38,11 @@ long double	get_decimal_remain(long double f)
 	return (f - (unsigned long long)f);
 }
 
-void		future_feature(void *param)
+void	future_feature(void *param)
 {
 	t_all					*all;
 
-	all = (t_all*)param;
+	all = (t_all *)param;
 	all->convert_str = ft_strdup("This is a possible future feature!");
 	all->arg_len = ft_strlen(all->convert_str);
 }

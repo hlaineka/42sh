@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 12:26:07 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:34:18 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 15:37:38 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ char	*ft_strnstr(const char *str1, const char *str2, size_t n)
 	i = 0;
 	w = 0;
 	if (str2[0] == '\0')
-		return ((char*)str1);
+		return ((char *)str1);
 	while (str1[i] != '\0' && i < n)
 	{
 		while (str2[w] != '\0' && str1[i + w] != '\0'
 			&& (i + w) < n && str2[w] == str1[i + w])
 		{
 			if (str2[w + 1] == '\0')
-				return ((char*)&str1[i]);
+				return ((char *)&str1[i]);
 			w++;
 		}
 		i++;

@@ -6,13 +6,13 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 15:16:55 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/13 23:46:30 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 20:13:30 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static long double		round_float(long double f, int prec)
+static long double	round_float(long double f, int prec)
 {
 	t_ldbits				ldu;
 	long double				ld_temp;
@@ -25,14 +25,17 @@ static long double		round_float(long double f, int prec)
 		return (f + (0.5 / ld_temp));
 }
 
-static char				*dot_float_str(long double f, int prec)
+static char	*dot_float_str(long double f, int prec)
 {
 	unsigned long long		num;
 	char					*f_part;
 	size_t					i;
 
 	i = 1;
-	if (prec < 1 || !(f_part = ft_strnew(prec + 2)))
+	if (prec < 1)
+		return (NULL);
+	f_part = ft_strnew(prec + 2);
+	if (!f_part)
 		return (NULL);
 	f_part[0] = '.';
 	while (prec-- > 0)
@@ -50,7 +53,7 @@ static char				*dot_float_str(long double f, int prec)
 	return (f_part);
 }
 
-static char				*special_cases(t_ldbits ldu, char *sign)
+static char	*special_cases(t_ldbits ldu, char *sign)
 {
 	if (ldu.bits.sign & 1)
 		*sign = '-';
@@ -67,7 +70,7 @@ static char				*special_cases(t_ldbits ldu, char *sign)
 	return (NULL);
 }
 
-char					*ft_lftoa_bit(long double f, size_t prec, char *sign)
+char	*ft_lftoa_bit(long double f, size_t prec, char *sign)
 {
 	t_ldbits				ldu;
 	char					*digits_str;
@@ -75,14 +78,16 @@ char					*ft_lftoa_bit(long double f, size_t prec, char *sign)
 	char					*res;
 
 	ldu.ld = f;
-	if ((res = special_cases(ldu, sign)))
+	res = special_cases(ldu, sign);
+	if (res)
 		return (res);
 	if (f < 0)
 		f = -f;
 	if (prec < 19)
 		f = round_float(f, prec);
 	digits_str = ft_uintmaxtoa_base((uintmax_t)f, 10);
-	if (!(decimals_str = dot_float_str(f, prec)))
+	decimals_str = dot_float_str(f, prec);
+	if (!decimals_str)
 		decimals_str = ft_strnew(0);
 	res = ft_strjoin(digits_str, decimals_str);
 	free(digits_str);

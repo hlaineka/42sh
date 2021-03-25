@@ -6,13 +6,13 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 12:22:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:28:17 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 17:19:26 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_float_to_str(long double n, long long int number)
+char	*ft_float_to_str(long double n, long long int number)
 {
 	int		i;
 	char	*returnable;
@@ -23,23 +23,22 @@ char		*ft_float_to_str(long double n, long long int number)
 		number = number * -1;
 	}
 	i = 1;
-	if (NULL != (returnable = (char*)malloc(sizeof(char) * 20)))
+	returnable = (char *)malloc(sizeof(char) * 20);
+	if (!returnable)
+		return (NULL);
+	returnable[0] = '.';
+	n = n - number;
+	while (i < 20)
 	{
-		returnable[0] = '.';
-		n = n - number;
-		while (i < 20)
-		{
-			n = n * 10;
-			number = n;
-			returnable[i] = (number % 10) + '0';
-			i++;
-		}
-		return (returnable);
+		n = n * 10;
+		number = n;
+		returnable[i] = (number % 10) + '0';
+		i++;
 	}
-	return (NULL);
+	return (returnable);
 }
 
-char		*ft_itoa_float(long double n)
+char	*ft_itoa_float(long double n)
 {
 	char			*str1;
 	char			*str2;

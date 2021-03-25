@@ -6,13 +6,13 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 17:42:56 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/13 23:45:59 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 20:20:13 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			ft_arg_convert(t_all *all)
+int	ft_arg_convert(t_all *all)
 {
 	int		i;
 

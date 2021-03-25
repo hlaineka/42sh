@@ -6,56 +6,11 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/17 18:26:38 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/25 18:39:20 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
-
-/*
-void	interrogate_terminal(t_prog *prog)
-{
-	char	*buffer;
-
-	if (!(buffer = ft_memalloc(sizeof(char) * 2048)))
-		err_fatal(ERR_MALLOC, NULL, prog);
-	prog->cl_string = tgetstr("cl", &buffer);
-	prog->cm_string = tgetstr("cm", &buffer);
-	prog->cd_string = tgetstr("cd", &buffer);
-	prog->height = tgetnum("li");
-	prog->width = tgetnum("co");
-	prog->so_string = tgetstr("so", &buffer);
-	prog->se_string = tgetstr("se", &buffer);
-	prog->mr_string = tgetstr("mr", &buffer);
-	prog->me_string = tgetstr("me", &buffer);
-	prog->us_string = tgetstr("us", &buffer);
-	prog->ue_string = tgetstr("ue", &buffer);
-	prog->vi_string = tgetstr("vi", &buffer);
-	prog->ve_string = tgetstr("ve", &buffer);
-	prog->ti_string = tgetstr("ti", &buffer);
-	prog->te_string = tgetstr("te", &buffer);
-}
-
-void	init_terminal_data(t_prog *prog)
-{
-	int		success;
-
-	ft_bzero(prog, sizeof(t_prog));
-	g_prog = prog;
-	prog->termtype = getenv("TERM");
-	if (!isatty(1))
-		prog->fd = open(ttyname(ttyslot()), O_RDWR);
-	else
-		prog->fd = STDOUT_FILENO;
-	if (!prog->termtype)
-		err_quit(ERR_TERMTYPE_NOT_SET, NULL);
-	success = tgetent(prog->term_buffer, prog->termtype);
-	if (success < 0)
-		err_quit(ERR_TERMCAPS_NO_ACCESS, NULL);
-	if (success == 0)
-		err_quit(ERR_TERMTYPE_NOT_FOUND, prog->termtype);
-}
-*/
 
 void			init_input(t_input *input)
 {
@@ -67,11 +22,33 @@ void			init_input(t_input *input)
 		free(input->ls);
 		exit(1);
 	}
+	if (!(input->clipboard = ft_memalloc(sizeof(char) * 2048)))
+	{
+		free(input->ls);
+		free(input->rrs);
+		exit(1);
+	}
 	if (!(input->history = ft_clstnew(NULL, 0)))
 		exit(1); //FIX this
 	input->last_comm = input->history;
 	input->ls_size = 2048;
 	input->rrs_size = 2048;
+	input->clipboard_size = 2048;
+}
+
+static void		get_termcaps_strings(t_term *term, char *buffer)
+{
+	term->ti_string = tgetstr("ti", &buffer);
+	term->te_string = tgetstr("te", &buffer);
+	term->cl_string = tgetstr("cl", &buffer);
+	term->cd_string = tgetstr("cd", &buffer);
+	term->ce_string = tgetstr("ce", &buffer);
+	term->cm_string = tgetstr("cm", &buffer);
+	term->le_string = tgetstr("le", &buffer);
+	term->nd_string = tgetstr("nd", &buffer);
+	term->sc_string = tgetstr("sc", &buffer);
+	term->rc_string = tgetstr("rc", &buffer);
+	term->dc_string = tgetstr("dc", &buffer);
 }
 
 void			init_term(t_term *term)
@@ -92,47 +69,25 @@ void			init_term(t_term *term)
 		err_quit(ERR_TERMCAPS_NO_ACCESS, NULL);
 	if (success == 0)
 		err_quit(ERR_TERMTYPE_NOT_FOUND, term->termtype);
-
 	if (!(term->buffer = ft_memalloc(sizeof(char) * 2048)))
 		err_fatal(ERR_MALLOC, NULL, term);
 	buffer = term->buffer;
-
-	term->ti_string = tgetstr("ti", &buffer);
-	term->te_string = tgetstr("te", &buffer);
-	term->cl_string = tgetstr("cl", &buffer);
-	term->cd_string = tgetstr("cd", &buffer);
-	term->ce_string = tgetstr("ce", &buffer);
-	term->cm_string = tgetstr("cm", &buffer);
-	term->le_string = tgetstr("le", &buffer);
-	term->nd_string = tgetstr("nd", &buffer);
-	term->sc_string = tgetstr("sc", &buffer);
-	term->rc_string = tgetstr("rc", &buffer);
-	term->dc_string = tgetstr("dc", &buffer);
-
+	get_termcaps_strings(term, buffer);
 	term->nrows = tgetnum("li");
 	term->ncolumns = tgetnum("co");
-
 	term->fd_stdin = STDIN_FILENO;
 	term->fd_stdout = STDOUT_FILENO; // change to terminal output?
 	term->fd_stderr = STDERR_FILENO;
-/*
-	term->so_string = tgetstr("so", &buffer);
-	term->se_string = tgetstr("se", &buffer);
-	term->mr_string = tgetstr("mr", &buffer);
-	term->me_string = tgetstr("me", &buffer);
-	term->us_string = tgetstr("us", &buffer);
-	term->ue_string = tgetstr("ue", &buffer);
-	term->vi_string = tgetstr("vi", &buffer);
-	term->ve_string = tgetstr("ve", &buffer);
-*/
-
-	
 }
 
 void			initialize(t_input *input, t_term *term)
 {
 	init_term(term);
 	init_input(input);
-	enable_raw_mode(term);
+	term->input = input;
+	get_termios_modes(term);
+//	enable_raw_mode(term);
 	tputs(term->ti_string, 1, ft_putc);
+	tputs(tgoto(term->cm_string, 0, 0), 1, ft_putc);
+	tputs(term->cd_string, 1, ft_putc);
 }

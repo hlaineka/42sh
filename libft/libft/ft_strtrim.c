@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:36:01 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:35:19 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 13:10:53 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	is_whitespace(char c)
 	return (0);
 }
 
-char		*ft_strtrim(const char *s)
+char	*ft_strtrim(const char *s)
 {
 	int		i;
 	int		w;

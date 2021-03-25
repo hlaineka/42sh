@@ -6,13 +6,13 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:22:37 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/13 23:47:30 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 19:54:43 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			get_format_id(t_all *all)
+int	get_format_id(t_all *all)
 {
 	int		i;
 	char	*temp_ptr;

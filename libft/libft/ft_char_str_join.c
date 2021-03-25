@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 11:09:24 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:27:09 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 16:38:47 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ char	*ft_char_str_join(char c, char *s1)
 
 	if (s1)
 	{
-		if (NULL != (returnable = (char*)malloc(sizeof(char)
-					* (ft_strlen(s1) + 1))))
+		returnable = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
+		if (NULL != (returnable))
 		{
 			i = 1;
 			w = 0;
