@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 11:03:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/23 17:24:11 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/25 20:09:30 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@ int			end_keypress(t_input *input, t_term *term)
 	int		x;
 	int		y;
 
+	if (ft_strchr(input->ls, 13) || ft_strchr(input->rrs, 13))
+	{
+		x = input->prompt_col - 1;
+		y = input->prompt_row - 1;
+		tputs(tgoto(term->cm_string, x, y), 1, ft_putc);
+		ft_putstr_input(input->ls, input, term);
+		ft_putrstr_input(input->rrs, input, term);
+		get_pos(&input->cursor_row, &input->cursor_col);
+		return (0);
+	}
 	ls_len = ft_strlen(input->ls);
 	rrs_len = ft_strlen(input->rrs);
 	print_len = ls_len + rrs_len + input->prompt_length;
