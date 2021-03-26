@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   includes.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 19:00:19 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/16 12:23:56 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/26 11:28:31 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # include "input.h"
 # include "parser.h"
 # include "ft_signal.h"
-# include "ft_debug.h"
 
 int 				g_ft_errno;
 

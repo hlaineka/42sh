@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 11:59:34 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/18 16:30:52 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/25 12:02:06 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_token				*get_token(char *delimiters, char **source)
 	
 	current = (t_token*)malloc(sizeof(t_token));
 	ft_bzero(current, sizeof(t_token));
-	current->single_quoted = FALSE;
+	current->single_quoted = FALSE; //these can be left out?
 	current->double_quoted = FALSE;
 	if (!get_tokenstr(current, delimiters, source))
 	{

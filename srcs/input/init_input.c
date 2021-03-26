@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/12 18:59:39 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/17 18:26:38 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ void			init_input(t_input *input)
 		free(input->ls);
 		exit(1);
 	}
+	if (!(input->history = ft_clstnew(NULL, 0)))
+		exit(1); //FIX this
+	input->last_comm = input->history;
 	input->ls_size = 2048;
 	input->rrs_size = 2048;
 }
@@ -100,6 +103,11 @@ void			init_term(t_term *term)
 	term->cd_string = tgetstr("cd", &buffer);
 	term->ce_string = tgetstr("ce", &buffer);
 	term->cm_string = tgetstr("cm", &buffer);
+	term->le_string = tgetstr("le", &buffer);
+	term->nd_string = tgetstr("nd", &buffer);
+	term->sc_string = tgetstr("sc", &buffer);
+	term->rc_string = tgetstr("rc", &buffer);
+	term->dc_string = tgetstr("dc", &buffer);
 
 	term->nrows = tgetnum("li");
 	term->ncolumns = tgetnum("co");

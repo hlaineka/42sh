@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 14:37:51 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/18 21:30:39 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/26 11:49:49 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ t_job		*parser(char *input)
 		ft_printf("token: %i, value: %s. ", temp->maintoken, temp->value);
 		temp = temp->next;
 	}
-	tree_maker(tokens);
+	ft_printf("\n");
+	ast_creator(tokens);
 	returnable = (t_job*)malloc(sizeof(t_job));
 	ft_bzero(returnable, sizeof(t_job));
 	returnable->command = ft_strdup(input);

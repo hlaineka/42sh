@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/23 19:31:21 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/03/26 11:46:16 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,18 +114,12 @@ enum e_token
 	tkn_eoi
 };
 
-enum states
-{
-	complete_command,
-	command,
-	cmd_suffix,
-	redirection
-};
-
 typedef struct 		s_token
 {
 	int				*tokens;
 	int				maintoken;
+	int				precedence;
+	bool			left_associative;
 	char			*value;
 	bool			single_quoted;
 	bool			double_quoted;
@@ -152,8 +146,6 @@ typedef struct		s_node
 	int				status;
 }					t_node;
 
-typedef t_node *(*handler)(t_node *current_node, t_token *current_token);
-
 t_job				*parser(char *input);
 
 /*
@@ -168,24 +160,6 @@ t_token				*lexer(char *input);
 
 t_token				*get_token(char *delimiters, char **source);
 
-/*
-** state_machine.c
-*/
-
-t_node	*tree_maker(t_token *tokens);
-t_node	*init_node();
-
-/*
-** state_functions.c
-*/
-
-t_node		*complete_word(t_node *current_node, t_token *current_token);
-t_node		*command_word(t_node *current_node, t_token *current_token);
-t_node		*command_operator(t_node *current_node, t_token *current_token);
-t_node		*command_redircetion(t_node *current_node, t_token *current_token);
-t_node		*cmd_suffix_word(t_node *current_node, t_token *current_token);
-t_node		*cmd_suffix_operator(t_node *current_node, t_token *current_token);
-t_node		*cmd_suffix_redirection(t_node *current_node, t_token *current_token);
-t_node		*redirection_word(t_node *current_node, t_token *current_token);
+t_node		*ast_creator(t_token *first);
 
 #endif

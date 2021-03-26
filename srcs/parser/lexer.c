@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:32:48 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/18 16:31:11 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/25 11:40:30 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ bool	combine_optokens(t_token **current, t_token *prev)
 	return (TRUE);
 }
 
-bool	check_singleop(t_token **current)
+bool	mark_singleop(t_token **current)
 {
 	if (ft_strequ((*current)->value, "|"))
 		(*current)->maintoken = tkn_pipe;
@@ -112,12 +112,12 @@ bool	check_singleop(t_token **current)
 	return(TRUE);		
 }
 
-bool	check_tkn_ops(t_token **current, t_token *prev)
+bool	mark_tkn_ops(t_token **current, t_token *prev)
 {
 	if (!current || !*current)
 	{
 		if (prev && prev->maintoken == tkn_operator)
-			if (!(check_singleop(&prev)))
+			if (!(mark_singleop(&prev)))
 				return (FALSE);
 		return (TRUE);
 	}
@@ -130,7 +130,7 @@ bool	check_tkn_ops(t_token **current, t_token *prev)
 		return (TRUE);
 	if ((*current)->maintoken == tkn_word)
 	{
-		if (!(check_singleop(&prev)))
+		if (!(mark_singleop(&prev)))
 			return (FALSE);
 	}
 	else
@@ -142,7 +142,7 @@ bool	check_token(t_token **current, t_token *prev)
 {
 	if (current && *current && ((*current)->single_quoted || (*current)->double_quoted))
 		check_tkn_quotes(*current);
-	if (!check_tkn_ops(current, prev))
+	if (!mark_tkn_ops(current, prev))
 	{
 		ft_printf_fd(2, "operator syntax error");
 		return (FALSE);
@@ -150,7 +150,7 @@ bool	check_token(t_token **current, t_token *prev)
 	return (TRUE);
 }
 
-bool	check_tokens(t_token **first)
+bool	combine_doubleops(t_token **first)
 {
 	t_token	*current;
 	t_token	*prev;
@@ -169,11 +169,9 @@ bool	check_tokens(t_token **first)
 		prev = current;
 		current = next;
 	}
-	
 	check_token(NULL, prev);
 	return (TRUE);
 }
-
 
 t_token	*lexer(char *input)
 {
@@ -200,7 +198,7 @@ t_token	*lexer(char *input)
 		prev = current;
 		current = get_token(METACHARS, &str_ptr);
 	}
-	if (!check_tokens(&first))
+	if (!combine_doubleops(&first))
 		return (NULL);
 	//comment handling here.
 	//IO_NUMBER handling

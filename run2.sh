@@ -1,3 +1,3 @@
-if make debug; then
+if make ; then
 	valgrind --leak-check=yes --track-origins=yes ./21sh
 fi
