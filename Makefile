@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/26 11:55:19 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/03/26 12:02:57 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = 21sh
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g -I$(DIR_INC) -Ilibft/includes
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -I$(DIR_INC) -Ilibft/includes
 TERMCAPS = -ltermcap
 
 DIR_INC = includes/
@@ -26,16 +26,29 @@ DIR_OBJS = objs/
 
 _SRC_MAIN = main.c
 
-_SRC_INPUT = disable_raw_mode.c \
-				enable_raw_mode.c \
-				errors.c \
-				ft_clstnew.c \
-				ft_isarrows.c \
-				ft_iskey.c \
-				ft_putc.c \
-				init_input.c \
-				prompt.c \
-				read_input_user.c
+_SRC_INPUT = read_input_user.c \
+			disable_raw_mode.c \
+			enable_raw_mode.c \
+			errors.c \
+			ft_putc.c \
+			init_input.c \
+			prompt.c \
+			ft_isarrows.c \
+			ft_iskey.c \
+			ft_clstnew.c \
+			ft_is_quote_open.c \
+			ft_putstr_input.c \
+			move_cursor.c \
+			get_pos.c \
+			move_chars.c \
+			history_keypress.c \
+			home_and_end_keypress.c \
+			alt_direction_keypress.c \
+			move_cursor_word.c \
+			left_right_keypress.c \
+			delete_keypress.c \
+			ft_isdelete.c \
+			shell_keypress.c
 
 _SRC_PARSER = 	parser.c \
 				lexer.c \

@@ -6,13 +6,13 @@
 /*   By: hhuhtane <hhuhtane@student.hive.f...>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 11:37:48 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/02/24 17:01:52 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/24 15:41:13 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_array_len(char const *s, char c)
+size_t	ft_array_len(char const *s, char c)
 {
 	size_t	words;
 

@@ -6,20 +6,20 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/15 12:44:38 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/13 23:46:17 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 20:16:29 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "ft_printf.h"
 
-static void		lst_delete(void *data, size_t i)
+static void	lst_delete(void *data, size_t i)
 {
 	ft_bzero(data, i);
 	free(data);
 }
 
-static void		ft_write_lst(t_list *lst, size_t *len, int fd)
+static void	ft_write_lst(t_list *lst, size_t *len, int fd)
 {
 	t_list		*ptr;
 
@@ -38,7 +38,7 @@ static void		ft_write_lst(t_list *lst, size_t *len, int fd)
 ** descriptor.
 */
 
-int				ft_dprintf(int fd, const char *format, ...)
+int	ft_dprintf(int fd, const char *format, ...)
 {
 	t_all		all;
 	size_t		len;

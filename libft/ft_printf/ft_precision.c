@@ -6,17 +6,18 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 16:43:54 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/13 23:46:53 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 20:02:51 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void		ft_precision_helper(t_all *all)
+static void	ft_precision_helper(t_all *all)
 {
 	char	*temp;
 
-	if (!(temp = ft_strnew(all->precision + all->prefix_len + 1)))
+	temp = ft_strnew(all->precision + all->prefix_len + 1);
+	if (!temp)
 		return ;
 	if (all->prefix[0] == '0' && !(all->prefix[1]))
 		all->prefix_len = 0;
@@ -31,7 +32,7 @@ static void		ft_precision_helper(t_all *all)
 	all->prefix_len = 0;
 }
 
-void			ft_precision(t_all *all)
+void	ft_precision(t_all *all)
 {
 	if (!(all->format_info & (1 << PRECISION_INDEX)) || \
 		!(all->format_id & DIOUXX_MASK))

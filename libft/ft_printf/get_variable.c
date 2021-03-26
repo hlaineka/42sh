@@ -6,13 +6,13 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 20:53:19 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/13 23:47:39 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 19:54:28 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_printf.h>
 
-static void		get_di(t_all *all)
+static void	get_di(t_all *all)
 {
 	if ((all->format_info >> H_INDEX) & 1)
 		all->arg_int = (short)va_arg(all->args, int);
@@ -27,7 +27,7 @@ static void		get_di(t_all *all)
 	all->arg_base = 10;
 }
 
-static void		get_ouxx(t_all *all)
+static void	get_ouxx(t_all *all)
 {
 	if ((all->format_info & (1 << H_INDEX)))
 		all->arg_uint = (unsigned short)va_arg(all->args, unsigned int);
@@ -47,7 +47,7 @@ static void		get_ouxx(t_all *all)
 		all->arg_base = 16;
 }
 
-void			get_double(t_all *all)
+void	get_double(t_all *all)
 {
 	if ((all->format_info >> UPL_INDEX) & 1)
 		all->arg_double = va_arg(all->args, long double);
@@ -57,7 +57,7 @@ void			get_double(t_all *all)
 		all->arg_double = (long double)va_arg(all->args, double);
 }
 
-static int		ft_collect_var(t_all *all)
+static int	ft_collect_var(t_all *all)
 {
 	if ((all->format_id & DI_MASK))
 		get_di(all);
@@ -76,7 +76,7 @@ static int		ft_collect_var(t_all *all)
 	return (1);
 }
 
-int				get_variable(t_all *all)
+int	get_variable(t_all *all)
 {
 	if (*all->format_ptr != '%')
 		return (1);

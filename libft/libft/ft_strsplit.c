@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/29 14:34:37 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:34:47 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 16:34:03 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** as a delimeter. I the allocation fails, the function returns NULL
 */
 
-int		ft_wordlength(char const *str, char c)
+int	ft_wordlength(char const *str, char c)
 {
 	int		i;
 	int		length;
@@ -35,7 +35,7 @@ int		ft_wordlength(char const *str, char c)
 	return (length);
 }
 
-int		ft_countwords(char const *str, char c)
+int	ft_countwords(char const *str, char c)
 {
 	int	i;
 	int	count;
@@ -61,15 +61,16 @@ char	**ft_strsplit(const char *s, char c)
 	int		k;
 	char	**s2;
 
-	if (!s || !(s2 = (char **)malloc(sizeof(*s2) *
-			(ft_countwords(s, c) + 1))))
+	s2 = (char **)malloc(sizeof(*s2) * (ft_countwords(s, c) + 1));
+	if (!s || !s2)
 		return (NULL);
 	i = -1;
 	j = 0;
 	while (++i < ft_countwords(s, c))
 	{
 		k = 0;
-		if (!(s2[i] = ft_strnew(ft_wordlength(&s[j], c) + 1)))
+		s2[i] = ft_strnew(ft_wordlength(&s[j], c) + 1);
+		if (!s2[i])
 			s2 = NULL;
 		while (s[j] == c)
 			j++;

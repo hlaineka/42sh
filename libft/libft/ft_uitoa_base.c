@@ -6,20 +6,21 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/24 11:47:20 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/08/07 13:26:49 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/24 13:07:53 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_uitoa_base(unsigned int n, unsigned int base)
+char	*ft_uitoa_base(unsigned int n, unsigned int base)
 {
 	size_t		n_len;
 	size_t		temp;
 	char		*str;
 
 	n_len = ft_uintlen_base(n, base);
-	if (!(str = ft_memalloc(sizeof(char) * (n_len + 1))))
+	str = ft_memalloc(sizeof(char) * (n_len + 1));
+	if (!str)
 		return (NULL);
 	str[n_len--] = '\0';
 	while (n >= base)

@@ -6,13 +6,13 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 18:04:12 by hhuhtane          #+#    #+#             */
-/*   Updated: 2020/08/07 18:15:31 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/24 17:02:55 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_longlonglen_base(long long n, int base)
+size_t	ft_longlonglen_base(long long n, int base)
 {
 	size_t		len;
 

@@ -6,7 +6,11 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 11:58:27 by hlaineka          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/03/16 11:55:15 by helvi            ###   ########.fr       */
+=======
+/*   Updated: 2021/03/24 21:11:26 by hhuhtane         ###   ########.fr       */
+>>>>>>> d4217e651790a2a479b7af04c5188235370983c0
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +116,6 @@ int					ft_strnequ(const char *s1, const char *s2, size_t n);
 
 double				ft_pow(double x, double y);
 int					ft_log10(long double f);
-unsigned long long	ft_logbase2(unsigned long long val);
 
 /*
 ** List functions
@@ -125,7 +128,7 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list*elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list				*ft_lstsrc(const void *content, t_list *beginning);
 void				ft_lstnewtoend(const void *content, size_t content_size,
-					t_list **beginning);
+						t_list **beginning);
 void				ft_lstaddafter(t_list *end, t_list *newelem);
 void				ft_lstappend(t_list **alst, t_list *new_lst);
 void				ft_lstrev(t_list **alst);

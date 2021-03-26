@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 12:50:26 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:35:06 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 13:15:12 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ char	*ft_strsub_freestr(char *s, unsigned int start, size_t len)
 	unsigned int	i;
 
 	i = 0;
-	if (s && (returnable = (char*)malloc(sizeof(char) * len + 1)))
+	returnable = (char *)malloc(sizeof(char) * len + 1);
+	if (s && returnable)
 	{
 		while (i < len)
 		{

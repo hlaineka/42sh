@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 10:31:36 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:30:15 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/24 16:41:10 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 int	ft_memcmp(const void *ptr1, const void *ptr2, size_t num)
 {
 	const unsigned char	*temp_ptr1;
-	const unsigned char *temp_ptr2;
+	const unsigned char	*temp_ptr2;
 
 	temp_ptr1 = ptr1;
 	temp_ptr2 = ptr2;

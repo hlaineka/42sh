@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   disable_raw_mode.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:31:46 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/15 12:02:31 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/26 12:02:58 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
+
+void		disable_raw_mode_continue(t_term *term)
+{
+	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &term->orig_termios) == -1)
+		err_quit(ERR_MESSAGE, "tcsetattr"); // or other error?
+}
 
 void		disable_raw_mode(t_term *term)
 {
@@ -19,7 +25,7 @@ void		disable_raw_mode(t_term *term)
 		err_quit(ERR_MESSAGE, "tcsetattr"); // or other error?
 }
 
-int			disable_rawmode()
+int			disable_rawmode(void)
 {
 	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &g_term->orig_termios) == -1)
 		die("tcsetattr");
