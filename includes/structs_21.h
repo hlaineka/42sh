@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/25 18:29:13 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/26 11:33:01 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 typedef struct termios	t_termios;
 
-typedef struct			s_clist
+typedef struct s_clist
 {
 	void				*content;
 	size_t				content_size;
@@ -27,7 +27,7 @@ typedef struct			s_clist
 	struct s_clist		*next;
 }						t_clist;
 
-typedef struct			s_input
+typedef struct s_input
 {
 	t_clist				*hist_cur;
 	t_clist				*history;
@@ -39,8 +39,8 @@ typedef struct			s_input
 	size_t				rrs_size;
 	size_t				clipboard_size;
 	size_t				prompt_length;
-	int					start_row;// no need yet
-	int					start_col;// no need yet
+	int					start_row;
+	int					start_col;
 	int					prompt_row; //limit y
 	int					prompt_col; //limit x
 	int					cursor_row;
@@ -130,7 +130,7 @@ typedef struct			s_job
 **			provided also. Most terminals have neither.
 */
 
-typedef struct			s_term
+typedef struct s_term
 {
 	t_input				*input;
 	char				*term_buffer;
@@ -157,18 +157,6 @@ typedef struct			s_term
 	int					fd_stdout;
 	int					fd_stderr;
 }						t_term;
-
-// t_input already is!
-typedef struct			s_itty
-{
-	char				*ls;
-	char				*rrs;
-	int					ls_i;
-	int					rrs_i;
-	//current location before prompt print
-	//current location after prompt print
-	//current location after ls print
-}						t_itty;
 
 /*
 ** GLOBALS

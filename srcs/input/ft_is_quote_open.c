@@ -6,14 +6,16 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 10:06:04 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/25 20:22:24 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/26 12:30:54 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes.h"
 
-int				ft_is_quote_open(int quote, char *str)
+int	ft_is_quote_open(int quote, char *str)
 {
+	if (quote == PROMPT_START)
+		return (PROMPT_NORMAL);
 	while (*str)
 	{
 		if (!quote && ft_strchr("'\"\\`", *str))

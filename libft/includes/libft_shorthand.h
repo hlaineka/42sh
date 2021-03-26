@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:05:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/24 21:12:04 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/26 11:26:05 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef long long			t_sl64;
 typedef float				t_f32;
 typedef double				t_f64;
 typedef long double			t_f80;
+typedef						void (*t_fp)(void*);
 
 typedef struct s_list
 {

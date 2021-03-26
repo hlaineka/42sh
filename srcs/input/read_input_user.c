@@ -6,14 +6,25 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/25 18:35:30 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/26 14:16:00 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "input.h"
 
-void			init_input_tty(t_input *input, int prompt_mode)
+static void	print_input(char *str, t_input *input, t_term *term)
+{
+	int		col;
+	int		row;
+
+	col = input->prompt_col - 1;
+	row = input->prompt_row - 1;
+	tputs(tgoto(term->cm_string, col, row), 1, ft_putc);
+	ft_putstr_input(str, input, term);
+}
+
+void	init_input_tty(t_input *input, int prompt_mode)
 {
 	ft_bzero(input->ls, input->ls_size);
 	ft_bzero(input->rrs, input->rrs_size);
@@ -25,7 +36,7 @@ void			init_input_tty(t_input *input, int prompt_mode)
 	input->hist_cur = input->last_comm;
 }
 
-char			*read_input_tty(int prompt_mode, t_input *input, t_term *term)
+char	*read_input_tty(int prompt_mode, t_input *input, t_term *term)
 {
 	char	read_chars[1024];
 	char	*str;
@@ -40,50 +51,61 @@ char			*read_input_tty(int prompt_mode, t_input *input, t_term *term)
 		if (shell_keypress(read_chars, input, term))
 		{
 			len = ft_strlen(input->ls) + ft_strlen(input->rrs) + 2;
-			if (!(str = ft_memalloc(sizeof(char) * len)))
+			str = ft_memalloc(sizeof(char) * len);
+			if (!str)
 				err_fatal(ERR_MALLOC, NULL, term);
 			end_keypress(input, term);
-			tputs(tgoto(term->cm_string, input->prompt_col - 1, input->prompt_row - 1), 1, ft_putc);
-			ft_putstr_input(input->ls, input, term);
-//			get_pos(&input->cursor_row, &input->cursor_col);
 			ft_strcat(str, input->ls);
 			ft_strncat(str, "\n", 1);
-			ft_putstr_input("\n", input, term);
+			print_input(str, input, term);
 			break ;
 		}
 	}
 	return (str);
 }
 
-char			*get_input(int argc, char **argv, t_term *term, t_input *input)
+static char	*get_input_tty(char *str, t_term *term, t_input *input)
 {
 	int		quote;
 	int		len;
-	char	*str;
 	char	*temp;
 	char	*temp2;
 
+	temp = NULL;
+	quote = PROMPT_START;
+	while (quote)
+	{
+		if (quote == PROMPT_START)
+			quote = PROMPT_NORMAL;
+		temp = read_input_tty(quote, input, term);
+		len = ft_strlen(str);
+		if (!str)
+			temp2 = ft_strdup(temp);
+		else
+			temp2 = ft_strjoin(str, temp);
+		free(str);
+		free(temp);
+		str = temp2;
+		temp = str + len;
+		quote = ft_is_quote_open(quote, temp);
+	}
+	return (str);
+}
+
+char	*get_input(int argc, char **argv, t_term *term, t_input *input)
+{
+	char	*str;
+
 	str = NULL;
-	quote = 0;
-	enable_raw_mode(term);
 	if (argc == 1)
 	{
-		str = read_input_tty(PROMPT_NORMAL, input, term);
-		temp = str;
-		while ((quote = ft_is_quote_open(quote, temp)))
-		{
-			temp = read_input_tty(quote, input, term);
-			len = ft_strlen(str);
-			temp2 = ft_strjoin(str, temp); // error check?
-			free(str);
-			free(temp);
-			str = temp2;
-			temp = str + len;
-		}
-		if (!(input->history = command_to_history(input, str)))
+		enable_raw_mode(term);
+		str = get_input_tty(str, term, input);
+		input->history = command_to_history(input, str);
+		if (!input->history)
 			err_fatal(ERR_MALLOC, NULL, term);
+		disable_raw_mode_continue(term);
 	}
 	(void)argv;
-	disable_raw_mode_continue(term);
 	return (str);
 }

@@ -6,13 +6,13 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 10:09:24 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/23 17:13:25 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/26 11:49:54 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes.h"
 
-static void		print_newline(int *x, int *y, t_input *input, t_term *term)
+static void	print_newline(int *x, int *y, t_input *input, t_term *term)
 {
 	write(STDOUT_FILENO, "\n\r", 2);
 	tputs(term->ce_string, 1, ft_putc);
@@ -26,7 +26,7 @@ static void		print_newline(int *x, int *y, t_input *input, t_term *term)
 		*y = *y + 1;
 }
 
-static void		ft_putchar_input(char c, int *x, int *y, t_term *term)
+static void	ft_putchar_input(char c, int *x, int *y, t_term *term)
 {
 	t_input	*input;
 
@@ -39,7 +39,7 @@ static void		ft_putchar_input(char c, int *x, int *y, t_term *term)
 		print_newline(x, y, input, term);
 }
 
-void			ft_putstr_input(char *str, t_input *input, t_term *term)
+void	ft_putstr_input(char *str, t_input *input, t_term *term)
 {
 	int		x;
 	int		y;
@@ -57,7 +57,7 @@ void			ft_putstr_input(char *str, t_input *input, t_term *term)
 	}
 }
 
-void			ft_putrstr_input(char *str, t_input *input, t_term *term)
+void	ft_putrstr_input(char *str, t_input *input, t_term *term)
 {
 	int		x;
 	int		y;

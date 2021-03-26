@@ -6,13 +6,13 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 17:40:33 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/11 20:26:32 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/26 11:46:22 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
-static void		get_error_str(char *buf, int error_no)
+static void	get_error_str(char *buf, int error_no)
 {
 	if (error_no == ERR_MALLOC)
 		ft_strcpy(buf, "Fatal error: failed to allocate memory\n");
@@ -30,7 +30,7 @@ static void		get_error_str(char *buf, int error_no)
 		ft_strcpy(buf, "Some random error.\n");
 }
 
-void			err_fatal(int error_no, char *s_str, t_term *term)
+void	err_fatal(int error_no, char *s_str, t_term *term)
 {
 	char	error_message[1024];
 
@@ -40,7 +40,7 @@ void			err_fatal(int error_no, char *s_str, t_term *term)
 	exit(1);
 }
 
-void			err_quit(int error_no, char *s_str)
+void	err_quit(int error_no, char *s_str)
 {
 	char	error_message[1024];
 

@@ -6,13 +6,13 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:10:18 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/18 15:22:59 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/26 12:03:05 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
-int				print_prompt(int mode)
+int	print_prompt(int mode)
 {
 	if (mode == PROMPT_NORMAL)
 		return (ft_printf_fd(STDOUT_FILENO, "$> "));

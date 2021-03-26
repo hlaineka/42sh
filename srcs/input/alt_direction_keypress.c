@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 11:35:39 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/24 12:37:36 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/26 11:41:30 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	alt_up_keypress(t_input *input, t_term *term)
 
 	ls = input->ls;
 	rrs = input->rrs;
-//	if (ft_strchr(input->ls, 13)
+	if (ft_strchr(input->ls, 13) || ft_strchr(input->rrs, 13))
+		return ;
 	if (ft_strlen(input->ls) > (term->ncolumns - input->start_col))
 	{
 		move_nchars_from_s1_to_s2(ls, rrs, input->rrs_size, term->ncolumns);
@@ -34,6 +35,8 @@ void	alt_down_keypress(t_input *input, t_term *term)
 
 	ls = input->ls;
 	rrs = input->rrs;
+	if (ft_strchr(input->ls, 13) || ft_strchr(input->rrs, 13))
+		return ;
 	if (ft_strlen(input->rrs) > (term->ncolumns - input->start_col))
 	{
 		move_nchars_from_s1_to_s2(rrs, ls, input->ls_size, term->ncolumns);

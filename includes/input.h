@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/25 18:26:16 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/26 12:26:19 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define ERR_TERMTYPE_NOT_FOUND 6
 
 # define PROMPT_NORMAL 0
+# define PROMPT_START 1
 # define PROMPT_QUOTE 39
 # define PROMPT_DQUOTE 34
 # define PROMPT_BQUOTE 96

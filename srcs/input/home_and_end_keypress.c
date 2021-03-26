@@ -6,13 +6,13 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 11:03:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/25 20:09:30 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/26 11:51:34 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes.h"
 
-int			home_keypress(t_input *input, t_term *term)
+int	home_keypress(t_input *input, t_term *term)
 {
 	int		ls_len;
 	int		row;
@@ -27,7 +27,7 @@ int			home_keypress(t_input *input, t_term *term)
 	return (0);
 }
 
-int			end_keypress(t_input *input, t_term *term)
+int	end_keypress(t_input *input, t_term *term)
 {
 	int		ls_len;
 	int		rrs_len;

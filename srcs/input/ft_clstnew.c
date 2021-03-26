@@ -6,17 +6,18 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 16:23:28 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/17 17:42:34 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/26 11:47:48 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
-t_clist		*ft_clstnew(void const *content, size_t content_size)
+t_clist	*ft_clstnew(void const *content, size_t content_size)
 {
 	t_clist		*new;
 
-	if (!(new = ft_memalloc(sizeof(t_clist))))
+	new = ft_memalloc(sizeof(t_clist));
+	if (!new)
 		return (NULL);
 	if (!content)
 	{
@@ -25,7 +26,8 @@ t_clist		*ft_clstnew(void const *content, size_t content_size)
 	}
 	else
 	{
-		if (!(new->content = ft_memalloc(content_size)))
+		new->content = ft_memalloc(content_size);
+		if (!new->content)
 		{
 			free(new);
 			return (NULL);
