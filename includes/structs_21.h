@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs_21.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/26 11:33:01 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/27 13:53:23 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define STRUCTS_21_H
 
 # include <termios.h>
+# include "libft_shorthand.h"
 
 # define KEY_ESC 27
 

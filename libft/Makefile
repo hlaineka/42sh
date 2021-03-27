@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: helvi <helvi@student.42.fr>                +#+  +:+       +#+         #
+#    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/24 20:55:03 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/03/26 12:19:37 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libft.a
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -I$(INC_DIR)
+CFLAGS = -Wall -Wextra -Werror -g -I$(INC_DIR)
 
 FT_ERROR_DIR = ft_error/
 FT_EXIT_DIR = ft_exit/

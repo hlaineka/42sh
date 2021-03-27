@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/25 18:45:55 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/27 11:22:50 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,24 @@ int		main(int argc, char **argv, char **envp)
 	t_term		term;
 	t_input		input;
 	char		*input_str;
-//	t_job		*next_job;
+	bool		debug;
+	t_token		*tokens;
+	//t_job		*next_job;
 
+	//next_job = NULL;
 	g_term = &term;
 	start_signal(); //signals not done;
 	initialize(&input, &term);
 	ft_atexit(&disable_rawmode);
+	if (argc == 2 && ft_strequ(argv[1], "debug"))
+		debug = TRUE;
+	else
+		debug = FALSE;
 //	tputs(tgoto(term.cm_string, 0, 0), 1, ft_putc);
 //	tputs(term.cd_string, 1, ft_putc);
 	while (1)
 	{
-		input_str = get_input(argc, argv, &term, &input); // not done, error check?
+		input_str = get_input(1, argv, &term, &input); // not done, error check?
 //		ft_putstr_input(input_str, &input, &term);
 		ft_printf("%s", input_str);
 //		ft_printf_fd(STDOUT_FILENO, "\n\r%s\n\r", input_str);
@@ -38,14 +45,13 @@ int		main(int argc, char **argv, char **envp)
 		{
 			break;
 		}
-//		next_job = parser(input_str);
-//		ft_free(next_job);//job leaks
+		tokens = parser(input_str, debug);
+		execution_caller(tokens, debug);
 		free(input_str);
 //		break;
 // input_str to lexer
 // token to scanner
 	}
-
 	(void)argc;
 	(void)argv;
 	(void)envp;

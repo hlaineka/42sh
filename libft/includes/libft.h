@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 11:58:27 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/24 21:11:26 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/26 12:13:18 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@
 
 # include "libft_shorthand.h"
 # include "ft_printf.h"
-# include "libft_shorthand.h"
-# include "ft_printf.h"
 # include "ft_exit.h"
 # include "ft_error.h"
 # include "lists.h"
@@ -40,6 +38,7 @@
 /*
 ** Basic functions
 */
+
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
 void				ft_putnbr(int n);
