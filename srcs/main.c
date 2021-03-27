@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/27 11:22:50 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/03/27 13:56:46 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int		main(int argc, char **argv, char **envp)
 			break;
 		}
 		tokens = parser(input_str, debug);
-		execution_caller(tokens, debug);
+//		execution_caller(tokens, debug);
 		free(input_str);
 //		break;
 // input_str to lexer
