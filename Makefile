@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/26 12:02:57 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/03/26 12:19:25 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = 21sh
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -I$(DIR_INC) -Ilibft/includes
+CFLAGS = -Wall -Wextra -Werror -g -I$(DIR_INC) -Ilibft/includes
 TERMCAPS = -ltermcap
 
 DIR_INC = includes/

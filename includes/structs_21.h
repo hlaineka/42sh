@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/26 12:02:24 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/03/26 12:15:14 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define STRUCTS_21_H
 
 # include <termios.h>
-# include <stdlib.h>
 # include "libft_shorthand.h"
 
 # define KEY_ESC 27
