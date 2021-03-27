@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/26 14:29:39 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/27 14:01:38 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ static char	*double_allocation(char *str, size_t size)
 
 static int	double_input_mem(t_input *input, t_term *term)
 {
-	input->ls = double_allocation(input->ls, input->ls_size); //error check
-	input->rrs = double_allocation(input->rrs, input->rrs_size); //error chekc
+	input->ls = double_allocation(input->ls, input->ls_size);
+	input->rrs = double_allocation(input->rrs, input->rrs_size);
+	if (!input->ls || !input->rrs)
+		err_fatal(ERR_MALLOC, NULL, term);
 	input->ls_size *= 2;
 	input->rrs_size *= 2;
 	return (0);
