@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/27 12:57:51 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/03/30 12:12:20 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ DIR_INC = includes/
 DIR_MAIN = srcs/
 DIR_INPUT = srcs/input/
 DIR_PARSER = srcs/parser/
+DIR_JOB_CREATION = srcs/parser/job_creation/
 DIR_SIGNAL = srcs/signal/
 DIR_EXECUTION = srcs/execution/
 DIR_EXECUTION_CALLER = srcs/execution/execution_caller/
@@ -58,22 +59,23 @@ _SRC_PARSER = 	parser.c \
 				token_functions.c \
 				ast_creation.c
 
+_SRC_JOB_CREATION = job_creation.c \
+					null_token.c \
+
 _SRC_SIGNAL = signal.c
 
 _SRC_EXECUTION = execution.c
 
-_SRC_EXECUTION_CALLER = execution_caller.c
-
 SRC_MAIN = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))
 SRC_INPUT = $(addprefix $(DIR_INPUT), $(_SRC_INPUT))
 SRC_PARSER = $(addprefix $(DIR_PARSER), $(_SRC_PARSER))
+SRC_JOB_CREATION = $(addprefix $(DIR_JOB_CREATION), $(_SRC_JOB_CREATION))
 SRC_SIGNAL = $(addprefix $(DIR_SIGNAL), $(_SRC_SIGNAL))
-SRC_EXECUTION_CALLER = $(addprefix $(DIR_EXECUTION_CALLER), $(_SRC_EXECUTION_CALLER))
 SRC_EXECTUION =  $(addprefix $(DIR_EXECUTION), $(_SRC_EXECUTION))
 
-SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER) $(SRC_SIGNAL) $(SRC_EXECUTION) $(SRC_EXECUTION_CALLER)
+SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER) $(SRC_SIGNAL) $(SRC_EXECUTION) $(SRC_JOB_CREATION)
 
-_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL) $(_SRC_EXECUTION) $(_SRC_EXECUTION_CALLER)
+_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL) $(_SRC_EXECUTION) $(_SRC_JOB_CREATION)
 
 OBJ_FILES = $(_SRC:.c=.o)
 OBJS = $(patsubst %, $(DIR_OBJS)%, $(_SRC:.c=.o))
@@ -106,13 +108,13 @@ $(DIR_OBJS)%.o: $(DIR_INPUT)%.c $(INC)
 $(DIR_OBJS)%.o: $(DIR_PARSER)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
+$(DIR_OBJS)%.o: $(DIR_JOB_CREATION)%.c $(INC)
+		$(CC) $(CFLAGS) -o $@ -c $<
+
 $(DIR_OBJS)%.o: $(DIR_SIGNAL)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 $(DIR_OBJS)%.o: $(DIR_EXECUTION)%.c $(INC)
-		$(CC) $(CFLAGS) -o $@ -c $<
-
-$(DIR_OBJS)%.o: $(DIR_EXECUTION_CALLER)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 libft:

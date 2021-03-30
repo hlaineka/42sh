@@ -4,6 +4,7 @@
 		"libft.h": "c",
 		"ft_debug.h": "c",
 		"structs_21.h": "c",
-		"vector.h": "c"
+		"vector.h": "c",
+		"includes.h": "c"
 	}
 }

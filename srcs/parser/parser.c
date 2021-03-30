@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 14:37:51 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/29 15:36:39 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/03/30 14:19:17 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,30 +65,55 @@ static void		debug_print_tokens(t_token *tokens)
 	t_token	*temp;
 
 	temp = tokens;
+	ft_printf("tokens after first tokenization:\n");
 	while (temp)
 	{
-		ft_printf("token: %i, value: %s. ", temp->maintoken, temp->value);
+		ft_printf("%s, ", temp->value);
 		temp = temp->next;
-		ft_printf("\n");
 	}
 	ft_printf("\n");
 }
 
-static void		debug_print_tree(t_node *node)
+static void		debug_print_tree(t_node *node, char *prefix)
 {
+	char	*temp;
+	
 	if (!node)
 		return;
-	
-	if (node->left)
+	temp = NULL;
+	if (prefix != NULL)
 	{
-		ft_printf("parent: %s, left %s. ", node->command, node->left->command);
-		debug_print_tree(node->left);
+		ft_printf(prefix);
+		if (ft_strlen(prefix) > 0 && prefix[ft_strlen(prefix) - 1] == '|')
+			ft_printf("--");
+		else
+			ft_printf("|--");
 	}
+	ft_printf("[%s]\n", node->command);
 	if (node->right)
 	{
-		ft_printf("parent: %s, right %s. ", node->command, node->right->command);
-		debug_print_tree(node->right);
+		if (prefix == NULL)
+			temp = ft_strdup("|");
+		else if (node->right->left || node->right->right)
+			temp = ft_strjoin(prefix, "  |");
+		else
+			temp = ft_strjoin(prefix, "  ");
+		debug_print_tree(node->right, temp);
+		ft_free(temp);
 	}
+	if (node->left)
+	{
+		if (prefix == NULL)
+			temp = ft_strdup("");
+		//else if (node->left->left)
+		//	temp = ft_strjoin(prefix, "  |");
+		else
+			temp = ft_strjoin(prefix, "  ");
+		debug_print_tree(node->left, temp);	
+	}
+	ft_free(temp);
+	if (!node->parent)
+		ft_free(prefix);
 }
 
 t_node		*parser(char *input, bool debug)
@@ -109,7 +134,7 @@ t_node		*parser(char *input, bool debug)
 		debug_print_tokens(tokens);
 	root = ast_creator(tokens, debug);
 	if (debug)
-		debug_print_tree(root);
+		debug_print_tree(root, NULL);
 	//free_tokens(tokens);
 	return(root);
 }

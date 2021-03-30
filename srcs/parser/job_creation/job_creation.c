@@ -1,15 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution_caller.c                                 :+:      :+:    :+:   */
+/*   job_creation.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:40:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/29 15:39:33 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/03/30 12:13:43 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 #include "execution.h"
 #include "includes.h"
 
@@ -77,7 +78,7 @@ t_job		*init_job(void)
 	return(returnable);
 }
 
-int			execution_caller(t_node *root, bool debug)
+int			job_creation(t_node *root, bool debug)
 {
 	//t_job		*executable;
 	//op_function	op_funcs[NUMBER_OF_TOKENS];
@@ -90,3 +91,4 @@ int			execution_caller(t_node *root, bool debug)
 	}
 	return (0);
 }
+*/
