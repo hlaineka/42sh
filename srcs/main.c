@@ -6,13 +6,16 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/27 11:22:50 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/03/29 13:44:13 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "input.h"
 #include "structs_21.h"
+#include "parser.h"
+#include "ft_signal.h"
+#include "execution.h"
 
 int		main(int argc, char **argv, char **envp)
 {
@@ -20,7 +23,7 @@ int		main(int argc, char **argv, char **envp)
 	t_input		input;
 	char		*input_str;
 	bool		debug;
-	t_token		*tokens;
+	//t_node		*root;
 	//t_job		*next_job;
 
 	//next_job = NULL;
@@ -45,9 +48,10 @@ int		main(int argc, char **argv, char **envp)
 		{
 			break;
 		}
-		tokens = parser(input_str, debug);
-		execution_caller(tokens, debug);
+		parser(input_str, debug);
+		//execution_caller(tokens, debug);
 		free(input_str);
+		//free_tree
 //		break;
 // input_str to lexer
 // token to scanner
@@ -57,5 +61,6 @@ int		main(int argc, char **argv, char **envp)
 	(void)envp;
 	disable_raw_mode(&term);
 	ft_putendl(input_str);
+	exit (0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/27 11:21:06 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/03/29 15:43:06 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ typedef struct		s_node
 	int				operation;
 	char			**envp;
 	char			**argv;
+	int				argc;
 	int				stdin;
 	int				stdout;
 	int				stderr;
@@ -146,7 +147,7 @@ typedef struct		s_node
 	int				status;
 }					t_node;
 
-t_token				*parser(char *input, bool debug);
+t_node				*parser(char *input, bool debug);
 
 /*
 ** lexer.c
@@ -160,6 +161,19 @@ t_token				*lexer(char *input);
 
 t_token				*get_token(char *delimiters, char **source);
 
-t_token				*ast_creator(t_token *first, bool debug);
+/*
+** token_functions.c
+*/
+
+t_token		*push_to_front(t_token *input, t_token *stack);
+t_token		*push_to_end(t_token *input, t_token *output);
+t_token		*delete_token(t_token *tkn);
+void		free_tokens(t_token *tokens);
+
+/*
+** ast_creation.c
+*/
+
+t_node				*ast_creator(t_token *first, bool debug);
 
 #endif

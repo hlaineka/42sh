@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 14:37:51 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/27 11:21:21 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/03/29 15:36:39 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void		quote_removal(t_token *first)
 	}
 }
 
-static void		debug_printing(t_token *tokens)
+static void		debug_print_tokens(t_token *tokens)
 {
 	t_token	*temp;
 
@@ -74,9 +74,27 @@ static void		debug_printing(t_token *tokens)
 	ft_printf("\n");
 }
 
-t_token		*parser(char *input, bool debug)
+static void		debug_print_tree(t_node *node)
+{
+	if (!node)
+		return;
+	
+	if (node->left)
+	{
+		ft_printf("parent: %s, left %s. ", node->command, node->left->command);
+		debug_print_tree(node->left);
+	}
+	if (node->right)
+	{
+		ft_printf("parent: %s, right %s. ", node->command, node->right->command);
+		debug_print_tree(node->right);
+	}
+}
+
+t_node		*parser(char *input, bool debug)
 {
 	t_token	*tokens;
+	t_node	*root;
 
 	tokens = lexer(input);
 	//alias handling call
@@ -88,9 +106,10 @@ t_token		*parser(char *input, bool debug)
 	quote_removal(tokens);
 	//redirection (marking or handling?)
 	if (debug)
-		debug_printing(tokens);
-	tokens = ast_creator(tokens, debug);
+		debug_print_tokens(tokens);
+	root = ast_creator(tokens, debug);
 	if (debug)
-		debug_printing(tokens);
-	return(tokens);
+		debug_print_tree(root);
+	//free_tokens(tokens);
+	return(root);
 }

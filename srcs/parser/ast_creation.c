@@ -6,12 +6,13 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 20:11:26 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/27 11:19:26 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/03/29 13:44:45 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "libft.h"
+#include "includes.h"
 # include <stdbool.h>
 
 /*
@@ -22,11 +23,9 @@
 t_token		*add_delimiter_token(t_token *tkn)
 {
 	t_token *new;
-	t_token *returnable;
 	
 	new = (t_token*)malloc(sizeof(t_token));
 	ft_bzero(new, sizeof(t_token));
-	returnable = tkn->next;
 	new->single_quoted = FALSE;
 	new->double_quoted = FALSE;
 	new->precedence = 5;
@@ -34,7 +33,7 @@ t_token		*add_delimiter_token(t_token *tkn)
 	new->next = tkn->next;
 	tkn->next = new;
 	new->prev = tkn;
-	return (returnable);
+	return (new);
 }
 
 t_token		*add_precedence(t_token *first)
@@ -69,88 +68,52 @@ t_token		*add_precedence(t_token *first)
 	return (returnable);
 }
 
-t_token		*push_to_output(t_token *input, t_token *output)
+t_token		*push_to_output(t_token **op_stack, t_token **word_stack, t_token *output)
 {
-	t_token	*returnable;
 	t_token	*temp;
-
-	returnable = output;
-	temp = output;
-	if (!output)
-	{
-		//ft_printf("push to output: output is NULL\n");
-		returnable = input;
-		returnable->next = NULL;
-		returnable->prev = NULL;
-	}
-	else
-	{
-		//ft_printf("adding to output list\n");
-		while (temp->next)
-			temp = temp->next;
-		temp->next = input;
-		input->next = NULL;
-		input->prev = temp;
-	}
-	return (returnable);
-}
-
-t_token		*push_to_stack(t_token *input, t_token *stack)
-{
-	input->next = NULL;
-	input->prev = stack;
-	if (stack)
-		stack->next = input;
-	return (input);
-}
-
-t_token		*delete_token(t_token *tkn)
-{
-	t_token *returnable;
+	t_token	*returnable;
 	
-	returnable = NULL;
-	ft_free(tkn->tokens);
-	ft_free(tkn->value);
-	if (tkn->next)
+	returnable = output;
+	ft_printf("push to output: ");
+	while (*word_stack)
 	{
-		tkn->next->prev = tkn->prev;
-		returnable = tkn->next;
+		ft_printf("%s ", (*word_stack)->value);
+		temp = (*word_stack)->prev;
+		returnable = push_to_end(*word_stack, returnable);
+		*word_stack = temp;
 	}
-	if (tkn->prev)
+	if (*op_stack)
 	{
-		tkn->prev->next = tkn->next;
-		if (!returnable)
-			returnable = tkn->prev;
+		ft_printf("%s \n", (*op_stack)->value);
+		temp = (*op_stack)->prev;
+		returnable = push_to_end((*op_stack), returnable);
+		*op_stack = temp;
 	}
-	ft_free(tkn);
 	return (returnable);
 }
 
 //funtions need to be added separately. They will need their own token.
 
-t_token		*handle_operator(t_token **op_stack, t_token **input, t_token *output)
+t_token		*handle_operator(t_token **op_stack, t_token **word_stack, t_token **input, t_token *output)
 {
 	t_token *returnable;
-	t_token	*temp;
 
 	returnable = output;
 	if ((*input)->maintoken == tkn_lpar)
 	{
-		//ft_printf("left paranthesis\n");
-		*op_stack = push_to_stack(*input, *op_stack);
+		ft_printf("left paranthesis\n");
+		*op_stack = push_to_front(*input, *op_stack);
 	}
 	else if ((*input)->maintoken == tkn_rpar)
 	{
-		//ft_printf("right paranthesis\n");
+		ft_printf("right paranthesis\n");
 		while (*op_stack && (*op_stack)->maintoken != tkn_lpar)
 		{
-			temp = (*op_stack)->prev;
-			returnable = push_to_output(*op_stack, returnable);
-			*op_stack = temp;
+			returnable = push_to_output(op_stack, word_stack, returnable);
 		}
 		if (!(*op_stack))
 		{
-			//ft_printf_fd(2, "syntax error, wrong amount of paranthesis");
+			ft_printf_fd(2, "syntax error, wrong amount of paranthesis");
 			return (NULL);
 		}
 		*input = delete_token(*input);
@@ -158,19 +121,17 @@ t_token		*handle_operator(t_token **op_stack, t_token **input, t_token *output)
 	}
 	else
 	{
-		//ft_printf("handle other operators than paranthesis\n");
+		ft_printf("handle other operators than paranthesis\n");
 		while (*op_stack && ((*op_stack)->precedence > (*input)->precedence || ((*op_stack)->precedence == (*input)->precedence && (*input)->left_associative)))
 		{	
-			temp = (*op_stack)->prev;
-			//ft_printf("in while, pushing from op_stack to output. %s\n", (*op_stack)->value);
-			returnable = push_to_output(*op_stack, returnable);
-			*op_stack = temp;
+			ft_printf("in while, pushing from op_stack to output. %s\n", (*op_stack)->value);
+			returnable = push_to_output(op_stack, word_stack, returnable);
 		}
-		//ft_printf("Pushing from input to op_stack.");
-		//if (*input)
-		//	ft_printf("%s", (*input)->value);
-		//ft_printf("\n");
-		*op_stack = push_to_stack(*input, *op_stack);
+		ft_printf("Pushing from input to op_stack.");
+		if (*input)
+			ft_printf("%s", (*input)->value);
+		ft_printf("\n");
+		*op_stack = push_to_front(*input, *op_stack);
 	}
 	return(returnable);
 }
@@ -178,6 +139,7 @@ t_token		*handle_operator(t_token **op_stack, t_token **input, t_token *output)
 t_token		*shunting_yard(t_token *first)
 {
 	t_token	*op_stack;
+	t_token *word_stack;
 	t_token	*output;
 	t_token	*input;
 	t_token *temp;
@@ -185,6 +147,7 @@ t_token		*shunting_yard(t_token *first)
 	temp = NULL;
 	op_stack = NULL;
 	output = NULL;
+	word_stack = NULL;
 	input = first;
 	while (input)
 	{
@@ -192,26 +155,27 @@ t_token		*shunting_yard(t_token *first)
 		//ft_printf("read new token\n");
 		if (input->precedence == 0)
 		{
-			//ft_printf("add tkn_word to output\n");
-			output = push_to_output(input, output);
+			ft_printf("add tkn_word to word_stack\n");
+			word_stack = push_to_front(input, word_stack);
 		}
 		else
 		{	
-			//ft_printf("handle operator\n");
-			output = handle_operator(&op_stack, &input, output);
+			ft_printf("handle operator\n");
+			output = handle_operator(&op_stack, &word_stack, &input, output);
 		}
-		if (output == NULL)
-		{
-			//ft_printf("output in NULL\n");
-			return (NULL);
-		}
+		//if (output == NULL)
+		//{
+		//	ft_printf("output in NULL\n");
+		//	return (NULL);
+		//}
 		input = temp;
 	}
+	output = push_to_output(&op_stack, &word_stack, output);
 	while (op_stack)
 	{
 		temp = op_stack->prev;
 		//ft_printf("push rest of the op_stack to output\n");
-		push_to_output(op_stack, output);
+		push_to_end(op_stack, output);
 		op_stack = temp;
 	}
 	return (output);
@@ -222,6 +186,7 @@ static void	debug_printing(t_token *tokens)
 	t_token	*temp;
 
 	temp = tokens;
+	ft_printf("print precedence:\n");
 	while (temp)
 	{
 		ft_printf("precedence: %i, value: %s. ", temp->precedence, temp->value);
@@ -231,13 +196,140 @@ static void	debug_printing(t_token *tokens)
 	ft_printf("\n");
 }
 
-t_token		*ast_creator(t_token *first, bool debug)
+t_node	*init_node()
+{
+	t_node	*returnable;
+
+	//copy std:s here
+	returnable = malloc(sizeof(t_node));
+	ft_bzero(returnable, sizeof(t_node));
+	returnable->parent = NULL;
+	returnable->left = NULL;
+	returnable->right = NULL;
+	returnable->command = NULL;
+	returnable->envp = malloc(ARGV_SIZE);
+	//copy envp
+	returnable->argv = malloc(ARGV_SIZE);
+	return(returnable);
+}
+
+int		push_word(t_token *tkn, t_node **node_stack)
+{
+	int 	i;
+	t_node	*new_node;
+
+	i = 0;
+	while(node_stack[i] && i < 30)
+		i++;
+	if (i == 30)
+	{
+		ft_printf_fd(2, "node stack full");
+		return (-1);
+	}
+	new_node = init_node();
+	new_node->command = ft_strdup(tkn->value);
+	ft_printf("adding leaf node: %s. ", new_node->command);
+	delete_token(tkn);
+	node_stack[i] = new_node;
+	return (0);
+}
+
+char	**combine_argvs(char **dest, char **argv1, char **argv2)
+{
+	int	i;
+	int	w;
+
+	i = 0;
+	w = 0;
+	while (argv1 && argv1[i])
+	{
+		dest[w] = ft_memcpy(dest[w], argv1[i], ft_strlen(argv1[i]));
+		i++;
+		w++;
+	}
+	i = 0;
+	while (argv2 && argv2[i])
+	{
+		dest[w] = ft_memcpy(dest[w], argv2[i], ft_strlen(argv2[i]));
+		i++;
+		w++;
+	}
+	return (dest);
+}
+
+int		push_operator(t_token *tkn, t_node **node_stack)
+{
+	int 	i;
+	t_node	*new_node;
+
+	i = 0;
+	while(node_stack[i] && i < 30)
+		i++;
+	if (i == 30)
+	{
+		ft_printf_fd(2, "node stack full");
+		return (-1);
+	}
+	new_node = init_node();
+	new_node->command = ft_strdup(tkn->value);
+	new_node->left = node_stack[--i];
+	node_stack[i]->parent = new_node;
+	if (i > 0)
+	{
+		node_stack[i] = NULL;
+		i--;
+		new_node->right = node_stack[i];
+		node_stack[i]->parent = new_node;
+	}
+	node_stack[i] = NULL;
+	ft_printf("adding operator node: %s , ", new_node->command);
+	ft_printf("left: ");
+	if (new_node->left)
+		ft_printf("%s", new_node->left->command);
+	ft_printf(", right: ");
+	if (new_node->right)
+		ft_printf("%s", new_node->right->command);
+	ft_printf(". ");
+	node_stack[i] = new_node;
+	return (0);
+}
+
+t_node		*ast_creator(t_token *first, bool debug)
 {
 	t_token	*new_first;
+	t_token	*temp;
+	t_node	*root;
+	t_node	*node_stack[30];
 
+	if (!first)
+		return (NULL);
+	root = NULL;
+	ft_bzero(node_stack, sizeof(t_node*) * 30);
 	new_first = add_precedence(first);
-	new_first = shunting_yard(first);
 	if (debug)
 		debug_printing(new_first);
-	return (new_first);
+	new_first = shunting_yard(first);
+	while (new_first)
+	{
+		temp = new_first->next;
+		if (new_first->precedence == 0)
+		{
+			ft_printf("push word. ");
+			if (-1 == (push_word(new_first, node_stack)))
+				return (NULL);
+		}
+		else
+		{
+			ft_printf("push operator. ");
+			push_operator(new_first, node_stack);
+		}
+		new_first = temp;
+	}
+	if (node_stack[1])
+	{
+		ft_printf_fd(2, "syntax error");
+		return(NULL);
+	}
+	root = node_stack[0];
+	return (root);
 }

@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/11 19:00:19 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/29 12:04:31 by hlaineka         ###   ########.fr       */
+/*   Created: 2021/03/27 11:35:38 by hlaineka          #+#    #+#             */
+/*   Updated: 2021/03/29 12:15:36 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_INCLUDES_H
-# define FT_INCLUDES_H
+#ifndef EXECUTION_H
+# define EXECUTION_H
 
-# include <curses.h>
-# include <fcntl.h>
-# include <signal.h>
-# include <sys/ioctl.h>
-# include <term.h>
-# include <termios.h>
-# include <unistd.h>
-
-# include "libft.h"
-# include "structs_21.h"
-# include "input.h"
 # include "parser.h"
-# include "ft_signal.h"
+# include <stdbool.h>
 
-# define STR_LENGTH 1024
+# define NUMBER_OF_TOKENS tkn_eoi
 
-/*
-** smallest allowed argv size in posix 4096 total
-*/
+typedef		int (*op_function)(t_token **stack, t_job *executable);
 
-# define ARGV_SIZE 4096
+int			execution_caller(t_token *tokens, bool debug);
 
-int 				g_ft_errno;
+int			null_token(t_token **stack, t_job *executable);
 
 #endif
