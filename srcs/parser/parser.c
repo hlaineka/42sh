@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 14:37:51 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/31 15:51:57 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/06 12:35:44 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ void	debug_print_tree(t_node *node, char *prefix)
 		debug_print_left(node, prefix);
 }
 
-t_node	*parser(char *input, bool debug)
+t_job	*parser(char *input, bool debug)
 {
 	t_token	*tokens;
 	t_node	*root;
+	t_job	*returnable;
 
 	tokens = lexer(input);
 	if (debug)
@@ -87,6 +88,7 @@ t_node	*parser(char *input, bool debug)
 	root = ast_creator(tokens, debug);
 	if (debug)
 		debug_print_tree(root, NULL);
+	returnable = job_creation(root, debug);
 	free_ast(root);
-	return (NULL);
+	return (returnable);
 }

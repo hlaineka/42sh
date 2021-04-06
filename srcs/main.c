@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/01 15:38:49 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/06 15:33:19 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int		main(int argc, char **argv, char **envp)
 	t_input		input;
 	char		*input_str;
 	bool		debug;
-	//t_job		*next_job;
+	t_job		*next_job;
 
-	//next_job = NULL;
+	next_job = NULL;
 	g_term = &term;
 	start_signal(); //signals not done;
 	initialize(&input, &term);
@@ -46,9 +46,9 @@ int		main(int argc, char **argv, char **envp)
 		{
 			break;
 		}
-		parser(input_str, debug);
-		//execution_caller(tokens, debug);
+		next_job = parser(input_str, debug);
 		free(input_str);
+		free_jobs(next_job);
 		//free_tree
 //		break;
 // input_str to lexer

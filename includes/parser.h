@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/06 11:23:10 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/06 16:38:35 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,25 +147,97 @@ typedef struct s_node
 	int				status;
 }					t_node;
 
-typedef int(*t_op_function)(t_token **stack, t_job *executable);
+/*
+** parser/parser.c
+*/
 
-t_node				*parser(char *input, bool debug);
+t_job				*parser(char *input, bool debug);
 void				debug_print_tree(t_node *node, char *prefix);
 
 /*
-** lexer.c
+** parser/ast_creation/ast_builder.c
+*/
+
+t_node				*ast_builder(t_token *new_first);
+
+/*
+** parser/ast_creation/ast_creation.c
+*/
+
+t_node				*ast_creator(t_token *first, bool debug);
+
+/*
+** parser/ast_creation/free_ast.c
+*/
+
+void				free_ast(t_node *root);
+
+/*
+** parser/ast_creation/precedence.c
+*/
+
+t_token				*add_precedence(t_token *first);
+
+/*
+** parser/ast_creation/shunting_yard.c
+*/
+
+t_token				*shunting_yard(t_token *first);
+
+/*
+** parser/job_creation/job_creation.c
+*/
+
+t_job				*job_creation(t_node *root, bool debug);
+
+/*
+** parser/job_creation/job_functions.c
+*/
+
+void				free_jobs(t_job *next_job);
+t_job				*init_job(void);
+
+/*
+** parser/job_creation/tree_traversal.c
+*/
+
+t_job				*tree_traversal(t_node *current, t_job	*(**op_functions)(t_job *job, t_node *current), t_job *first_job);
+
+/*
+** parser/job_creation: operation function pointers, all in their own files
+** named like function() -> function.c
+*/
+
+t_job				*null_token(t_job *job, t_node *current);
+
+
+/*
+** parser/tokenization/lexer.c
 */
 
 t_token				*lexer(char *input);
 
 /*
-** tokens.c
+** parser/tokenization/operator_tokens_functions.c
 */
-
-t_token				*get_basic_token(char *delimiters, char **source);
+void				check_tkn_quotes(t_token *current);
 
 /*
-** token_functions.c
+** parser/tokenization/operator_tokens.c
+*/
+
+t_token				*define_operator_tokens(t_token *first);
+
+
+/*
+** parser/tokenization/quote_removal.c
+*/
+
+void				quote_removal(t_token *first);
+
+
+/*
+** parser/tokenization/token_functions.c
 */
 
 t_token				*push_to_front(t_token *input, t_token *stack);
@@ -175,50 +247,9 @@ void				free_tokens(t_token *tokens);
 void				free_token(t_token *to_free);
 
 /*
-** ast_creation.c
+** parser/tokenization/tokens.c
 */
 
-t_node				*ast_creator(t_token *first, bool debug);
-
-/*
-** precedence.c
-*/
-
-t_token				*add_precedence(t_token *first);
-
-/*
-** shunting_yard.c
-*/
-
-t_token				*shunting_yard(t_token *first);
-
-/*
-** quote_removal.c
-*/
-
-void				quote_removal(t_token *first);
-
-/*
-** ast_builder.c
-*/
-
-t_node				*ast_builder(t_token *new_first);
-
-/*
-** free_ast.c
-*/
-
-void				free_ast(t_node *root);
-
-/*
-** operator_tokens.c
-*/
-
-t_token				*define_operator_tokens(t_token *first);
-
-/*
-** operator_tokens_functions.c
-*/
-void				check_tkn_quotes(t_token *current);
+t_token				*get_basic_token(char *delimiters, char **source);
 
 #endif

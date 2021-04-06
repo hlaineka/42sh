@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/04/01 11:37:00 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/04/06 15:35:28 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,10 +55,11 @@ _SRC_INPUT = read_input_user.c \
 			shell_keypress.c
 
 _SRC_PARSER = 	parser.c \
-				free_ast.c
 
 _SRC_JOB_CREATION = job_creation.c \
+					job_functions.c \
 					null_token.c \
+					tree_traversal.c
 
 _SRC_TOKENIZATION = lexer.c \
 					quote_removal.c \
@@ -70,7 +71,8 @@ _SRC_TOKENIZATION = lexer.c \
 _SRC_AST_CREATION = ast_creation.c \
 					precedence.c \
 					shunting_yard.c \
-					ast_builder.c
+					ast_builder.c \
+					free_ast.c
 
 _SRC_SIGNAL = signal.c
 
