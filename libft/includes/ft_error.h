@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 13:02:36 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/14 12:12:30 by helvi            ###   ########.fr       */
+/*   Updated: 2021/03/29 14:19:44 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,6 +305,27 @@ typedef struct	s_tags
 
 # define ENOMEDIUM       123
 # define EMEDIUMTYPE     124
+
+/*
+enum				e_errstr
+{
+	0 = "\0",
+	EPERM = "Operation not permitted",
+	ENOENT = "No such file or directory",
+	ESRCH = "No such process",
+	EINTR = "Interrupted system call",
+	EIO  = "I/O error",
+	ENXIO = "No such device or address",
+	E2BIG = "Argument list too long",
+	ENOEXEC = "Exec format error",
+	EBADF = "Bad file number/descriptor",
+	ECHILD = "No child processes",
+	EDEADLK = "Resource deadlock avoided",
+	ENOMEM = "Cannot allocate memory",
+	EACCES = "Permission denied",
+	NOTREADY = "THIS IS NOT HTE LAST"
+};
+*/
 
 extern int			g_ft_errno;
 extern char			*g_program_name;

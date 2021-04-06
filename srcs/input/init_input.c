@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/26 11:55:12 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/30 13:17:56 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,11 @@ void	init_term(t_term *term)
 	term->fd_stderr = STDERR_FILENO;
 }
 
-void			initialize(t_input *input, t_term *term)
+void			initialize(t_input *input, t_term *term, char **envp)
 {
 	init_term(term);
 	init_input(input);
+	copy_envp(envp, term);
 	term->input = input;
 	get_termios_modes(term);
 	tputs(term->ti_string, 1, ft_putc);

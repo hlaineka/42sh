@@ -1,37 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getenv.c                                        :+:      :+:    :+:   */
+/*   ft_unsetenv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/28 17:17:00 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/05 17:50:36 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/04/01 21:33:16 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/04/05 17:34:30 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 /*
-** The getenv() function obtains the current value of the environment vari-
-** able, name.  The application should not modify the string pointed to by the
-** ft_getenv() function.
+** The ft_unsetenv() function deletes all instances of the variable name
+** pointed to by name from the list.  Note that only the variable name
+** (e.g., "NAME") should be given; "NAME=value" will not work.
 */
 
-char	*ft_getenv(const char *name, char **envp)
+int	ft_unsetenv(const char *name, char **envp)
 {
-	size_t		len;
-	int			i;
+	size_t	len;
+	int		i;
 
 	i = 0;
-	if (!name || !envp)
-		return (NULL);
+	if (!name || ft_strchr(name, '='))
+		return (-EINVAL);
 	len = ft_strlen(name);
 	while (envp[i])
 	{
 		if (!ft_strncmp(envp[i], name, len) && envp[i][len] == '=')
-			return (envp[i] + (len + 1));
+		{
+			free(envp[i]);
+			break ;
+		}
 		i++;
 	}
-	return (NULL);
+	while (envp[i])
+	{
+		envp[i] = envp[i + 1];
+		i++;
+	}
+	return (0);
 }

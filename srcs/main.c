@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/27 13:56:46 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/05 15:34:55 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		main(int argc, char **argv, char **envp)
 	//next_job = NULL;
 	g_term = &term;
 	start_signal(); //signals not done;
-	initialize(&input, &term);
+	initialize(&input, &term, envp);
 	ft_atexit(&disable_rawmode);
 	if (argc == 2 && ft_strequ(argv[1], "debug"))
 		debug = TRUE;
@@ -34,6 +34,16 @@ int		main(int argc, char **argv, char **envp)
 		debug = FALSE;
 //	tputs(tgoto(term.cm_string, 0, 0), 1, ft_putc);
 //	tputs(term.cd_string, 1, ft_putc);
+
+//poista t'st'
+
+	builtin_env(argc - 1, argv + 1, term.envp);
+	ft_printf("\nend\n");
+	while (1);
+	exit(1);
+
+/// t'nne
+
 	while (1)
 	{
 		input_str = get_input(1, argv, &term, &input); // not done, error check?

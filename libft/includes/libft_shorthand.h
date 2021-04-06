@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:05:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/27 13:53:52 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/04 10:05:49 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ typedef union u_doubleu
 # define _MSB_ 			0x8000000000000000
 # define _NOT_MSB_		0x7FFFFFFFFFFFFFFF
 # define _ALLBITS_		0xFFFFFFFFFFFFFFFF
+# define MAX_FD			4000
 
 #endif

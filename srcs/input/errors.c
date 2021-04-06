@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 17:40:33 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/26 11:46:22 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/29 10:35:37 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,13 @@ void	err_quit(int error_no, char *s_str)
 	get_error_str(error_message, error_no);
 	ft_printf_fd(2, error_message, s_str);
 	exit(1);
+}
+
+int		err_return(int error_no, char *s_str)
+{
+	char	error_message[1024];
+
+	get_error_str(error_message, error_no);
+	ft_printf_fd(STDERR_FILENO, error_message, s_str);
+	return (error_no);
 }

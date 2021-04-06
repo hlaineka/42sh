@@ -3,73 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hhuhtane <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/03 10:38:16 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:35:36 by helvi            ###   ########.fr       */
+/*   Created: 2019/11/21 18:12:13 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/04/02 14:29:23 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** searches the source string for newline or end of string. If newline is
-** not found, returns 0. If newline is found, copies source string until
-** the newline to the end of destination string, and removes all data until
-** newline from source string. Uses ft_str_realloc to string reallocation
-*/
-
-static int		search_newline(char **dest, char **src)
+static int	ft_read_fd(const int fd, char **str)
 {
-	int		i;
+	int		rt;
+	char	buff[BUFF_SIZE + 1];
+	char	*str_temp;
 
-	i = 0;
-	if (!src || !*src || src[0][0] == '\0')
-		return (0);
-	while (src[0][i] != '\0' && src[0][i] != '\n')
-		i++;
-	if (src[0][i] == '\n')
+	rt = 1;
+	while ((!str[fd] || !ft_strchr(str[fd], '\n')) && rt)
 	{
-		if (!*dest)
-			*dest = ft_strsub(*src, 0, i);
+		rt = read(fd, buff, BUFF_SIZE);
+		if (rt <= 0)
+			break ;
+		buff[rt] = '\0';
+		if (!str[fd])
+			str_temp = ft_strdup(buff);
 		else
-			*dest = ft_str_realloc(*src, 0, i);
-		*src = ft_str_realloc(*src, i + 1, ft_strlen(*src));
+			str_temp = ft_strjoin(str[fd], buff);
+		ft_strdel(&str[fd]);
+		str[fd] = str_temp;
+	}
+	return (rt);
+}
+
+static int	ft_crop_to_line(const int fd, int rt, char **str, char **line)
+{
+	char	*ptr_t;
+
+	if (rt == 0 && str[fd] && str[fd][0] == '\0')
+	{
+		*line = ft_strdup(str[fd]);
+		ft_strdel(&str[fd]);
+		return (0);
+	}
+	if (rt == 0 && str[fd] && !ft_strchr(str[fd], '\n'))
+	{
+		*line = ft_strdup(str[fd]);
+		str[fd][0] = '\0';
+		return (1);
+	}
+	if (str[fd] && ft_strchr(str[fd], '\n'))
+	{
+		*line = ft_strsub(str[fd], 0, (ft_strchr(str[fd], '\n') - str[fd]));
+		ptr_t = str[fd];
+		str[fd] = ft_strdup(ft_strchr(str[fd], '\n') + 1);
+		ft_strdel(&ptr_t);
 		return (1);
 	}
 	return (0);
 }
 
-/*
-** reads the fd given as parameter and writes a string from the input that
-** is until newline or EOF to the parameter line. The newline characters are
-** nor included in line. Returns one every time it writes a line to line and
-** zero ones the EOF has been reached.
-*/
-
-int				get_next_line(const int fd, char **line)
+int	get_next_line(const int fd, char **line)
 {
-	static char	*fds[FD_LIMIT];
-	char		buf[BUFF_SIZE];
-	int			bytes;
-	int			returnable;
+	static char		*str[MAX_FD];
+	int				rt;
 
-	if (fd < 0 || fd > FD_LIMIT || !line)
+	if (fd < 0 || fd > MAX_FD || BUFF_SIZE < 1 || !line)
 		return (-1);
-	*line = NULL;
-	bytes = 0;
-	while ((returnable = search_newline(line, &fds[fd])) == 0
-		&& (bytes = read(fd, buf, BUFF_SIZE)) > 0)
-		ft_dynamic_string(&fds[fd], buf, bytes);
-	if (bytes < 0)
+	rt = ft_read_fd(fd, str);
+	if (rt == -1)
 		return (-1);
-	if (bytes == 0 && *line == NULL && (fds[fd] == NULL || fds[fd][0] == '\0'))
-		return (0);
-	if (bytes == 0 && returnable == 0 && fds[fd][0] != '\0')
-	{
-		*line = ft_strdup(fds[fd]);
-		fds[fd] = ft_strdup("\0");
-		return (1);
-	}
-	return (1);
+	return (ft_crop_to_line(fd, rt, str, line));
 }

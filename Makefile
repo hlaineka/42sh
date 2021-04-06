@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/26 12:19:25 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/04/06 10:21:59 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ DIR_MAIN = srcs/
 DIR_INPUT = srcs/input/
 DIR_PARSER = srcs/parser/
 DIR_SIGNAL = srcs/signal/
+DIR_BUILTIN = srcs/builtins/
 DIR_OBJS = objs/
 
 _SRC_MAIN = main.c
@@ -48,23 +49,29 @@ _SRC_INPUT = read_input_user.c \
 			left_right_keypress.c \
 			delete_keypress.c \
 			ft_isdelete.c \
-			shell_keypress.c
+			shell_keypress.c \
+			copy_envp.c
 
 _SRC_PARSER = 	parser.c \
 				lexer.c \
 				tokens.c \
 				ast_creation.c
 
-_SRC_SIGNAL = signal.c
+_SRC_SIGNAL =	signal.c
+
+_SRC_BUILTIN =	builtin_env.c \
+				err_builtin.c \
+				find_path.c
 
 SRC_MAIN = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))
 SRC_INPUT = $(addprefix $(DIR_INPUT), $(_SRC_INPUT))
 SRC_PARSER = $(addprefix $(DIR_PARSER), $(_SRC_PARSER))
 SRC_SIGNAL = $(addprefix $(DIR_SIGNAL), $(_SRC_SIGNAL))
+SRC_BUILTIN = $(addprefix $(DIR_BUILTIN), $(_SRC_BUILTIN))
 
-SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER) $(SRC_SIGNAL)
+SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER) $(SRC_SIGNAL) $(SRC_BUILTIN)
 
-_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL)
+_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL) $(_SRC_BUILTIN)
 
 OBJ_FILES = $(_SRC:.c=.o)
 OBJS = $(patsubst %, $(DIR_OBJS)%, $(_SRC:.c=.o))
@@ -73,7 +80,9 @@ _INC = 	input.h \
 		structs_21.h \
 		includes.h \
 		parser.h \
-		ft_signal.h
+		ft_signal.h \
+		builtins.h \
+		typedefs.h
 
 INC = $(addprefix $(DIR_INC), $(_INC))
 
@@ -97,6 +106,9 @@ $(DIR_OBJS)%.o: $(DIR_PARSER)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 $(DIR_OBJS)%.o: $(DIR_SIGNAL)%.c $(INC)
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(DIR_OBJS)%.o: $(DIR_BUILTIN)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 libft:

@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getenv.c                                        :+:      :+:    :+:   */
+/*   copy_envp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/28 17:17:00 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/05 17:50:36 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/03/30 13:18:44 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/03/30 13:31:58 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes.h"
 
-/*
-** The getenv() function obtains the current value of the environment vari-
-** able, name.  The application should not modify the string pointed to by the
-** ft_getenv() function.
-*/
-
-char	*ft_getenv(const char *name, char **envp)
+int		copy_envp(char **envp, t_term *term)
 {
-	size_t		len;
-	int			i;
+	int		i;
 
 	i = 0;
-	if (!name || !envp)
-		return (NULL);
-	len = ft_strlen(name);
+	ft_bzero(term->envp, 1024);
+	if (!envp)
+		return (-1);
 	while (envp[i])
 	{
-		if (!ft_strncmp(envp[i], name, len) && envp[i][len] == '=')
-			return (envp[i] + (len + 1));
+		term->envp[i] = ft_strdup(envp[i]);
 		i++;
 	}
-	return (NULL);
+	return (0);
 }

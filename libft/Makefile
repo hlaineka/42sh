@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/26 12:19:37 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/04/01 21:50:44 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -179,6 +179,8 @@ _SRC_LISTS = ft_lst_length.c \
 
 _SRC_MISC =	ft_free.c \
 			ft_getenv.c \
+			ft_setenv.c \
+			ft_unsetenv.c \
 			ft_is_whitespace.c \
 			ft_itoa_base.c \
 			ft_itoa_float.c \

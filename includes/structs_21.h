@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/27 13:53:23 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/29 08:13:23 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ typedef struct			s_job
 
 typedef struct s_term
 {
+	char				*envp[1024];
 	t_input				*input;
 	char				*term_buffer;
 	char				*termtype;
