@@ -6,12 +6,12 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 19:00:19 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/04 12:33:25 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/06 13:22:49 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_INCLUDES_H
-# define FT_INCLUDES_H
+#ifndef INCLUDES_H
+# define INCLUDES_H
 
 # include <curses.h>
 # include <fcntl.h>
@@ -28,6 +28,12 @@
 # include "ft_signal.h"
 # include "builtins.h"
 
-int 				g_ft_errno;
+# define STR_LENGTH 1024
+
+/*
+** smallest allowed argv size in posix 4096 total
+*/
+
+# define ARGV_SIZE 4096
 
 #endif

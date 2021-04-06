@@ -6,14 +6,14 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:05:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/04 10:05:49 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/06 13:19:07 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_SHORTHAND_H
 # define LIBFT_SHORTHAND_H
 
-#include <stdlib.h>
+# include <stdlib.h>
 
 /*
 ** SHORTHANDS FOR VARIABLE TYPES WITH BITSIZES

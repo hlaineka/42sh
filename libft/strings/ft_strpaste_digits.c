@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strpaste_digits.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 12:47:39 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:34:22 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/01 13:04:46 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** Does not add \0
 */
 
-void		ft_strpaste_digits(char *dest, char *src)
+void	ft_strpaste_digits(char *dest, char *src)
 {
 	int	i;
 

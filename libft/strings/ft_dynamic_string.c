@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dynamic_string.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 11:17:49 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:27:17 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/01 16:01:03 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@
 ** Good when used with read().
 */
 
-char		*ft_dynamic_string(char **dest, char *src, int num)
+char	*ft_dynamic_string(char **dest, char *src, int num)
 {
 	char	*returnable;
 	char	*temp_src;
 
-	temp_src = (char*)malloc(sizeof(char) * (num + 1));
+	if (num < 0)
+		return (NULL);
+	temp_src = malloc(sizeof(char) * (num + 1));
 	temp_src = ft_memcpy(temp_src, src, num);
 	temp_src[num] = '\0';
 	returnable = NULL;

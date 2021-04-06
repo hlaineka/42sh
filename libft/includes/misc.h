@@ -3,23 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   misc.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 12:20:52 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/01 21:48:36 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/06 13:44:06 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MISC_H
-# define FT_MISC_H
+#ifndef MISC_H
+# define MISC_H
 
 # include "libft.h"
 
 int		ft_define_base_length(long long int n, int base);
 void	ft_free(void *variable);
-char	*ft_getenv(const char *name, char **envp);
-int		ft_setenv(const char *name, const char *val, int over, char **envp);
-int		ft_unsetenv(const char *name, char **envp);
 int		ft_is_whitespace(const char c);
 char	*ft_itoa_base(long long int n, long long int base);
 char	*ft_itoa_float(long double n);

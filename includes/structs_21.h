@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/29 08:13:23 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/06 13:22:36 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_input
 	int					cursor_col;
 }						t_input;
 
-typedef struct			s_process
+typedef struct s_process
 {
 	struct s_process	*next;       /* next process in pipeline */
 	char				**argv;      /* for exec */
@@ -59,7 +59,7 @@ typedef struct			s_process
 }						t_process;
 
 /* A job is a pipeline of processes.  */
-typedef struct			s_job
+typedef struct s_job
 {
 	struct s_job		*next;          /* next active job, if not t_list */
 	char				*command;       /* command line, used for messages */

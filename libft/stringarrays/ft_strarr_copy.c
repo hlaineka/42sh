@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strarr_copy.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 16:54:09 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:32:09 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/01 13:08:39 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 #include "libft.h"
 
-char		**ft_strarr_copy(char **src)
+char	**ft_strarr_copy(char **src)
 {
 	int		i;
 	char	**returnable;
@@ -26,7 +26,7 @@ char		**ft_strarr_copy(char **src)
 	i = 0;
 	if (!src)
 		return (NULL);
-	returnable = (char**)malloc(sizeof(char*) * (ft_array_length(src) + 1));
+	returnable = malloc(sizeof(char *) * (ft_array_length(src) + 1));
 	while (src && src[i])
 	{
 		returnable[i] = ft_strdup(src[i]);

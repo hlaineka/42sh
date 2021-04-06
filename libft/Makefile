@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/04/01 21:50:44 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/04/06 13:52:24 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,6 @@ _SRC_LIBFT = ft_abs.c \
 			ft_atoi_base.c \
 			ft_bitmask.c \
 			ft_bzero.c \
-			ft_define_length.c \
 			ft_frexp.c \
 			ft_ftoa.c \
 			ft_intlen_base.c \
@@ -88,7 +87,6 @@ _SRC_LIBFT = ft_abs.c \
 			ft_isprint.c \
 			ft_isspace.c \
 			ft_itoa.c \
-			ft_itoa_base.c \
 			ft_itoa_base_prefix.c \
 			ft_log10.c \
 			ft_longlonglen_base.c \
@@ -118,13 +116,9 @@ _SRC_LIBFT = ft_abs.c \
 			ft_memset.c \
 			ft_pow.c \
 			ft_putchar.c \
-			ft_putchar_fd.c \
 			ft_putendl.c \
-			ft_putendl_fd.c \
 			ft_putnbr.c \
-			ft_putnbr_fd.c \
 			ft_putstr.c \
-			ft_putstr_fd.c \
 			ft_strarrdel.c \
 			ft_strarrlen.c \
 			ft_strcat.c \
@@ -155,7 +149,6 @@ _SRC_LIBFT = ft_abs.c \
 			ft_strsplit.c \
 			ft_strstr.c \
 			ft_strsub.c \
-			ft_strtoupper.c \
 			ft_strtrim.c \
 			ft_tolower.c \
 			ft_toupper.c \
@@ -165,8 +158,7 @@ _SRC_LIBFT = ft_abs.c \
 			ft_uitoa_base.c \
 			ft_ull_len_base.c \
 			ft_vlqnew.c \
-			get_nbr.c \
-			get_next_line.c
+			get_nbr.c
 
 _SRC_LISTS = ft_lst_length.c \
 			ft_lst_merge_sort.c \
@@ -178,9 +170,6 @@ _SRC_LISTS = ft_lst_length.c \
 			ft_lstend.c
 
 _SRC_MISC =	ft_free.c \
-			ft_getenv.c \
-			ft_setenv.c \
-			ft_unsetenv.c \
 			ft_is_whitespace.c \
 			ft_itoa_base.c \
 			ft_itoa_float.c \
@@ -203,6 +192,7 @@ _SRC_STRINGS = ft_char_str_join.c \
 			ft_putendl_fd.c \
 			ft_putnbr_fd.c \
 			ft_putstr_fd.c \
+			ft_remove_chars.c \
 			ft_replace_char.c \
 			ft_str_addi.c \
 			ft_str_char_join.c \
@@ -221,7 +211,8 @@ _SRC_STRINGS = ft_char_str_join.c \
 			ft_strstr_remove.c \
 			ft_strstri.c \
 			ft_strsub_freestr.c \
-			ft_strsub_mid.c
+			ft_strsub_mid.c \
+			ft_strtoupper.c
 
 SRC_FT_ERROR = $(addprefix $(FT_ERROR_DIR), $(_SRC_FT_ERROR))
 SRC_FT_EXIT = $(addprefix $(FT_EXIT_DIR), $(_SRC_FT_EXIT))

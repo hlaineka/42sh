@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_f.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 10:02:18 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/13 22:29:02 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/01 13:11:00 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	*float_width(char *string, int width, t_tags *command)
 	if ((int)ft_strlen(string) < width)
 	{
 		if (command->flag_zero && !command->flag_minus
-				&& command->precision == -1)
+			&& command->precision == -1)
 			returnable = ft_strset('0', width);
 		else
 			returnable = ft_strset(' ', width);
@@ -46,7 +46,7 @@ static char	*float_precision(char *string, t_tags *command)
 	{
 		returnable = ft_strset('0', command->precision);
 		ft_strpaste_digits(&returnable[ft_strlen(returnable)
-				- ft_strlen(string)], string);
+			- ft_strlen(string)], string);
 		if (!ft_isdigit(string[0]))
 			returnable = ft_char_str_join(string[0], returnable);
 	}
@@ -86,7 +86,7 @@ static char	*float_editor(char *printable, t_tags *command)
 	return (printable);
 }
 
-int			print_f(t_tags *command, va_list *source)
+int	print_f(t_tags *command, va_list *source)
 {
 	char		*printable;
 	long double	aquired;

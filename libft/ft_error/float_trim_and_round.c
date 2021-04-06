@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   float_trim_and_round.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 10:25:02 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/13 23:36:55 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/01 13:13:42 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_error.h"
 
-char			*ft_trim(char *str, t_tags *command)
+char	*ft_trim(char *str, t_tags *command)
 {
 	int		i;
 	int		w;
@@ -34,7 +34,7 @@ char			*ft_trim(char *str, t_tags *command)
 	return (returnable);
 }
 
-long double		ft_round(long double number, t_tags *command)
+long double	ft_round(long double number, t_tags *command)
 {
 	long double	returnable;
 	int			i;

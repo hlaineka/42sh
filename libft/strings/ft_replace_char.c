@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_replace_char.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 13:58:24 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:31:21 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/01 12:59:41 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_replc(char *src, int i, char *input)
 	int		src_i;
 	int		input_i;
 
-	returnable = (char*)malloc(ft_strlen(src) + ft_strlen(input) + 1);
+	returnable = malloc(ft_strlen(src) + ft_strlen(input) + 1);
 	returnable_i = 0;
 	src_i = 0;
 	input_i = 0;

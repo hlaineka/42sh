@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 11:22:52 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:28:13 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/06 11:05:13 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** turns intiger value to char, using the base given.
 */
 
-int		ft_define_base_length(long long int n, int base)
+int	ft_define_base_length(long long int n, int base)
 {
 	int				i;
 	long long int	int_min;
@@ -46,8 +46,8 @@ char	*ft_itoa_base(long long int n, long long int base)
 	w = ft_define_base_length(n, base) - 1;
 	if (n < -9223372036854775807)
 		return (ft_strdup("-9223372036854775808"));
-	if (NULL != (str = (char*)malloc(sizeof(char) *
-					(ft_define_base_length(n, base) + 1))))
+	str = malloc(sizeof(char) * (ft_define_base_length(n, base) + 1));
+	if (str)
 	{
 		str[w + 1] = ('\0');
 		if (n < 0)

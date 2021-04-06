@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_command_values.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 10:38:52 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/13 22:29:31 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/01 15:40:23 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	set_precision(t_tags *command, char c, va_list *source)
 void	set_length(t_tags *command, char c)
 {
 	if (c == 'h')
+	{
 		if (command->length_h)
 		{
 			command->length_hh = TRUE;
@@ -106,7 +107,9 @@ void	set_length(t_tags *command, char c)
 		}
 		else
 			command->length_h = TRUE;
+	}
 	else if (c == 'l')
+	{
 		if (command->length_l)
 		{
 			command->length_ll = TRUE;
@@ -114,6 +117,7 @@ void	set_length(t_tags *command, char c)
 		}
 		else
 			command->length_l = TRUE;
+	}
 	else
 		command->length_lll = TRUE;
 }

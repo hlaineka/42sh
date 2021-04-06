@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr_remove.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/06 12:04:57 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:34:51 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/01 12:59:21 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ char	*ft_strstr_remove(char *str1, char *str2)
 
 	start = ft_strstri(str1, str2);
 	end = start + ft_strlen(str2);
-	returnable = (char*)malloc(sizeof(char) * (ft_strlen(str1) -
-			ft_strlen(str2) + 1));
+	returnable = malloc(sizeof(char) * (ft_strlen(str1) - ft_strlen(str2) + 1));
 	i = 0;
 	w = 0;
 	while (str1[i])

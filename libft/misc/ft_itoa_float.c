@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_float.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 12:22:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:28:17 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/06 11:14:15 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_float_to_str(long double n, long long int number)
+char	*ft_float_to_str(long double n, long long int number)
 {
 	int		i;
 	char	*returnable;
@@ -23,7 +23,8 @@ char		*ft_float_to_str(long double n, long long int number)
 		number = number * -1;
 	}
 	i = 1;
-	if (NULL != (returnable = (char*)malloc(sizeof(char) * 20)))
+	returnable = malloc(sizeof(char) * 20);
+	if (returnable)
 	{
 		returnable[0] = '.';
 		n = n - number;
@@ -39,7 +40,7 @@ char		*ft_float_to_str(long double n, long long int number)
 	return (NULL);
 }
 
-char		*ft_itoa_float(long double n)
+char	*ft_itoa_float(long double n)
 {
 	char			*str1;
 	char			*str2;

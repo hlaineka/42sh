@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_p.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 12:24:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/13 22:29:10 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/01 15:31:13 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,13 @@ static char	*pointer_editor(char *printable, t_tags *command)
 	return (printable);
 }
 
-int			print_p(t_tags *command, va_list *source)
+int	print_p(t_tags *command, va_list *source)
 {
 	void	*pointer;
 	char	*printable;
 	int		returnable;
 
-	pointer = va_arg(*source, void*);
+	pointer = va_arg(*source, void *);
 	printable = ft_itoa_hexa((uintmax_t)(pointer));
 	printable = ft_strjoin_frees2("0x", printable);
 	printable = pointer_editor(printable, command);
