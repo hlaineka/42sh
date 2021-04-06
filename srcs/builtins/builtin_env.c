@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:21:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 12:57:15 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/06 14:01:40 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ int	execute_env(char **argv, char **envp, char *altpath, int options)
 		print_envp(envp);
 //		ft_printf("ENVIN PRINTTAUS\n");
 //		ft_lstiter(envl->next, &ft_lstprint);
-	while(1);
 	return (0);
 }
 

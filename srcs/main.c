@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 13:30:45 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/06 14:00:37 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,6 @@ int		main(int argc, char **argv, char **envp)
 //poista t'st'
 
 	builtin_env(argc - 1, argv + 1, term.envp);
-	ft_printf("\nend\n");
-	while (1);
-	exit(1);
 
 /// t'nne
 
