@@ -6,23 +6,23 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 19:20:26 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/25 18:35:52 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/26 11:45:11 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
-static void		ft_cfmakeraw(t_termios *termios_p)
+static void	ft_cfmakeraw(t_termios *termios_p)
 {
-	termios_p->c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP \
-							| INLCR | IGNCR | ICRNL | IXON);
+	termios_p->c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP
+			| INLCR | IGNCR | ICRNL | IXON);
 	termios_p->c_oflag &= ~OPOST;
 	termios_p->c_lflag &= ~(ECHO | ECHONL | ICANON | IEXTEN);
 	termios_p->c_cflag &= ~(CSIZE | PARENB);
 	termios_p->c_cflag |= CS8;
 }
 
-void			get_termios_modes(t_term *term)
+void	get_termios_modes(t_term *term)
 {
 	t_termios	raw;
 
@@ -35,8 +35,12 @@ void			get_termios_modes(t_term *term)
 	term->raw = raw;
 }
 
-void			enable_raw_mode(t_term *term)
+/*
+** CHECK:
+** tcsetattr TCSANOW or TCSAFLUSH?
+*/
+void	enable_raw_mode(t_term *term)
 {
-	if (tcsetattr(STDIN_FILENO, TCSANOW, &term->raw) == -1) //TCSANOW or TCSAFLUSH
+	if (tcsetattr(STDIN_FILENO, TCSANOW, &term->raw) == -1)
 		err_fatal(ERR_MESSAGE, "tcsetattr", term);
 }

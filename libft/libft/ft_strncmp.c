@@ -3,29 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hhuhtane <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/28 12:22:06 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/24 15:36:43 by hhuhtane         ###   ########.fr       */
+/*   Created: 2019/10/24 18:39:22 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/04/05 17:49:56 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** compares up to num characters of str2 to str1. Returns 0 if strings are
-** aqual or an integer representing the difference.
-*/
-
-int	ft_strncmp(const char *str1, const char *str2, size_t num)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (str1[i] != '\0' && str2[i] != '\0' && str1[i] != str2[i]
-		&& i < num)
+	if (!n)
+		return (0);
+	while (*s1 == *s2 && n-- > 1 && *s1 && *s2)
 	{
-		i++;
+		s1++;
+		s2++;
 	}
-	return ((unsigned char)str1[i] - (unsigned char)str2[i]);
+	return ((unsigned char)(*s1) - (unsigned char)(*s2));
 }

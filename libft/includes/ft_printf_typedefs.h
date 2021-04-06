@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 12:33:21 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/24 21:05:30 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/26 11:26:16 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,8 @@ typedef struct s_all
 	char				flags_str[FLAGS_SIZE + 1];
 	char				l_modifier_str[L_MOD_SIZE + 1];
 	char				format_id_str[FORMAT_ID_SIZE + 1];
-	void				(*convert_fun_ptr[FORMAT_ID_SIZE])(void*);
-	void				(*flags_fun_ptr[FLAGS_SIZE])(void*);
+	t_fp				convert_fun_ptr[FORMAT_ID_SIZE];
+	t_fp				flags_fun_ptr[FLAGS_SIZE];
 	int					format_info;
 	size_t				width;
 	size_t				precision;

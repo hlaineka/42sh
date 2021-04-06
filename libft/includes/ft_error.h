@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 13:02:36 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/06 11:10:54 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/06 13:20:42 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,6 @@ typedef struct s_tags
 	int			length_lll;
 	int			empty;
 }				t_tags;
-
-void			ft_perror(const char *program_name, const char *message);
-void			ft_error(int status, const char *program_name,
-					const char *format, ...);
 
 /*
 ** The main function to handle printing

@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdelete.c                                      :+:      :+:    :+:   */
+/*   ft_strtoupper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/16 16:12:43 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/26 11:48:47 by hhuhtane         ###   ########.fr       */
+/*   Created: 2020/04/13 22:32:00 by hhuhtane          #+#    #+#             */
+/*   Updated: 2020/04/13 22:39:50 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_is_delete_key(char *str)
+#include "libft.h"
+
+void	ft_strtoupper(char *str)
 {
-	if (str[0] == 27 && str[1] == 91 && str[2] == 51 && str[3] == 126)
-		return (1);
-	return (0);
+	size_t		i;
+
+	i = 0;
+	while (str[i])
+	{
+		str[i] = ft_toupper(str[i]);
+		i++;
+	}
 }

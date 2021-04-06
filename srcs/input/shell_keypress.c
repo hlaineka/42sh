@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/24 12:39:03 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/27 14:01:38 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,23 @@ static char	*double_allocation(char *str, size_t size)
 {
 	char	*new;
 
-	if (!(new = ft_memalloc(sizeof(char) * size * 2)))
+	new = ft_memalloc(sizeof(char) * size * 2);
+	if (!new)
 		return (NULL);
 	ft_strcat(new, str);
 	free(str);
 	return (new);
+}
+
+static int	double_input_mem(t_input *input, t_term *term)
+{
+	input->ls = double_allocation(input->ls, input->ls_size);
+	input->rrs = double_allocation(input->rrs, input->rrs_size);
+	if (!input->ls || !input->rrs)
+		err_fatal(ERR_MALLOC, NULL, term);
+	input->ls_size *= 2;
+	input->rrs_size *= 2;
+	return (0);
 }
 
 static int	do_special_keys(char *rc, t_input *input, t_term *term)
@@ -58,7 +70,7 @@ static int	do_special_keys(char *rc, t_input *input, t_term *term)
 	return (0);
 }
 
-int			shell_keypress(char *rc, t_input *input, t_term *term)
+int	shell_keypress(char *rc, t_input *input, t_term *term)
 {
 	int		ret;
 	int		col;
@@ -72,12 +84,7 @@ int			shell_keypress(char *rc, t_input *input, t_term *term)
 	else
 	{
 		if (ft_strlen(rc) > (input->ls_size - ft_strlen(input->ls)))
-		{
-			input->ls = double_allocation(input->ls, input->ls_size); //error check
-			input->rrs = double_allocation(input->rrs, input->rrs_size); //error chekc
-			input->ls_size *= 2;
-			input->rrs_size *= 2;
-		}
+			double_input_mem(input, term);
 		ft_strncat(input->ls, rc, 1024);
 		ft_putstr_input(rc, input, term);
 		get_pos(&input->cursor_row, &input->cursor_col);

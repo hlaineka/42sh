@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 13:28:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/25 13:22:05 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/25 20:12:59 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	backspace_keypress(t_input *input, t_term *term)
 
 	if (!input->ls[0])
 		return ;
-	if (input->ls[ft_strlen(input->ls) - 1] == 13)
+	if (ft_strchr(input->ls, 13) || ft_strchr(input->rrs, 13))
 	{
 		input->ls[ft_strlen(input->ls) - 1] = '\0';
 		print_clean_pos(input, term);
@@ -64,7 +64,7 @@ void	delete_keypress(t_input *input, t_term *term)
 	if (!input->rrs[0])
 		return ;
 	last = ft_strlen(input->rrs) - 1;
-	if (input->rrs[last] == 13)
+	if (ft_strchr(input->ls, 13) || ft_strchr(input->rrs, 13))
 	{
 		input->rrs[last] = '\0';
 		print_clean_pos(input, term);

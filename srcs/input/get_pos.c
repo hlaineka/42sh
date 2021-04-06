@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 10:24:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/22 10:42:43 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/26 11:50:25 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	get_cur_y(int *y, char *buf, int *i)
 	return (0);
 }
 
-int			get_pos(int *y, int *x)
+int	get_pos(int *y, int *x)
 {
 	char	buf[30];
 	int		i;

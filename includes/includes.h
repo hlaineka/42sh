@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 19:00:19 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 11:21:14 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/06 13:22:49 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include "input.h"
 # include "parser.h"
 # include "ft_signal.h"
+# include "builtins.h"
 
 # define STR_LENGTH 1024
 

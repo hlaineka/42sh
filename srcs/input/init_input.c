@@ -6,29 +6,33 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/25 18:39:20 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/30 13:17:56 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
-void			init_input(t_input *input)
+void	init_input(t_input *input)
 {
 	ft_bzero(input, sizeof(t_input));
-	if (!(input->ls = ft_memalloc(sizeof(char) * 2048)))
-		exit(1);
-	if (!(input->rrs = ft_memalloc(sizeof(char) * 2048)))
+	input->ls = ft_memalloc(sizeof(char) * 2048);
+	if (!input->ls)
+		exit(1); //fix
+	input->rrs = ft_memalloc(sizeof(char) * 2048);
+	if (!input->rrs)
 	{
 		free(input->ls);
 		exit(1);
 	}
-	if (!(input->clipboard = ft_memalloc(sizeof(char) * 2048)))
+	input->clipboard = ft_memalloc(sizeof(char) * 2048);
+	if (!input->clipboard)
 	{
 		free(input->ls);
 		free(input->rrs);
-		exit(1);
+		exit(1); // FIX
 	}
-	if (!(input->history = ft_clstnew(NULL, 0)))
+	input->history = ft_clstnew(NULL, 0);
+	if (!input->history)
 		exit(1); //FIX this
 	input->last_comm = input->history;
 	input->ls_size = 2048;
@@ -36,7 +40,7 @@ void			init_input(t_input *input)
 	input->clipboard_size = 2048;
 }
 
-static void		get_termcaps_strings(t_term *term, char *buffer)
+static void	get_termcaps_strings(t_term *term, char *buffer)
 {
 	term->ti_string = tgetstr("ti", &buffer);
 	term->te_string = tgetstr("te", &buffer);
@@ -51,7 +55,7 @@ static void		get_termcaps_strings(t_term *term, char *buffer)
 	term->dc_string = tgetstr("dc", &buffer);
 }
 
-void			init_term(t_term *term)
+void	init_term(t_term *term)
 {
 	int		success;
 	char	*buffer;
@@ -80,13 +84,13 @@ void			init_term(t_term *term)
 	term->fd_stderr = STDERR_FILENO;
 }
 
-void			initialize(t_input *input, t_term *term)
+void			initialize(t_input *input, t_term *term, char **envp)
 {
 	init_term(term);
 	init_input(input);
+	copy_envp(envp, term);
 	term->input = input;
 	get_termios_modes(term);
-//	enable_raw_mode(term);
 	tputs(term->ti_string, 1, ft_putc);
 	tputs(tgoto(term->cm_string, 0, 0), 1, ft_putc);
 	tputs(term->cd_string, 1, ft_putc);

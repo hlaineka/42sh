@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdelete.c                                      :+:      :+:    :+:   */
+/*   copy_envp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/16 16:12:43 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/26 11:48:47 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/03/30 13:18:44 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/03/30 13:31:58 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_is_delete_key(char *str)
+#include "includes.h"
+
+int		copy_envp(char **envp, t_term *term)
 {
-	if (str[0] == 27 && str[1] == 91 && str[2] == 51 && str[3] == 126)
-		return (1);
+	int		i;
+
+	i = 0;
+	ft_bzero(term->envp, 1024);
+	if (!envp)
+		return (-1);
+	while (envp[i])
+	{
+		term->envp[i] = ft_strdup(envp[i]);
+		i++;
+	}
 	return (0);
 }

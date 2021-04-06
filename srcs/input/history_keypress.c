@@ -6,13 +6,13 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 10:52:51 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/22 14:20:55 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/03/26 11:51:13 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes.h"
 
-void			history_up(t_input *input, t_term *term)
+void	history_up(t_input *input, t_term *term)
 {
 	char	*str;
 	int		x;
@@ -35,7 +35,7 @@ void			history_up(t_input *input, t_term *term)
 	get_pos(&input->cursor_row, &input->cursor_col);
 }
 
-void			history_down(t_input *input, t_term *term)
+void	history_down(t_input *input, t_term *term)
 {
 	char	*str;
 	int		x;
@@ -58,12 +58,13 @@ void			history_down(t_input *input, t_term *term)
 	get_pos(&input->cursor_row, &input->cursor_col);
 }
 
-t_clist			*command_to_history(t_input *input, char *str)
+t_clist	*command_to_history(t_input *input, char *str)
 {
 	t_clist	*new;
 	char	*ptr;
 
-	if (!(new = ft_clstnew(str, ft_strlen(str) + 1)))
+	new = ft_clstnew(str, ft_strlen(str) + 1);
+	if (!new)
 		return (NULL);
 	ptr = ft_strrchr(new->content, '\n');
 	*ptr = '\0';

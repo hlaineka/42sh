@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/04/06 16:23:25 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/04/06 17:06:16 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,98 +69,96 @@ _SRC_FT_PRINTF = convert_di.c \
 			get_variable.c \
 			get_variable_info.c
 
-_SRC_LIBFT = 	ft_abs.c \
-				ft_array_len.c \
-				ft_atoi_base.c \
-				ft_atoi.c \
-				ft_bitmask.c \
-				ft_bzero.c \
-				ft_frexp.c \
-				ft_ftoa.c \
-				ft_intlen_base.c \
-				ft_isalnum.c \
-				ft_isalpha.c \
-				ft_isascii.c \
-				ft_iscntrl.c \
-				ft_isdigit.c \
-				ft_isoption.c \
-				ft_isprint.c \
-				ft_isspace.c \
-				ft_itoa_base_prefix.c \
-				ft_itoa.c \
-				ft_log10.c \
-				ft_longlonglen_base.c \
-				ft_lstaddafter.c \
-				ft_lstadd.c \
-				ft_lstappend.c \
-				ft_lstdel.c \
-				ft_lstdelone.c \
-				ft_lstfree.c \
-				ft_lstiter.c \
-				ft_lstlen.c \
-				ft_lstmap.c \
-				ft_lstnew.c \
-				ft_lstnewtoend.c \
-				ft_lstprint.c \
-				ft_lstrev.c \
-				ft_lstsrc.c \
-				ft_ltoa_base.c \
-				ft_ltoa_base_prefix.c \
-				ft_memalloc.c \
-				ft_memccpy.c \
-				ft_memchr.c \
-				ft_memcmp.c \
-				ft_memcpy.c \
-				ft_memdel.c \
-				ft_memmove.c \
-				ft_memset.c \
-				ft_pow.c \
-				ft_putchar.c \
-				ft_putendl.c \
-				ft_putnbr.c \
-				ft_putstr.c \
-				ft_strarrdel.c \
-				ft_strarrlen.c \
-				ft_strcat.c \
-				ft_strchr.c \
-				ft_strclr.c \
-				ft_strcmp.c \
-				ft_strcpy.c \
-				ft_strdel.c \
-				ft_strdup.c \
-				ft_strequ.c \
-				ft_striter.c \
-				ft_striteri.c \
-				ft_strjoin.c \
-				ft_strlcat.c \
-				ft_strlen.c \
-				ft_strmap.c \
-				ft_strmapi.c \
-				ft_strncat.c \
-				ft_strnchr.c \
-				ft_strncmp.c \
-				ft_strncpy.c \
-				ft_strnequ.c \
-				ft_strnew.c \
-				ft_strnstr.c \
-				ft_strrcat.c \
-				ft_strrchr.c \
-				ft_strset.c \
-				ft_strsplit.c \
-				ft_strstr.c \
-				ft_strsub.c \
-				ft_strtoupper.c \
-				ft_strtrim.c \
-				ft_tolower.c \
-				ft_toupper.c \
-				ft_uintlen_base.c \
-				ft_uintmaxlen_base.c \
-				ft_uintmaxtoa_base.c \
-				ft_uitoa_base.c \
-				ft_ull_len_base.c \
-				ft_vlqnew.c \
-				get_nbr.c
-
+_SRC_LIBFT = ft_abs.c \
+			ft_array_len.c \
+			ft_atoi.c \
+			ft_atoi_base.c \
+			ft_bitmask.c \
+			ft_bzero.c \
+			ft_frexp.c \
+			ft_ftoa.c \
+			ft_intlen_base.c \
+			ft_isalnum.c \
+			ft_isalpha.c \
+			ft_isascii.c \
+			ft_iscntrl.c \
+			ft_isdigit.c \
+			ft_isoption.c \
+			ft_isprint.c \
+			ft_isspace.c \
+			ft_itoa.c \
+			ft_itoa_base_prefix.c \
+			ft_log10.c \
+			ft_longlonglen_base.c \
+			ft_lstadd.c \
+			ft_lstaddafter.c \
+			ft_lstappend.c \
+			ft_lstdel.c \
+			ft_lstdelone.c \
+			ft_lstfree.c \
+			ft_lstiter.c \
+			ft_lstlen.c \
+			ft_lstmap.c \
+			ft_lstnew.c \
+			ft_lstnewtoend.c \
+			ft_lstprint.c \
+			ft_lstrev.c \
+			ft_lstsrc.c \
+			ft_ltoa_base.c \
+			ft_ltoa_base_prefix.c \
+			ft_memalloc.c \
+			ft_memccpy.c \
+			ft_memchr.c \
+			ft_memcmp.c \
+			ft_memcpy.c \
+			ft_memdel.c \
+			ft_memmove.c \
+			ft_memset.c \
+			ft_pow.c \
+			ft_putchar.c \
+			ft_putendl.c \
+			ft_putnbr.c \
+			ft_putstr.c \
+			ft_strarrdel.c \
+			ft_strarrlen.c \
+			ft_strcat.c \
+			ft_strchr.c \
+			ft_strclr.c \
+			ft_strcmp.c \
+			ft_strcpy.c \
+			ft_strdel.c \
+			ft_strdup.c \
+			ft_strequ.c \
+			ft_striter.c \
+			ft_striteri.c \
+			ft_strjoin.c \
+			ft_strlcat.c \
+			ft_strlen.c \
+			ft_strmap.c \
+			ft_strmapi.c \
+			ft_strncat.c \
+			ft_strnchr.c \
+			ft_strncmp.c \
+			ft_strncpy.c \
+			ft_strnequ.c \
+			ft_strnew.c \
+			ft_strnstr.c \
+			ft_strrcat.c \
+			ft_strrchr.c \
+			ft_strset.c \
+			ft_strsplit.c \
+			ft_strstr.c \
+			ft_strsub.c \
+			ft_strtrim.c \
+			ft_tolower.c \
+			ft_toupper.c \
+			ft_uintlen_base.c \
+			ft_uintmaxlen_base.c \
+			ft_uintmaxtoa_base.c \
+			ft_uitoa_base.c \
+			ft_ull_len_base.c \
+			ft_vlqnew.c \
+			get_nbr.c
 
 _SRC_LISTS = ft_lst_length.c \
 			ft_lst_merge_sort.c \
@@ -172,7 +170,6 @@ _SRC_LISTS = ft_lst_length.c \
 			ft_lstend.c
 
 _SRC_MISC =	ft_free.c \
-			ft_getenv.c \
 			ft_is_whitespace.c \
 			ft_itoa_base.c \
 			ft_itoa_float.c \
@@ -214,7 +211,8 @@ _SRC_STRINGS = ft_char_str_join.c \
 			ft_strstr_remove.c \
 			ft_strstri.c \
 			ft_strsub_freestr.c \
-			ft_strsub_mid.c 
+			ft_strsub_mid.c \
+			ft_strtoupper.c
 
 SRC_FT_ERROR = $(addprefix $(FT_ERROR_DIR), $(_SRC_FT_ERROR))
 SRC_FT_EXIT = $(addprefix $(FT_EXIT_DIR), $(_SRC_FT_EXIT))

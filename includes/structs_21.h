@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 11:20:37 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/06 13:22:36 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ typedef struct s_input
 	size_t				rrs_size;
 	size_t				clipboard_size;
 	size_t				prompt_length;
-	int					start_row;// no need yet
-	int					start_col;// no need yet
+	int					start_row;
+	int					start_col;
 	int					prompt_row; //limit y
 	int					prompt_col; //limit x
 	int					cursor_row;
@@ -133,6 +133,7 @@ typedef struct s_job
 
 typedef struct s_term
 {
+	char				*envp[1024];
 	t_input				*input;
 	char				*term_buffer;
 	char				*termtype;
@@ -158,18 +159,6 @@ typedef struct s_term
 	int					fd_stdout;
 	int					fd_stderr;
 }						t_term;
-
-// t_input already is!
-typedef struct s_itty
-{
-	char				*ls;
-	char				*rrs;
-	int					ls_i;
-	int					rrs_i;
-	//current location before prompt print
-	//current location after prompt print
-	//current location after ls print
-}						t_itty;
 
 /*
 ** GLOBALS

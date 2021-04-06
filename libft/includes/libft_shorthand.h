@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 11:05:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 11:14:50 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/06 13:19:07 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef long long			t_sl64;
 typedef float				t_f32;
 typedef double				t_f64;
 typedef long double			t_f80;
+typedef						void (*t_fp)(void*);
 
 typedef struct s_list
 {
@@ -56,5 +57,6 @@ typedef union u_doubleu
 # define _MSB_ 			0x8000000000000000
 # define _NOT_MSB_		0x7FFFFFFFFFFFFFFF
 # define _ALLBITS_		0xFFFFFFFFFFFFFFFF
+# define MAX_FD			4000
 
 #endif
