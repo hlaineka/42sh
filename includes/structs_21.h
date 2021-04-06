@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 13:22:36 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/06 18:08:37 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define KEY_ESC 27
 
 typedef struct termios	t_termios;
+typedef struct stat		t_stat;
 
 typedef struct s_clist
 {

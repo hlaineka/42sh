@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 14:27:47 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 12:56:15 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/06 15:44:22 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,14 +123,19 @@ static const char	*g_errstr[] =
 	"Variable name must contain alphanumeric characters",
 	"Variable name must begin with a letter",
 	"Fork: Resource temporarily unavailable",
-	"illegal option -- "
+	"illegal option",
+	"chdir failed",
+	"Environment HOME is not set"
 };
 
 int	err_builtin(int error_no, char *name, char *arg)
 {
 // not yet done: ERR_PATH_NOT_SET, ERR_INVALID_INPUT
 
-	ft_printf_fd(STDERR_FILENO, "%s: %s%s.\n", name, g_errstr[error_no], arg);
+	ft_printf_fd(STDERR_FILENO, "%s: %s", name, g_errstr[error_no]);
+	if (arg)
+		ft_printf_fd(STDERR_FILENO, ": %s", arg);
+	ft_putchar_fd('\n', STDERR_FILENO);
 /*
 	if (error_no == E_TOO_FEW_ARGS)
 		ft_printf_fd(STDERR_FILENO, "%s: Too few arguments.\n", name);
@@ -140,6 +145,7 @@ int	err_builtin(int error_no, char *name, char *arg)
 		ft_printf_fd(STDERR_FILENO, "%s: Variable name must contain alphanumeric characters.\n", name);
 	if (error_no == E_FIRST_ALPHA)
 		ft_printf_fd(STDERR_FILENO, "%s: Variable name must begin with a letter.\n", name);
+
 */
 
 	return (1);

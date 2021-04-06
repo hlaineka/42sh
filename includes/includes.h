@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 19:00:19 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 13:22:49 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/06 18:08:03 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <fcntl.h>
 # include <signal.h>
 # include <sys/ioctl.h>
+# include <sys/stat.h>
+# include <sys/wait.h>
 # include <term.h>
 # include <termios.h>
 # include <unistd.h>
