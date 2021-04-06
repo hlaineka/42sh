@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin_frees2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 12:43:29 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:33:14 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/01 13:07:08 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ char	*ft_strjoin_frees2(char *s1, char *s2)
 
 	if (s1 && s2)
 	{
-		if (NULL != (returnable = (char*)malloc(sizeof(char)
-			* (ft_strlen(s1) + ft_strlen(s2)) + 1)))
+		returnable = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2))
+				+ 1);
+		if (NULL != returnable)
 		{
 			i = 0;
 			w = 0;

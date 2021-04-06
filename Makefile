@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/30 12:12:20 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/04/01 11:37:00 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,10 @@ DIR_MAIN = srcs/
 DIR_INPUT = srcs/input/
 DIR_PARSER = srcs/parser/
 DIR_JOB_CREATION = srcs/parser/job_creation/
+DIR_TOKENIZATION = srcs/parser/tokenization/
+DIR_AST_CREATION = srcs/parser/ast_creation/
 DIR_SIGNAL = srcs/signal/
 DIR_EXECUTION = srcs/execution/
-DIR_EXECUTION_CALLER = srcs/execution/execution_caller/
 DIR_OBJS = objs/
 
 _SRC_MAIN = main.c
@@ -54,13 +55,22 @@ _SRC_INPUT = read_input_user.c \
 			shell_keypress.c
 
 _SRC_PARSER = 	parser.c \
-				lexer.c \
-				tokens.c \
-				token_functions.c \
-				ast_creation.c
+				free_ast.c
 
 _SRC_JOB_CREATION = job_creation.c \
 					null_token.c \
+
+_SRC_TOKENIZATION = lexer.c \
+					quote_removal.c \
+					tokens.c \
+					token_functions.c \
+					operator_tokens.c \
+					operator_tokens_functions.c
+
+_SRC_AST_CREATION = ast_creation.c \
+					precedence.c \
+					shunting_yard.c \
+					ast_builder.c
 
 _SRC_SIGNAL = signal.c
 
@@ -70,12 +80,14 @@ SRC_MAIN = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))
 SRC_INPUT = $(addprefix $(DIR_INPUT), $(_SRC_INPUT))
 SRC_PARSER = $(addprefix $(DIR_PARSER), $(_SRC_PARSER))
 SRC_JOB_CREATION = $(addprefix $(DIR_JOB_CREATION), $(_SRC_JOB_CREATION))
+SRC_TOKENIZATION = $(addprefix $(DIR_TOKENIZATION), $(_SRC_TOKENIZATION))
+SRC_AST_CREATION = $(addprefix $(DIR_AST_CREATION), $(_SRC_AST_CREATION))
 SRC_SIGNAL = $(addprefix $(DIR_SIGNAL), $(_SRC_SIGNAL))
 SRC_EXECTUION =  $(addprefix $(DIR_EXECUTION), $(_SRC_EXECUTION))
 
-SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER) $(SRC_SIGNAL) $(SRC_EXECUTION) $(SRC_JOB_CREATION)
+SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER) $(SRC_SIGNAL) $(SRC_EXECUTION) $(SRC_JOB_CREATION) $(SRC_TOKENIZATION) $(SRC_AST_CREATION)
 
-_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL) $(_SRC_EXECUTION) $(_SRC_JOB_CREATION)
+_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL) $(_SRC_EXECUTION) $(_SRC_JOB_CREATION) $(_SRC_TOKENIZATION) $(_SRC_AST_CREATION)
 
 OBJ_FILES = $(_SRC:.c=.o)
 OBJS = $(patsubst %, $(DIR_OBJS)%, $(_SRC:.c=.o))
@@ -109,6 +121,12 @@ $(DIR_OBJS)%.o: $(DIR_PARSER)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 $(DIR_OBJS)%.o: $(DIR_JOB_CREATION)%.c $(INC)
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(DIR_OBJS)%.o: $(DIR_TOKENIZATION)%.c $(INC)
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(DIR_OBJS)%.o: $(DIR_AST_CREATION)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 $(DIR_OBJS)%.o: $(DIR_SIGNAL)%.c $(INC)

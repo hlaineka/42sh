@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   strings.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:23:19 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/14 12:13:17 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/06 11:23:52 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_STRINGS_H
-# define FT_STRINGS_H
+#ifndef STRINGS_H
+# define STRINGS_H
 
 # include "libft.h"
 
@@ -40,6 +40,7 @@ char				*ft_strstr_remove(char *str1, char *str2);
 int					ft_strstri(const char *str1, const char *str2);
 char				*ft_strsub_freestr(char *s, unsigned int start, size_t len);
 char				*ft_strsub_mid(const char *s, unsigned int start,
-					size_t end);
+						size_t end);
+char				*ft_remove_chars(char *str, int c);
 
 #endif

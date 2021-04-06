@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/29 13:44:13 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/01 15:38:49 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,12 @@ int		main(int argc, char **argv, char **envp)
 	t_input		input;
 	char		*input_str;
 	bool		debug;
-	//t_node		*root;
 	//t_job		*next_job;
 
 	//next_job = NULL;
 	g_term = &term;
 	start_signal(); //signals not done;
 	initialize(&input, &term);
-	ft_atexit(&disable_rawmode);
 	if (argc == 2 && ft_strequ(argv[1], "debug"))
 		debug = TRUE;
 	else

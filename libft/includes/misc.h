@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   misc.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 12:20:52 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/14 12:13:10 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/06 11:16:29 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MISC_H
-# define FT_MISC_H
+#ifndef MISC_H
+# define MISC_H
 
 # include "libft.h"
 

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/29 15:43:06 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/06 11:23:10 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ enum e_token
 	tkn_eoi
 };
 
-typedef struct 		s_token
+typedef struct s_token
 {
 	int				*tokens;
 	int				maintoken;
@@ -127,7 +127,7 @@ typedef struct 		s_token
 	struct s_token	*prev;
 }					t_token;
 
-typedef struct		s_node
+typedef struct s_node
 {
 	struct s_node	*parent;
 	struct s_node	*left;
@@ -147,7 +147,10 @@ typedef struct		s_node
 	int				status;
 }					t_node;
 
+typedef int(*t_op_function)(t_token **stack, t_job *executable);
+
 t_node				*parser(char *input, bool debug);
+void				debug_print_tree(t_node *node, char *prefix);
 
 /*
 ** lexer.c
@@ -159,21 +162,63 @@ t_token				*lexer(char *input);
 ** tokens.c
 */
 
-t_token				*get_token(char *delimiters, char **source);
+t_token				*get_basic_token(char *delimiters, char **source);
 
 /*
 ** token_functions.c
 */
 
-t_token		*push_to_front(t_token *input, t_token *stack);
-t_token		*push_to_end(t_token *input, t_token *output);
-t_token		*delete_token(t_token *tkn);
-void		free_tokens(t_token *tokens);
+t_token				*push_to_front(t_token *input, t_token *stack);
+t_token				*push_to_end(t_token *input, t_token *output);
+t_token				*delete_token(t_token *tkn);
+void				free_tokens(t_token *tokens);
+void				free_token(t_token *to_free);
 
 /*
 ** ast_creation.c
 */
 
 t_node				*ast_creator(t_token *first, bool debug);
+
+/*
+** precedence.c
+*/
+
+t_token				*add_precedence(t_token *first);
+
+/*
+** shunting_yard.c
+*/
+
+t_token				*shunting_yard(t_token *first);
+
+/*
+** quote_removal.c
+*/
+
+void				quote_removal(t_token *first);
+
+/*
+** ast_builder.c
+*/
+
+t_node				*ast_builder(t_token *new_first);
+
+/*
+** free_ast.c
+*/
+
+void				free_ast(t_node *root);
+
+/*
+** operator_tokens.c
+*/
+
+t_token				*define_operator_tokens(t_token *first);
+
+/*
+** operator_tokens_functions.c
+*/
+void				check_tkn_quotes(t_token *current);
 
 #endif

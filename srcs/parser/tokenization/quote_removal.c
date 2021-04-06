@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstend.c                                        :+:      :+:    :+:   */
+/*   quote_removal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/16 20:11:01 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:29:35 by helvi            ###   ########.fr       */
+/*   Created: 2021/03/31 10:49:09 by hlaineka          #+#    #+#             */
+/*   Updated: 2021/03/31 15:23:12 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "parser.h"
 #include "libft.h"
 
-/*
-** Finds the last element of the list.
-*/
-
-t_list	*ft_lstend(t_list *beginning)
+void	quote_removal(t_token *first)
 {
-	t_list	*temp;
+	t_token	*temp;
 
-	temp = beginning;
-	while (temp != NULL && temp->next != NULL)
+	temp = first;
+	while (temp)
+	{
+		if (temp->single_quoted)
+			ft_remove_chars(temp->value, 39);
+		if (temp->double_quoted)
+			ft_remove_chars(temp->value, 34);
 		temp = temp->next;
-	return (temp);
+	}
 }

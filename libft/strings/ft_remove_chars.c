@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strarray_free.c                                 :+:      :+:    :+:   */
+/*   ft_remove_chars.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/27 11:29:50 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:32:14 by helvi            ###   ########.fr       */
+/*   Created: 2021/03/31 10:50:46 by hlaineka          #+#    #+#             */
+/*   Updated: 2021/04/01 12:58:14 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-** frees all the strings in a NULL terminated array, and then the array itself.
-** sets every pointer to NULL after free.
-*/
-
 #include "libft.h"
 
-void	ft_strarray_free(char **strarr)
+char	*ft_remove_chars(char *str, int c)
 {
-	int	i;
+	int		i;
+	int		w;
 
-	i = 0;
-	while (strarr && strarr[i])
+	i = -1;
+	w = 0;
+	while (str[++i])
 	{
-		ft_free(strarr[i]);
-		i++;
+		if (str[i] == c)
+			continue ;
+		str[w] = str[i];
+		w++;
 	}
-	ft_free(strarr);
-	return ;
+	while (w < i)
+		str[w++] = '\0';
+	return (str);
 }

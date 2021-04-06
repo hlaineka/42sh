@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_toupper.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 11:26:14 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:31:55 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/01 13:01:07 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,15 @@ char	*ft_str_toupper(char *str)
 	char	*returnable;
 
 	i = 0;
-	returnable = (char*)malloc(sizeof(char) * ft_strlen(str) + 1);
-	while (str[i])
+	returnable = malloc(sizeof(char) * ft_strlen(str) + 1);
+	if (returnable)
 	{
-		returnable[i] = ft_toupper(str[i]);
-		i++;
+		while (str[i])
+		{
+			returnable[i] = ft_toupper(str[i]);
+			i++;
+		}
+		returnable[i] = '\0';
 	}
-	returnable[i] = '\0';
 	return (returnable);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_hexa.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 12:35:48 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:28:28 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/01 15:48:15 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_define_hexa_length(uintmax_t n)
+static int	ft_define_hexa_length(uintmax_t n)
 {
 	int			i;
 	uintmax_t	base;
@@ -27,15 +27,15 @@ static int		ft_define_hexa_length(uintmax_t n)
 	return (i);
 }
 
-char			*ft_itoa_hexa(uintmax_t n)
+char	*ft_itoa_hexa(uintmax_t n)
 {
 	static char		*str;
 	int				w;
 	uintmax_t		base;
 
 	base = 16;
-	if (NULL != (str = (char*)malloc(sizeof(char)
-					* (ft_define_hexa_length(n) + 1))))
+	str = malloc(sizeof(char) * (ft_define_hexa_length(n) + 1));
+	if (str)
 	{
 		w = ft_define_hexa_length(n) - 1;
 		str[w + 1] = ('\0');

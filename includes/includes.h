@@ -6,12 +6,12 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 19:00:19 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/29 12:04:31 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/06 11:21:14 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_INCLUDES_H
-# define FT_INCLUDES_H
+#ifndef INCLUDES_H
+# define INCLUDES_H
 
 # include <curses.h>
 # include <fcntl.h>
@@ -34,7 +34,5 @@
 */
 
 # define ARGV_SIZE 4096
-
-int 				g_ft_errno;
 
 #endif

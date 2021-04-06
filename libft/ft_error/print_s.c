@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_s.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 12:24:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/13 22:29:15 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/01 15:30:47 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ static char	*string_editor(char *printable, t_tags *command)
 	return (printable);
 }
 
-int			print_s(t_tags *command, va_list *source)
+int	print_s(t_tags *command, va_list *source)
 {
 	char	*printable;
 	char	*aquired;
 	int		returnable;
 
 	aquired = NULL;
-	aquired = va_arg(*source, char*);
+	aquired = va_arg(*source, char *);
 	if (aquired == NULL)
 		printable = ft_strdup("(null)");
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 12:23:03 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/14 12:00:53 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/01 15:40:57 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,23 +63,23 @@ static int	check_command(const char *format, t_tags *command, va_list *source)
 {
 	int		w;
 
-	w = 1;
-	while (format[w] != '\0' && !is_specifier(format[w]))
+	w = 0;
+	while (format[++w] != '\0' && !is_specifier(format[w]))
 	{
-		if (format[w] == '-' || format[w] == '+' || format[w] == ' ' ||
-		format[w] == '#' || (command->precision == -1 && command->width == -1
-		&& !command->flag_zero && format[w] == '0') || format[w] == 'r')
+		if ((command->precision == -1 && command->width == -1
+				&& !command->flag_zero && format[w] == '0') || format[w] == 'r')
 			set_flag(command, format[w]);
-		else if (ft_isdigit(format[w]) || format[w] == '*')
+		if (ft_isdigit(format[w]) || format[w] == '*')
+		{
 			if (command->precision == -1)
 				set_width(command, format[w], source);
 			else
 				set_precision(command, format[w], source);
+		}
 		else if (format[w] == '.')
 			set_precision(command, format[w], source);
 		else if (format[w] == 'h' || format[w] == 'l' || format[w] == 'L')
 			set_length(command, format[w]);
-		w++;
 	}
 	if (format[w] == '\0' || !is_specifier(format[w]))
 		command->empty = TRUE;
@@ -88,13 +88,13 @@ static int	check_command(const char *format, t_tags *command, va_list *source)
 	return (w);
 }
 
-int			ft_printer(const char *format, va_list *source)
+int	ft_printer(const char *format, va_list *source)
 {
 	int		printed;
 	t_tags	*command;
 	int		i;
 
-	command = (t_tags*)malloc(sizeof(t_tags));
+	command = malloc(sizeof(t_tags));
 	printed = 0;
 	i = -1;
 	while (format[++i] != '\0')

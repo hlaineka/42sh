@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/26 12:15:14 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/06 11:20:37 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 typedef struct termios	t_termios;
 
-typedef struct			s_clist
+typedef struct s_clist
 {
 	void				*content;
 	size_t				content_size;
@@ -28,7 +28,7 @@ typedef struct			s_clist
 	struct s_clist		*next;
 }						t_clist;
 
-typedef struct			s_input
+typedef struct s_input
 {
 	t_clist				*hist_cur;
 	t_clist				*history;
@@ -48,7 +48,7 @@ typedef struct			s_input
 	int					cursor_col;
 }						t_input;
 
-typedef struct			s_process
+typedef struct s_process
 {
 	struct s_process	*next;       /* next process in pipeline */
 	char				**argv;      /* for exec */
@@ -59,7 +59,7 @@ typedef struct			s_process
 }						t_process;
 
 /* A job is a pipeline of processes.  */
-typedef struct			s_job
+typedef struct s_job
 {
 	struct s_job		*next;          /* next active job, if not t_list */
 	char				*command;       /* command line, used for messages */
@@ -131,7 +131,7 @@ typedef struct			s_job
 **			provided also. Most terminals have neither.
 */
 
-typedef struct			s_term
+typedef struct s_term
 {
 	t_input				*input;
 	char				*term_buffer;
@@ -160,7 +160,7 @@ typedef struct			s_term
 }						t_term;
 
 // t_input already is!
-typedef struct			s_itty
+typedef struct s_itty
 {
 	char				*ls;
 	char				*rrs;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_rfind_c.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/01 16:07:06 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:31:50 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/01 13:03:21 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** returns the index of the last occurance of c in src
 */
 
-int		ft_str_rfind_c(const char *src, int c)
+int	ft_str_rfind_c(const char *src, int c)
 {
 	int		i;
 

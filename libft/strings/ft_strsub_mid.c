@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsub_mid.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:24:36 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:35:11 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/01 12:54:05 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strsub_mid(const char *s, unsigned int start, size_t end)
 	char			*returnable;
 	unsigned int	i;
 
-	returnable = (char*)malloc(sizeof(char) * end - start + 1);
+	returnable = (char *)malloc(sizeof(char) * end - start + 1);
 	i = 0;
 	if (returnable)
 	{

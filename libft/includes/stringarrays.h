@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   stringarrays.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 12:12:22 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/14 12:12:39 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/06 11:14:30 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_STRINGARRAYS_H
-# define FT_STRINGARRAYS_H
+#ifndef STRINGARRAYS_H
+# define STRINGARRAYS_H
 
 # include "libft.h"
 

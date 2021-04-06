@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_char_join.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 20:15:53 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/02/19 11:31:31 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/01 12:55:20 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ char	*ft_str_char_join(char c, char *s1)
 	unsigned int	w;
 	char			*returnable;
 
-	if (NULL != (returnable = (char*)malloc(sizeof(char)
-				* (ft_strlen(s1) + 2))))
+	returnable = malloc(sizeof(char) * (ft_strlen(s1) + 2));
+	if (NULL != returnable)
 	{
 		i = 0;
 		w = 0;

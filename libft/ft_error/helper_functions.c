@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helper_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 15:06:23 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/13 22:28:35 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/01 15:44:03 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,11 @@ char	*hexa_upperalpha(char *string)
 	return (returnable);
 }
 
-int		is_specifier(char c)
+int	is_specifier(char c)
 {
 	if (c == 's' || c == 'c' || c == 'p' || c == 'd'
-	|| c == 'i' || c == 'o' || c == 'u' || c == 'x'
-	|| c == 'X' || c == '%' || c == 'f' || c == 'r')
+		|| c == 'i' || c == 'o' || c == 'u' || c == 'x'
+		|| c == 'X' || c == '%' || c == 'f' || c == 'r')
 		return (TRUE);
 	return (FALSE);
 }

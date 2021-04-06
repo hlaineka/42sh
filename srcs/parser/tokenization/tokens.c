@@ -6,14 +6,15 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 11:59:34 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/25 12:02:06 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/01 12:52:35 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "parser.h"
-# include "libft.h"
+#include "parser.h"
+#include "libft.h"
 
-bool		check_quotes(t_token *current, char c, bool *single_quoted, bool *double_quoted)
+bool	check_quotes(t_token *current, char c, bool *single_quoted,
+		bool *double_quoted)
 {
 	if (c == 34)
 	{
@@ -28,7 +29,7 @@ bool		check_quotes(t_token *current, char c, bool *single_quoted, bool *double_q
 	return (TRUE);
 }
 
-bool		str_delimiter(t_token *current, char **source, int i)
+bool	delimit_str(t_token *current, char **source, int i)
 {
 	if (ft_strchr(OPCHARS, source[0][i]) && i != 0)
 	{
@@ -47,10 +48,10 @@ bool		str_delimiter(t_token *current, char **source, int i)
 		return (FALSE);
 	}
 	*source = *source + i + 1;
-	return(TRUE);
+	return (TRUE);
 }
 
-bool		get_tokenstr(t_token *current, char *delimiters, char **source)
+bool	get_tokenstr(t_token *current, char *delimiters, char **source)
 {
 	int		i;
 	bool	single_quoted;
@@ -64,24 +65,25 @@ bool		get_tokenstr(t_token *current, char *delimiters, char **source)
 	while (source[0][i])
 	{
 		check_quotes(current, source[0][i], &single_quoted, &double_quoted);
-		if (!single_quoted && !double_quoted && ft_strchr(delimiters, source[0][i]))
+		if (!single_quoted && !double_quoted
+			&& ft_strchr(delimiters, source[0][i]))
 		{
-			if (!str_delimiter(current, source, i))
-				continue;
-			return(TRUE);
+			if (!delimit_str(current, source, i))
+				continue ;
+			return (TRUE);
 		}
 		i++;
 	}
 	current->value = ft_strsub(*source, 0, i);
 	*source = *source + i;
-	return(TRUE);
+	return (TRUE);
 }
 
-t_token				*get_token(char *delimiters, char **source)
+t_token	*get_basic_token(char *delimiters, char **source)
 {
 	t_token	*current;
-	
-	current = (t_token*)malloc(sizeof(t_token));
+
+	current = (t_token *)malloc(sizeof(t_token));
 	ft_bzero(current, sizeof(t_token));
 	current->single_quoted = FALSE; //these can be left out?
 	current->double_quoted = FALSE;
@@ -90,5 +92,5 @@ t_token				*get_token(char *delimiters, char **source)
 		ft_free(current);
 		return (NULL);
 	}
-	return(current);
+	return (current);
 }

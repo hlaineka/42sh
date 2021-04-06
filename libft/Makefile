@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/03/26 12:19:37 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/03/31 12:06:15 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -201,6 +201,7 @@ _SRC_STRINGS = ft_char_str_join.c \
 			ft_putendl_fd.c \
 			ft_putnbr_fd.c \
 			ft_putstr_fd.c \
+			ft_remove_chars.c \
 			ft_replace_char.c \
 			ft_str_addi.c \
 			ft_str_char_join.c \
@@ -219,7 +220,7 @@ _SRC_STRINGS = ft_char_str_join.c \
 			ft_strstr_remove.c \
 			ft_strstri.c \
 			ft_strsub_freestr.c \
-			ft_strsub_mid.c
+			ft_strsub_mid.c 
 
 SRC_FT_ERROR = $(addprefix $(FT_ERROR_DIR), $(_SRC_FT_ERROR))
 SRC_FT_EXIT = $(addprefix $(FT_EXIT_DIR), $(_SRC_FT_EXIT))
