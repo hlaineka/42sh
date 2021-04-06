@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 11:58:27 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/06 13:53:39 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/06 17:06:36 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # define T_INT_MAX 2147483647
 # define T_INT_MIN -2147483648
 # define BUFF_SIZE 8
-# define FD_LIMIT 4864
 # define TRUE 1
 # define FALSE 0
 

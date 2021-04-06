@@ -6,89 +6,88 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:40:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/30 12:13:43 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/06 16:38:54 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-#include "execution.h"
+
+#include "parser.h"
 #include "includes.h"
 
-int			init_func_pointers(op_function *op_funcs)
+int	init_func_pointers(t_job *(**op_functions)(t_job *job, t_node *current))
 {
-	op_funcs[tkn_token] = &null_token;
-	//op_funcs[tkn_word] =
-	//op_funcs[tkn_operator] =
-	//op_funcs[tkn_name] =
-	//op_funcs[tkn_assignment_word] =
-	//op_funcs[tkn_io_number] =
-	//op_funcs[tkn_and] =
-	//op_funcs[tkn_lpar] =
-	//op_funcs[tkn_rpar] =
-	//op_funcs[tkn_semi] =
-	//op_funcs[tkn_nl] =
-	//op_funcs[tkn_pipe] =
-	//op_funcs[tkn_less] =
-	//op_funcs[tkn_great] =
-	//op_funcs[tkn_and_if] =
-	//op_funcs[tkn_or_if] =
-	//op_funcs[tkn_dsemi] =
-	//op_funcs[tkn_dless] =
-	//op_funcs[tkn_dgreat] =
-	//op_funcs[tkn_lessand] =
-	//op_funcs[tkn_greatand] =
-	//op_funcs[tkn_lessgreat] =
-	//op_funcs[tkn_dlessdash] =
-	//op_funcs[tkn_clobber] =
-	//op_funcs[tkn_if] =
-	//op_funcs[tkn_then] =
-	//op_funcs[tkn_else] =
-	//op_funcs[tkn_elif] =
-	//op_funcs[tkn_fi] =
-	//op_funcs[tkn_do] =
-	//op_funcs[tkn_done] =
-	//op_funcs[tkn_case] =
-	//op_funcs[tkn_tesac] =
-	//op_funcs[tkn_while] =
-	//op_funcs[tkn_until] =
-	//op_funcs[tkn_for] =
-	//op_funcs[tkn_lbrace] =
-	//op_funcs[tkn_rbrace] =
-	//op_funcs[tkn_bang] =
-	//op_funcs[tkn_in] =
-	//op_funcs[tkn_eoi] =
+	op_functions[tkn_token] = null_token;
+	op_functions[tkn_word] = NULL;
+	op_functions[tkn_operator] = NULL;
+	op_functions[tkn_name] = NULL;
+	op_functions[tkn_assignment_word] = NULL;
+	op_functions[tkn_io_number] = NULL;
+	op_functions[tkn_and] = NULL;
+	op_functions[tkn_lpar] = NULL;
+	op_functions[tkn_rpar] = NULL;
+	op_functions[tkn_semi] = NULL;
+	op_functions[tkn_nl] = NULL;
+	op_functions[tkn_pipe] = NULL;
+	op_functions[tkn_less] = NULL;
+	op_functions[tkn_great] = NULL;
+	op_functions[tkn_and_if] = NULL;
+	op_functions[tkn_or_if] = NULL;
+	op_functions[tkn_dsemi] = NULL;
+	op_functions[tkn_dless] = NULL;
+	op_functions[tkn_dgreat] = NULL;
+	op_functions[tkn_lessand] = NULL;
+	op_functions[tkn_greatand] = NULL;
+	op_functions[tkn_lessgreat] = NULL;
+	op_functions[tkn_dlessdash] = NULL;
+	op_functions[tkn_clobber] = NULL;
+	op_functions[tkn_if] = NULL;
+	op_functions[tkn_then] = NULL;
+	op_functions[tkn_else] = NULL;
+	op_functions[tkn_elif] = NULL;
+	op_functions[tkn_fi] = NULL;
+	op_functions[tkn_do] = NULL;
+	op_functions[tkn_done] = NULL;
+	op_functions[tkn_case] = NULL;
+	op_functions[tkn_tesac] = NULL;
+	op_functions[tkn_while] = NULL;
+	op_functions[tkn_until] = NULL;
+	op_functions[tkn_for] = NULL;
+	op_functions[tkn_lbrace] = NULL;
+	op_functions[tkn_rbrace] = NULL;
+	op_functions[tkn_bang] = NULL;
+	op_functions[tkn_in] = NULL;
+	op_functions[tkn_eoi] = NULL;
 	return (0);
 }
 
-t_job		*init_job(void)
+static void	debug_printing(t_job *next_job)
 {
-	t_job		*returnable;
-	t_process	*first_process;
+	int	i;
 
-	returnable = malloc(sizeof(t_job));
-	first_process = malloc(sizeof(t_process));
-	ft_bzero(returnable, sizeof(t_job));
-	ft_bzero(first_process, sizeof(t_process));
-	first_process->next = NULL;
-	first_process->argv = malloc(ARGV_SIZE);
-	ft_bzero(first_process->argv, ARGV_SIZE);
-	returnable->next = NULL;
-	returnable->command = NULL;
-	returnable->first_process = first_process;
-	return(returnable);
-}
-
-int			job_creation(t_node *root, bool debug)
-{
-	//t_job		*executable;
-	//op_function	op_funcs[NUMBER_OF_TOKENS];
-
-	//init_func_pointers(op_funcs);
-	//executable = init_job();
-	while (tokens && debug)
+	i = 0;
+	ft_printf("argv of the first process: ");
+	if (next_job)
 	{
-		tokens = tokens->next;
+		while (next_job->first_process->argv[i])
+		{
+			ft_printf("%s, ", next_job->first_process->argv[i]);
+			i++;
+		}
 	}
-	return (0);
+	ft_printf("\n");
 }
-*/
+
+t_job	*job_creation(t_node *root, bool debug)
+{
+	t_job	*returnable;
+	t_job	*(*op_functions[tkn_eoi + 1])(t_job *job, t_node *current);
+
+	init_func_pointers(op_functions);
+	returnable = init_job();
+	returnable = tree_traversal(root, op_functions, returnable);
+	if (returnable == NULL)
+		ft_printf_fd(2, "syntax_error\n");
+	if (debug)
+		debug_printing(returnable);
+	return (returnable);
+}
