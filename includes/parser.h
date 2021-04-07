@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/06 16:38:35 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/07 12:21:53 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,8 @@ typedef struct s_node
 	int				status;
 }					t_node;
 
+typedef t_job *(*op_function)(t_job *job, t_node *current);
+
 /*
 ** parser/parser.c
 */
@@ -201,14 +203,15 @@ t_job				*init_job(void);
 ** parser/job_creation/tree_traversal.c
 */
 
-t_job				*tree_traversal(t_node *current, t_job	*(**op_functions)(t_job *job, t_node *current), t_job *first_job);
+t_job				*tree_traversal(t_node *current);
 
 /*
 ** parser/job_creation: operation function pointers, all in their own files
 ** named like function() -> function.c
 */
 
-t_job				*null_token(t_job *job, t_node *current);
+t_job				*token_null(t_job *job, t_node *current);
+t_job				*token_semi(t_job *job, t_node *current);
 
 
 /*

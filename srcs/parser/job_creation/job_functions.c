@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:33:35 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/06 16:32:12 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/07 13:16:11 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ void	free_jobs(t_job *next_job)
 	t_process	*temp_process;
 	t_process	*temp;
 	t_job		*temp_job;
+	t_job		*job_to_free;
 	
-	while (next_job)
+	job_to_free = next_job;
+	while (job_to_free)
 	{
-		temp_process = next_job->first_process;
+		temp_process = job_to_free->first_process;
 		while (temp_process)
 		{
 			ft_strarray_free(temp_process->argv);
@@ -30,10 +32,10 @@ void	free_jobs(t_job *next_job)
 			ft_free(temp_process);
 			temp_process = temp;
 		}
-		ft_free(next_job->command);
-		temp_job = next_job->next;
-		ft_free(next_job);
-		next_job = temp_job;
+		ft_free(job_to_free->command);
+		temp_job = job_to_free->next;
+		ft_free(job_to_free);
+		job_to_free = temp_job;
 	}
 }
 

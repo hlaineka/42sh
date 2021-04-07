@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   null_token.c                                       :+:      :+:    :+:   */
+/*   token_null.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 17:32:13 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/06 16:58:18 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/07 14:44:48 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,36 @@
 
 char	**strarr_add(char **argv, char *command)
 {
-	char	*temp;
-	char	*next;
 	int		i;
 
-	next = argv[0];
-	argv[0] = ft_strdup(command);
-	i = 1;
-	while (next)
-	{
-		temp = argv[i];
-		argv[i] = next;
-		next = temp;
+	i = 0;
+	while (argv[i])
 		i++;
-	}
-	argv[i] = next;
+	argv[i] = ft_strdup(command);
 	return(argv);
 }
 
-t_job		*null_token(t_job *job, t_node *current)
+char	**traverse_nulls(t_node *current, char **argv)
 {
-	if (!current->right || !current->left)
-		return (NULL);
-	if (current->right->operation == tkn_word)
-		strarr_add(job->first_process->argv, current->right->command);
-	strarr_add(job->first_process->argv, current->left->command);
-	return(job);
+	if (!current->left && !current->right)
+		return (strarr_add(argv, current->command));
+	if (current->left)
+		traverse_nulls(current->left, argv);
+	if (current->right)
+		traverse_nulls(current->right, argv);
+	return(argv);
+}
+
+t_job	*token_null(t_job *job, t_node *current)
+{
+	t_job	*returnable;
+
+	returnable = NULL;
+	if (!job)
+	{
+		returnable = init_job();
+		traverse_nulls(current, returnable->first_process->argv);
+		job = returnable;
+	}
+	return(returnable);
 }

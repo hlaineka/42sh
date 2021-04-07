@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:32:48 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/01 12:46:38 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/07 15:18:12 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ t_token	*define_basic_tokens(char *input)
 		prev = current;
 		current = get_basic_token(METACHARS, &str_ptr);
 	}
+	if (current)
+		free_token(current);
 	return (returnable);
 }
 
