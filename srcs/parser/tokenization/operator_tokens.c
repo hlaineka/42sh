@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 15:57:08 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/01 12:50:52 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/07 13:08:53 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ t_token	*define_operator_tokens(t_token *first)
 	t_token	*returnable;
 	t_token	*prev;
 
+	if (!first)
+		return (NULL);
 	current = first;
 	prev = NULL;
 	while (current)
@@ -119,6 +121,7 @@ t_token	*define_operator_tokens(t_token *first)
 		if (!current)
 		{
 			ft_printf_fd(2, "operator syntax error\n");
+			free_tokens(first);
 			return (NULL);
 		}
 		if (!current->prev)
@@ -129,6 +132,7 @@ t_token	*define_operator_tokens(t_token *first)
 	if (!differ_single_and_double_op(current, prev))
 	{
 		ft_printf_fd(2, "operator syntax error\n");
+		free_tokens(first);
 		return (NULL);
 	}
 	return (returnable);
