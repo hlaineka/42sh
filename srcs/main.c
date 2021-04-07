@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 17:06:02 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/07 15:57:37 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		main(int argc, char **argv, char **envp)
 
 //poista t'st'
 
-	builtin_env(argc - 1, argv + 1, term.envp);
+//	builtin_env(argc - 1, argv + 1, term.envp);
 
 /// t'nne
 
@@ -54,6 +54,9 @@ int		main(int argc, char **argv, char **envp)
 			break;
 		}
 		next_job = parser(input_str, debug);
+
+		execute_jobs(next_job, envp);
+
 		free(input_str);
 		free_jobs(next_job);
 		//free_tree

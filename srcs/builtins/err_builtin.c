@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 14:27:47 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 15:44:22 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/07 11:03:53 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static const char	*g_errstr[] =
 {
-	"Not used",
+	"\0",
 	"Operation not permitted",
 	"No such file or directory",
 	"No such process",

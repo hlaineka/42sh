@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 18:12:48 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/07 15:57:00 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,13 @@
 
 pid_t	g_pid;
 
+
+int		is_builtin(t_process *process);
+
 /*
 ** CD BUILTIN:
 */
-int		builtin_cd(int argc, char **argv, char **envp);
+void	builtin_cd(void *proc);
 int		find_path(char *file, char *path_env, char *buf);
 int		is_absolute_path(char *path);
 int		is_valid_folder(char *path);
@@ -49,6 +52,6 @@ int		ft_unsetenv(const char *name, char **envp);
 
 int		builtin_unsetenv(int argc, char **argv, char **envp);
 int		builtin_setenv(int argc, char **argv, char **envp);
-int		builtin_env(int argc, char **argv, char **envp);
+void	builtin_env(void *proc);
 
 #endif

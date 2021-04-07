@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 19:00:19 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 18:08:03 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/07 15:35:52 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include "parser.h"
 # include "ft_signal.h"
 # include "builtins.h"
+# include "execution.h"
 
 # define STR_LENGTH 1024
 

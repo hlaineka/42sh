@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 18:08:37 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/07 15:49:53 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ typedef struct s_input
 typedef struct s_process
 {
 	struct s_process	*next;       /* next process in pipeline */
+	int					argc;
 	char				**argv;      /* for exec */
+	char				**envp;
 	pid_t				pid;         /* process ID */
 	char				completed;   /* true if process has completed */
 	char				stopped;     /* true if process has stopped */

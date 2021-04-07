@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/04/06 18:19:04 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/04/07 15:40:06 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,8 @@ _SRC_BUILTIN =	builtin_env.c \
 				err_builtin.c \
 				ft_getenv.c \
 				ft_setenv.c \
-				ft_unsetenv.c
+				ft_unsetenv.c \
+				is_builtin.c
 
 _SRC_CD =	builtin_cd.c \
 			find_path.c \
