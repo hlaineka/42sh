@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/07 15:57:00 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/07 18:16:06 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ int		is_valid_folder(char *path);
 char	*get_absolute_path_to_buf(char *rel, char **envp, char *buf);
 
 /*
+** ECHO BUILTIN
+*/
+
+void	builtin_echo(void *proc);
+
+/*
 ** ENV FUNCTION PROTOTYPES
 */
 
@@ -50,8 +56,18 @@ char	*ft_getenv(const char *name, char **envp);
 int		ft_setenv(const char *name, const char *val, int over, char **envp);
 int		ft_unsetenv(const char *name, char **envp);
 
-int		builtin_unsetenv(int argc, char **argv, char **envp);
-int		builtin_setenv(int argc, char **argv, char **envp);
 void	builtin_env(void *proc);
+
+/*
+** SETENV BUILTIN:
+*/
+
+void	builtin_setenv(void *proc);
+
+/*
+** UNSETENV BUILTIN:
+*/
+
+void	builtin_unsetenv(void *proc);
 
 #endif

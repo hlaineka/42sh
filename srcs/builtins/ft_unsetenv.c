@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 21:33:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 13:46:35 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/08 19:39:29 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ int	ft_unsetenv(const char *name, char **envp)
 	if (!name || ft_strchr(name, '='))
 		return (-E_INVAL);
 	len = ft_strlen(name);
+	ft_printf("name=%s len=%d\n", name, len);
 	while (envp[i])
 	{
 		if (!ft_strncmp(envp[i], name, len) && envp[i][len] == '=')
 		{
+			ft_putendl("UNSETENV DFAOSDFASDF");
 			free(envp[i]);
 			break ;
 		}

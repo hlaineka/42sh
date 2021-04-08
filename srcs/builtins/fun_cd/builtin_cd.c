@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 14:22:43 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/07 16:03:56 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/07 16:53:30 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	builtin_cd(void *proc)
 		return ;
 //		return (err_builtin(E_HOME_NOT_SET, argv[0], NULL));
 	}
-	if (is_valid_folder(path) == -1)
+	if (is_valid_folder(path) != 0)
 		return ;
 //		return (-1);
 	getcwd(cwd, 1024);

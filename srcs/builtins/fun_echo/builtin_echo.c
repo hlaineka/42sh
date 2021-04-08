@@ -1,53 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_builtin.c                                       :+:      :+:    :+:   */
+/*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/06 18:45:48 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/08 19:43:42 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/04/08 17:59:20 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes.h"
 
-static const char	*g_builtins[] =
+void	builtin_echo(void *proc)
 {
-	"cd",
-	"echo",
-	"env",
-//	"exit",
-	"setenv",
-	"unsetenv"
-};
-
-static const t_fp	g_builtin_fps[] =
-{
-	&builtin_cd,
-	&builtin_echo,
-	&builtin_env,
-//	&builtin_exit,
-	&builtin_setenv,
-	&builtin_unsetenv
-};
-
-int	is_builtin(t_process *process)
-{
-	char	**argv;
+	t_process	*process;
+	char		**argv;
 	int		i;
 
-	i = 0;
+	process = proc;
 	argv = process->argv;
-	while (g_builtins[i])
-	{
-		ft_printf("%s %s\n", argv[1], g_builtins[i]);
-		if (!ft_strcmp(argv[0], g_builtins[i]))
-		{
-			g_builtin_fps[i](process);
-			return (1);
-		}
+	i = 1;
+	if (argv[1] && !ft_strcmp(argv[1], "-n"))
 		i++;
+	while (argv[i])
+	{
+		ft_putstr(argv[i]);
+		i++;
+		if (argv[i])
+			ft_putchar(' ');
 	}
-	return (0);
+	if (!argv[1] || ft_strcmp(argv[1], "-n"))
+		ft_putchar('\n');
+	process->completed = 1;
+//	process->stopped = 1;
+	process->status = 0;
 }

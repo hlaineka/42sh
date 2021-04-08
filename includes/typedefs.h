@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:42:02 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 15:43:52 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/08 19:31:39 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,7 @@
 # define E_ILLEGAL_OPTION 109
 # define E_CD_CHANGE_FAIL 110
 # define E_HOME_NOT_SET 111
+# define E_INVALID_INPUT 112
+# define E_NO_COMMAND 113
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 14:27:47 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/07 11:03:53 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/08 19:03:32 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,9 @@ static const char	*g_errstr[] =
 	"Fork: Resource temporarily unavailable",
 	"illegal option",
 	"chdir failed",
-	"Environment HOME is not set"
+	"Environment HOME is not set",
+	"Invalid input",
+	"Command not found"
 };
 
 int	err_builtin(int error_no, char *name, char *arg)
