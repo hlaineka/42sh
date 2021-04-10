@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 20:11:26 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/31 14:57:24 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/09 12:50:44 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	debug_printing(t_token *tokens)
 	ft_printf("\n");
 }
 
-t_node	*ast_creator(t_token *first, bool debug)
+t_node	*ast_creator(t_token *first, t_term *term)
 {
 	t_token	*new_first;
 	t_node	*root;
@@ -41,7 +41,7 @@ t_node	*ast_creator(t_token *first, bool debug)
 	new_first = shunting_yard(first);
 	if (!new_first)
 		return (NULL);
-	if (debug)
+	if (term->flag_debug == 1)
 		debug_printing(new_first);
 	root = ast_builder(new_first);
 	return (root);

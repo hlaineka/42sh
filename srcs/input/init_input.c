@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/30 13:17:56 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/09 12:47:24 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,22 @@ void	init_term(t_term *term)
 	get_termcaps_strings(term, buffer);
 	term->nrows = tgetnum("li");
 	term->ncolumns = tgetnum("co");
-	term->fd_stdin = STDIN_FILENO;
-	term->fd_stdout = STDOUT_FILENO; // change to terminal output?
-	term->fd_stderr = STDERR_FILENO;
+	term->fd_stdin = dup(STDIN_FILENO);
+	term->fd_stdout = dup(STDOUT_FILENO);
+	term->fd_stderr = dup(STDERR_FILENO);
 }
 
-void			initialize(t_input *input, t_term *term, char **envp)
+void	init_flags(t_term *term, char **argv)
+{
+	term->flag_noclobber = 0;
+	if (ft_array_length(argv) == 2 && ft_strequ(argv[1], "debug"))
+		term->flag_debug = 1;
+}
+
+void	initialize(t_input *input, t_term *term, char **envp, char **argv)
 {
 	init_term(term);
+	init_flags(term, argv);
 	init_input(input);
 	copy_envp(envp, term);
 	term->input = input;

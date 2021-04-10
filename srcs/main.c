@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 17:06:02 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/09 12:48:02 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,18 @@ int		main(int argc, char **argv, char **envp)
 	t_term		term;
 	t_input		input;
 	char		*input_str;
-	bool		debug;
 	t_job		*next_job;
 
 	next_job = NULL;
 	g_term = &term;
 	start_signal(); //signals not done;
-	initialize(&input, &term, envp);
-	if (argc == 2 && ft_strequ(argv[1], "debug"))
-		debug = TRUE;
-	else
-		debug = FALSE;
+	initialize(&input, &term, envp, argv);
 //	tputs(tgoto(term.cm_string, 0, 0), 1, ft_putc);
 //	tputs(term.cd_string, 1, ft_putc);
 
 //poista t'st'
 
-	builtin_env(argc - 1, argv + 1, term.envp);
+	//builtin_env(argc - 1, argv + 1, term.envp);
 
 /// t'nne
 
@@ -53,7 +48,7 @@ int		main(int argc, char **argv, char **envp)
 		{
 			break;
 		}
-		next_job = parser(input_str, debug);
+		next_job = parser(input_str, &term);
 		free(input_str);
 		free_jobs(next_job);
 		//free_tree

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:40:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/07 17:32:20 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/09 12:51:05 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,16 @@ static void	debug_printing(t_job *next_job)
 	}
 }
 
-t_job	*job_creation(t_node *root, bool debug)
+t_job	*job_creation(t_node *root, t_term *term)
 {
 	t_job	*returnable;
 
 	if (!root)
 		return (NULL);
-	returnable = tree_traversal(root);
+	returnable = tree_traversal(root, term);
 	if (returnable == NULL)
-		ft_printf_fd(2, "syntax_error\n");
-	if (debug)
+		ft_printf_fd(2, "job syntax_error\n");
+	if (term->flag_debug == 1)
 		debug_printing(returnable);
 	return (returnable);
 }

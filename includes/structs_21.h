@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 13:22:36 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/09 12:41:26 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <termios.h>
 # include "libft_shorthand.h"
+# include "libft.h"
 
 # define KEY_ESC 27
 
@@ -158,6 +159,8 @@ typedef struct s_term
 	int					fd_stdin;
 	int					fd_stdout;
 	int					fd_stderr;
+	int					flag_debug;
+	int					flag_noclobber;
 }						t_term;
 
 /*

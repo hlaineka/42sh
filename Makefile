@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/04/07 16:51:12 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/04/10 15:02:02 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,14 +63,18 @@ _SRC_JOB_CREATION = job_creation.c \
 					token_null.c \
 					tree_traversal.c \
 					token_semi.c \
-					token_pipe.c
+					token_pipe.c \
+					token_great.c
 
 _SRC_TOKENIZATION = lexer.c \
 					quote_removal.c \
 					tokens.c \
 					token_functions.c \
+					token_functions2.c \
 					operator_tokens.c \
-					operator_tokens_functions.c
+					operator_tokens_functions.c \
+					io_numbers.c \
+					pathname_extensions.c
 
 _SRC_AST_CREATION = ast_creation.c \
 					precedence.c \
