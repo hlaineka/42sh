@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/30 13:17:56 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/09 15:12:52 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ void	init_term(t_term *term)
 	get_termcaps_strings(term, buffer);
 	term->nrows = tgetnum("li");
 	term->ncolumns = tgetnum("co");
-	term->fd_stdin = STDIN_FILENO;
-	term->fd_stdout = STDOUT_FILENO; // change to terminal output?
-	term->fd_stderr = STDERR_FILENO;
+	term->fd_stdin = dup(STDIN_FILENO);
+	term->fd_stdout = dup(STDOUT_FILENO); // change to terminal output?
+	term->fd_stderr = dup(STDERR_FILENO);
 }
 
 void			initialize(t_input *input, t_term *term, char **envp)

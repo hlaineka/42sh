@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/07 12:21:53 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/07 17:07:25 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,7 @@ t_job				*tree_traversal(t_node *current);
 
 t_job				*token_null(t_job *job, t_node *current);
 t_job				*token_semi(t_job *job, t_node *current);
+t_job				*token_pipe(t_job *job, t_node *current);
 
 
 /*

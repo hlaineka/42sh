@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:40:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/07 14:49:43 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/07 17:32:20 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,13 @@ static void	debug_printing(t_job *next_job)
 			i = 0;
 			while (temp_process->argv[i])
 			{
-				ft_printf("%s, ", temp_job->first_process->argv[i]);
+				ft_printf("%s, ", temp_process->argv[i]);
 				i++;
 			}
 			ft_printf("\n");
 			temp_process = temp_process->next;
 			processes++;
 		}
-		ft_printf("\n");
 		temp_job = temp_job->next;
 		jobs++;
 	}
