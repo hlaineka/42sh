@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 18:51:15 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/08 19:32:07 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/11 12:24:27 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	exec_tprocess(t_process *proc)
 	else if (path_ptr && find_path(proc->argv[0], path_ptr, fpath) <= 0)
 		return (err_builtin(E_NO_COMMAND, proc->argv[0], NULL));
 	if (access(fpath, F_OK) == -1)
-		return (err_builtin(E_NOENT, proc->argv[0], NULL));
+		return (err_builtin(E_NOENT, fpath, NULL));
 	if (access(fpath, X_OK) == -1)
 		return (err_builtin(E_PERM, proc->argv[0], NULL));
 	if ((g_pid = fork()) == 0)

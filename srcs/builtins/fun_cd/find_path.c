@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 11:03:24 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 14:22:14 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/11 12:25:20 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	find_path(char *file, char *path_env, char *buf)
 	if (!folders[i])
 		buf[0] = '\0';
 	ft_strarray_free(folders); // ok?
-	if (buf)
+	if (buf[0])
 		return (1);
 	return (0);
 }
