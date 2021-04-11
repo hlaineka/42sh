@@ -6,12 +6,13 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 18:28:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/10 21:42:58 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/11 11:19:18 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes.h"
 
+/*
 static void	set_read(int* lpipe)
 {
 	dup2(lpipe[0], STDIN_FILENO);
@@ -33,6 +34,7 @@ static void	chain_pipes(int *lpipe, int *rpipe)
 	if (rpipe)
 		set_write(rpipe);
 }
+*/
 
 void	execute_jobs(t_job *jobs, t_term *term)
 {
@@ -118,7 +120,9 @@ USE THIS WHEN THEY WORK
 				close(lpipe[0]);
 //				ft_putendl_fd("elsessa", STDOUT_FILENO);
 //				ft_putendl_fd("elsessa", 2);
-				chain_pipes(lpipe, NULL);
+
+//				chain_pipes(lpipe, NULL);
+
 //				ft_putendl_fd("elsessa", 2);
 				dup2(term->fd_stdout, STDOUT_FILENO);
 //				lpipe[0] = rpipe[0];

@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putc.c                                          :+:      :+:    :+:   */
+/*   clear_rows_starting_y.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/11 20:12:20 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/11 12:07:52 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/04/11 11:38:18 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/04/11 11:40:40 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
+#include "includes.h"
 
-int	ft_putc(int c)
+void	clear_rows_starting_y(int y, t_term *term)
 {
-	return (write(STDIN_FILENO, &c, 1));
+	tputs(tgoto(term->cm_string, 0, y), 1, ft_putc);
+	tputs(term->cd_string, 1, ft_putc);
 }

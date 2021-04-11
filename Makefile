@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/04/09 14:21:15 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/04/11 11:47:29 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,8 @@ _SRC_INPUT = read_input_user.c \
 			delete_keypress.c \
 			ft_isdelete.c \
 			shell_keypress.c \
-			copy_envp.c
+			copy_envp.c \
+			clear_rows_starting_y.c
 
 _SRC_PARSER = 	parser.c \
 

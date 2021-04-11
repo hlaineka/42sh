@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/30 13:38:20 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/11 11:46:14 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,6 @@ int			ft_is_delete_key(char *str);
 int			ft_is_quote_open(int quote, char *str);
 
 t_clist		*ft_clstnew(void const *content, size_t content_size);
+
+void		clear_rows_starting_y(int y, t_term *term);
 #endif
