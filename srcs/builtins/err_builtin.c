@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 14:27:47 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/08 19:03:32 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/11 12:45:10 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,8 @@ static const char	*g_errstr[] =
 	"chdir failed",
 	"Environment HOME is not set",
 	"Invalid input",
-	"Command not found"
+	"Command not found",
+	"Environment PATH is not set"
 };
 
 int	err_builtin(int error_no, char *name, char *arg)
