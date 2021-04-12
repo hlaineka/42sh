@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_functions2.c                                 :+:      :+:    :+:   */
+/*   basic_token_functions2.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:54:13 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/08 15:10:03 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/11 11:58:15 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ t_token		*init_token(void)
 
 	returnable = (t_token *)malloc(sizeof(t_token));
 	ft_bzero(returnable, sizeof(t_token));
-	returnable->single_quoted = FALSE;
-	returnable->double_quoted = FALSE;
-	returnable->tokens = NULL;
 	returnable->value = NULL;
 	returnable->subtokens = NULL;
 	returnable->next = NULL;

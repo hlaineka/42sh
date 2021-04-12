@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/10 15:14:56 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/12 10:09:48 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 # include "structs_21.h"
 # include <stdbool.h>
 
-# define METACHARS "|&;()<> \t\n"
-# define OPCHARS "|&;()<>"
-# define SPECIALPARAMS "@*#?-$!0"
-# define EXPANSIONCHARS "~$`"
+# define BLANKS " \t\n"
+# define OPCHARS "&;<>-|"
+# define REDIROPS "&<>-|"
+# define SPECIALPARAMS "@*#?-$!0~"
+# define EXPANSIONCHARS "$`"
 
 /*
 **enum e_token
@@ -65,7 +66,9 @@
 **	tkn_rbrace,				37
 **	tkn_bang,				38
 **	tkn_in,					39
-**	tkn_eoi					40
+**	tkn_redirop,			40
+**	tkn_syntax_error		41
+**	tkn_eoi					42
 };
 */
 
@@ -111,18 +114,17 @@ enum e_token
 	tkn_rbrace,
 	tkn_bang,
 	tkn_in,
+	tkn_redirop,
+	tkn_syntax_error,
 	tkn_eoi
 };
 
 typedef struct s_token
 {
-	int				*tokens;
 	int				maintoken;
 	int				precedence;
 	bool			left_associative;
 	char			*value;
-	bool			single_quoted;
-	bool			double_quoted;
 	struct s_token	*subtokens;
 	struct s_token	*next;
 	struct s_token	*prev;
@@ -228,7 +230,7 @@ void				check_tkn_quotes(t_token *current);
 ** parser/tokenization/operator_tokens.c
 */
 
-t_token				*define_operator_tokens(t_token *first);
+t_token				*validate_operator_tokens(t_token *first);
 
 
 /*
@@ -239,7 +241,7 @@ void				quote_removal(t_token *first);
 
 
 /*
-** parser/tokenization/token_functions.c
+** parser/tokenization/basic_token_functions.c
 */
 
 t_token				*push_to_front(t_token *input, t_token *stack);
@@ -249,16 +251,16 @@ void				free_tokens(t_token *tokens);
 void				free_token(t_token *to_free);
 
 /*
-** parser/tokenization/token_functions2.c
+** parser/tokenization/basic_token_functions2.c
 */
 
 t_token				*init_token(void);
 t_token				*add_subtoken(t_token *current, t_token *sub);
 
 /*
-** parser/tokenization/tokens.c
+** parser/tokenization/basic_tokens.c
 */
 
-t_token				*get_basic_token(char *delimiters, char **source);
+t_token				*define_basic_tokens(char *input);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 14:37:51 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/10 15:14:26 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/12 10:25:56 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ t_job	*parser(char *input, t_term *term)
 	t_job	*returnable;
 
 	tokens = lexer(input, term);
+	returnable = NULL;
 	root = ast_creator(tokens, term);
 	if (term->flag_debug == 1)
 		debug_print_tree(root, NULL);
