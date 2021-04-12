@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 14:48:16 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/06 16:57:56 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/08 15:38:46 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,12 @@ t_node	*init_node(void)
 {
 	t_node	*returnable;
 
-	//copy std:s here
 	returnable = malloc(sizeof(t_node));
 	ft_bzero(returnable, sizeof(t_node));
 	returnable->parent = NULL;
 	returnable->left = NULL;
 	returnable->right = NULL;
 	returnable->command = NULL;
-	returnable->envp = malloc(ARGV_SIZE);
-	//copy envp
-	returnable->argv = malloc(ARGV_SIZE);
 	return (returnable);
 }
 
@@ -67,6 +63,7 @@ int	push_operator(t_token *tkn, t_node **node_stack)
 	new_node = init_node();
 	new_node->command = ft_strdup(tkn->value);
 	new_node->operation = tkn->maintoken;
+	new_node->subtokens = tkn->subtokens;
 	new_node->right = node_stack[--i];
 	node_stack[i]->parent = new_node;
 	if (i > 0)

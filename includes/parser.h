@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/07 17:07:25 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/10 15:14:56 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct s_token
 	char			*value;
 	bool			single_quoted;
 	bool			double_quoted;
+	struct s_token	*subtokens;
 	struct s_token	*next;
 	struct s_token	*prev;
 }					t_token;
@@ -132,28 +133,19 @@ typedef struct s_node
 	struct s_node	*parent;
 	struct s_node	*left;
 	struct s_node	*right;
+	t_token			*subtokens;
 	int				state;
 	int				operation;
-	char			**envp;
-	char			**argv;
-	int				argc;
-	int				stdin;
-	int				stdout;
-	int				stderr;
 	char			*command;
-	int				pid;
-	bool			completed;
-	bool			stopped;
-	int				status;
 }					t_node;
 
-typedef t_job *(*op_function)(t_job *job, t_node *current);
+typedef t_job *(*op_function)(t_job *job, t_term *term, t_node *current);
 
 /*
 ** parser/parser.c
 */
 
-t_job				*parser(char *input, bool debug);
+t_job				*parser(char *input, t_term *term);
 void				debug_print_tree(t_node *node, char *prefix);
 
 /*
@@ -166,7 +158,7 @@ t_node				*ast_builder(t_token *new_first);
 ** parser/ast_creation/ast_creation.c
 */
 
-t_node				*ast_creator(t_token *first, bool debug);
+t_node				*ast_creator(t_token *first, t_term *term);
 
 /*
 ** parser/ast_creation/free_ast.c
@@ -190,7 +182,7 @@ t_token				*shunting_yard(t_token *first);
 ** parser/job_creation/job_creation.c
 */
 
-t_job				*job_creation(t_node *root, bool debug);
+t_job				*job_creation(t_node *root, t_term *term);
 
 /*
 ** parser/job_creation/job_functions.c
@@ -203,23 +195,29 @@ t_job				*init_job(void);
 ** parser/job_creation/tree_traversal.c
 */
 
-t_job				*tree_traversal(t_node *current);
+t_job				*tree_traversal(t_node *current, t_term *term);
 
 /*
 ** parser/job_creation: operation function pointers, all in their own files
 ** named like function() -> function.c
 */
 
-t_job				*token_null(t_job *job, t_node *current);
-t_job				*token_semi(t_job *job, t_node *current);
-t_job				*token_pipe(t_job *job, t_node *current);
-
+t_job				*token_null(t_job *job, t_term *term, t_node *current);
+t_job				*token_semi(t_job *job, t_term *term, t_node *current);
+t_job				*token_pipe(t_job *job, t_term *term, t_node *current);
+t_job 				*token_great(t_job *job, t_term *term, t_node *current);
 
 /*
 ** parser/tokenization/lexer.c
 */
 
-t_token				*lexer(char *input);
+t_token				*lexer(char *input, t_term *term);
+
+/*
+** parser/tokenization/io_numbers.c
+*/
+
+t_token				*io_numbers(t_token *first);
 
 /*
 ** parser/tokenization/operator_tokens_functions.c
@@ -249,6 +247,13 @@ t_token				*push_to_end(t_token *input, t_token *output);
 t_token				*delete_token(t_token *tkn);
 void				free_tokens(t_token *tokens);
 void				free_token(t_token *to_free);
+
+/*
+** parser/tokenization/token_functions2.c
+*/
+
+t_token				*init_token(void);
+t_token				*add_subtoken(t_token *current, t_token *sub);
 
 /*
 ** parser/tokenization/tokens.c

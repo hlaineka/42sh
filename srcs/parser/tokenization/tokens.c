@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 11:59:34 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/07 14:54:53 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/10 15:24:37 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ bool	delimit_str(t_token *current, char **source, int i)
 bool	get_tokenstr(t_token *current, char *delimiters, char **source)
 {
 	int		i;
+	int		w;
 	bool	single_quoted;
 	bool	double_quoted;
 
@@ -65,7 +66,20 @@ bool	get_tokenstr(t_token *current, char *delimiters, char **source)
 	while (source[0][i])
 	{
 		check_quotes(current, source[0][i], &single_quoted, &double_quoted);
-		if (!single_quoted && !double_quoted
+		if (!single_quoted && !double_quoted && source[0][i] == '#')
+		{
+			w = i;
+			while (source[0][i] && source[0][i] != '\n')
+				i++;
+			if (source[0][i] == '\n')
+				i++;
+			while (source[0][i])
+				source[0][w++] = source[0][i++];
+			while (w < i)
+				source[0][w++] = '\0'; 
+			continue;
+		}
+		else if (!single_quoted && !double_quoted
 			&& ft_strchr(delimiters, source[0][i]))
 		{
 			if (!delimit_str(current, source, i))
@@ -83,10 +97,7 @@ t_token	*get_basic_token(char *delimiters, char **source)
 {
 	t_token	*current;
 
-	current = (t_token *)malloc(sizeof(t_token));
-	ft_bzero(current, sizeof(t_token));
-	current->single_quoted = FALSE; //these can be left out?
-	current->double_quoted = FALSE;
+	current = init_token();
 	if (!get_tokenstr(current, delimiters, source))
 	{
 		ft_free(current);

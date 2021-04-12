@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 18:28:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/11 11:19:18 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/12 15:07:23 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ void	execute_jobs(t_job *jobs, t_term *term)
 
 	while (jobs)
 	{
-/*
+
 		dup2(jobs->fd_stdin, STDIN_FILENO);
-		dup2(jobs->fd_stdout, STDOUT_FILENO);
+//		dup2(jobs->fd_stdout, STDOUT_FILENO);
 		dup2(jobs->fd_stderr, STDERR_FILENO);
+/*
 		close(jobs->fd_stdin);
 		close(jobs->fd_stdout);
 		close(jobs->fd_stderr);
@@ -69,15 +70,16 @@ void	execute_jobs(t_job *jobs, t_term *term)
 		}
 		else
 		{
+/*
 			dup2(term->fd_stdin, STDIN_FILENO);
 			dup2(term->fd_stdout, STDOUT_FILENO);
 			dup2(term->fd_stderr, STDERR_FILENO);
-/*
-USE THIS WHEN THEY WORK
-			dup2(jobs->fd_stdin, STDIN_FILENO);
-			dup2(jobs->fd_stdout, STDOUT_FILENO);
-			dup2(jobs->fd_stderr, STDERR_FILENO);
 */
+// USE THIS WHEN THEY WORK
+//			dup2(jobs->fd_stdin, STDIN_FILENO);
+			dup2(jobs->fd_stdout, STDOUT_FILENO);
+//			dup2(jobs->fd_stderr, STDERR_FILENO);
+
 		}
 
 /*
@@ -124,7 +126,10 @@ USE THIS WHEN THEY WORK
 //				chain_pipes(lpipe, NULL);
 
 //				ft_putendl_fd("elsessa", 2);
-				dup2(term->fd_stdout, STDOUT_FILENO);
+
+				dup2(jobs->fd_stdout, STDOUT_FILENO);
+//				dup2(term->fd_stdout, STDOUT_FILENO);
+
 //				lpipe[0] = rpipe[0];
 //				lpipe[1] = rpipe[1];
 			}

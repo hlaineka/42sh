@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 12:58:18 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/01 12:47:47 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/08 15:39:07 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,14 @@ t_token	*delete_token(t_token *tkn)
 
 void	free_tokens(t_token *tokens)
 {
+	t_token	*temp;
+
 	while (tokens)
-		tokens = delete_token(tokens);
+	{
+		temp = tokens->next;
+		free_token(tokens);
+		tokens = temp;
+	}
 }
 
 void	free_token(t_token *to_free)

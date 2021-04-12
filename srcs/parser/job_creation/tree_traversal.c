@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 11:58:18 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/07 17:07:09 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/09 15:39:21 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static const op_function g_op_functions[] =
 	[tkn_nl] = NULL,
 	[tkn_pipe] = token_pipe,
 	[tkn_less] = NULL,
-	[tkn_great] = NULL,
+	[tkn_great] = token_great,
 	[tkn_and_if] = NULL,
 	[tkn_or_if] = NULL,
 	[tkn_dsemi] = NULL,
@@ -59,14 +59,14 @@ static const op_function g_op_functions[] =
 	[tkn_eoi + 1] = NULL
 };
 
-t_job	*tree_traversal(t_node *current)
+t_job	*tree_traversal(t_node *current, t_term *term)
 {
 	t_job	*returnable;
 
 	returnable = NULL;
 	if (!current->left && !current->right && current->operation == tkn_word)
-		return (token_null(returnable, current));
+		return (token_null(returnable, term, current));
 	if (g_op_functions[current->operation])
-		returnable = g_op_functions[current->operation](returnable, current);
+		returnable = g_op_functions[current->operation](returnable, term, current);
 	return (returnable);
 }

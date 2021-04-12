@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/11 11:46:14 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/12 14:43:42 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # include "includes.h"
 # include "structs_21.h"
 
-void		initialize(t_input *input, t_term *term, char **envp);
+void		initialize(t_input *input, t_term *term, char **envp, char **argv);
 int			copy_envp(char **envp, t_term *term);
 
 void		err_fatal(int error_no, char *s_str, t_term *term);
