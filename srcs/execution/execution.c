@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 18:28:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/12 15:07:23 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/12 15:11:15 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,9 @@ void	execute_jobs(t_job *jobs, t_term *term)
 		dup2(term->fd_stdin, STDIN_FILENO);
 		dup2(term->fd_stdout, STDOUT_FILENO);
 		dup2(term->fd_stderr, STDERR_FILENO);
+		close(jobs->fd_stdin);
+		close(jobs->fd_stdout);
+		close(jobs->fd_stderr);
 		// do we need to return fds to normal?
 		jobs = jobs->next;
 	}
