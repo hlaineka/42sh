@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/12 14:43:12 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/13 16:16:07 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ typedef struct s_term
 	char				*sc_string;
 	char				*rc_string;
 	char				*dc_string;
+	char				*bl_string;
 	size_t				nrows;
 	size_t				ncolumns;
 	int					cursorcol;

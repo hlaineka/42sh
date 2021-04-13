@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/12 14:42:45 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/13 16:15:28 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void	get_termcaps_strings(t_term *term, char *buffer)
 	term->sc_string = tgetstr("sc", &buffer);
 	term->rc_string = tgetstr("rc", &buffer);
 	term->dc_string = tgetstr("dc", &buffer);
+	term->bl_string = tgetstr("bl", &buffer);
 }
 
 void	init_term(t_term *term)

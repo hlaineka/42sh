@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:32:34 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/12 14:54:39 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/13 15:18:53 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	add_fd(t_job *job, int old_fd, int new_fd)
 		free_jobs(job);
 		return (-1);
 	}
+	close(new_fd);
 	if (job->fd_stdin == -1 || job->fd_stdout == -1 || job->fd_stderr == -1)
 	{
 		//print fd error
