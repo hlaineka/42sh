@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/12 13:26:33 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/14 19:26:36 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <stdbool.h>
 
 # define BLANKS " \t\n"
-# define OPCHARS "&;<>-|"
-# define REDIROPS "&<>-|"
+# define OPCHARS "&;<>|"
+# define REDIROPS "&<>|"
 # define SPECIALPARAMS "@*#?-$!0~"
 # define EXPANSIONCHARS "$`"
 
@@ -68,7 +68,8 @@
 **	tkn_in,					39
 **	tkn_redirop,			40
 **	tkn_syntax_error		41
-**	tkn_eoi					42
+**	tkn_dash				42
+**	tkn_eoi					43
 };
 */
 
@@ -116,6 +117,7 @@ enum e_token
 	tkn_in,
 	tkn_redirop,
 	tkn_syntax_error,
+	tkn_dash,
 	tkn_eoi
 };
 
@@ -210,6 +212,9 @@ t_job				*token_null(t_job *job, t_term *term, t_node *current);
 t_job				*token_semi(t_job *job, t_term *term, t_node *current);
 t_job				*token_pipe(t_job *job, t_term *term, t_node *current);
 t_job 				*token_great(t_job *job, t_term *term, t_node *current);
+t_job				*token_less(t_job *job, t_term *term, t_node *current);
+t_job				*token_dgreat(t_job *job, t_term *term, t_node *current);
+t_job				*token_greatand(t_job *job, t_term *term, t_node *current);
 
 /*
 ** parser/tokenization/lexer.c

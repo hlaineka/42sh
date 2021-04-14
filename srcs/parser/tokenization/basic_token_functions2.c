@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:54:13 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/11 11:58:15 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/14 16:27:56 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ t_token	*add_subtoken(t_token *current, t_token *sub)
 	t_token	*returnable;
 	t_token	*temp;
 
-	if (!current || !sub)
+	if (!current)
+		return (NULL);
+	if (!sub)
 		return (NULL);
 	if (sub->prev)
 		sub->prev->next = sub->next;

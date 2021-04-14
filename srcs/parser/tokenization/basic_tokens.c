@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 11:59:34 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/13 12:19:50 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/14 18:07:57 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ bool	ft_is_nbrstr(char *str)
 	}
 	return (TRUE);
 }
+
+/*
+** returns 0 when the current tokenstr should be delimited.
+*/
 
 static int	handle_operator(char *str, char *source, int *i, int *maintoken)
 {

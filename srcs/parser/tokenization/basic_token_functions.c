@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 12:58:18 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/11 11:58:31 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/14 16:37:24 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ t_token	*delete_token(t_token *tkn)
 	t_token	*returnable;
 
 	returnable = NULL;
-	ft_free(tkn->value);
+	if (tkn->value)
+		ft_free(tkn->value);
+	if (tkn->quotes)
+		ft_free(tkn->quotes);
 	if (tkn->next)
 	{
 		tkn->next->prev = tkn->prev;
@@ -83,6 +86,8 @@ void	free_token(t_token *to_free)
 {
 	if (to_free->value)
 		ft_free(to_free->value);
+	if (to_free->quotes)
+		ft_free(to_free->quotes);
 	ft_free(to_free);
 	to_free = NULL;
 }
