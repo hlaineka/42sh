@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_great.c                                      :+:      :+:    :+:   */
+/*   token_less.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/08 15:32:34 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/14 14:59:36 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/04/12 10:52:24 by hlaineka          #+#    #+#             */
+/*   Updated: 2021/04/13 12:28:35 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-t_job	*get_job(t_job *job, t_node *current, t_term *term)
+static t_job	*get_job(t_job *job, t_node *current, t_term *term)
 {
 	t_job	*returnable;
 
@@ -35,7 +35,7 @@ t_job	*get_job(t_job *job, t_node *current, t_term *term)
 	return (returnable);
 }
 
-int	add_fd(t_job *job, int old_fd, int new_fd)
+static int	add_fd(t_job *job, int old_fd, int new_fd)
 {
 	if (old_fd == 0)
 		job->fd_stdin = dup2(new_fd, job->fd_stdin);
@@ -49,7 +49,6 @@ int	add_fd(t_job *job, int old_fd, int new_fd)
 		free_jobs(job);
 		return (-1);
 	}
-	close(new_fd);
 	if (job->fd_stdin == -1 || job->fd_stdout == -1 || job->fd_stderr == -1)
 	{
 		//print fd error
@@ -59,14 +58,13 @@ int	add_fd(t_job *job, int old_fd, int new_fd)
 	return (0);
 }
 
-int	open_fd(char *filename, t_term *term)
+static int	open_fd(char *filename, t_term *term)
 {
 	int	returnable;
 
 	//add filename path checking
 	if (term->flag_noclobber == 0)
-		returnable = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU | S_IRGRP
-				| S_IXGRP | S_IROTH | S_IXOTH);
+		returnable = open(filename, O_RDONLY);
 	else
 		returnable = open(filename, O_RDWR | O_APPEND);
 	if (returnable == -1)
@@ -74,7 +72,7 @@ int	open_fd(char *filename, t_term *term)
 	return (returnable);
 }
 
-char	*get_filename(char	*file)
+static char	*get_filename(char	*file)
 {
 	return(file);
 }
@@ -86,7 +84,7 @@ char	*get_filename(char	*file)
 ** excess residual data left from overwrite.
 */
 
-t_job	*token_great(t_job *job, t_term *term, t_node *current)
+t_job	*token_less(t_job *job, t_term *term, t_node *current)
 {
 	int		new_fd;
 	int		old_fd;
@@ -100,7 +98,7 @@ t_job	*token_great(t_job *job, t_term *term, t_node *current)
 	if (!returnable)
 		return (NULL);
 	if (!current->subtokens)
-		old_fd = 1;
+		old_fd = 0;
 	else
 		old_fd = ft_atoi(current->subtokens->value);
 	filename = get_filename(current->right->command);

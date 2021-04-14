@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_functions.c                                  :+:      :+:    :+:   */
+/*   basic_token_functions.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 12:58:18 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/08 15:39:07 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/11 11:58:31 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ t_token	*delete_token(t_token *tkn)
 	t_token	*returnable;
 
 	returnable = NULL;
-	ft_free(tkn->tokens);
 	ft_free(tkn->value);
 	if (tkn->next)
 	{
@@ -82,8 +81,6 @@ void	free_tokens(t_token *tokens)
 
 void	free_token(t_token *to_free)
 {
-	if (to_free->tokens)
-		ft_free(to_free->tokens);
 	if (to_free->value)
 		ft_free(to_free->value);
 	ft_free(to_free);

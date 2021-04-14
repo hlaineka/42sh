@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 16:01:36 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/08 14:49:16 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/11 12:01:36 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ static t_token	*add_delimiter_token(t_token *tkn)
 	{
 		new = malloc(sizeof(t_token));
 		ft_bzero(new, sizeof(t_token));
-		new->single_quoted = FALSE;
-		new->double_quoted = FALSE;
 		new->value = ft_strdup("(null)");
 		new->precedence = 5;
 		tkn->next->prev = new;
