@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/12 10:09:48 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/12 13:26:33 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ enum e_token
 
 typedef struct s_token
 {
+	int				*quotes;
+	bool			*quoted;
 	int				maintoken;
 	int				precedence;
 	bool			left_associative;

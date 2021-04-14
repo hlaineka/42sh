@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 11:59:34 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/11 12:34:21 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/13 12:19:50 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,52 @@ t_token	*get_basic_token(char **source)
 	return (current);
 }
 
+/*
+** The index of every character is marked either by 0, or the ascii
+** value of the quoting character that applies. If multiple quotes
+** apply at any given point, the sum of those ascii values is in quote_values.
+** ascii 35 = " , ascii 39 = ', ascii 92 = \
+*/
+
+t_token	*add_quotearray(t_token *current)
+{
+	int		*quotearray;
+	int		i;
+	bool	backslash;
+	bool	single_quote;
+	bool	double_quote;
+
+	if (current)
+	{
+		quotearray = malloc(sizeof(int) * ft_strlen(current->value));
+		ft_bzero(quotearray, sizeof(int) * ft_strlen(current->value));
+		double_quote = FALSE;
+		single_quote = FALSE;
+		backslash = FALSE;
+		i = 0;
+		while (current->value[i])
+		{
+			if (current->value[i] == 34)
+				double_quote = !double_quote;
+			if (current->value[i] == 44)
+				single_quote = !single_quote;
+			if (current->value[i] == 92)
+				backslash = TRUE;
+			if (double_quote)
+				quotearray[i] = quotearray[i] + 34;
+			if (single_quote)
+				quotearray[i] = quotearray[i] + 39;
+			if (backslash)
+				quotearray[i] = quotearray[i] + 92;
+			if (current->value[i] != 92 && backslash == TRUE)
+				backslash = FALSE;
+			i++;
+		}
+		current->quotes = quotearray;
+	}
+	return (current);
+}
+
 t_token	*define_basic_tokens(char *input)
 {
 	t_token	*current;
@@ -153,6 +199,7 @@ t_token	*define_basic_tokens(char *input)
 			prev->next = current;
 		prev = current;
 		current = get_basic_token(&str_ptr);
+		current = add_quotearray(current);
 	}
 	if (current)
 		free_token(current);

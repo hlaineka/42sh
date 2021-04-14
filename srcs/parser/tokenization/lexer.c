@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:32:48 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/12 10:21:48 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/13 12:16:21 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,11 @@ t_token	*lexer(char *input, t_term *term)
 	first = NULL;
 	first = define_basic_tokens(input);
 	first = validate_operator_tokens(first);
-	//first = io_numbers(first);
-	//alias handling call
-	//reserved words recognition call
-	//positional parameteres check call
-	//special parameters and substitution, word expansions
-	//field splitting = extra empty character removal that came from expansions & aliases
-	//pathname extensions
+	//first = advanced_tokenization(first);
 	if (term->flag_debug == 1)
 		debug_print_tokens(first);
 	if (!first)
 		return (NULL);
 	quote_removal(first);
-	//redirection (marking or handling?)
 	return (first);
 }
