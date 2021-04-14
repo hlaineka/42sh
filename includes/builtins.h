@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 13:45:58 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/07 18:16:06 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,46 @@
 
 pid_t	g_pid;
 
+
+int		is_builtin(t_process *process);
+
+/*
+** CD BUILTIN:
+*/
+void	builtin_cd(void *proc);
+int		find_path(char *file, char *path_env, char *buf);
+int		is_absolute_path(char *path);
+int		is_valid_folder(char *path);
+char	*get_absolute_path_to_buf(char *rel, char **envp, char *buf);
+
+/*
+** ECHO BUILTIN
+*/
+
+void	builtin_echo(void *proc);
+
 /*
 ** ENV FUNCTION PROTOTYPES
 */
 
 int		err_builtin(int error_no, char *name, char *arg);
-int		find_path(char *file, char *path_env, char *buf);
 
 char	*ft_getenv(const char *name, char **envp);
 int		ft_setenv(const char *name, const char *val, int over, char **envp);
 int		ft_unsetenv(const char *name, char **envp);
 
-int		builtin_unsetenv(int argc, char **argv, char **envp);
-int		builtin_setenv(int argc, char **argv, char **envp);
-int		builtin_env(int argc, char **argv, char **envp);
+void	builtin_env(void *proc);
+
+/*
+** SETENV BUILTIN:
+*/
+
+void	builtin_setenv(void *proc);
+
+/*
+** UNSETENV BUILTIN:
+*/
+
+void	builtin_unsetenv(void *proc);
 
 #endif

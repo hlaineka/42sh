@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 11:03:24 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/05 15:32:19 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/11 12:25:20 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 
 static int	is_path_file(char *file, char *folder, char *path)
 {
-//	char	path[1024];
-
 	ft_strcpy(path, folder);
 	ft_strcat(path, "/");
 	ft_strcat(path, file);
@@ -47,8 +45,7 @@ int	find_path(char *file, char *path_env, char *buf)
 	if (!folders[i])
 		buf[0] = '\0';
 	ft_strarray_free(folders); // ok?
-	//free path_split;
-	if (buf)
+	if (buf[0])
 		return (1);
 	return (0);
 }

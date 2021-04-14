@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 15:57:08 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/12 10:25:07 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/14 18:07:30 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ char	*ft_strcut(char *str, int start, int end)
 	char	*returnable;
 	int		i;
 	int		w;
+	int		len;
 
 	returnable = malloc(end - start + 1);
+	len = ft_strlen(str);
 	i = start;
 	w = 0;
 	while (i < end)
@@ -29,17 +31,16 @@ char	*ft_strcut(char *str, int start, int end)
 		i++;
 	}
 	returnable[w] = '\0';
-	i = 0;
-	while (str[end + i])
+	i = start;
+	w = end;
+	while (str[w])
 	{
-		str[start + i] = str[end + i];
+		str[i] = str[w];
 		i++;
+		w++;
 	}
-	while (i <= (end - start))
-	{
-		str[start + i] = '\0';
-		i++;
-	}
+	while (i <= len)
+		str[i++] = '\0';
 	return (returnable);
 }
 
@@ -49,6 +50,7 @@ int	handle_tkn_io_number(t_token *current)
 	t_token	*new_subtoken;
 
 	i = 0;
+	new_subtoken = NULL;
 	while (current->value[i] && ft_isdigit(current->value[i]))
 		i++;
 	if (!ft_strchr(OPCHARS, current->value[i]))
@@ -58,13 +60,14 @@ int	handle_tkn_io_number(t_token *current)
 		new_subtoken = init_token();
 		new_subtoken->maintoken = tkn_io_number;
 		new_subtoken->value = ft_strcut(current->value, 0, i);
+		add_subtoken(current, new_subtoken);
 	}
 	return (0);
 }
 
 int	handle_redirection_op(t_token *current)
 {
-	if (ft_strlen(current->value) > 3)
+	if (ft_strlen(current->value) > 4)
 		return (-1);
 	else if (ft_strequ(current->value, "<"))
 		current->maintoken = tkn_less;
@@ -110,13 +113,15 @@ int	handle_operation(t_token *current)
 
 int	handle_basic_optkn(t_token *current)
 {
-	if (-1 == handle_tkn_io_number(current))
-		return -1;
-	if (-1 == handle_redirection_op(current))
-		return (-1);
-	if (-1 == handle_operation(current))
-		return (-1);
-	return (0);
+	int	returnable;
+
+	returnable = 0;
+	returnable = handle_tkn_io_number(current);
+	if (returnable != -1)
+		returnable = handle_redirection_op(current);
+	if (returnable != -1)
+		returnable = handle_operation(current);
+	return (returnable);
 }
 
 t_token	*validate_operator_tokens(t_token *first)

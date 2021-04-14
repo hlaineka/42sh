@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 10:52:51 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/26 11:51:13 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/11 12:06:07 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ void	history_up(t_input *input, t_term *term)
 	str = input->hist_cur->content;
 	if (!str)
 		return ;
-	x = input->start_col + input->prompt_length - 1;
-	y = input->start_row - 1;
+	x = input->prompt_col - 1;
+	y = input->prompt_row - 1;
+	if (ft_strlen(input->ls) + ft_strlen(input->rrs) + input->prompt_length > term->nrows)
+		clear_rows_starting_y(y + 1, term);
 	tputs(tgoto(term->cm_string, x, y), 1, ft_putc);
 	tputs(term->ce_string, 1, ft_putc);
 	ft_bzero(input->ls, input->ls_size);
@@ -41,14 +43,16 @@ void	history_down(t_input *input, t_term *term)
 	int		x;
 	int		y;
 
-	if (input->hist_cur->next == NULL)
+	if (input->hist_cur->prev == NULL)
 		return ;
 	input->hist_cur = input->hist_cur->prev;
 	str = input->hist_cur->content;
 	if (!str)
 		return ;
-	x = input->start_col + input->prompt_length - 1;
-	y = input->start_row - 1;
+	x = input->prompt_col - 1;
+	y = input->prompt_row - 1;
+	if (ft_strlen(input->ls) + ft_strlen(input->rrs) + input->prompt_length > term->nrows)
+		clear_rows_starting_y(y + 1, term);
 	tputs(tgoto(term->cm_string, x, y), 1, ft_putc);
 	tputs(term->ce_string, 1, ft_putc);
 	ft_bzero(input->ls, input->ls_size);

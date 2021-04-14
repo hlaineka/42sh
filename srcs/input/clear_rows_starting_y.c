@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.h                                        :+:      :+:    :+:   */
+/*   clear_rows_starting_y.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/27 11:35:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/09 12:36:20 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/04/11 11:38:18 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/04/11 11:40:40 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTION_H
-# define EXECUTION_H
+#include "includes.h"
 
-# include "parser.h"
-# include <stdbool.h>
-
-void	execute_jobs(t_job *jobs, t_term *term);
-int		exec_tprocess(t_process *proc);
-
-#endif
+void	clear_rows_starting_y(int y, t_term *term)
+{
+	tputs(tgoto(term->cm_string, 0, y), 1, ft_putc);
+	tputs(term->cd_string, 1, ft_putc);
+}

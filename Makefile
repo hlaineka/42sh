@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/04/13 12:17:44 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/04/14 19:26:17 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,10 @@ DIR_TOKENIZATION = srcs/parser/tokenization/
 DIR_AST_CREATION = srcs/parser/ast_creation/
 DIR_SIGNAL = srcs/signal/
 DIR_BUILTIN = srcs/builtins/
+DIR_CD = srcs/builtins/fun_cd/
+DIR_ECHO = srcs/builtins/fun_echo/
+DIR_SETENV = srcs/builtins/fun_setenv/
+DIR_UNSETENV = srcs/builtins/fun_unsetenv/
 DIR_EXECUTION = srcs/execution/
 DIR_OBJS = objs/
 
@@ -54,7 +58,8 @@ _SRC_INPUT = read_input_user.c \
 			delete_keypress.c \
 			ft_isdelete.c \
 			shell_keypress.c \
-			copy_envp.c
+			copy_envp.c \
+			clear_rows_starting_y.c
 
 _SRC_PARSER = 	parser.c \
 
@@ -64,7 +69,10 @@ _SRC_JOB_CREATION = job_creation.c \
 					tree_traversal.c \
 					token_semi.c \
 					token_pipe.c \
-					token_great.c
+					token_great.c \
+					token_less.c \
+					token_dgreat.c \
+					token_greatand.c
 
 _SRC_TOKENIZATION = lexer.c \
 					quote_removal.c \
@@ -83,12 +91,26 @@ _SRC_SIGNAL =	signal.c
 
 _SRC_BUILTIN =	builtin_env.c \
 				err_builtin.c \
-				find_path.c \
 				ft_getenv.c \
 				ft_setenv.c \
-				ft_unsetenv.c
+				ft_unsetenv.c \
+				is_builtin.c
 
-_SRC_EXECUTION = execution.c
+_SRC_CD =	builtin_cd.c \
+			find_path.c \
+			ft_is_absolute_path.c \
+			get_absolute_path.c \
+			is_valid_path.c
+
+_SRC_ECHO =	builtin_echo.c
+
+_SRC_SETENV =	builtin_setenv.c
+
+_SRC_UNSETENV =	builtin_unsetenv.c
+
+_SRC_EXECUTION =	exec_tprocess.c \
+					execution.c
+
 
 SRC_MAIN = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))
 SRC_INPUT = $(addprefix $(DIR_INPUT), $(_SRC_INPUT))
@@ -98,11 +120,15 @@ SRC_TOKENIZATION = $(addprefix $(DIR_TOKENIZATION), $(_SRC_TOKENIZATION))
 SRC_AST_CREATION = $(addprefix $(DIR_AST_CREATION), $(_SRC_AST_CREATION))
 SRC_SIGNAL = $(addprefix $(DIR_SIGNAL), $(_SRC_SIGNAL))
 SRC_BUILTIN = $(addprefix $(DIR_BUILTIN), $(_SRC_BUILTIN))
+SRC_CD = $(addprefix $(DIR_CD), $(_SRC_CD))
+SRC_ECHO = $(addprefix $(DIR_ECHO), $(_SRC_ECHO))
+SRC_SETENV = $(addprefix $(DIR_SETENV), $(_SRC_SETENV))
+SRC_UNSETENV = $(addprefix $(DIR_UNSETENV), $(_SRC_UNSETENV))
 SRC_EXECTUION =  $(addprefix $(DIR_EXECUTION), $(_SRC_EXECUTION))
 
-SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER) $(SRC_SIGNAL) $(SRC_BUILTIN) $(SRC_EXECUTION) $(SRC_JOB_CREATION) $(SRC_TOKENIZATION) $(SRC_AST_CREATION)
+SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER) $(SRC_SIGNAL) $(SRC_BUILTIN) $(SRC_CD) $(SRC_ECHO) $(SRC_SETENV) $(SRC_UNSETENV) $(SRC_EXECUTION) $(SRC_JOB_CREATION) $(SRC_TOKENIZATION) $(SRC_AST_CREATION)
 
-_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL) $(_SRC_BUILTIN) $(_SRC_EXECUTION) $(_SRC_JOB_CREATION) $(_SRC_TOKENIZATION) $(_SRC_AST_CREATION)
+_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL) $(_SRC_BUILTIN) $(_SRC_CD) $(_SRC_ECHO) $(_SRC_SETENV) $(_SRC_UNSETENV) $(_SRC_EXECUTION) $(_SRC_JOB_CREATION) $(_SRC_TOKENIZATION) $(_SRC_AST_CREATION)
 
 OBJ_FILES = $(_SRC:.c=.o)
 OBJS = $(patsubst %, $(DIR_OBJS)%, $(_SRC:.c=.o))
@@ -150,6 +176,18 @@ $(DIR_OBJS)%.o: $(DIR_SIGNAL)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 $(DIR_OBJS)%.o: $(DIR_BUILTIN)%.c $(INC)
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(DIR_OBJS)%.o: $(DIR_CD)%.c $(INC)
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(DIR_OBJS)%.o: $(DIR_ECHO)%.c $(INC)
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(DIR_OBJS)%.o: $(DIR_SETENV)%.c $(INC)
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(DIR_OBJS)%.o: $(DIR_UNSETENV)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 $(DIR_OBJS)%.o: $(DIR_EXECUTION)%.c $(INC)

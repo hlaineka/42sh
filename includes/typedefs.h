@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:42:02 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 10:48:10 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/11 12:44:37 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,10 @@
 # define E_FIRST_ALPHA 107
 # define E_FORK 108
 # define E_ILLEGAL_OPTION 109
+# define E_CD_CHANGE_FAIL 110
+# define E_HOME_NOT_SET 111
+# define E_INVALID_INPUT 112
+# define E_NO_COMMAND 113
+# define E_ENV_PATH_NOT_SET 114
 
 #endif

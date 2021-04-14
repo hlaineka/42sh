@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 17:40:33 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/29 10:35:37 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/11 12:07:24 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	err_quit(int error_no, char *s_str)
 	exit(1);
 }
 
-int		err_return(int error_no, char *s_str)
+int	err_return(int error_no, char *s_str)
 {
 	char	error_message[1024];
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_great.c                                      :+:      :+:    :+:   */
+/*   token_dgreat.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/08 15:32:34 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/14 18:08:31 by hlaineka         ###   ########.fr       */
+/*   Created: 2021/04/14 12:25:59 by hlaineka          #+#    #+#             */
+/*   Updated: 2021/04/14 16:49:26 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,12 @@ static int	add_fd(t_job *job, int old_fd, int new_fd)
 	return (0);
 }
 
-static int	open_fd(char *filename, t_term *term)
+static int	open_fd(char *filename)
 {
 	int	returnable;
 
 	//add filename path checking
-	if (term->flag_noclobber == 0)
-		returnable = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU | S_IRGRP
-				| S_IXGRP | S_IROTH | S_IXOTH);
-	else
-		returnable = open(filename, O_RDWR | O_APPEND);
+	returnable = open(filename, O_RDWR | O_APPEND);
 	if (returnable == -1)
 		ft_printf("open failed\n"); //
 	return (returnable);
@@ -86,7 +82,7 @@ static char	*get_filename(char	*file)
 ** excess residual data left from overwrite.
 */
 
-t_job	*token_great(t_job *job, t_term *term, t_node *current)
+t_job	*token_dgreat(t_job *job, t_term *term, t_node *current)
 {
 	int		new_fd;
 	int		old_fd;
@@ -109,7 +105,7 @@ t_job	*token_great(t_job *job, t_term *term, t_node *current)
 		return (NULL);
 	}
 	filename = get_filename(current->right->command);
-	new_fd = open_fd(filename, term);
+	new_fd = open_fd(filename);
 	if (-1 == new_fd)
 		return(NULL);
 	if (-1 == add_fd(returnable, old_fd, new_fd))

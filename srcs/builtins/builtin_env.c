@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:21:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 17:08:22 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/07 15:59:40 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,8 +147,19 @@ int	get_env_options(char **argv, char **envp, int *options, char *altpath)
 	return (i);
 }
 
-int	builtin_env(int argc, char **argv, char **envp)
+//int	builtin_env(int argc, char **argv, char **envp)
+
+void	builtin_env(void *proc)
 {
+	t_process	*process;
+	int		argc;
+	char	**argv;
+	char	**envp;
+	process = proc;
+	argc = process->argc;
+	argv = process->argv;
+	envp = process->envp;
+
 	char	altpath[1024];
 	int		options;
 	int		i;
@@ -156,7 +167,11 @@ int	builtin_env(int argc, char **argv, char **envp)
 	i = 0;
 	options = 0;
 	if ((g_pid = fork()) < 0)
-		return (err_builtin(E_FORK, argv[0], NULL));
+	{
+		err_builtin(E_FORK, argv[0], NULL);
+		return ;
+//		return (err_builtin(E_FORK, argv[0], NULL));
+	}
 //		return (err_minishell(ERR_FORK_ERROR, argv[0]));
 	else if (g_pid == 0)
 	{
@@ -170,5 +185,5 @@ int	builtin_env(int argc, char **argv, char **envp)
 	else
 		wait(NULL);
 	g_pid = 0;
-	return (0);
+//	return (0);
 }

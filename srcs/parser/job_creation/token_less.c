@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:52:24 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/13 12:28:35 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/14 16:49:02 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static int	add_fd(t_job *job, int old_fd, int new_fd)
 		free_jobs(job);
 		return (-1);
 	}
+	close(new_fd);
 	if (job->fd_stdin == -1 || job->fd_stdout == -1 || job->fd_stderr == -1)
 	{
 		//print fd error
@@ -58,15 +59,12 @@ static int	add_fd(t_job *job, int old_fd, int new_fd)
 	return (0);
 }
 
-static int	open_fd(char *filename, t_term *term)
+static int	open_fd(char *filename)
 {
 	int	returnable;
 
 	//add filename path checking
-	if (term->flag_noclobber == 0)
-		returnable = open(filename, O_RDONLY);
-	else
-		returnable = open(filename, O_RDWR | O_APPEND);
+	returnable = open(filename, O_RDONLY);
 	if (returnable == -1)
 		ft_printf("open failed\n"); //
 	return (returnable);
@@ -99,10 +97,15 @@ t_job	*token_less(t_job *job, t_term *term, t_node *current)
 		return (NULL);
 	if (!current->subtokens)
 		old_fd = 0;
-	else
+	else if (current->subtokens->maintoken == tkn_io_number)
 		old_fd = ft_atoi(current->subtokens->value);
+	else
+	{
+		free_jobs(returnable);
+		return (NULL);
+	}
 	filename = get_filename(current->right->command);
-	new_fd = open_fd(filename, term);
+	new_fd = open_fd(filename);
 	if (-1 == new_fd)
 		return(NULL);
 	if (-1 == add_fd(returnable, old_fd, new_fd))

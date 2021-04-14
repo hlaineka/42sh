@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_great.c                                      :+:      :+:    :+:   */
+/*   token_greatand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/08 15:32:34 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/14 18:08:31 by hlaineka         ###   ########.fr       */
+/*   Created: 2021/04/14 16:40:21 by hlaineka          #+#    #+#             */
+/*   Updated: 2021/04/14 19:33:04 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,38 +59,24 @@ static int	add_fd(t_job *job, int old_fd, int new_fd)
 	return (0);
 }
 
-static int	open_fd(char *filename, t_term *term)
+int	ft_isdigits(char *str)
 {
-	int	returnable;
+	int	i;
 
-	//add filename path checking
-	if (term->flag_noclobber == 0)
-		returnable = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU | S_IRGRP
-				| S_IXGRP | S_IROTH | S_IXOTH);
-	else
-		returnable = open(filename, O_RDWR | O_APPEND);
-	if (returnable == -1)
-		ft_printf("open failed\n"); //
-	return (returnable);
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
-static char	*get_filename(char	*file)
-{
-	return(file);
-}
-
-/*
-** open(filename, O_RDWR | O_CREAT | O_TRUNC):
-** opens the file with read and write permission, creates the file if it
-** does not exists and overwrites the data on the file AND truncates all
-** excess residual data left from overwrite.
-*/
-
-t_job	*token_great(t_job *job, t_term *term, t_node *current)
+t_job	*token_greatand(t_job *job, t_term *term, t_node *current)
 {
 	int		new_fd;
 	int		old_fd;
-	char	*filename;
 	t_job	*returnable;
 
 	if (!current->right || current->right->left
@@ -108,11 +94,27 @@ t_job	*token_great(t_job *job, t_term *term, t_node *current)
 		free_jobs(returnable);
 		return (NULL);
 	}
-	filename = get_filename(current->right->command);
-	new_fd = open_fd(filename, term);
-	if (-1 == new_fd)
-		return(NULL);
-	if (-1 == add_fd(returnable, old_fd, new_fd))
-		return (NULL);
+	if (ft_strequ(current->right->command, "-"))
+	{
+		if (old_fd == 0)
+			close(returnable->fd_stdin);
+		else if (old_fd == 1)
+			close(returnable->fd_stdout);
+		else if (old_fd == 2)
+			close(returnable->fd_stderr);
+		if (-1 == close(old_fd))
+		{
+			free_jobs(returnable);
+			return (NULL);
+		}
+	}
+	else if (ft_isdigits(current->right->command))
+	{
+		new_fd = atoi(current->right->command);
+		if (-1 == new_fd)
+			return(NULL);
+		if (-1 == add_fd(returnable, old_fd, new_fd))
+			return (NULL);
+	}
 	return(returnable);
 }

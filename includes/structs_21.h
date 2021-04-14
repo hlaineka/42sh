@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/09 12:41:26 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/13 16:16:07 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define KEY_ESC 27
 
 typedef struct termios	t_termios;
+typedef struct stat		t_stat;
 
 typedef struct s_clist
 {
@@ -52,7 +53,9 @@ typedef struct s_input
 typedef struct s_process
 {
 	struct s_process	*next;       /* next process in pipeline */
+	int					argc;
 	char				**argv;      /* for exec */
+	char				**envp;
 	pid_t				pid;         /* process ID */
 	char				completed;   /* true if process has completed */
 	char				stopped;     /* true if process has stopped */
@@ -152,6 +155,7 @@ typedef struct s_term
 	char				*sc_string;
 	char				*rc_string;
 	char				*dc_string;
+	char				*bl_string;
 	size_t				nrows;
 	size_t				ncolumns;
 	int					cursorcol;
