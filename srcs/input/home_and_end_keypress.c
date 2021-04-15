@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 11:03:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/26 11:51:34 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/15 14:40:47 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@ int	home_keypress(t_input *input, t_term *term)
 
 int	end_keypress(t_input *input, t_term *term)
 {
-	int		ls_len;
+//	int		ls_len;
 	int		rrs_len;
+	int		row;
+	int		col;
+
+/*
 	int		print_len;
 	int		x;
 	int		y;
@@ -52,6 +56,16 @@ int	end_keypress(t_input *input, t_term *term)
 	x = (print_len % term->ncolumns) + (input->start_col - 1);
 	move_nchars_from_s1_to_s2(input->rrs, input->ls, input->ls_size, rrs_len);
 	tputs(tgoto(term->cm_string, x, y), 1, ft_putc);
+	get_pos(&input->cursor_row, &input->cursor_col);
+	return (0);
+*/
+
+	rrs_len = ft_strlen(input->rrs);
+	row = input->prompt_row - 1;
+	col = input->prompt_col - 1;
+	move_nchars_from_s1_to_s2(input->rrs, input->ls, input->ls_size, rrs_len);
+	tputs(tgoto(term->cm_string, col, row), 1, ft_putc);
+	ft_putstr_input(input->ls, input, term);
 	get_pos(&input->cursor_row, &input->cursor_col);
 	return (0);
 }
