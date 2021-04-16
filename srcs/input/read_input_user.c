@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/26 14:16:00 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/16 11:53:51 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static char	*get_input_tty(char *str, t_term *term, t_input *input)
 	char	*temp;
 	char	*temp2;
 
-	temp = NULL;
+	input->input_temp = &temp;
 	quote = PROMPT_START;
 	while (quote)
 	{
@@ -97,6 +97,26 @@ char	*get_input(int argc, char **argv, t_term *term, t_input *input)
 	char	*str;
 
 	str = NULL;
+	input->ret_str = &str;
+// do signal fail check
+	signal(SIGINT, SIG_DFL);
+	signal(SIGINT, sig_handler_input);
+
+	signal(SIGCONT, sig_handler_input);
+	signal(SIGINT, sig_handler_input);
+	signal(SIGTSTP, sig_handler_input);
+	signal(SIGTERM, sig_handler_input);
+	signal(SIGQUIT, sig_handler_input);
+	signal(SIGHUP, sig_handler_input);
+	signal(SIGPIPE, sig_handler_input);
+	signal(SIGALRM, sig_handler_input);
+	signal(SIGXCPU, sig_handler_input);
+	signal(SIGXFSZ, sig_handler_input);
+	signal(SIGABRT, sig_handler_input);
+	signal(SIGVTALRM, sig_handler_input);
+	signal(SIGPROF, sig_handler_input);
+
+
 	if (argc == 1)
 	{
 		enable_raw_mode(term);
@@ -106,6 +126,10 @@ char	*get_input(int argc, char **argv, t_term *term, t_input *input)
 			err_fatal(ERR_MALLOC, NULL, term);
 		disable_raw_mode_continue(term);
 	}
+
+
+
+	signal(SIGINT, SIG_DFL);
 	(void)argv;
 	return (str);
 }

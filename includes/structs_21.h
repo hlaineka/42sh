@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/13 16:16:07 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/16 11:54:03 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct s_input
 	t_clist				*hist_cur;
 	t_clist				*history;
 	t_clist				*last_comm;
+	char				**ret_str;
+	char				**input_temp;
 	char				*ls;
 	char				*rrs;
 	char				*clipboard;
@@ -171,5 +173,6 @@ typedef struct s_term
 ** GLOBALS
 */
 t_term					*g_term;
+t_input					*g_input;
 
 #endif

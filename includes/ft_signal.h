@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 11:12:09 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/15 18:27:01 by helvi            ###   ########.fr       */
+/*   Updated: 2021/04/16 11:20:49 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@
 # include "includes.h"
 
 void	start_signal(void);
+void	sig_handler_input(int signo);
 
 #endif
