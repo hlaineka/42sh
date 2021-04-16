@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/14 19:26:36 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/15 16:50:58 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "structs_21.h"
 # include <stdbool.h>
 
-# define BLANKS " \t\n"
+# define BLANKS " \t\n\0"
 # define OPCHARS "&;<>|"
 # define REDIROPS "&<>|"
 # define SPECIALPARAMS "@*#?-$!0~"
@@ -201,7 +201,17 @@ t_job				*init_job(void);
 ** parser/job_creation/tree_traversal.c
 */
 
-t_job				*tree_traversal(t_node *current, t_term *term);
+t_job				*tree_traversal(t_job *job, t_node *current, t_term *term);
+
+/*
+** parser/job_creation/redirection_functions.c
+*/
+t_job				*get_left_job(t_job *job, t_node *current, t_term *term);
+t_job				*get_right_job(t_job *job, t_node *current, t_term *term);
+char				*get_filename(t_node *current);
+int					add_fd(t_job *job, int old_fd, int new_fd);
+int					get_fd(t_node *current, int default_fd);
+int					close_fd(t_job *job, int old_fd);
 
 /*
 ** parser/job_creation: operation function pointers, all in their own files

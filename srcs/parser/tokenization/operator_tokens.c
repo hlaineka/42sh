@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 15:57:08 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/14 18:07:30 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/15 14:00:20 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,17 @@ int	handle_tkn_io_number(t_token *current)
 	return (0);
 }
 
+int	add_filename_tkn(t_token *current)
+{
+	if (!current->next || current->next->maintoken != tkn_word)
+		return (-1);
+	add_subtoken(current, current->next);
+	return (0);
+}
+
 int	handle_redirection_op(t_token *current)
 {
-	if (ft_strlen(current->value) > 4)
+	if (ft_strlen(current->value) > 2)
 		return (-1);
 	else if (ft_strequ(current->value, "<"))
 		current->maintoken = tkn_less;
@@ -83,11 +91,11 @@ int	handle_redirection_op(t_token *current)
 		current->maintoken = tkn_greatand;
 	else if (ft_strequ(current->value, "<>"))
 		current->maintoken = tkn_lessgreat;
-	else if (ft_strequ(current->value, "<<-"))
-		current->maintoken = tkn_dlessdash;
 	else if (ft_strequ(current->value, ">|"))
 		current->maintoken = tkn_clobber;
-	return (0);
+	else
+		return (0);
+	return (add_filename_tkn(current));
 }
 
 int	handle_operation(t_token *current)

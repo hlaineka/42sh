@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 14:48:16 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/08 15:38:46 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/16 11:18:16 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,35 @@ int	push_word(t_token *tkn, t_node **node_stack)
 	return (0);
 }
 
+int	is_unaryop(t_token *tkn)
+{
+	if (tkn->maintoken == tkn_less || tkn->maintoken == tkn_great
+		|| tkn->maintoken == tkn_dless || tkn->maintoken == tkn_dgreat
+		|| tkn->maintoken == tkn_lessand || tkn->maintoken == tkn_greatand
+		|| tkn->maintoken == tkn_lessgreat || tkn->maintoken == tkn_clobber)
+		return (1);
+	return (0);
+}
+
+t_node	*create_opnode(t_token *tkn, t_node **node_stack, int *i)
+{
+	t_node	*new_node;
+
+	new_node = init_node();
+	new_node->command = ft_strdup(tkn->value);
+	new_node->operation = tkn->maintoken;
+	new_node->subtokens = tkn->subtokens;
+	if (is_unaryop(tkn))
+		new_node->right = NULL;
+	else
+	{
+		*i = *i - 1;
+		new_node->right = node_stack[*i];
+		node_stack[*i]->parent = new_node;
+	}
+	return (new_node);
+}
+
 int	push_operator(t_token *tkn, t_node **node_stack)
 {
 	int		i;
@@ -60,12 +89,7 @@ int	push_operator(t_token *tkn, t_node **node_stack)
 		ft_printf_fd(2, "node stack full");
 		return (-1);
 	}
-	new_node = init_node();
-	new_node->command = ft_strdup(tkn->value);
-	new_node->operation = tkn->maintoken;
-	new_node->subtokens = tkn->subtokens;
-	new_node->right = node_stack[--i];
-	node_stack[i]->parent = new_node;
+	new_node = create_opnode(tkn, node_stack, &i);
 	if (i > 0)
 	{
 		node_stack[i] = NULL;

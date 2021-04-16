@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 11:58:18 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/14 19:27:06 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/15 14:09:28 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ static const op_function g_op_functions[] =
 	[tkn_eoi + 1] = NULL
 };
 
-t_job	*tree_traversal(t_node *current, t_term *term)
+t_job	*tree_traversal(t_job *job, t_node *current, t_term *term)
 {
 	t_job	*returnable;
 
 	returnable = NULL;
 	if (!current->left && !current->right && current->operation == tkn_word)
-		return (token_null(returnable, term, current));
+		return (token_null(job, term, current));
 	if (g_op_functions[current->operation])
-		returnable = g_op_functions[current->operation](returnable, term, current);
+		returnable = g_op_functions[current->operation](job, term, current);
 	return (returnable);
 }

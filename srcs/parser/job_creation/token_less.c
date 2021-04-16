@@ -6,58 +6,13 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:52:24 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/14 16:49:02 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/16 11:57:33 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include <sys/stat.h>
 #include <fcntl.h>
-
-static t_job	*get_job(t_job *job, t_node *current, t_term *term)
-{
-	t_job	*returnable;
-
-	returnable = NULL;
-	if (job)
-		returnable = job;
-	if (current->left && returnable)
-	{
-		free_jobs(job);
-		return (NULL);
-	}
-	if (current->left)
-		returnable = tree_traversal(current->left, term);
-	if (current->left && !returnable)
-		return (NULL);
-	if (!returnable)
-		returnable = init_job();
-	return (returnable);
-}
-
-static int	add_fd(t_job *job, int old_fd, int new_fd)
-{
-	if (old_fd == 0)
-		job->fd_stdin = dup2(new_fd, job->fd_stdin);
-	else if (old_fd == 1)
-		job->fd_stdout = dup2(new_fd, job->fd_stdout);
-	else if (old_fd == 2)
-		job->fd_stderr = dup2(new_fd, job->fd_stderr);
-	else
-	{
-		//print fd error
-		free_jobs(job);
-		return (-1);
-	}
-	close(new_fd);
-	if (job->fd_stdin == -1 || job->fd_stdout == -1 || job->fd_stderr == -1)
-	{
-		//print fd error
-		free_jobs(job);
-		return (-1);
-	}
-	return (0);
-}
 
 static int	open_fd(char *filename)
 {
@@ -68,11 +23,6 @@ static int	open_fd(char *filename)
 	if (returnable == -1)
 		ft_printf("open failed\n"); //
 	return (returnable);
-}
-
-static char	*get_filename(char	*file)
-{
-	return(file);
 }
 
 /*
@@ -89,22 +39,11 @@ t_job	*token_less(t_job *job, t_term *term, t_node *current)
 	char	*filename;
 	t_job	*returnable;
 
-	if (!current->right || current->right->left
-		|| current->right->right)
-		return (NULL);
-	returnable = get_job(job, current, term);
+	old_fd = get_fd(current, 0);
+	returnable = get_left_job(job, current, term);
 	if (!returnable)
 		return (NULL);
-	if (!current->subtokens)
-		old_fd = 0;
-	else if (current->subtokens->maintoken == tkn_io_number)
-		old_fd = ft_atoi(current->subtokens->value);
-	else
-	{
-		free_jobs(returnable);
-		return (NULL);
-	}
-	filename = get_filename(current->right->command);
+	filename = get_filename(current);
 	new_fd = open_fd(filename);
 	if (-1 == new_fd)
 		return(NULL);

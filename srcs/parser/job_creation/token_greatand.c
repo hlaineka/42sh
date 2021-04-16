@@ -6,58 +6,13 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 16:40:21 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/14 19:33:04 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/16 12:05:52 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include <sys/stat.h>
 #include <fcntl.h>
-
-static t_job	*get_job(t_job *job, t_node *current, t_term *term)
-{
-	t_job	*returnable;
-
-	returnable = NULL;
-	if (job)
-		returnable = job;
-	if (current->left && returnable)
-	{
-		free_jobs(job);
-		return (NULL);
-	}
-	if (current->left)
-		returnable = tree_traversal(current->left, term);
-	if (current->left && !returnable)
-		return (NULL);
-	if (!returnable)
-		returnable = init_job();
-	return (returnable);
-}
-
-static int	add_fd(t_job *job, int old_fd, int new_fd)
-{
-	if (old_fd == 0)
-		job->fd_stdin = dup2(new_fd, job->fd_stdin);
-	else if (old_fd == 1)
-		job->fd_stdout = dup2(new_fd, job->fd_stdout);
-	else if (old_fd == 2)
-		job->fd_stderr = dup2(new_fd, job->fd_stderr);
-	else
-	{
-		//print fd error
-		free_jobs(job);
-		return (-1);
-	}
-	close(new_fd);
-	if (job->fd_stdin == -1 || job->fd_stdout == -1 || job->fd_stderr == -1)
-	{
-		//print fd error
-		free_jobs(job);
-		return (-1);
-	}
-	return (0);
-}
 
 int	ft_isdigits(char *str)
 {
@@ -73,48 +28,57 @@ int	ft_isdigits(char *str)
 	return (1);
 }
 
+int	dup_fd(t_job *job, int old_fd, int new_fd)
+{
+	int	returnable;
+
+	returnable = close_fd(job, old_fd);
+	if (returnable != -1)
+	{
+		if (old_fd == 0)
+			job->fd_stdin = dup(new_fd);
+		else if (old_fd == 1)
+			job->fd_stdout = dup(new_fd);
+		else if (old_fd == 2)
+			job->fd_stderr = dup(new_fd);
+		else 
+			old_fd = dup(new_fd);;
+	}
+	if (job->fd_stdin == -1 || job->fd_stdout == -1 || job->fd_stderr == -1
+		|| old_fd == -1)
+		returnable = -1;
+	return (returnable);
+}
+
 t_job	*token_greatand(t_job *job, t_term *term, t_node *current)
 {
 	int		new_fd;
 	int		old_fd;
+	char	*tkn_word;
 	t_job	*returnable;
 
-	if (!current->right || current->right->left
-		|| current->right->right)
-		return (NULL);
-	returnable = get_job(job, current, term);
+	returnable = get_left_job(job, current, term);
 	if (!returnable)
 		return (NULL);
-	if (!current->subtokens)
-		old_fd = 1;
-	else if (current->subtokens->maintoken == tkn_io_number)
-		old_fd = ft_atoi(current->subtokens->value);
+	old_fd = get_fd(current, 1);
+	tkn_word = get_filename(current);
+	if (ft_strequ(tkn_word, "-"))
+	{
+		if (-1 == close_fd(returnable, old_fd))
+			return (NULL);
+	}
+	else if (ft_isdigits(tkn_word))
+	{
+		new_fd = atoi(tkn_word);
+		if (-1 == new_fd)
+			return(NULL);
+		if (-1 == dup_fd(returnable, old_fd, new_fd))
+			return (NULL);
+	}
 	else
 	{
 		free_jobs(returnable);
 		return (NULL);
-	}
-	if (ft_strequ(current->right->command, "-"))
-	{
-		if (old_fd == 0)
-			close(returnable->fd_stdin);
-		else if (old_fd == 1)
-			close(returnable->fd_stdout);
-		else if (old_fd == 2)
-			close(returnable->fd_stderr);
-		if (-1 == close(old_fd))
-		{
-			free_jobs(returnable);
-			return (NULL);
-		}
-	}
-	else if (ft_isdigits(current->right->command))
-	{
-		new_fd = atoi(current->right->command);
-		if (-1 == new_fd)
-			return(NULL);
-		if (-1 == add_fd(returnable, old_fd, new_fd))
-			return (NULL);
 	}
 	return(returnable);
 }

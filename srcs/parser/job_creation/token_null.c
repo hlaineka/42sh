@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 17:32:13 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/08 10:45:13 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/15 14:54:32 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,10 @@ t_job	*token_null(t_job *job, t_term *term, t_node *current)
 	t_job	*returnable;
 
 	returnable = NULL;
-	if (!job && term)
-	{
+	if (job && term)
+		returnable = job;
+	else
 		returnable = init_job();
-		traverse_nulls(current, returnable->first_process->argv);
-		job = returnable;
-	}
+	traverse_nulls(current, returnable->first_process->argv);
 	return(returnable);
 }
