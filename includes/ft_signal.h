@@ -6,7 +6,7 @@
 /*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 11:12:09 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/16 11:20:49 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/17 11:33:14 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@
 
 void	start_signal(void);
 void	sig_handler_input(int signo);
+void	sig_handler_exec(int signo);
 
 #endif

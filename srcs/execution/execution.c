@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 18:28:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/13 15:17:00 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/17 10:40:38 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ static void	start_new_jobs(t_job *jobs, int *rpipe)
 {
 	t_process	*current;
 
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	close(STDERR_FILENO);
 	dup2(jobs->fd_stdin, STDIN_FILENO);
 	dup2(jobs->fd_stderr, STDERR_FILENO);
 	close(jobs->fd_stdin);

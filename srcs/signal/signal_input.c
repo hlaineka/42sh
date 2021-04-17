@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 10:34:59 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/16 12:05:55 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/17 10:47:09 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	sig_handler_input(int signo)
 	ft_putrstr_input(input->rrs, input, term);
 	input->ls[0] = '\0';
 	input->rrs[0] = '\0';
+	*input->quote = PROMPT_NORMAL;
 	ft_putstr_fd("\n\r", STDOUT_FILENO);
 	ft_memdel((void**)input->ret_str);
 	*input->input_temp = NULL;

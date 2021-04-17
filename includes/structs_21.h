@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/16 11:54:03 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/17 11:36:17 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_input
 	t_clist				*last_comm;
 	char				**ret_str;
 	char				**input_temp;
+	int					*quote;
 	char				*ls;
 	char				*rrs;
 	char				*clipboard;
@@ -162,6 +163,7 @@ typedef struct s_term
 	size_t				ncolumns;
 	int					cursorcol;
 	int					cursorrow;
+	t_job				*jobs;
 	int					fd_stdin;
 	int					fd_stdout;
 	int					fd_stderr;
