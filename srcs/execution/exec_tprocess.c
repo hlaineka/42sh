@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 18:51:15 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/17 11:35:42 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/19 10:35:24 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,13 @@ int	exec_tprocess(t_process *proc)
 		exit(execve(fpath, proc->argv, proc->envp)); // how to return to parent?
 	}
 	else
-		wait(NULL);
+	{
+		waitpid(proc->pid, &proc->status, 0);
+//		ft_printf_fd(4, "WIFEXITED=%d\n", WIFEXITED(proc->status));
+//		ft_printf_fd(4, "WEXITSTATUS=%d\n", WEXITSTATUS(proc->status));
+//		ft_printf_fd(4, "argv[0]=%s status=%d\n", fpath, proc->status);
+	}
+//		wait(NULL);
 	signal(SIGINT, SIG_DFL);
-	return ((g_pid = 0));
+	return ((proc->status));
 }
