@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/26 14:16:00 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/17 10:45:46 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,32 +64,33 @@ char	*read_input_tty(int prompt_mode, t_input *input, t_term *term)
 	return (str);
 }
 
-static char	*get_input_tty(char *str, t_term *term, t_input *input)
+static char	*get_input_tty(t_term *term, t_input *input)
 {
 	int		quote;
 	int		len;
 	char	*temp;
 	char	*temp2;
 
-	temp = NULL;
+	input->input_temp = &temp;
+	input->quote = &quote;
 	quote = PROMPT_START;
 	while (quote)
 	{
 		if (quote == PROMPT_START)
 			quote = PROMPT_NORMAL;
 		temp = read_input_tty(quote, input, term);
-		len = ft_strlen(str);
-		if (!str)
+		len = ft_strlen(*input->ret_str);
+		if (!(*input->ret_str))
 			temp2 = ft_strdup(temp);
 		else
-			temp2 = ft_strjoin(str, temp);
-		free(str);
+			temp2 = ft_strjoin(*input->ret_str, temp);
+		free(*input->ret_str);
 		free(temp);
-		str = temp2;
-		temp = str + len;
+		*input->ret_str = temp2;
+		temp = *input->ret_str + len;
 		quote = ft_is_quote_open(quote, temp);
 	}
-	return (str);
+	return (*input->ret_str);
 }
 
 char	*get_input(int argc, char **argv, t_term *term, t_input *input)
@@ -97,15 +98,39 @@ char	*get_input(int argc, char **argv, t_term *term, t_input *input)
 	char	*str;
 
 	str = NULL;
+	input->ret_str = &str;
+// do signal fail check
+	signal(SIGINT, SIG_DFL);
+	signal(SIGINT, sig_handler_input);
+
+	signal(SIGCONT, sig_handler_input);
+	signal(SIGINT, sig_handler_input);
+	signal(SIGTSTP, sig_handler_input);
+	signal(SIGTERM, sig_handler_input);
+	signal(SIGQUIT, sig_handler_input);
+	signal(SIGHUP, sig_handler_input);
+	signal(SIGPIPE, sig_handler_input);
+	signal(SIGALRM, sig_handler_input);
+	signal(SIGXCPU, sig_handler_input);
+	signal(SIGXFSZ, sig_handler_input);
+	signal(SIGABRT, sig_handler_input);
+	signal(SIGVTALRM, sig_handler_input);
+	signal(SIGPROF, sig_handler_input);
+
+
 	if (argc == 1)
 	{
 		enable_raw_mode(term);
-		str = get_input_tty(str, term, input);
+		str = get_input_tty(term, input);
 		input->history = command_to_history(input, str);
 		if (!input->history)
 			err_fatal(ERR_MALLOC, NULL, term);
 		disable_raw_mode_continue(term);
 	}
+
+
+
+	signal(SIGINT, SIG_DFL);
 	(void)argv;
 	return (str);
 }

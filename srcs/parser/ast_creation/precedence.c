@@ -6,13 +6,24 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 16:01:36 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/11 12:01:36 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/19 14:05:53 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "libft.h"
 #include <stdbool.h>
+
+int	is_redirectionop(t_token *tkn)
+{
+	if (tkn && (tkn->maintoken == tkn_io_number || tkn->maintoken == tkn_less
+	|| tkn->maintoken == tkn_great || tkn->maintoken == tkn_dless
+	|| tkn->maintoken == tkn_dgreat || tkn->maintoken == tkn_lessand
+	|| tkn->maintoken == tkn_greatand || tkn->maintoken == tkn_lessgreat
+	|| tkn->maintoken == tkn_dlessdash || tkn->maintoken == tkn_clobber))
+		return (1);
+	return (0);
+}
 
 /*
 ** When there are two plain words one after another, a delimiter token needs to
@@ -22,21 +33,28 @@
 static t_token	*add_delimiter_token(t_token *tkn)
 {
 	t_token	*new;
+	t_token	*temp;
 
 	new = tkn;
-	if (tkn->maintoken == tkn_word && tkn->next && (tkn->next->maintoken
-			== tkn_word || tkn->next->maintoken == tkn_lpar))
+	if (tkn->maintoken == tkn_word)
 	{
-		new = malloc(sizeof(t_token));
-		ft_bzero(new, sizeof(t_token));
-		new->value = ft_strdup("(null)");
-		new->precedence = 5;
-		tkn->next->prev = new;
-		new->next = tkn->next;
-		tkn->next = new;
-		new->prev = tkn;
+		
+		temp = tkn->prev;
+		while (temp && is_redirectionop(temp))
+			temp = temp->prev;
+		if (temp && (temp->maintoken == tkn_word || temp->maintoken == tkn_lpar))
+		{
+			new = malloc(sizeof(t_token));
+			ft_bzero(new, sizeof(t_token));
+			new->value = ft_strdup("(null)");
+			new->precedence = 5;
+			new->prev = tkn->prev;
+			new->next = tkn;
+			tkn->prev->next = new;
+			tkn->prev = new;
+		}
 	}
-	return (new);
+	return (tkn);
 }
 
 /*

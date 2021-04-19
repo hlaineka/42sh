@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 14:48:16 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/16 11:18:16 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/19 14:06:59 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ t_node	*create_opnode(t_token *tkn, t_node **node_stack, int *i)
 		*i = *i - 1;
 		new_node->right = node_stack[*i];
 		node_stack[*i]->parent = new_node;
+		node_stack[*i] = NULL;
 	}
 	return (new_node);
 }
@@ -92,7 +93,6 @@ int	push_operator(t_token *tkn, t_node **node_stack)
 	new_node = create_opnode(tkn, node_stack, &i);
 	if (i > 0)
 	{
-		node_stack[i] = NULL;
 		new_node->left = node_stack[--i];
 		node_stack[i]->parent = new_node;
 	}
@@ -123,6 +123,8 @@ t_node	*ast_builder(t_token *new_first)
 	}
 	if (node_stack[1])
 	{
+		ft_printf((node_stack[0])->command);
+		ft_printf((node_stack[1])->command);
 		ft_printf_fd(2, "syntax error");
 		return (NULL);
 	}
