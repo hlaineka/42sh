@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 18:28:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/19 13:56:29 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/19 14:29:48 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	execute_jobs(t_job *jobs, t_term *term)
 		{
 			current->envp = term->envp;
 			current->argc = ft_strarrlen(current->argv);
-			ft_printf_fd(2, "argv[0]=%s j fd=%d\n", current->argv[0], jobs->fd_stdout);
+//			ft_printf_fd(2, "argv[0]=%s j fd=%d\n", current->argv[0], jobs->fd_stdout);
 			if (!is_builtin(current))
 			{
 				current->status = exec_tprocess(current);
