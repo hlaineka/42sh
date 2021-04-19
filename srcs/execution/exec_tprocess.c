@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 18:51:15 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/11 12:45:32 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/19 10:35:24 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,21 @@ int	exec_tprocess(t_process *proc)
 		return (err_builtin(E_NOENT, proc->argv[0], NULL));
 	if (access(fpath, X_OK) == -1)
 		return (err_builtin(E_PERM, proc->argv[0], NULL));
-	if ((g_pid = fork()) == 0)
+//	if ((g_pid = fork()) == 0)
+	signal(SIGINT, sig_handler_exec);
+	if ((proc->pid = fork()) == 0)
 	{
+		signal(SIGINT, SIG_DFL);
 		exit(execve(fpath, proc->argv, proc->envp)); // how to return to parent?
 	}
 	else
-		wait(NULL);
-	return ((g_pid = 0));
+	{
+		waitpid(proc->pid, &proc->status, 0);
+//		ft_printf_fd(4, "WIFEXITED=%d\n", WIFEXITED(proc->status));
+//		ft_printf_fd(4, "WEXITSTATUS=%d\n", WEXITSTATUS(proc->status));
+//		ft_printf_fd(4, "argv[0]=%s status=%d\n", fpath, proc->status);
+	}
+//		wait(NULL);
+	signal(SIGINT, SIG_DFL);
+	return ((proc->status));
 }

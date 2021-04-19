@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/16 14:26:37 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/19 13:32:38 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		main(int argc, char **argv, char **envp)
 
 	next_job = NULL;
 	g_term = &term;
+	g_input = &input;
 	start_signal(); //signals not done;
 	initialize(&input, &term, envp, argv);
 //	tputs(tgoto(term.cm_string, 0, 0), 1, ft_putc);
@@ -41,7 +42,6 @@ int		main(int argc, char **argv, char **envp)
 	{
 		input_str = get_input(1, argv, &term, &input); // not done, error check?
 //		ft_putstr_input(input_str, &input, &term);
-		ft_printf("%s", input_str);
 //		ft_printf_fd(STDOUT_FILENO, "\n\r%s\n\r", input_str);
 //		ft_printf_fd(STDOUT_FILENO, "%s\n", input_str);
 		if (!ft_strcmp(input_str, "exit\n"))

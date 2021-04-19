@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/12 14:43:42 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/16 11:24:03 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int			copy_envp(char **envp, t_term *term);
 void		err_fatal(int error_no, char *s_str, t_term *term);
 void		err_quit(int error_no, char *s_str);
 int			err_return(int error_no, char *s_str);
+
+void		init_input_tty(t_input *input, int prompt_mode);
 
 /*
 ** TERMINAL
