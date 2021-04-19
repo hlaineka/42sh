@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 19:42:21 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/16 09:33:03 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/16 12:26:08 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ t_job	*token_semi(t_job *job, t_term *term, t_node *current)
 	t_job	*right;
 	t_job	*returnable;
 	
+	left = NULL;
+	right = NULL;
+	returnable = NULL;
 	if (current->left)
 		left = tree_traversal(NULL, current->left, term);
 	if (current->right)

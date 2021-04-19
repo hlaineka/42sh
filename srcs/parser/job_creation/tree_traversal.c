@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 11:58:18 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/15 14:09:28 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/16 12:29:30 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ static const op_function g_op_functions[] =
 	[tkn_rbrace] = NULL,
 	[tkn_bang] = NULL,
 	[tkn_in] = NULL,
+	[tkn_redirop] = NULL,
+	[tkn_syntax_error] = NULL,
+	[tkn_dash] = NULL,
 	[tkn_eoi] = NULL,
 	[tkn_eoi + 1] = NULL
 };
