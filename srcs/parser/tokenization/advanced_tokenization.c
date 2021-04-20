@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:01:44 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/20 13:14:01 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/20 19:43:25 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,28 +125,44 @@ int	dollar_expansion(t_token *tkn, t_term *term, int dollar)
 	return (0);
 }
 
+int	token_value_expansion(t_token *tkn, t_term *term)
+{
+	int		i;
+	
+	i = 0;
+	while(tkn->value && tkn->value[i])
+	{
+		if (tkn->value[i] == '~' && -1 == tilde_expansion(tkn, term, i))
+			return (-1);
+		if (tkn->value[i] == '$' && -1 == dollar_expansion(tkn, term, i))
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+
 t_token *word_expansions(t_token *first, t_term *term)
 {
 	t_token *temp;
-	int		i;
+	t_token	*temp_sub;
 
 	temp = first;
 	while (temp)
 	{
-		i = 0;
-		while(temp->value && temp->value[i])
+		if (-1 == token_value_expansion(temp, term))
 		{
-			if (temp->value[i] == '~' && -1 == tilde_expansion(temp, term, i))
+			free_tokens(first);
+			return (NULL);
+		}
+		temp_sub = temp->subtokens;
+		while(temp_sub)
+		{
+			if (-1 == token_value_expansion(temp_sub, term))
 			{
 				free_tokens(first);
 				return (NULL);
 			}
-			if (temp->value[i] == '$' && -1 == dollar_expansion(temp, term, i))
-			{	
-				free_tokens(first);
-				return (NULL);
-			}
-			i++;
+			temp_sub = temp_sub->next;
 		}
 		temp = temp->next;
 	}

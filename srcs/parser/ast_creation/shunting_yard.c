@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 16:07:19 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/31 15:21:54 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/20 20:31:19 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ t_token	*shunting_yard(t_token *first)
 	while (op_stack)
 	{
 		temp = op_stack->prev;
-		push_to_end(op_stack, output);
+		output = push_to_end(op_stack, output);
 		op_stack = temp;
 	}
 	return (output);

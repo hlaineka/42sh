@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 13:30:11 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/16 14:25:43 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/20 20:45:57 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_job	*get_left_job(t_job *job, t_node *current, t_term *term)
 	t_job	*returnable;
 
 	returnable = NULL;
+	if (!current)
+		return (NULL);
 	if (current->left)
 		returnable = tree_traversal(job, current->left, term);
 	if (current->left && !returnable)
@@ -60,12 +62,17 @@ char	*get_filename(t_node *current)
 
 int	add_fd(t_job *job, int old_fd, int new_fd)
 {
+	t_process	*temp;
+
+	temp = job->first_process;
+	while (temp && temp->next)
+		temp = temp->next;
 	if (old_fd == 0)
-		job->fd_stdin = dup2(new_fd, job->fd_stdin);
+		temp->fd_stdin = dup2(new_fd, job->fd_stdin);
 	else if (old_fd == 1)
-		job->fd_stdout = dup2(new_fd, job->fd_stdout);
+		temp->fd_stdout = dup2(new_fd, job->fd_stdout);
 	else if (old_fd == 2)
-		job->fd_stderr = dup2(new_fd, job->fd_stderr);
+		temp->fd_stderr = dup2(new_fd, job->fd_stderr);
 	else
 	{
 		//this has to be handled somehow
