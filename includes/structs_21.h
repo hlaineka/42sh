@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/20 19:17:26 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/20 22:20:05 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_input
 	int					prompt_col; //limit x
 	int					cursor_row;
 	int					cursor_col;
+	int					heredoc;
 }						t_input;
 
 typedef struct s_process

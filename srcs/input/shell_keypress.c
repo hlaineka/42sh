@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/13 16:19:23 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/20 22:15:01 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ static int	do_special_keys(char *rc, t_input *input, t_term *term)
 			tputs(term->bl_string, 1, ft_putc);
 		else
 		{
-			ft_strcpy(input->ls, "exit");
+			if (input->heredoc)
+				ft_strcpy(input->ls, "EOF");
+			else
+				ft_strcpy(input->ls, "exit");
 			input->rrs[0] = '\0';
 			return (1);
 		}

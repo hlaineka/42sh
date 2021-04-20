@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/20 20:07:24 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/20 22:28:10 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,15 @@
 # define PROMPT_DQUOTE 34
 # define PROMPT_BQUOTE 96
 # define PROMPT_ESCAPECHAR 92
+# define PROMPT_HEREDOC 127
 
 # include "includes.h"
 # include "structs_21.h"
+
+char		*get_input(int argc, char **argv, t_term *term, t_input *input);
+char		*get_input_heredoc(char *eof, t_input *input, t_term *term);
+
+char		*read_input_tty(int prompt_mode, t_input *input, t_term *term);
 
 void		initialize(t_input *input, t_term *term, char **envp, char **argv);
 int			copy_envp(char **envp, t_term *term);
@@ -70,7 +76,6 @@ void		right_keypress(t_input *input, t_term *term);
 void		backspace_keypress(t_input *input, t_term *term);
 void		delete_keypress(t_input *input, t_term *term);
 
-char		*get_input(int argc, char **argv, t_term *term, t_input *input);
 int			get_pos(int *y, int *x);
 
 void		move_char_from_s1_to_s2(char *s1, char *s2, int s2_limit);

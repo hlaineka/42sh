@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:10:18 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/26 12:03:05 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/20 22:22:37 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ int	print_prompt(int mode)
 		return (ft_printf_fd(STDOUT_FILENO, "bquote> "));
 	if (mode == PROMPT_ESCAPECHAR)
 		return (ft_printf_fd(STDOUT_FILENO, "> "));
+	if (mode == PROMPT_HEREDOC)
+		return (ft_printf_fd(STDOUT_FILENO, "heredoc> "));
 	return (ft_printf_fd(STDOUT_FILENO, "$> "));
 }
