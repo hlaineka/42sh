@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:23:19 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/06 13:54:17 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/20 12:03:54 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ char				*ft_strsub_mid(const char *s, unsigned int start,
 						size_t end);
 char				*ft_remove_chars(char *str, int c);
 void				ft_strtoupper(char *str);
+char				*ft_strcut(char *str, int start, int end);
 
 #endif

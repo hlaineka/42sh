@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 12:35:03 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/03/24 17:15:51 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/20 13:18:44 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,28 @@
 /*
 ** turns intiger value to char*
 */
+
+int	ft_define_length(int n)
+{
+	int	i;
+	int	int_min;
+
+	int_min = -2147483647;
+	i = 1;
+	if (n < int_min)
+		return (11);
+	if (n < 0)
+	{
+		i++;
+		n = n * (-1);
+	}
+	while ((n / 10) > 0)
+	{
+		i++;
+		n = n / 10;
+	}
+	return (i);
+}
 
 char	*ft_itoa(int n)
 {

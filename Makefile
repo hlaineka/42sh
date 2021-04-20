@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/04/19 13:07:12 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/04/19 18:26:23 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,8 @@ _SRC_TOKENIZATION = lexer.c \
 					basic_tokens.c \
 					basic_token_functions.c \
 					basic_token_functions2.c \
-					operator_tokens.c
+					operator_tokens.c \
+					advanced_tokenization.c
 
 _SRC_AST_CREATION = ast_creation.c \
 					precedence.c \

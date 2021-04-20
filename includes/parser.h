@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/15 16:50:58 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/19 18:28:44 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,6 +233,12 @@ t_job				*token_greatand(t_job *job, t_term *term, t_node *current);
 t_token				*lexer(char *input, t_term *term);
 
 /*
+** parser/tokenization/advanced_tokenization.c
+*/
+
+t_token				*advanced_tokenization(t_token *first, t_term *term);
+
+/*
 ** parser/tokenization/io_numbers.c
 */
 
@@ -279,5 +285,6 @@ t_token				*add_subtoken(t_token *current, t_token *sub);
 */
 
 t_token				*define_basic_tokens(char *input);
+t_token				*add_quotearray(t_token *current);
 
 #endif

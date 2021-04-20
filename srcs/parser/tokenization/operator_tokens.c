@@ -6,43 +6,12 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 15:57:08 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/15 14:00:20 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/20 11:58:47 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "libft.h"
-
-char	*ft_strcut(char *str, int start, int end)
-{
-	char	*returnable;
-	int		i;
-	int		w;
-	int		len;
-
-	returnable = malloc(end - start + 1);
-	len = ft_strlen(str);
-	i = start;
-	w = 0;
-	while (i < end)
-	{
-		returnable[w] = str[i];
-		w++;
-		i++;
-	}
-	returnable[w] = '\0';
-	i = start;
-	w = end;
-	while (str[w])
-	{
-		str[i] = str[w];
-		i++;
-		w++;
-	}
-	while (i <= len)
-		str[i++] = '\0';
-	return (returnable);
-}
 
 int	handle_tkn_io_number(t_token *current)
 {

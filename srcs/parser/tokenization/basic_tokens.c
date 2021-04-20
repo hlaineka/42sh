@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 11:59:34 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/15 16:57:42 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/20 12:50:22 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,26 +116,6 @@ char	*get_tokenstr(char **source, int *maintoken)
 	return (returnable);
 }
 
-t_token	*get_basic_token(char **source)
-{
-	t_token	*current;
-	char	*str;
-	int		maintoken;
-
-	maintoken = tkn_word;
-	str = NULL;
-	while ((!str || !str[0]) && **source)
-		str = get_tokenstr(source, &maintoken);
-	current = NULL;
-	if (str)
-	{
-		current = init_token();
-		current->value = str;
-		current->maintoken = maintoken;
-	}
-	return (current);
-}
-
 /*
 ** The index of every character is marked either by 0, or the ascii
 ** value of the quoting character that applies. If multiple quotes
@@ -153,7 +133,9 @@ t_token	*add_quotearray(t_token *current)
 
 	if (current)
 	{
-		quotearray = malloc(sizeof(int) * ft_strlen(current->value));
+		if (current->quotes)
+			ft_free(current->quotes);
+		quotearray = malloc(sizeof(int) * ft_strlen(current->value) + 1);
 		ft_bzero(quotearray, sizeof(int) * ft_strlen(current->value));
 		double_quote = FALSE;
 		single_quote = FALSE;
@@ -182,6 +164,27 @@ t_token	*add_quotearray(t_token *current)
 	return (current);
 }
 
+t_token	*get_basic_token(char **source)
+{
+	t_token	*current;
+	char	*str;
+	int		maintoken;
+
+	maintoken = tkn_word;
+	str = NULL;
+	while ((!str || !str[0]) && **source)
+		str = get_tokenstr(source, &maintoken);
+	current = NULL;
+	if (str)
+	{
+		current = init_token();
+		current->value = str;
+		current->maintoken = maintoken;
+		current = add_quotearray(current);
+	}
+	return (current);
+}
+
 t_token	*define_basic_tokens(char *input)
 {
 	t_token	*current;
@@ -203,7 +206,6 @@ t_token	*define_basic_tokens(char *input)
 			prev->next = current;
 		prev = current;
 		current = get_basic_token(&str_ptr);
-		current = add_quotearray(current);
 	}
 	if (current)
 		free_token(current);

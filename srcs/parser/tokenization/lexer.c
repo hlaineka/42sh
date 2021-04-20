@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:32:48 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/14 16:33:21 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/19 18:22:44 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_token	*lexer(char *input, t_term *term)
 	first = NULL;
 	first = define_basic_tokens(input);
 	first = validate_operator_tokens(first);
-	//first = advanced_tokenization(first);
+	first = advanced_tokenization(first, term);
 	if (term->flag_debug == 1)
 		debug_print_tokens(first);
 	if (!first)

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 18:28:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/19 13:07:42 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/19 14:36:47 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static void	start_new_jobs(t_job *jobs, int *rpipe)
 {
 	t_process	*current;
 
-	close(STDIN_FILENO);
-	close(STDOUT_FILENO);
-	close(STDERR_FILENO);
+//	close(STDIN_FILENO);
+//	close(STDOUT_FILENO);
+//	close(STDERR_FILENO);
 	dup2(jobs->fd_stdin, STDIN_FILENO);
 	dup2(jobs->fd_stderr, STDERR_FILENO);
 	close(jobs->fd_stdin);
@@ -94,10 +94,13 @@ void	execute_jobs(t_job *jobs, t_term *term)
 		{
 			current->envp = term->envp;
 			current->argc = ft_strarrlen(current->argv);
+//			ft_printf_fd(2, "argv[0]=%s j fd=%d\n", current->argv[0], jobs->fd_stdout);
 			if (!is_builtin(current))
 			{
 				current->status = exec_tprocess(current);
 			}
+			if (current->status)
+				break ;
 			current = current->next;
 			set_pipeline_to_process(current, jobs, rpipe);
 		}
