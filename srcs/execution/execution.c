@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 18:28:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/19 14:36:47 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/20 21:47:52 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,25 @@ static void	set_pipeline_to_process(t_process *cur, t_job *jobs, int *rpipe)
 	}
 }
 
+static void	redirect_process(int fd_in, int fd_out, int fd_err)
+{
+	if (fd_in != STDIN_FILENO)
+	{
+		dup2(fd_in, STDIN_FILENO);
+		close(fd_in);
+	}
+	if (fd_out != STDOUT_FILENO)
+	{
+		dup2(fd_out, STDOUT_FILENO);
+		close(fd_out);
+	}
+	if (fd_err != STDERR_FILENO)
+	{
+		dup2(fd_err, STDERR_FILENO);
+		close(fd_err);
+	}
+}
+
 void	execute_jobs(t_job *jobs, t_term *term)
 {
 	t_process	*current;
@@ -95,6 +114,7 @@ void	execute_jobs(t_job *jobs, t_term *term)
 			current->envp = term->envp;
 			current->argc = ft_strarrlen(current->argv);
 //			ft_printf_fd(2, "argv[0]=%s j fd=%d\n", current->argv[0], jobs->fd_stdout);
+			redirect_process(current->fd_stdin, current->fd_stdout, current->fd_stderr);
 			if (!is_builtin(current))
 			{
 				current->status = exec_tprocess(current);
