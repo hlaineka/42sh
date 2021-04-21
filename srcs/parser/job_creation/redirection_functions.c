@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 13:30:11 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/20 20:45:57 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/21 09:30:15 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	add_fd(t_job *job, int old_fd, int new_fd)
 		return (-1);
 	}
 	close(new_fd);
-	if (job->fd_stdin == -1 || job->fd_stdout == -1 || job->fd_stderr == -1)
+	if (temp->fd_stdin == -1 || temp->fd_stdout == -1 || temp->fd_stderr == -1)
 	{
 		//print fd error
 		free_jobs(job);
@@ -102,14 +102,18 @@ int	get_fd(t_node *current, int default_fd)
 
 int	close_fd(t_job *job, int old_fd)
 {
-	int	returnable;
+	int			returnable;
+	t_process	*temp;
 
+	temp = job->first_process;
+	while (temp && temp->next)
+		temp = temp->next;
 	if (old_fd == 0)
-		returnable = close(job->fd_stdin);
+		returnable = close(temp->fd_stdin);
 	else if (old_fd == 1)
-		returnable = close(job->fd_stdout);
+		returnable = close(temp->fd_stdout);
 	else if (old_fd == 2)
-		returnable = close(job->fd_stderr);
+		returnable = close(temp->fd_stderr);
 	else
 		returnable = close(old_fd);
 	if (returnable == -1)

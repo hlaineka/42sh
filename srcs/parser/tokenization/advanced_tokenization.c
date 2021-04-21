@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:01:44 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/20 19:43:25 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/21 09:52:51 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	tilde_expansion(t_token *tkn, t_term *term, int tilde)
 	char			*temp;
 	struct passwd	*temp_pwd;
 	
-	if (tkn->quotes[tilde] != 0)
+	if ((tilde != 0 && tkn->maintoken != tkn_assignment_word) || tkn->quotes[tilde] != 0)
 		return (0);
 	end = tilde;
 	while (tkn->value[end] && tkn->value[end] != '/')

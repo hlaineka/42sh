@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 19:45:44 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/20 21:08:53 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/21 09:55:08 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ t_job	*token_dless(t_job *job, t_term *term, t_node *current)
 	fd = get_fd(current, 1);
 	returnable = get_left_job(job, current, term);
 	delimiter = get_filename(current);
-	//delimiter = ft_strjoin_frees1(delimiter, "\n");
-	ft_printf("> ");
-	get_next_line(0, &input);
+	//delimiter = ft_strjoin_frees1(delimiter, "\n"); //uncomment
+	ft_printf("> "); //substitute this
+	get_next_line(0, &input); //substitute this
 	while (!ft_strequ(delimiter, input))
 	{
 		output = ft_strjoin_all(output, input, fd);
-		ft_printf("> ");
-		get_next_line(0, &input);
+		ft_printf("> "); //substitute this
+		get_next_line(0, &input); //substitute this
 	}
 	if (returnable)
 		write(returnable->first_process->fd_stdin, output, ft_strlen(output));
