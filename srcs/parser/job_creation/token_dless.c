@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 19:45:44 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/21 09:55:08 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/21 11:53:04 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,27 +46,32 @@ t_job	*token_dless(t_job *job, t_term *term, t_node *current)
 {
 	char	*delimiter;
 	int		fd;
-	char	*input;
+//	char	*input;
+//	t_input	tinput;
 	char	*output;
 	t_job	*returnable;
 
+//	ft_bzero(&tinput, sizeof(t_input));
 	output = NULL;
 	fd = get_fd(current, 1);
 	returnable = get_left_job(job, current, term);
 	delimiter = get_filename(current);
-	//delimiter = ft_strjoin_frees1(delimiter, "\n"); //uncomment
-	ft_printf("> "); //substitute this
-	get_next_line(0, &input); //substitute this
-	while (!ft_strequ(delimiter, input))
-	{
-		output = ft_strjoin_all(output, input, fd);
-		ft_printf("> "); //substitute this
-		get_next_line(0, &input); //substitute this
-	}
+	delimiter = ft_strjoin_frees1(delimiter, "\n"); //uncomment
+	output = get_input_heredoc(delimiter, term->here_input, term);
+//	ft_printf("> "); //substitute this
+//	get_next_line(0, &input); //substitute this
+//	while (!ft_strequ(delimiter, input))
+//	{
+//		output = ft_strjoin_all(output, input, fd);
+//		ft_printf("> "); //substitute this
+//		get_next_line(0, &input); //substitute this
+//	}
 	if (returnable)
 		write(returnable->first_process->fd_stdin, output, ft_strlen(output));
 	else
 		write(STDOUT_FILENO, output, ft_strlen(output));
-	ft_free(output);
+	ft_memdel((void**)&output);
+//	ft_printf("DONG1");
+//	while(1);
 	return (returnable);
 }

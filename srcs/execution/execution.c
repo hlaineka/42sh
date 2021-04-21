@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 18:28:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/20 21:47:52 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/21 11:47:28 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,9 @@ void	execute_jobs(t_job *jobs, t_term *term)
 			current->argc = ft_strarrlen(current->argv);
 //			ft_printf_fd(2, "argv[0]=%s j fd=%d\n", current->argv[0], jobs->fd_stdout);
 			redirect_process(current->fd_stdin, current->fd_stdout, current->fd_stderr);
-			if (!is_builtin(current))
+			if (current->argv[0][0] == '\0')
+				ft_putendl("EMPTY ARGV");
+			else if (!is_builtin(current))
 			{
 				current->status = exec_tprocess(current);
 			}

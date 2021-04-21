@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/19 14:36:37 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/21 11:56:56 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		main(int argc, char **argv, char **envp)
 {
 	t_term		term;
 	t_input		input;
+	t_input		here_input;
 	char		*input_str;
 	t_job		*next_job;
 
@@ -29,6 +30,8 @@ int		main(int argc, char **argv, char **envp)
 	g_input = &input;
 	start_signal(); //signals not done;
 	initialize(&input, &term, envp, argv);
+	init_input(&here_input);
+	term.here_input = &here_input;
 //	tputs(tgoto(term.cm_string, 0, 0), 1, ft_putc);
 //	tputs(term.cd_string, 1, ft_putc);
 

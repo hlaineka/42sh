@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 10:34:59 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/17 10:47:09 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/21 11:24:10 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,8 @@ void	sig_handler_input(int signo)
 	ft_memdel((void**)input->ret_str);
 	*input->input_temp = NULL;
 // is quote on?
-	init_input_tty(input, PROMPT_START);
+	if (input->heredoc)
+		init_input_tty(input, PROMPT_HEREDOC);
+	else
+		init_input_tty(input, PROMPT_START);
 }
