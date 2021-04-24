@@ -6,11 +6,23 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 18:51:15 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/19 10:35:24 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/23 14:42:37 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes.h"
+
+void	signal_to_default(void)
+{
+	int		i;
+
+	i = 1;
+	while (i < 30)
+	{
+		signal(i, SIG_DFL);
+		i++;
+	}
+}
 
 int	exec_tprocess(t_process *proc)
 {
@@ -29,12 +41,21 @@ int	exec_tprocess(t_process *proc)
 	if (access(fpath, X_OK) == -1)
 		return (err_builtin(E_PERM, proc->argv[0], NULL));
 //	if ((g_pid = fork()) == 0)
+//	ft_putendl("before fork");
 	signal(SIGINT, sig_handler_exec);
-	if ((proc->pid = fork()) == 0)
+//	proc->pid = fork();
+	if (proc->pid == 0)
 	{
+//		sleep(1);
+//		ft_printf_fd(4, "execve:%s\n", proc->argv[0]);
+		signals_to_default();
+
 		signal(SIGINT, SIG_DFL);
+		signal(SIGPIPE, SIG_DFL);
 		exit(execve(fpath, proc->argv, proc->envp)); // how to return to parent?
 	}
+	else
+/*
 	else
 	{
 		waitpid(proc->pid, &proc->status, 0);
@@ -43,6 +64,8 @@ int	exec_tprocess(t_process *proc)
 //		ft_printf_fd(4, "argv[0]=%s status=%d\n", fpath, proc->status);
 	}
 //		wait(NULL);
+*/
 	signal(SIGINT, SIG_DFL);
-	return ((proc->status));
+	return (0);
+//	return ((proc->status));
 }

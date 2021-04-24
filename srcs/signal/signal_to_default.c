@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_signal.h                                        :+:      :+:    :+:   */
+/*   signal_to_default.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/15 11:12:09 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/23 14:42:24 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/04/23 14:38:09 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/04/23 14:42:29 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SIGNAL_H
-# define FT_SIGNAL_H
+#include "includes.h"
 
-# include <signal.h>
-# include "includes.h"
+void	signals_to_default(void)
+{
+	int		i;
 
-void	start_signal(void);
-void	sig_handler_input(int signo);
-void	sig_handler_exec(int signo);
-void	signals_to_default(void);
-
-#endif
+	i  = 1;
+	while (i < 32)
+	{
+		signal(i, SIG_DFL);
+		i++;
+	}
+}

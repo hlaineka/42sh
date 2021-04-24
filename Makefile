@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/04/20 22:25:56 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/04/23 14:43:38 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,8 @@ _SRC_AST_CREATION = ast_creation.c \
 
 _SRC_SIGNAL =	signal.c \
 				signal_input.c \
-				signal_execution.c
+				signal_execution.c \
+				signal_to_default.c
 
 _SRC_BUILTIN =	builtin_env.c \
 				err_builtin.c \
@@ -115,7 +116,8 @@ _SRC_SETENV =	builtin_setenv.c
 _SRC_UNSETENV =	builtin_unsetenv.c
 
 _SRC_EXECUTION =	exec_tprocess.c \
-					execution.c
+					execution.c \
+					simple_command.c
 
 
 SRC_MAIN = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))
