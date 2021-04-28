@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/04/23 14:43:38 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/04/28 15:53:15 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,7 @@ _SRC_AST_CREATION = ast_creation.c \
 					precedence.c \
 					shunting_yard.c \
 					ast_builder.c \
-					free_ast.c
+					ast_functions.c
 
 _SRC_SIGNAL =	signal.c \
 				signal_input.c \

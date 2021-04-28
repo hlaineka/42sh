@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 16:01:36 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/19 14:05:53 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/28 15:52:37 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,24 @@
 #include "libft.h"
 #include <stdbool.h>
 
+/*
+** Precedence is the order in which the operations are executed. The shunting
+** yard algorithm that changes the token list from infix to postfix notation
+** uses precedence to evaluate the order of operators. In token creation,
+** the filename of redirection operations is saved in the subtokens, and for
+** that reson redirectionoperator are marked as unary operations. pipe |, &&
+** and || are also marked as left associative. A null token is added between
+** two words, since otherwise the shunting yard algorithm would not work.
+*/
+
 int	is_redirectionop(t_token *tkn)
 {
 	if (tkn && (tkn->maintoken == tkn_io_number || tkn->maintoken == tkn_less
-	|| tkn->maintoken == tkn_great || tkn->maintoken == tkn_dless
-	|| tkn->maintoken == tkn_dgreat || tkn->maintoken == tkn_lessand
-	|| tkn->maintoken == tkn_greatand || tkn->maintoken == tkn_lessgreat
-	|| tkn->maintoken == tkn_dlessdash || tkn->maintoken == tkn_clobber))
+			|| tkn->maintoken == tkn_great || tkn->maintoken == tkn_dless
+			|| tkn->maintoken == tkn_dgreat || tkn->maintoken == tkn_lessand
+			|| tkn->maintoken == tkn_greatand || tkn->maintoken == tkn_lessgreat
+			|| tkn->maintoken == tkn_dlessdash || tkn->maintoken
+			== tkn_clobber))
 		return (1);
 	return (0);
 }
@@ -29,7 +40,7 @@ int	is_redirectionop(t_token *tkn)
 ** When there are two plain words one after another, a delimiter token needs to
 ** be added to make sure they bind together in the shunting yard algorithm.
 */
-//do we need one with rpar?
+
 static t_token	*add_delimiter_token(t_token *tkn)
 {
 	t_token	*new;
@@ -38,11 +49,11 @@ static t_token	*add_delimiter_token(t_token *tkn)
 	new = tkn;
 	if (tkn->maintoken == tkn_word)
 	{
-		
 		temp = tkn->prev;
 		while (temp && is_redirectionop(temp))
 			temp = temp->prev;
-		if (temp && (temp->maintoken == tkn_word || temp->maintoken == tkn_lpar))
+		if (temp && (temp->maintoken == tkn_word
+				|| temp->maintoken == tkn_lpar))
 		{
 			new = malloc(sizeof(t_token));
 			ft_bzero(new, sizeof(t_token));

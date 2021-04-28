@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 20:11:26 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/20 20:25:03 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/28 15:47:23 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 #include "libft.h"
 #include "includes.h"
 #include <stdbool.h>
+
+/*
+** The main function for abstract syntax tree creation. First precendance value
+** is added to the tokens with null tokens that are used to combine two words
+** together. After that the tokens are send to shunting yard, and algorithm
+** that changes the infix notation to postfix notation. The abstarct syntax
+** tree creation is much easier from postfic notation. The tokens are printed
+** out after the shunting yard if the shell was started in debug mode. In the
+** end, the abstract syntax tree is created.
+** Parameters: first of the token list, the "global" struct term
+** Return value: the root of the abstract syntax tree.
+*/
 
 static void	debug_printing(t_token *tokens)
 {

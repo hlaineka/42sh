@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/20 20:33:58 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/28 15:53:26 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,9 +167,11 @@ t_node				*ast_builder(t_token *new_first);
 t_node				*ast_creator(t_token *first, t_term *term);
 
 /*
-** parser/ast_creation/free_ast.c
+** parser/ast_creation/ast_functions.c
 */
 
+t_node				*init_node(void);
+int					is_unaryop(t_token *tkn);
 void				free_ast(t_node *root);
 
 /*

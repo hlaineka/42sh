@@ -6,25 +6,29 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 14:48:16 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/19 14:06:59 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/28 16:03:38 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "includes.h"
 
-t_node	*init_node(void)
-{
-	t_node	*returnable;
-
-	returnable = malloc(sizeof(t_node));
-	ft_bzero(returnable, sizeof(t_node));
-	returnable->parent = NULL;
-	returnable->left = NULL;
-	returnable->right = NULL;
-	returnable->command = NULL;
-	return (returnable);
-}
+/*
+** The abstact syntax tree is created from postfix notation with the help of
+** last in first out stack (made with pointers of the tokens). The command
+** echo hi ; ls > file
+** would become
+** echo, hi, (null), ls, >, ;
+** To create the abstract syntax tree, the tokens are read from right to left.
+** all the words are moved to stack as nodes, so in this case we would have
+** echo and hi. Next we have the operator null, which takes two parameters
+** from the stack (echo and hi) and created a node with those as left and right
+** child. The null node is then moved to the stack, followed my ls. > is a
+** unary operation, so it makes a node with only ls, and the > node is moved
+** to stack. At this point, we have > and (null) in the stack. Last we have
+** ; operator, that takes > and (null) as its left and right node. This tree
+** is then returned.
+*/
 
 int	push_word(t_token *tkn, t_node **node_stack)
 {
@@ -44,16 +48,6 @@ int	push_word(t_token *tkn, t_node **node_stack)
 	new_node->operation = tkn->maintoken;
 	delete_token(tkn);
 	node_stack[i] = new_node;
-	return (0);
-}
-
-int	is_unaryop(t_token *tkn)
-{
-	if (tkn->maintoken == tkn_less || tkn->maintoken == tkn_great
-		|| tkn->maintoken == tkn_dless || tkn->maintoken == tkn_dgreat
-		|| tkn->maintoken == tkn_lessand || tkn->maintoken == tkn_greatand
-		|| tkn->maintoken == tkn_lessgreat || tkn->maintoken == tkn_clobber)
-		return (1);
 	return (0);
 }
 

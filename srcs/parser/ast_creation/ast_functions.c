@@ -1,17 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_ast.c                                         :+:      :+:    :+:   */
+/*   ast_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/31 15:07:53 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/09 15:54:10 by hlaineka         ###   ########.fr       */
+/*   Created: 2021/04/28 15:34:07 by hlaineka          #+#    #+#             */
+/*   Updated: 2021/04/28 16:04:05 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "libft.h"
+
+t_node	*init_node(void)
+{
+	t_node	*returnable;
+
+	returnable = malloc(sizeof(t_node));
+	ft_bzero(returnable, sizeof(t_node));
+	returnable->parent = NULL;
+	returnable->left = NULL;
+	returnable->right = NULL;
+	returnable->command = NULL;
+	return (returnable);
+}
+
+int	is_unaryop(t_token *tkn)
+{
+	if (tkn->maintoken == tkn_less || tkn->maintoken == tkn_great
+		|| tkn->maintoken == tkn_dless || tkn->maintoken == tkn_dgreat
+		|| tkn->maintoken == tkn_lessand || tkn->maintoken == tkn_greatand
+		|| tkn->maintoken == tkn_lessgreat || tkn->maintoken == tkn_clobber)
+		return (1);
+	return (0);
+}
 
 void	free_node(t_node *node)
 {

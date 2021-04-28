@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:33:35 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/28 14:23:35 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/28 16:06:34 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	free_jobs(t_job *next_job)
 	job_to_free = next_job;
 	while (job_to_free)
 	{
+		temp_job = job_to_free->next;
 		if (job_to_free->first_process->completed == 1 || job_to_free->first_process->stopped == 1)
 		{
 			close(job_to_free->fd_stdin);
@@ -41,10 +42,9 @@ void	free_jobs(t_job *next_job)
 				temp_process = temp;
 			}
 			ft_free(job_to_free->command);
-			temp_job = job_to_free->next;
 			ft_free(job_to_free);
-			job_to_free = temp_job;
 		}
+		job_to_free = temp_job;
 	}
 }
 
