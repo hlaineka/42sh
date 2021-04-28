@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 19:42:21 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/21 09:43:18 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/28 14:47:33 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,27 @@ t_job	*token_semi(t_job *job, t_term *term, t_node *current)
 {
 	t_job	*left;
 	t_job	*right;
-	t_job	*returnable;
 	
 	left = NULL;
 	right = NULL;
-	if (job)
+	if (!current->left || job)
 		return (NULL);
-	if (current->left)
+	left = tree_traversal(NULL, current->left, term);
+	if (left)
 	{
-		left = tree_traversal(NULL, current->left, term);
-		if (left)
-			execute_jobs(left, term);
+		left->next = term->jobs;
+		term->jobs = left;
+		execute_jobs(left, term);
 	}
 	if (current->right)
 	{
 		right = tree_traversal(NULL, current->right, term);
-		if (right)
+		if (right && current->right->operation != tkn_semi)
+		{
+			right->next = term->jobs;
+			term->jobs = right;
 			execute_jobs(right, term);
+		}
 	}
-	if (!current->left)
-		returnable = right;
-	else
-	{
-		returnable = left;
-		while (left->next)
-			left = left->next;
-		left->next = right;
-	}
-	return (returnable);
+	return (term->jobs);
 }

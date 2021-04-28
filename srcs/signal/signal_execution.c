@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:07:56 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/22 10:21:29 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/28 10:40:57 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	sig_child_handler(void)
 	t_process	*proc;
 
 	pid = waitpid(-1, &status, WNOHANG);
+	//ft_printf("pid=%i", pid);
 	jobs = g_term->jobs;
 	while (jobs)
 	{

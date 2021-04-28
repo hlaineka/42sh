@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 18:28:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/23 11:01:45 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/28 14:48:02 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,42 +149,51 @@ void	execute_jobs(t_job *jobs, t_term *term)
 	int			rpipe[2];
 
 	job = jobs;
-	current = job->first_process;
-	if (!current->next)
+	while(job)
 	{
-		execute_job(jobs, term);
-		return ;
-	}
-	current->envp = term->envp;
-	current->argc = ft_strarrlen(current->argv);
-	pipe(rpipe);
-	fork_and_chain_pipes2(NULL, rpipe, current);
-	lpipe[0] = rpipe[0];
-	lpipe[1] = rpipe[1];
-	current = current->next;
-	while (current->next)
-	{
+		current = job->first_process;
+		if (!current->next)
+		{
+			if (!current->completed && !current->stopped)
+				execute_job(job, term);
+			job = job->next;
+			continue;
+		}
 		current->envp = term->envp;
 		current->argc = ft_strarrlen(current->argv);
 		pipe(rpipe);
-		fork_and_chain_pipes2(lpipe, rpipe, current);
-		close(lpipe[0]);
-		close(lpipe[1]);
+		fork_and_chain_pipes2(NULL, rpipe, current);
 		lpipe[0] = rpipe[0];
 		lpipe[1] = rpipe[1];
 		current = current->next;
-	}
-	current->envp = term->envp;
-	current->argc = ft_strarrlen(current->argv);
-	dup2(term->fd_stdout, STDOUT_FILENO);
-	fork_and_chain_pipes2(lpipe, NULL, current);
-	close(lpipe[0]);
-	close(lpipe[1]);
-	dup2(term->fd_stdin, STDIN_FILENO);
-	dup2(term->fd_stdout, STDOUT_FILENO);
-	dup2(term->fd_stderr, STDERR_FILENO);
+		while (current->next)
+		{
+			if (!current->completed && !current->stopped)
+			{
+				current->envp = term->envp;
+				current->argc = ft_strarrlen(current->argv);
+				pipe(rpipe);
+				fork_and_chain_pipes2(lpipe, rpipe, current);
+				close(lpipe[0]);
+				close(lpipe[1]);
+				lpipe[0] = rpipe[0];
+				lpipe[1] = rpipe[1];
+				current = current->next;
+			}
+		}
+		current->envp = term->envp;
+		current->argc = ft_strarrlen(current->argv);
+		dup2(term->fd_stdout, STDOUT_FILENO);
+		fork_and_chain_pipes2(lpipe, NULL, current);
+		close(lpipe[0]);
+		close(lpipe[1]);
+		dup2(term->fd_stdin, STDIN_FILENO);
+		dup2(term->fd_stdout, STDOUT_FILENO);
+		dup2(term->fd_stderr, STDERR_FILENO);
 //	ft_putendl("EXITEXITEXIT");
-	wait_children(job);
+		wait_children(job);
+		job = job->next;
+	}
 }
 
 // this executes a job not jobs
@@ -203,7 +212,7 @@ void	execute_job(t_job *jobs, t_term *term)
 		return ;
 	}
 */
-	ft_printf_fd(4, "EXECUTE_JOBS\n");
+	//ft_printf_fd(4, "EXECUTE_JOBS\n");
 //	signal(SIGCHLD, sig_handler_exec);
 	signal(SIGPIPE, SIG_IGN);
 //	start_new_jobs(jobs, rpipe);

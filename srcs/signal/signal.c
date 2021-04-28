@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 10:00:31 by helvi             #+#    #+#             */
-/*   Updated: 2021/03/23 13:24:21 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/28 10:08:27 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ void	signwinch_handler(int signo)
 void	sig_handler(int signo)
 {
 	//h_disable_rawmode();
-	if (signo)
+	if (signo == SIGCHLD)
+		sig_child_handler();
+	else
 	{
 		ft_exit(0);
 	}
-	ft_exit(0);
 }
 
 void	sigcont_handler(int signo)
@@ -76,6 +77,7 @@ void	start_signal(void)
 		(signal(SIGIOT, sig_handler) == SIG_ERR) ||
 		(signal(SIGTRAP, sig_handler) == SIG_ERR) ||
 		(signal(SIGSYS, sig_handler) == SIG_ERR) ||
-		(signal(SIGSEGV, sig_handler) == SIG_ERR))
+		(signal(SIGSEGV, sig_handler) == SIG_ERR) ||
+		(signal(SIGCHLD, sig_handler) == SIG_ERR))
 		ft_exit(0);
 }

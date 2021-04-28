@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_signal.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: helvi <helvi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 11:12:09 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/23 14:42:24 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/28 10:06:13 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ void	start_signal(void);
 void	sig_handler_input(int signo);
 void	sig_handler_exec(int signo);
 void	signals_to_default(void);
+void	sig_child_handler(void);
 
 #endif

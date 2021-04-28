@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 19:45:44 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/21 11:53:04 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/28 09:31:48 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*ft_strjoin_all(char *str1, char *str2, int mode)
 t_job	*token_dless(t_job *job, t_term *term, t_node *current)
 {
 	char	*delimiter;
-	int		fd;
+//	int		fd;
 //	char	*input;
 //	t_input	tinput;
 	char	*output;
@@ -53,7 +53,7 @@ t_job	*token_dless(t_job *job, t_term *term, t_node *current)
 
 //	ft_bzero(&tinput, sizeof(t_input));
 	output = NULL;
-	fd = get_fd(current, 1);
+//	fd = get_fd(current, 1);
 	returnable = get_left_job(job, current, term);
 	delimiter = get_filename(current);
 	delimiter = ft_strjoin_frees1(delimiter, "\n"); //uncomment
