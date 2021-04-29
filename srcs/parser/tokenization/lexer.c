@@ -6,12 +6,19 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:32:48 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/20 20:23:07 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/28 17:46:05 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "libft.h"
+
+/*
+** Lexer is the main function responsible for tokenization. Tokenization is
+** divided into three parts, basic tokenization, operator tokenization and
+** advanced tokenization. The created tokens are printed, if the shell is
+** started in debug mode.
+*/
 
 static void	debug_print_tokens(t_token *tokens)
 {

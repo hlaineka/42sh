@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/04/28 15:53:15 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/04/28 17:58:22 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,7 @@ _SRC_TOKENIZATION = lexer.c \
 					basic_tokens.c \
 					basic_token_functions.c \
 					basic_token_functions2.c \
+					basic_token_functions3.c \
 					operator_tokens.c \
 					advanced_tokenization.c
 

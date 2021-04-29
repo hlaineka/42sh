@@ -6,41 +6,18 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 15:57:08 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/20 11:58:47 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/29 10:05:58 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "libft.h"
 
-int	handle_tkn_io_number(t_token *current)
-{
-	int		i;
-	t_token	*new_subtoken;
-
-	i = 0;
-	new_subtoken = NULL;
-	while (current->value[i] && ft_isdigit(current->value[i]))
-		i++;
-	if (!ft_strchr(OPCHARS, current->value[i]))
-		return (-1);
-	if (i > 0)
-	{
-		new_subtoken = init_token();
-		new_subtoken->maintoken = tkn_io_number;
-		new_subtoken->value = ft_strcut(current->value, 0, i);
-		add_subtoken(current, new_subtoken);
-	}
-	return (0);
-}
-
-int	add_filename_tkn(t_token *current)
-{
-	if (!current->next || current->next->maintoken != tkn_word)
-		return (-1);
-	add_subtoken(current, current->next);
-	return (0);
-}
+/*
+** tkn_operator and tkn_redirop tokens created in the basic tokenization are 
+** processed again, and given the actual token is set. In case of redirection
+** opertaions, the io_number and/or filename are saved as subtokens.
+*/
 
 int	handle_redirection_op(t_token *current)
 {
@@ -83,7 +60,8 @@ int	handle_operation(t_token *current)
 		current->maintoken = tkn_bang;
 	else if (ft_strequ(current->value, ";;"))
 		current->maintoken = tkn_dsemi;
-	else if (current->maintoken == tkn_operator || current->maintoken == tkn_redirop)
+	else if (current->maintoken == tkn_operator || current->maintoken
+		== tkn_redirop)
 		return (-1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/04/20 12:04:16 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/04/28 17:51:52 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -213,7 +213,8 @@ _SRC_STRINGS = ft_char_str_join.c \
 			ft_strsub_freestr.c \
 			ft_strsub_mid.c \
 			ft_strtoupper.c \
-			ft_strcut.c
+			ft_strcut.c \
+			ft_is_nbrstr.c
 
 SRC_FT_ERROR = $(addprefix $(FT_ERROR_DIR), $(_SRC_FT_ERROR))
 SRC_FT_EXIT = $(addprefix $(FT_EXIT_DIR), $(_SRC_FT_EXIT))

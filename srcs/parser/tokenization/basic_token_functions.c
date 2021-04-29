@@ -6,12 +6,16 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 12:58:18 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/14 16:37:24 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/29 10:02:44 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "libft.h"
+
+/*
+** Functions to help basic tokenization
+*/
 
 t_token	*push_to_front(t_token *input, t_token *stack)
 {

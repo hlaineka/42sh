@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:23:19 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/20 12:03:54 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/28 17:51:21 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ char				*ft_strsub_mid(const char *s, unsigned int start,
 char				*ft_remove_chars(char *str, int c);
 void				ft_strtoupper(char *str);
 char				*ft_strcut(char *str, int start, int end);
+int					ft_is_nbrstr(char *str);
 
 #endif

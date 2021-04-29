@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:51:19 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/28 10:53:55 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/28 18:49:20 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,11 @@ t_job	*token_pipe(t_job *job, t_term *term, t_node *current)
 
 	if (!current->left || !current->right)
 		return (NULL);
-	left = tree_traversal(NULL, current->left, term);
-	right = tree_traversal(NULL, current->right, term);
+	left = init_job();
+	right = init_job();
+	//pipe
+	left = tree_traversal(left, current->left, term);
+	right = tree_traversal(right, current->right, term);
 	if (job)
 	{
 		returnable = job;

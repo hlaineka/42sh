@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/28 15:53:26 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/29 09:59:46 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,7 +250,8 @@ t_token				*io_numbers(t_token *first);
 /*
 ** parser/tokenization/operator_tokens_functions.c
 */
-void				check_tkn_quotes(t_token *current);
+int					handle_tkn_io_number(t_token *current);
+int					add_filename_tkn(t_token *current);
 
 /*
 ** parser/tokenization/operator_tokens.c
@@ -282,12 +283,17 @@ void				free_token(t_token *to_free);
 
 t_token				*init_token(void);
 t_token				*add_subtoken(t_token *current, t_token *sub);
+t_token				*add_quotearray(t_token *current);
+void				check_quotes(char c, bool *single_quoted, bool *double_quoted);
+void				check_backslash(char *str, char c, bool *backslash);
+
+int			handle_operator_token(char *str, char *source, int *i, int *maintoken);
+int			handle_word_token(char *str, char *source, int *i, int *maintoken);
 
 /*
 ** parser/tokenization/basic_tokens.c
 */
 
 t_token				*define_basic_tokens(char *input);
-t_token				*add_quotearray(t_token *current);
 
 #endif

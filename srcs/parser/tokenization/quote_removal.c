@@ -6,12 +6,16 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 10:49:09 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/11 11:52:32 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/29 09:56:43 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "libft.h"
+
+/*
+** functions to remove quotes at the end of tokenization
+*/
 
 int	get_escchar_value(int c)
 {
