@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/04/28 17:58:22 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/04/29 13:56:42 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,7 +118,8 @@ _SRC_UNSETENV =	builtin_unsetenv.c
 
 _SRC_EXECUTION =	exec_tprocess.c \
 					execution.c \
-					simple_command.c
+					simple_command.c \
+					fork_and_chain_pipes.c
 
 
 SRC_MAIN = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))

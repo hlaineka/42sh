@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 13:30:11 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/21 09:30:15 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/29 13:54:32 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_job	*get_left_job(t_job *job, t_node *current, t_term *term)
 	if (current->left && !returnable)
 		return (NULL);
 	if (!returnable && !job)
-		returnable = init_job();
+		returnable = init_job(term);
 	else if (!returnable)
 		returnable = job;
 	return (returnable);

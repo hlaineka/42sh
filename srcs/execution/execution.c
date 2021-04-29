@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 18:28:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/28 14:48:02 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/29 12:01:43 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ void	execute_jobs(t_job *jobs, t_term *term)
 			job = job->next;
 			continue;
 		}
+		
 		current->envp = term->envp;
 		current->argc = ft_strarrlen(current->argv);
 		pipe(rpipe);
