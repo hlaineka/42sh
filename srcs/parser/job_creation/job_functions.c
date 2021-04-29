@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:33:35 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/29 16:43:11 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/29 18:58:21 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	free_jobs(t_job *next_job)
 				close(temp_process->fd_stdout);
 				close(temp_process->fd_stderr);
 				ft_strarray_free(temp_process->argv);
-				ft_strarray_free(temp_process->envp);
 				temp = temp_process->next;
 				ft_free(temp_process);
 				temp_process = temp;
@@ -61,7 +60,7 @@ t_job	*init_job(t_term *term)
 	first_process->next = NULL;
 	first_process->argv = malloc(ARGV_SIZE);
 	ft_bzero(first_process->argv, ARGV_SIZE);
-	first_process->envp = ft_strarr_copy(term->envp);
+	first_process->envp = term->envp;
 	returnable->next = NULL;
 	returnable->command = NULL;
 	returnable->first_process = first_process;

@@ -6,13 +6,14 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:51:19 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/29 16:56:19 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/29 19:19:48 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "execution.h"
 #include "libft.h"
+#include <sys/wait.h>
 
 void	add_processes(t_job *returnable, t_job *removable)
 {
@@ -45,7 +46,7 @@ t_job	*token_pipe(t_job *job, t_term *term, t_node *current)
 	t_process	*temp_process;
 	
 	if (!current->left || !current->right)
-		left = NULL;
+		return (NULL);
 	left = job;
 	right = NULL;
 	if (current->left)
@@ -55,16 +56,16 @@ t_job	*token_pipe(t_job *job, t_term *term, t_node *current)
 			temp_process = init_process(term);
 			temp_process->next = left->first_process;
 			left->first_process = temp_process;
-			pipe(lpipe);
-			lpipe[0] = left->fd_stdout;
+			lpipe[0] = left->fd_stdin;
+			lpipe[1] = left->fd_stdout;
 			pipe(rpipe);
 			temp_process->pid = fork_and_chain_pipes(lpipe, rpipe);
 		}
 		else
 		{
 			left = init_job(term);
-			left->next = g_term->jobs;
-			g_term->jobs = left;
+			left->next = term->jobs;
+			term->jobs = left;
 			temp_process = left->first_process;
 			pipe(rpipe);
 			temp_process->pid = fork_and_chain_pipes(NULL, rpipe);
@@ -76,39 +77,41 @@ t_job	*token_pipe(t_job *job, t_term *term, t_node *current)
 			left = tree_traversal(left, current->left, term);
 			if (left)
 			{
-				temp_process->status = simple_command(temp_process);
-				temp_process->completed = 1;
-				exit(temp_process->status);
+				simple_command(left->first_process);
+				exit(left->first_process->status);
 			}
 			exit(1);
 		}
-		left->fd_stdin = rpipe[1];
+		left->fd_stdin = rpipe[0];
+		left->fd_stdout = rpipe[1];
 	}
-	if (current->right && current->operation == tkn_pipe)
-		right = tree_traversal(right, current->right, term);
+	if (current->right && current->right->operation == tkn_pipe)
+		right = tree_traversal(left, current->right, term);
 	else if (current->right)
 	{
-		right = init_job(term);
-		temp_process = right->first_process;
+		temp_process = init_process(term);
 		temp_process->next = left->first_process;
 		left->first_process = temp_process;
-		pipe(lpipe);
-		lpipe[0] = left->fd_stdout;
+		lpipe[0] = rpipe[0];
+		lpipe[1] = rpipe[1];
 		temp_process->pid = fork_and_chain_pipes(lpipe, NULL);
 		if (temp_process->pid == 0)
 		{
-			right = tree_traversal(right, current->right, term);
+			dup2(term->fd_stdout, STDOUT_FILENO);
+			right = tree_traversal(NULL, current->right, term);
 			if (right)
 			{
-				temp_process->status = simple_command(temp_process);
-				temp_process->completed = 1;
-				exit(temp_process->status);
+				simple_command(right->first_process);
+				exit(right->first_process->status);
 			}
 			exit(1);
 		}
-		//delete right job but not the processes
-		left->fd_stdin = term->fd_stdin;
-		left->fd_stdout = term->fd_stdout;
+		waitpid(temp_process->pid, &temp_process->status, 0);
+		dup2(term->fd_stdout, STDOUT_FILENO);
+		dup2(term->fd_stdin, STDIN_FILENO);
+		dup2(term->fd_stderr, STDERR_FILENO);
+		//left->fd_stdin = term->fd_stdin;
+		//left->fd_stdout = term->fd_stdout;
 		//close(lpipe[0]);
 		//close(lpipe[1]);
 		//lpipe[0] = rpipe[0];

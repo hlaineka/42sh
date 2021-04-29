@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 10:00:31 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/28 10:08:27 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/29 18:13:24 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	start_signal(void)
 		(signal(SIGIOT, sig_handler) == SIG_ERR) ||
 		(signal(SIGTRAP, sig_handler) == SIG_ERR) ||
 		(signal(SIGSYS, sig_handler) == SIG_ERR) ||
-		(signal(SIGSEGV, sig_handler) == SIG_ERR) ||
-		(signal(SIGCHLD, sig_handler) == SIG_ERR))
+		(signal(SIGSEGV, sig_handler) == SIG_ERR))
+		//(signal(SIGCHLD, sig_handler) == SIG_ERR))
 		ft_exit(0);
 }
