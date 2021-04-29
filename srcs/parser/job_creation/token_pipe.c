@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:51:19 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/29 10:48:44 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/29 11:14:06 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,46 @@ void	add_processes(t_job *returnable, t_job *removable)
 
 t_job	*token_pipe(t_job *job, t_term *term, t_node *current)
 {
-	t_job		*left;
-	t_job		*right;
-	t_job		*returnable;
-
-	if (!current->left || !current->right)
-		return (NULL);
-	if (job)
+	t_job	*left;
+	t_job	*right;
+	
+	//(!job)
+	//	->ensimmäinen pipe
+	if (job || !current->left || !current->right)
+		left = NULL;
+	else
 		left = job;
-	else
-		left = init_job();
-	right = init_job();
-	//pipe
-	left = tree_traversal(left, current->left, term);
-	right = tree_traversal(right, current->right, term);
-	if (job)
+	right = NULL;
+	if (!current->left || job)
+		return (NULL);
+	if (current->left)
 	{
-		returnable = job;
-		add_processes(returnable, left);
+		// pipe left to right
+		//fork
+		left = tree_traversal(left, current->left, term);
+		if (left)
+		{
+			left->next = term->jobs;
+			term->jobs = left;
+			execute_jobs(left, term);
+		}
+		//fork loppuu
 	}
-	else
-		returnable = left;
-	add_processes(returnable, right);
-	return (returnable);
+	if (current->right && current->right->operation == tkn_pipe)
+		right = tree_traversal(right, current->right, term);
+	else if (current->right)
+	{
+		//fork
+		right = tree_traversal(right, current->right, term);
+		if (right)
+		{
+			//tämä on viimeinen
+			right->next = term->jobs;
+			term->jobs = right;
+			execute_jobs(right, term);
+		}
+		//fork loppuu
+	}
+	//yhdistä left ja righ
+	return (term->jobs);
 }
