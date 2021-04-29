@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:33:35 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/29 13:13:38 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/29 16:43:11 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	free_jobs(t_job *next_job)
 				close(temp_process->fd_stdout);
 				close(temp_process->fd_stderr);
 				ft_strarray_free(temp_process->argv);
+				ft_strarray_free(temp_process->envp);
 				temp = temp_process->next;
 				ft_free(temp_process);
 				temp_process = temp;

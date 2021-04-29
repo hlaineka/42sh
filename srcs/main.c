@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/28 16:06:48 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/29 16:36:21 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		main(int argc, char **argv, char **envp)
 			break;
 		}
 		next_job = parser(input_str, &term);
-		execute_jobs(next_job, &term);
+		//execute_jobs(next_job, &term);
 
 		free(input_str);
 		free_jobs(next_job);
