@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:33:35 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/30 12:13:54 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/30 12:33:03 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ void	free_jobs(t_term *term)
 		if (job_to_free->first_process->completed == 1 || job_to_free->first_process->stopped == 1)
 		{
 			if (prev == term->jobs)
+			{
 				term->jobs = job_to_free->next;
+				prev = term->jobs;
+			}
 			else
 				prev->next = job_to_free->next;
 			free_job(job_to_free);

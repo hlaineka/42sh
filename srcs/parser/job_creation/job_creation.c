@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:40:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/30 12:16:30 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/30 14:00:18 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ t_job	*job_creation(t_node *root, t_term *term)
 
 	if (!root)
 		return (NULL);
-	//while (1);
 	returnable = tree_traversal(NULL, root, term);
 	if (returnable == NULL)
 		ft_printf_fd(2, "job syntax_error\n");

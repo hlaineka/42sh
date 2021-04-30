@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:51:19 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/30 09:10:05 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/30 13:59:49 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,46 +112,21 @@ t_job	*token_pipe(t_job *job, t_term *term, t_node *current)
 	t_job	*returnable;
 	
 	if (!current->left || (!job && !current->right))
-	{	
-		ft_printf("error\r\n");
 		return (NULL);
-	}
 	returnable = job;
 	if (current->left->operation == tkn_pipe)
-	{	
-		ft_printf("tree traversal left\r\n");
 		returnable = tree_traversal(returnable, current->left, term);
-	}
 	else if (!returnable)
-	{	
-		ft_printf("pipe start left\r\n");
 		returnable = pipe_start(returnable, term, current->left);
-	}
 	else if (!current->right)
-	{	
-		ft_printf("pipe end left\r\n");
 		returnable = pipe_end(returnable, term, current->left);
-	}
 	else
-	{	
-		ft_printf("pipe middle left\r\n");
 		returnable = pipe_middle(returnable, term, current->left);
-	}
 	if (current->right->operation == tkn_pipe)
-	{	
-		ft_printf("tree traversal right\r\n");
 		returnable = tree_traversal(returnable, current->right, term);
-	}
 	else if (current->parent && current->parent->operation == tkn_pipe)
-	{	
-		ft_printf("pipe middle right\r\n");
 		returnable = pipe_middle(returnable, term, current->right);
-	}
 	else
-	{	
-		ft_printf("pipe end right\r\n");
 		returnable = pipe_end(returnable, term, current->right);
-	}
-	
 	return (returnable);
 }
