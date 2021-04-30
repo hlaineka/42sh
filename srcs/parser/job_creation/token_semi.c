@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 19:42:21 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/30 09:18:25 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/30 10:11:01 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ t_job	*token_semi(t_job *job, t_term *term, t_node *current)
 	left = NULL;
 	right = NULL;
 	if (!current->left || job)
+	{
+		printf("no current left?");
 		return (NULL);
+	}
+	ft_printf("in token semi, %s\r\n", current->left->command);
 	left = tree_traversal(NULL, current->left, term);
 	if (left)
 	{

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 14:37:51 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/15 14:11:07 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/30 10:32:41 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	debug_print_right(t_node *node, char *prefix)
 		temp = ft_strjoin(prefix, "  |");
 	else
 		temp = ft_strjoin(prefix, "  ");
-	debug_print_tree(node->right, temp);
+	debug_print_tree(node->right, temp, 2);
 	ft_free(temp);
 }
 
@@ -39,11 +39,11 @@ static void	debug_print_left(t_node *node, char *prefix)
 		temp = ft_strdup("");
 	else
 		temp = ft_strjoin(prefix, "  ");
-	debug_print_tree(node->left, temp);
+	debug_print_tree(node->left, temp, 1);
 	ft_free(temp);
 }
 
-void	debug_print_tree(t_node *node, char *prefix)
+void	debug_print_tree(t_node *node, char *prefix, int left_right)
 {
 	if (!node)
 		return ;
@@ -55,6 +55,10 @@ void	debug_print_tree(t_node *node, char *prefix)
 		else
 			ft_printf("|--");
 	}
+	if (left_right == 1)
+		ft_printf ("left ");
+	if (left_right == 2)
+		ft_printf("right ");
 	ft_printf("[%s]\n", node->command);
 	if (node->right)
 		debug_print_right(node, prefix);
@@ -72,7 +76,7 @@ t_job	*parser(char *input, t_term *term)
 	returnable = NULL;
 	root = ast_creator(tokens, term);
 	if (term->flag_debug == 1)
-		debug_print_tree(root, NULL);
+		debug_print_tree(root, NULL, 0);
 	returnable = job_creation(root, term);
 	free_ast(root);
 	return (returnable);

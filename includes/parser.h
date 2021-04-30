@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/29 13:15:14 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/30 10:29:24 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ typedef t_job *(*op_function)(t_job *job, t_term *term, t_node *current);
 */
 
 t_job				*parser(char *input, t_term *term);
-void				debug_print_tree(t_node *node, char *prefix);
+void				debug_print_tree(t_node *node, char *prefix, int left_right);
 
 /*
 ** parser/ast_creation/ast_builder.c

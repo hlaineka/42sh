@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 14:48:16 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/28 16:03:38 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/30 10:37:34 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_node	*create_opnode(t_token *tkn, t_node **node_stack, int *i)
 	new_node->subtokens = tkn->subtokens;
 	if (is_unaryop(tkn))
 		new_node->right = NULL;
-	else
+	else if (*i > 1)
 	{
 		*i = *i - 1;
 		new_node->right = node_stack[*i];
