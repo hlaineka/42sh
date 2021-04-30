@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/24 11:02:13 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/30 07:34:47 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,11 @@ int	simple_command(t_process *proc)
 	pid_t	pid;
 	int		status;
 
-	if (proc->argv[0][0] == '\0')
+	if (!proc->argv || !proc->argv[0] || proc->argv[0][0] == '\0')
+	{
+		ft_printf("empty argv");
 		return (-1); // is this needed? what error?
+	}
 	if (is_builtin(proc))
 		return (proc->status);
 	signal(SIGINT, sig_handler_exec);
