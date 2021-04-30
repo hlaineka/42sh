@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:40:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/29 16:41:00 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/30 10:53:50 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_job	*job_creation(t_node *root, t_term *term)
 {
 	t_job	*returnable;
 	t_job	*temp_job;
+	t_job	*double_temp;
 
 	if (!root)
 		return (NULL);
@@ -68,9 +69,14 @@ t_job	*job_creation(t_node *root, t_term *term)
 	temp_job = returnable;
 	while (temp_job)
 	{
+		double_temp = temp_job->next;
 		if (temp_job->first_process->pid == 0)
+		{
+			temp_job->next = term->jobs;
+			term->jobs = temp_job;
 			simple_command(temp_job->first_process);
-		temp_job = temp_job->next;
+		}
+		temp_job = double_temp;
 	}
 	return (returnable);
 }
