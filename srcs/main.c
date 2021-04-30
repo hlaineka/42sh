@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/30 10:51:00 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/30 12:06:06 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		main(int argc, char **argv, char **envp)
 		//execute_jobs(next_job, &term);
 
 		free(input_str);
-		free_jobs(term.jobs);
+		free_jobs(&term);
 		//free_tree
 //		break;
 // input_str to lexer

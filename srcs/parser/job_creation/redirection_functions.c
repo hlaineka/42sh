@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 13:30:11 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/29 13:54:32 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/30 12:10:25 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,14 @@ int	add_fd(t_job *job, int old_fd, int new_fd)
 	{
 		//this has to be handled somehow
 		//print fd error
-		free_jobs(job);
+		free_job(job);
 		return (-1);
 	}
 	close(new_fd);
 	if (temp->fd_stdin == -1 || temp->fd_stdout == -1 || temp->fd_stderr == -1)
 	{
 		//print fd error
-		free_jobs(job);
+		free_job(job);
 		return (-1);
 	}
 	return (0);
@@ -119,7 +119,7 @@ int	close_fd(t_job *job, int old_fd)
 	if (returnable == -1)
 	{
 		ft_printf_fd(2, "Bad file descriptor %i", old_fd);
-		free_jobs(job);
+		free_job(job);
 	}
 	return (returnable);
 }

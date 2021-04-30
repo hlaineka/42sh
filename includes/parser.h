@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/30 10:29:24 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/30 12:11:49 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,9 +196,10 @@ t_job				*job_creation(t_node *root, t_term *term);
 ** parser/job_creation/job_functions.c
 */
 
-void				free_jobs(t_job *next_job);
+void				free_jobs(t_term *term);
 t_job				*init_job(t_term *term);
 t_process			*init_process(t_term *term);
+void				free_job(t_job *job_to_free);
 
 /*
 ** parser/job_creation/tree_traversal.c

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 16:40:21 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/16 12:05:52 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/30 12:12:27 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_job	*token_greatand(t_job *job, t_term *term, t_node *current)
 	}
 	else
 	{
-		free_jobs(returnable);
+		free_job(returnable);
 		return (NULL);
 	}
 	return(returnable);

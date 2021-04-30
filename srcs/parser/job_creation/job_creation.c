@@ -6,14 +6,14 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:40:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/30 10:53:50 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/30 12:16:30 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "includes.h"
 
-/*static void	debug_printing(t_job *next_job)
+static void	debug_printing(t_job *next_job)
 {
 	int			i;
 	t_job		*temp_job;
@@ -36,7 +36,7 @@
 				ft_printf("completed. ");
 			if (temp_process->stopped == 1)
 				ft_printf("stopped. ");
-			ft_printf("argv of the %i process: ", temp_process->completed);
+			ft_printf("argv of the %i process: ", processes);
 			i = 0;
 			while (temp_process->argv && temp_process->argv[i])
 			{
@@ -50,7 +50,7 @@
 		temp_job = temp_job->next;
 		jobs++;
 	}
-}*/
+}
 
 t_job	*job_creation(t_node *root, t_term *term)
 {
@@ -64,8 +64,6 @@ t_job	*job_creation(t_node *root, t_term *term)
 	returnable = tree_traversal(NULL, root, term);
 	if (returnable == NULL)
 		ft_printf_fd(2, "job syntax_error\n");
-	//if (term->flag_debug == 1)
-	//	debug_printing(returnable);
 	temp_job = returnable;
 	while (temp_job)
 	{
@@ -78,5 +76,7 @@ t_job	*job_creation(t_node *root, t_term *term)
 		}
 		temp_job = double_temp;
 	}
+	if (term->flag_debug == 1)
+		debug_printing(term->jobs);
 	return (returnable);
 }
