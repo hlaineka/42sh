@@ -6,11 +6,12 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 12:25:59 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/16 11:58:03 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/30 14:59:44 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include "execution.h"
 #include <sys/stat.h>
 #include <fcntl.h>
 

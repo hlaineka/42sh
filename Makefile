@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/04/29 14:24:09 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/04/30 14:57:08 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ DIR_INC = includes/
 DIR_MAIN = srcs/
 DIR_INPUT = srcs/input/
 DIR_PARSER = srcs/parser/
-DIR_JOB_CREATION = srcs/parser/job_creation/
+DIR_JOB_CREATION = srcs/execution/job_creation/
 DIR_TOKENIZATION = srcs/parser/tokenization/
 DIR_AST_CREATION = srcs/parser/ast_creation/
 DIR_SIGNAL = srcs/signal/
@@ -63,19 +63,6 @@ _SRC_INPUT = read_input_user.c \
 			get_input_heredoc.c
 
 _SRC_PARSER = 	parser.c \
-
-_SRC_JOB_CREATION = job_creation.c \
-					job_functions.c \
-					token_null.c \
-					tree_traversal.c \
-					redirection_functions.c \
-					token_semi.c \
-					token_pipe.c \
-					token_great.c \
-					token_less.c \
-					token_dgreat.c \
-					token_greatand.c \
-					token_dless.c
 
 _SRC_TOKENIZATION = lexer.c \
 					quote_removal.c \
@@ -121,6 +108,19 @@ _SRC_EXECUTION =	exec_tprocess.c \
 					execution.c \
 					simple_command.c \
 					fork_and_chain_pipes.c
+
+_SRC_JOB_CREATION = job_creation.c \
+					job_functions.c \
+					token_null.c \
+					tree_traversal.c \
+					redirection_functions.c \
+					token_semi.c \
+					token_pipe.c \
+					token_great.c \
+					token_less.c \
+					token_dgreat.c \
+					token_greatand.c \
+					token_dless.c
 
 
 SRC_MAIN = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))

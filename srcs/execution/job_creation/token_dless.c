@@ -6,13 +6,14 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 19:45:44 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/28 09:31:48 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/30 15:01:56 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "input.h"
 #include "libft.h"
+#include "execution.h"
 #include <sys/stat.h>
 #include <fcntl.h>
 
@@ -45,33 +46,30 @@ char	*ft_strjoin_all(char *str1, char *str2, int mode)
 t_job	*token_dless(t_job *job, t_term *term, t_node *current)
 {
 	char	*delimiter;
-//	int		fd;
-//	char	*input;
-//	t_input	tinput;
+	int		lpipe[2];
 	char	*output;
 	t_job	*returnable;
 
-//	ft_bzero(&tinput, sizeof(t_input));
 	output = NULL;
-//	fd = get_fd(current, 1);
 	returnable = get_left_job(job, current, term);
-	delimiter = get_filename(current);
-	delimiter = ft_strjoin_frees1(delimiter, "\n"); //uncomment
+	delimiter = get_filename(current);  
+	delimiter = ft_strjoin_frees1(delimiter, "\n");
 	output = get_input_heredoc(delimiter, term->here_input, term);
-//	ft_printf("> "); //substitute this
-//	get_next_line(0, &input); //substitute this
-//	while (!ft_strequ(delimiter, input))
-//	{
-//		output = ft_strjoin_all(output, input, fd);
-//		ft_printf("> "); //substitute this
-//		get_next_line(0, &input); //substitute this
-//	}
 	if (returnable)
-		write(returnable->first_process->fd_stdin, output, ft_strlen(output));
+	{
+		pipe(lpipe);
+		write(lpipe[1], output, ft_strlen(output));
+		dup2(lpipe[0], STDIN_FILENO);
+		returnable->first_process->status = simple_command(returnable->first_process);
+		close(lpipe[0]);
+		close(lpipe[1]);
+		dup2(term->fd_stdin, STDIN_FILENO);
+	}
 	else
+	{
 		write(STDOUT_FILENO, output, ft_strlen(output));
+		write(STDOUT_FILENO, "\n", 1);
+	}
 	ft_memdel((void**)&output);
-//	ft_printf("DONG1");
-//	while(1);
 	return (returnable);
 }

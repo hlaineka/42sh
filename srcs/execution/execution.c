@@ -6,11 +6,17 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 18:28:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/29 12:01:43 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/30 14:19:44 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes.h"
+
+t_job *execute(t_node *root, t_term *term)
+{
+	job_creation(root, term);
+	return(term->jobs);
+}
 
 
 void	set_read(int* lpipe)

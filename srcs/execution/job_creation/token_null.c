@@ -6,11 +6,12 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 17:32:13 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/29 12:01:13 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/30 14:58:14 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include "execution.h"
 #include "libft.h"
 
 char	**strarr_add(char **argv, char *command)

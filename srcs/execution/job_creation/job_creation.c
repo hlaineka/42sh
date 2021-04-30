@@ -6,11 +6,12 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:40:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/30 14:00:18 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/30 14:58:20 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include "execution.h"
 #include "includes.h"
 
 static void	debug_printing(t_job *next_job)
