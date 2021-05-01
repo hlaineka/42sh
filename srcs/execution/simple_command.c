@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/01 10:55:31 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/01 15:22:30 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	execve_process(t_process *proc)
 	exit(execve(command_path, proc->argv, proc->envp));
 }
 
-static void	get_status_and_condition(t_process *proc, int status)
+void	get_status_and_condition(t_process *proc, int status)
 {
 	if (WIFEXITED(status))
 	{
