@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:40:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 13:00:19 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 13:15:01 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,17 @@ t_job	*job_creation(t_node *root, t_term *term)
 	returnable = tree_traversal(NULL, root, term);
 	if (returnable == NULL)
 		ft_printf_fd(2, "job syntax_error\n");
-	if (returnable->first_process->pid == 0)
+	if (returnable && returnable->first_process->pid == 0)
 	{
 		returnable->next = term->jobs;
 		term->jobs = returnable;
 		returnable->first_process->status = simple_command(returnable->first_process);
 	}
+	if (returnable)
+		term->last_return = returnable->first_process->status;
 	restore_fds(term);
 	if (term->flag_debug == 1)
 		debug_printing(term->jobs);
 	free_ast(root);
 	return (returnable);
 }
-
-
