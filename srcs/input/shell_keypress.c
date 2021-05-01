@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/20 22:15:01 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/01 19:45:58 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*double_allocation(char *str, size_t size)
 	return (new);
 }
 
-static int	double_input_mem(t_input *input, t_term *term)
+int	double_input_mem(t_input *input, t_term *term)
 {
 	input->ls = double_allocation(input->ls, input->ls_size);
 	input->rrs = double_allocation(input->rrs, input->rrs_size);
@@ -52,6 +52,10 @@ static int	do_special_keys(char *rc, t_input *input, t_term *term)
 	ft_is_left_key(rc) == TRUE ? left_keypress(input, term) : 0;
 	ft_is_right_key(rc) == TRUE ? right_keypress(input, term) : 0;
 	ft_is_delete_key(rc) == TRUE ? delete_keypress(input, term) : 0;
+	if (rc[0] == -61 && rc[1] == -89)
+		copy_input_to_clipboard(input, term);
+	if (rc[0] == -30 && rc[1] == -120 && rc[2] == -102)
+		paste_clipboard_to_input(input, term);
 	if (rc[0] == KEY_ESC)
 	{
 		if (ft_is_right_key(rc + 1))
