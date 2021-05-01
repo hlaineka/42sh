@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/01 18:48:42 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 21:53:44 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,5 +256,23 @@ int					handle_word_token(char *str, char *source, int *i, int *maintoken);
 */
 
 t_token				*define_basic_tokens(char *input);
+
+/*
+** parser/tokenization/tilde_expansion.c
+*/
+
+int					tilde_expansion(t_token *tkn, t_term *term, int tilde);
+
+/*
+** parser/tokenization/dollar_expansion.c
+*/
+
+int					dollar_expansion(t_token *tkn, t_term *term, int dollar);
+
+/*
+** parser/tokenization/word_expansion.c
+*/
+
+t_token 			*word_expansions(t_token *first, t_term *term);
 
 #endif

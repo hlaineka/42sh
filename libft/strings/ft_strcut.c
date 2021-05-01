@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 11:58:59 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/20 12:02:08 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 22:10:30 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,11 @@
 
 char	*ft_strcut(char *str, int start, int end)
 {
-	char	*returnable;
 	int		i;
 	int		w;
 	int		len;
 
-	returnable = malloc(end - start + 1);
 	len = ft_strlen(str);
-	i = start;
-	w = 0;
-	while (i < end)
-	{
-		returnable[w] = str[i];
-		w++;
-		i++;
-	}
-	returnable[w] = '\0';
 	i = start;
 	w = end;
 	while (str[w])
@@ -46,5 +35,5 @@ char	*ft_strcut(char *str, int start, int end)
 	}
 	while (i <= len)
 		str[i++] = '\0';
-	return (returnable);
+	return (str);
 }

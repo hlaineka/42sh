@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 11:59:34 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/01 15:51:13 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 19:48:16 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,25 @@
 ** and marks every index that is quoted to make it easier in the later
 ** tokenization to single out quoted characters.
 */
+
+int	find_delimiters(char **source, int *i, char *returnable, int *maintoken)
+{
+	if (ft_strchr(BLANKS, source[0][*i]))
+	{
+		*i = *i + 1;
+		return (0);
+	}
+	if (ft_strchr(OPCHARS, source[0][*i]))
+	{
+		if (0 == handle_operator_token(returnable, *source, i, maintoken))
+			return (0);
+	}
+	//if (ft_strchr(EXPANSIONCHARS, source[0][*i]))
+	//	check_expansions(returnable, source[0][*i]);
+	//if (source[0][*i] == '#')
+	//	handle_comment(returnable, *source, &i);
+	return (1);
+}
 
 char	*get_tokenstr(char **source, int *maintoken)
 {
@@ -39,30 +58,16 @@ char	*get_tokenstr(char **source, int *maintoken)
 		check_quotes(source[0][i], &single_quoted, &double_quoted);
 		check_backslash(returnable, source[0][i], &backslash);
 		if (!single_quoted && !double_quoted && !backslash
-			&& ft_strchr(BLANKS, source[0][i]))
-		{	
-			i++;
+			&& 0 == find_delimiters(source, &i, returnable, maintoken))
 			break ;
-		}
-		if (!single_quoted && !double_quoted && !backslash
-		&& ft_strchr(OPCHARS, source[0][i]))
-		{
-			if (0 == handle_operator_token(returnable, *source, &i, maintoken))
-				break;
-		}
-		//else if (!single_quoted && !double_quoted && !backslash && ft_strchr(EXPANSIONCHARS, source[0][i]))
-		//	check_expansions(returnable, source[0][i]);
-		//else if (!single_quoted && !double_quoted && !backslash && source[0][i] == '#')
-		//	handle_comment(returnable, *source, &i);
-		else if (0 == handle_word_token(returnable, *source, &i, maintoken))
-			break;
+		if (!ft_strchr(OPCHARS, source[0][i])
+			&& 0 == handle_word_token(returnable, *source, &i, maintoken))
+			break ;
 		i++;
 	}
 	*source = *source + i;
 	return (returnable);
 }
-
-
 
 t_token	*get_basic_token(char **source)
 {
@@ -77,6 +82,7 @@ t_token	*get_basic_token(char **source)
 		if (str)
 			ft_free(str);
 		str = get_tokenstr(source, &maintoken);
+		ft_printf(str);
 	}
 	current = NULL;
 	if (str)
