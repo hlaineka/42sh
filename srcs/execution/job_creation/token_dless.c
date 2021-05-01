@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 19:45:44 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 11:59:11 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 12:11:02 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,18 @@ char	*ft_strjoin_all(char *str1, char *str2, int mode)
 	return (returnable); 
 }
 
-t_job	*heredoc_pipe_start(t_job *job, t_term *term, t_process *new)
+t_job	*heredoc_pipe_start(t_job *job, t_term *term, t_job *new)
 {
 	int			rpipe[2];
 	
-	job = init_job(term);
 	job->next = term->jobs;
 	term->jobs = job;
-	new->next = job->first_process;
-	job->first_process = new;
 	pipe(rpipe);
-	new->pid = fork_and_chain_pipes(NULL, rpipe);
-	if (new->pid == 0)
+	new->first_process->pid = fork_and_chain_pipes(NULL, rpipe);
+	if (new->first_process->pid == 0)
 	{
-		simple_command(new);
-		exit(new->status);
+		simple_command(new->first_process);
+		exit(new->first_process->status);
 	}
 	close(job->fd_stdout);
 	close(job->fd_stdin);
@@ -82,20 +79,20 @@ t_job	*token_dless(t_job *job, t_term *term, t_node *current)
 	char		*delimiter;
 	char		*output;
 	t_job		*returnable;
-	t_process	*new;
+	t_job		*new;
 
 	if (job)
 		return (NULL);
 	output = NULL;
 	returnable = NULL;
 	delimiter = get_filename(current);  
-	delimiter = ft_strjoin_frees1(delimiter, "\n");
+	delimiter = ft_strjoin_all(delimiter, "\n", 1);
 	output = get_input_heredoc(delimiter, term->here_input, term);
-	new = init_process(term);
-	strarr_add(new->argv, "echo");
-	strarr_add(new->argv, output);
+	new = init_job(term);
+	strarr_add(new->first_process->argv, "echo");
+	strarr_add(new->first_process->argv, output);
 	if (current->left)
-		returnable = heredoc_pipe_start(returnable, term, new);
+		returnable = heredoc_pipe_start(new, term, new);
 	if (current->right)
 	{
 		returnable = pipe_middle(returnable, term, current->left);
@@ -105,13 +102,12 @@ t_job	*token_dless(t_job *job, t_term *term, t_node *current)
 		returnable = pipe_end(returnable, term, current->left);
 	else
 	{
-		returnable = init_job(term);
+		returnable = new;
 		returnable->next = term->jobs;
 		term->jobs = returnable;
-		new->next = returnable->first_process;
-		returnable->first_process = new;
-		simple_command(new);
+		simple_command(returnable->first_process);
 	}
 	ft_memdel((void**)&output);
+	ft_memdel((void**)&delimiter);
 	return (returnable);
 }
