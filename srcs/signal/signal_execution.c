@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:07:56 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/28 10:40:57 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 16:21:33 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,25 @@ void	sig_child_handler(void)
 
 void	sig_handler_exec(int signo)
 {
-//	t_job		*jobs;
-//	t_process	*proc;
+	t_job		*jobs;
+	t_process	*proc;
 
 	if (signo == SIGCHLD)
 		sig_child_handler();
+	if (signo == SIGINT)
+	{
+		jobs = g_term->jobs;
+		while (jobs)
+		{
+			proc = jobs->first_process;
+			while(proc)
+			{
+				kill(proc->pid, SIGINT);
+				proc = proc->next;
+			}
+			jobs = jobs->next;
+		}
+	}
 /*
 	(void)signo;
 	jobs = g_term->jobs;
