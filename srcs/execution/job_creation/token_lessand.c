@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_greatand.c                                   :+:      :+:    :+:   */
+/*   token_lessand.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/14 16:40:21 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 14:58:59 by hlaineka         ###   ########.fr       */
+/*   Created: 2021/05/01 14:49:07 by hlaineka          #+#    #+#             */
+/*   Updated: 2021/05/01 14:58:53 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	dup_fd(int old_fd, char *tkn_word)
 	return (returnable);
 }
 
-t_job	*token_greatand(t_job *job, t_term *term, t_node *current)
+t_job	*token_lessand(t_job *job, t_term *term, t_node *current)
 {
 	int		old_fd;
 	char	*tkn_word;
@@ -47,7 +47,7 @@ t_job	*token_greatand(t_job *job, t_term *term, t_node *current)
 	returnable = get_left_job(job, current, term);
 	if (!returnable)
 		return (NULL);
-	old_fd = get_fd(current, 1);
+	old_fd = get_fd(current, 0);
 	tkn_word = get_filename(current);
 	if (ft_strequ(tkn_word, "-"))
 	{

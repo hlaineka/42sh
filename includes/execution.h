@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:35:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 11:29:16 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 15:07:46 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ t_job 		*token_great(t_job *job, t_term *term, t_node *current);
 t_job		*token_less(t_job *job, t_term *term, t_node *current);
 t_job		*token_dgreat(t_job *job, t_term *term, t_node *current);
 t_job		*token_greatand(t_job *job, t_term *term, t_node *current);
+t_job		*token_lessand(t_job *job, t_term *term, t_node *current);
 t_job		*token_dless(t_job *job, t_term *term, t_node *current);
 
 
