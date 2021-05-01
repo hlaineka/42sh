@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/04/30 14:57:08 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/05/01 11:29:46 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,6 +113,7 @@ _SRC_JOB_CREATION = job_creation.c \
 					job_functions.c \
 					token_null.c \
 					tree_traversal.c \
+					pipe_functions.c \
 					redirection_functions.c \
 					token_semi.c \
 					token_pipe.c \

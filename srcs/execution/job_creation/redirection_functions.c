@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 13:30:11 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 09:58:14 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 11:11:12 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,29 +58,7 @@ char	*get_filename(t_node *current)
 	if (temp->maintoken != tkn_word)
 		return (NULL);
 	returnable = temp->value;
-	return(returnable);
-}
-
-int	add_fd(t_job *job, int old_fd, int new_fd)
-{
-	int			returnable;
-
-	if (old_fd == 0)
-		returnable = dup2(new_fd, STDIN_FILENO);
-	else if (old_fd == 1)
-		returnable = dup2(new_fd, STDOUT_FILENO);
-	else if (old_fd == 2)
-		returnable = dup2(new_fd, STDERR_FILENO);
-	else
-		returnable = dup2(new_fd, old_fd);
-	close(new_fd);
-	if (returnable == -1)
-	{
-		//print fd error
-		free_job(job);
-		return (-1);
-	}
-	return (0);
+	return (returnable);
 }
 
 int	get_fd(t_node *current, int default_fd)
