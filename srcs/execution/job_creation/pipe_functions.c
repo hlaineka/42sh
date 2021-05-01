@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 11:26:20 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 17:22:18 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/01 18:47:26 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ t_job	*pipe_end(t_job *job, t_term *term, t_node *current)
 	close(job->fd_stderr);
 	signal(SIGINT, sig_handler_exec);
 	wait_till_ready(job);
-//	waitpid(temp_process->pid, &temp_process->status, 0);
 	dup2(term->fd_stdout, STDOUT_FILENO);
 	dup2(term->fd_stdin, STDIN_FILENO);
 	dup2(term->fd_stderr, STDERR_FILENO);

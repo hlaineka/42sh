@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:54:13 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/29 10:08:19 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 15:43:00 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,32 +30,26 @@ t_token	*init_token(void)
 	return (returnable);
 }
 
-t_token	*add_subtoken(t_token *current, t_token *sub)
+static int	get_quotevalue(int c, bool *backslash, bool *single_quote,
+bool *double_quote)
 {
-	t_token	*returnable;
-	t_token	*temp;
+	int	returnable;
 
-	if (!current || !sub)
-		return (NULL);
-	if (sub->prev)
-		sub->prev->next = sub->next;
-	if (sub->next)
-		sub->next->prev = sub->prev;
-	sub->next = NULL;
-	returnable = current;
-	temp = current->subtokens;
-	if (temp)
-	{
-		while (temp->next)
-			temp = temp->next;
-		temp->next = sub;
-		sub->prev = temp;
-	}
-	else
-	{
-		returnable->subtokens = sub;
-		sub->prev = returnable;
-	}
+	returnable = 0;
+	if (c == 34)
+		*double_quote = !*double_quote;
+	if (c == 44)
+		*single_quote = !*single_quote;
+	if (c == 92)
+		*backslash = TRUE;
+	if (double_quote)
+		returnable = returnable + 34;
+	if (single_quote)
+		returnable = returnable + 39;
+	if (backslash)
+		returnable = returnable + 92;
+	if (c != 92 && *backslash == TRUE)
+		*backslash = FALSE;
 	return (returnable);
 }
 
@@ -86,20 +80,8 @@ t_token	*add_quotearray(t_token *current)
 		i = 0;
 		while (current->value[i])
 		{
-			if (current->value[i] == 34)
-				double_quote = !double_quote;
-			if (current->value[i] == 44)
-				single_quote = !single_quote;
-			if (current->value[i] == 92)
-				backslash = TRUE;
-			if (double_quote)
-				quotearray[i] = quotearray[i] + 34;
-			if (single_quote)
-				quotearray[i] = quotearray[i] + 39;
-			if (backslash)
-				quotearray[i] = quotearray[i] + 92;
-			if (current->value[i] != 92 && backslash == TRUE)
-				backslash = FALSE;
+			quotearray[i] = get_quotevalue(current->value[i], &backslash,
+					&single_quote, &double_quote);
 			i++;
 		}
 		current->quotes = quotearray;

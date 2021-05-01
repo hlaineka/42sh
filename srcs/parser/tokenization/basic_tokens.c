@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 11:59:34 by helvi             #+#    #+#             */
-/*   Updated: 2021/04/28 18:12:53 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 15:51:13 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,13 @@ char	*get_tokenstr(char **source, int *maintoken)
 		check_quotes(source[0][i], &single_quoted, &double_quoted);
 		check_backslash(returnable, source[0][i], &backslash);
 		if (!single_quoted && !double_quoted && !backslash
-				&& ft_strchr(BLANKS, source[0][i]))
+			&& ft_strchr(BLANKS, source[0][i]))
 		{	
 			i++;
-			break;
+			break ;
 		}
-		if (!single_quoted && !double_quoted && !backslash && ft_strchr(OPCHARS, source[0][i]))
+		if (!single_quoted && !double_quoted && !backslash
+		&& ft_strchr(OPCHARS, source[0][i]))
 		{
 			if (0 == handle_operator_token(returnable, *source, &i, maintoken))
 				break;

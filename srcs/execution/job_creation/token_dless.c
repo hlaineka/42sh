@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 19:45:44 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 12:11:02 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 18:50:00 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_strjoin_all(char *str1, char *str2, int mode)
 		ft_free(str1);
 	if (mode == 2 || mode == 3)
 		ft_free(str2);
-	return (returnable); 
+	return (returnable);
 }
 
 t_job	*heredoc_pipe_start(t_job *job, t_term *term, t_job *new)
@@ -86,7 +86,7 @@ t_job	*token_dless(t_job *job, t_term *term, t_node *current)
 	output = NULL;
 	returnable = NULL;
 	delimiter = get_filename(current);  
-	delimiter = ft_strjoin_all(delimiter, "\n", 1);
+	delimiter = ft_strjoin_all(delimiter, "\n", 0);
 	output = get_input_heredoc(delimiter, term->here_input, term);
 	new = init_job(term);
 	strarr_add(new->first_process->argv, "echo");
@@ -107,7 +107,7 @@ t_job	*token_dless(t_job *job, t_term *term, t_node *current)
 		term->jobs = returnable;
 		simple_command(returnable->first_process);
 	}
-	ft_memdel((void**)&output);
-	ft_memdel((void**)&delimiter);
+	ft_free(output);
+	ft_free(delimiter);
 	return (returnable);
 }

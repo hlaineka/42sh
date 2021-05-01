@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/04/28 17:51:52 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/05/01 15:20:34 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -202,6 +202,7 @@ _SRC_STRINGS = ft_char_str_join.c \
 			ft_str_rfind_c.c \
 			ft_str_toupper.c \
 			ft_strjoin3.c \
+			ft_strjoin_all.c \
 			ft_strjoin_frees1.c \
 			ft_strjoin_frees2.c \
 			ft_strlast.c \
