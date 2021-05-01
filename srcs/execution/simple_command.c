@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/30 07:34:47 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 10:55:31 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,30 @@ static int	execve_process(t_process *proc)
 	exit(execve(command_path, proc->argv, proc->envp));
 }
 
+static void	get_status_and_condition(t_process *proc, int status)
+{
+	if (WIFEXITED(status))
+	{
+		proc->completed = 1;
+		proc->status = WEXITSTATUS(status);
+	}
+	else if (WIFSIGNALED(status))
+	{
+		proc->completed = 1;
+		proc->status = WTERMSIG(status) + 128;
+	}
+	else if (WIFSTOPPED(status)) // should this be before signaled?
+	{
+		proc->stopped = 1;
+		proc->status = WIFSTOPPED(status);
+	}
+	else
+	{
+		proc->stopped = 1;
+		proc->status = status;
+	}
+}
+
 int	simple_command(t_process *proc)
 {
 	pid_t	pid;
@@ -66,13 +90,6 @@ int	simple_command(t_process *proc)
 		exit(execve_process(proc));
 	proc->pid = pid;
 	waitpid(pid, &status, 0); // check the status with those macros?
-	if (WIFEXITED(status))
-		proc->status = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status))
-		proc->status = WTERMSIG(status) + 128;
-	else if (WIFSTOPPED(status)) // should this be before signaled?
-		proc->status = WIFSTOPPED(status);
-	else
-		proc->status = status;
+	get_status_and_condition(proc, status);
 	return (proc->status);
 }
