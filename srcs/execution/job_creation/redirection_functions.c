@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 13:30:11 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/30 14:59:38 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 09:58:14 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,26 +63,18 @@ char	*get_filename(t_node *current)
 
 int	add_fd(t_job *job, int old_fd, int new_fd)
 {
-	t_process	*temp;
+	int			returnable;
 
-	temp = job->first_process;
-	while (temp && temp->next)
-		temp = temp->next;
 	if (old_fd == 0)
-		temp->fd_stdin = dup2(new_fd, job->fd_stdin);
+		returnable = dup2(new_fd, STDIN_FILENO);
 	else if (old_fd == 1)
-		temp->fd_stdout = dup2(new_fd, job->fd_stdout);
+		returnable = dup2(new_fd, STDOUT_FILENO);
 	else if (old_fd == 2)
-		temp->fd_stderr = dup2(new_fd, job->fd_stderr);
+		returnable = dup2(new_fd, STDERR_FILENO);
 	else
-	{
-		//this has to be handled somehow
-		//print fd error
-		free_job(job);
-		return (-1);
-	}
+		returnable = dup2(new_fd, old_fd);
 	close(new_fd);
-	if (temp->fd_stdin == -1 || temp->fd_stdout == -1 || temp->fd_stderr == -1)
+	if (returnable == -1)
 	{
 		//print fd error
 		free_job(job);
@@ -101,26 +93,12 @@ int	get_fd(t_node *current, int default_fd)
 	return (returnable);
 }
 
-int	close_fd(t_job *job, int old_fd)
+int	close_fd(int old_fd)
 {
 	int			returnable;
-	t_process	*temp;
 
-	temp = job->first_process;
-	while (temp && temp->next)
-		temp = temp->next;
-	if (old_fd == 0)
-		returnable = close(temp->fd_stdin);
-	else if (old_fd == 1)
-		returnable = close(temp->fd_stdout);
-	else if (old_fd == 2)
-		returnable = close(temp->fd_stderr);
-	else
-		returnable = close(old_fd);
+	returnable = close(old_fd);
 	if (returnable == -1)
-	{
 		ft_printf_fd(2, "Bad file descriptor %i", old_fd);
-		free_job(job);
-	}
 	return (returnable);
 }

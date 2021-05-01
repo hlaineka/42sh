@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/21 11:56:10 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/04/30 19:18:33 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,6 @@ typedef struct s_process
 	char				completed;   /* true if process has completed */
 	char				stopped;     /* true if process has stopped */
 	int					status;      /* reported status value */
-	int					fd_stdin;
-	int					fd_stdout;
-	int					fd_stderr;
 }						t_process;
 
 /* A job is a pipeline of processes.  */

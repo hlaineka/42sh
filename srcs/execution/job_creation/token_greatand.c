@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 16:40:21 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/30 14:59:49 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/04/30 20:11:07 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,22 @@ int	ft_isdigits(char *str)
 	return (1);
 }
 
-int	dup_fd(t_job *job, int old_fd, int new_fd)
+int	dup_fd(int old_fd, int new_fd)
 {
 	int	returnable;
 
-	returnable = close_fd(job, old_fd);
+	returnable = close_fd(old_fd);
 	if (returnable != -1)
 	{
 		if (old_fd == 0)
-			job->fd_stdin = dup(new_fd);
+			returnable = dup2(new_fd, STDIN_FILENO);
 		else if (old_fd == 1)
-			job->fd_stdout = dup(new_fd);
+			returnable = dup2(new_fd, STDOUT_FILENO);
 		else if (old_fd == 2)
-			job->fd_stderr = dup(new_fd);
+			returnable = dup2(new_fd, STDERR_FILENO);
 		else 
-			old_fd = dup(new_fd);;
+			returnable = dup2(new_fd, old_fd);
 	}
-	if (job->fd_stdin == -1 || job->fd_stdout == -1 || job->fd_stderr == -1
-		|| old_fd == -1)
-		returnable = -1;
 	return (returnable);
 }
 
@@ -65,7 +62,7 @@ t_job	*token_greatand(t_job *job, t_term *term, t_node *current)
 	tkn_word = get_filename(current);
 	if (ft_strequ(tkn_word, "-"))
 	{
-		if (-1 == close_fd(returnable, old_fd))
+		if (-1 == close_fd(old_fd))
 			return (NULL);
 	}
 	else if (ft_isdigits(tkn_word))
@@ -73,7 +70,7 @@ t_job	*token_greatand(t_job *job, t_term *term, t_node *current)
 		new_fd = atoi(tkn_word);
 		if (-1 == new_fd)
 			return(NULL);
-		if (-1 == dup_fd(returnable, old_fd, new_fd))
+		if (-1 == dup_fd(old_fd, new_fd))
 			return (NULL);
 	}
 	else

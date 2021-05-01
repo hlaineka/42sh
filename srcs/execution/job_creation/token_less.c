@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:52:24 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/30 14:59:46 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 10:01:53 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-static int	open_fd(char *filename)
+static int	open_fd(char *filename, int old_fd)
 {
 	int	returnable;
 
 	//add filename path checking
-	returnable = open(filename, O_RDONLY);
+	returnable = close(old_fd);
+	if (returnable >= 0)
+		returnable = open(filename, O_RDONLY);
 	if (returnable == -1)
 		ft_printf("open failed\n"); //
 	return (returnable);
@@ -45,10 +47,8 @@ t_job	*token_less(t_job *job, t_term *term, t_node *current)
 	if (!returnable)
 		return (NULL);
 	filename = get_filename(current);
-	new_fd = open_fd(filename);
+	new_fd = open_fd(filename, old_fd);
 	if (-1 == new_fd)
 		return(NULL);
-	if (-1 == add_fd(returnable, old_fd, new_fd))
-		return (NULL);
 	return(returnable);
 }

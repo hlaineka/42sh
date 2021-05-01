@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:35:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/30 14:23:59 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 09:57:18 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void		free_jobs(t_term *term);
 t_job		*init_job(t_term *term);
 t_process	*init_process(t_term *term);
 void		free_job(t_job *job_to_free);
+void		restore_fds(t_term *term);
 
 /*
 ** parser/job_creation/tree_traversal.c
@@ -53,7 +54,7 @@ t_job		*get_right_job(t_job *job, t_node *current, t_term *term);
 char		*get_filename(t_node *current);
 int			add_fd(t_job *job, int old_fd, int new_fd);
 int			get_fd(t_node *current, int default_fd);
-int			close_fd(t_job *job, int old_fd);
+int			close_fd(int old_fd);
 
 /*
 ** parser/job_creation: operation function pointers, all in their own files
