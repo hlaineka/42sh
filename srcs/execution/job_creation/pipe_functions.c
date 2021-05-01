@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 11:26:20 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 12:36:37 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 17:22:18 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "execution.h"
 #include "libft.h"
 #include <sys/wait.h>
+#include <signal.h>
+#include "ft_signal.h"
 
 void	execute_child(t_job *job, t_node *current, t_term *term)
 {
@@ -68,6 +70,20 @@ t_job	*pipe_middle(t_job *job, t_term *term, t_node *current)
 	return (job);
 }
 
+static void	wait_till_ready(t_job *job)
+{
+	t_process	*proc;
+	int			status;
+
+	proc = job->first_process;
+	while (proc)
+	{
+		waitpid(proc->pid, &status, 0);
+		get_status_and_condition(proc, status);
+		proc = proc->next;
+	}
+}
+
 t_job	*pipe_end(t_job *job, t_term *term, t_node *current)
 {
 	t_process	*temp_process;
@@ -83,7 +99,10 @@ t_job	*pipe_end(t_job *job, t_term *term, t_node *current)
 		execute_child(job, current, term);
 	close(lpipe[0]);
 	close(lpipe[1]);
-	waitpid(temp_process->pid, &temp_process->status, 0);
+	close(job->fd_stderr);
+	signal(SIGINT, sig_handler_exec);
+	wait_till_ready(job);
+//	waitpid(temp_process->pid, &temp_process->status, 0);
 	dup2(term->fd_stdout, STDOUT_FILENO);
 	dup2(term->fd_stdin, STDIN_FILENO);
 	dup2(term->fd_stderr, STDERR_FILENO);

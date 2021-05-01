@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:35:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 15:07:46 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 15:24:52 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int			exec_tprocess(t_process *proc);
 int			fork_and_chain_pipes(int *lpipe, int *rpipe);
 
 int			simple_command(t_process *proc);
+
+void		get_status_and_condition(t_process *proc, int status);
 
 /*
 ** execution/job_creation/job_creation.c
