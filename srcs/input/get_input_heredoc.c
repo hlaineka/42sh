@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 21:48:18 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/01 11:10:43 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/01 11:20:42 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ char	*get_input_heredoc(char *eof, t_input *input, t_term *term)
 		}
 		temp2 = ft_strjoin(ret, temp);
 		free(ret);
+		free(temp);
 		ret = temp2;
 	}
+	ret[ft_strlen(ret) - 1] = '\0';
 	disable_raw_mode_continue(term);
 	input->heredoc = 0;
 	signal(SIGINT, SIG_DFL);
