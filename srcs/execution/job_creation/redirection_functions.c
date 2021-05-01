@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 13:30:11 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/30 14:59:38 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 11:11:12 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,37 +58,7 @@ char	*get_filename(t_node *current)
 	if (temp->maintoken != tkn_word)
 		return (NULL);
 	returnable = temp->value;
-	return(returnable);
-}
-
-int	add_fd(t_job *job, int old_fd, int new_fd)
-{
-	t_process	*temp;
-
-	temp = job->first_process;
-	while (temp && temp->next)
-		temp = temp->next;
-	if (old_fd == 0)
-		temp->fd_stdin = dup2(new_fd, job->fd_stdin);
-	else if (old_fd == 1)
-		temp->fd_stdout = dup2(new_fd, job->fd_stdout);
-	else if (old_fd == 2)
-		temp->fd_stderr = dup2(new_fd, job->fd_stderr);
-	else
-	{
-		//this has to be handled somehow
-		//print fd error
-		free_job(job);
-		return (-1);
-	}
-	close(new_fd);
-	if (temp->fd_stdin == -1 || temp->fd_stdout == -1 || temp->fd_stderr == -1)
-	{
-		//print fd error
-		free_job(job);
-		return (-1);
-	}
-	return (0);
+	return (returnable);
 }
 
 int	get_fd(t_node *current, int default_fd)
@@ -101,26 +71,12 @@ int	get_fd(t_node *current, int default_fd)
 	return (returnable);
 }
 
-int	close_fd(t_job *job, int old_fd)
+int	close_fd(int old_fd)
 {
 	int			returnable;
-	t_process	*temp;
 
-	temp = job->first_process;
-	while (temp && temp->next)
-		temp = temp->next;
-	if (old_fd == 0)
-		returnable = close(temp->fd_stdin);
-	else if (old_fd == 1)
-		returnable = close(temp->fd_stdout);
-	else if (old_fd == 2)
-		returnable = close(temp->fd_stderr);
-	else
-		returnable = close(old_fd);
+	returnable = close(old_fd);
 	if (returnable == -1)
-	{
 		ft_printf_fd(2, "Bad file descriptor %i", old_fd);
-		free_job(job);
-	}
 	return (returnable);
 }

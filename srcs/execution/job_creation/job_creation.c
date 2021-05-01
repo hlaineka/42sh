@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:40:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/30 14:58:20 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 13:15:01 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,27 +56,23 @@ static void	debug_printing(t_job *next_job)
 t_job	*job_creation(t_node *root, t_term *term)
 {
 	t_job	*returnable;
-	t_job	*temp_job;
-	t_job	*double_temp;
 
 	if (!root)
 		return (NULL);
 	returnable = tree_traversal(NULL, root, term);
 	if (returnable == NULL)
 		ft_printf_fd(2, "job syntax_error\n");
-	temp_job = returnable;
-	while (temp_job)
+	if (returnable && returnable->first_process->pid == 0)
 	{
-		double_temp = temp_job->next;
-		if (temp_job->first_process->pid == 0)
-		{
-			temp_job->next = term->jobs;
-			term->jobs = temp_job;
-			simple_command(temp_job->first_process);
-		}
-		temp_job = double_temp;
+		returnable->next = term->jobs;
+		term->jobs = returnable;
+		returnable->first_process->status = simple_command(returnable->first_process);
 	}
+	if (returnable)
+		term->last_return = returnable->first_process->status;
+	restore_fds(term);
 	if (term->flag_debug == 1)
 		debug_printing(term->jobs);
+	free_ast(root);
 	return (returnable);
 }

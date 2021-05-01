@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 11:58:18 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/30 14:59:40 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 15:00:18 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,14 @@
 #include "execution.h"
 #include "includes.h"
 
-static const op_function g_op_functions[] =
-{
+/*
+** The tree traversal checks the current operator in the tree and calls the
+** function assigned to that operator from static const array of function
+** pointers. If the function is not found, NULL pointer is returned. All the
+** functions are named token_operatorname(). 
+*/
+
+static const op_function	g_op_functions[] = {
 	[tkn_token] = token_null,
 	[tkn_word] = NULL,
 	[tkn_operator] = NULL,
@@ -35,7 +41,7 @@ static const op_function g_op_functions[] =
 	[tkn_dsemi] = NULL,
 	[tkn_dless] = token_dless,
 	[tkn_dgreat] = token_dgreat,
-	[tkn_lessand] = NULL,
+	[tkn_lessand] = token_lessand,
 	[tkn_greatand] = token_greatand,
 	[tkn_lessgreat] = NULL,
 	[tkn_dlessdash] = NULL,
