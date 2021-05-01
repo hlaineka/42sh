@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 11:26:20 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 11:27:01 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 12:36:37 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,17 @@
 #include "execution.h"
 #include "libft.h"
 #include <sys/wait.h>
+
+void	execute_child(t_job *job, t_node *current, t_term *term)
+{
+	job = tree_traversal(job, current, term);
+	if (job)
+	{
+		simple_command(job->first_process);
+		exit(job->first_process->status);
+	}
+	exit(1);
+}
 
 t_job	*pipe_start(t_job *job, t_term *term, t_node *current)
 {
@@ -27,15 +38,7 @@ t_job	*pipe_start(t_job *job, t_term *term, t_node *current)
 	pipe(rpipe);
 	temp_process->pid = fork_and_chain_pipes(NULL, rpipe);
 	if (temp_process->pid == 0)
-	{
-		job = tree_traversal(job, current, term);
-		if (job)
-		{
-			simple_command(job->first_process);
-			exit(job->first_process->status);
-		}
-		exit(1);
-	}
+		execute_child(job, current, term);
 	close(job->fd_stdout);
 	close(job->fd_stdin);
 	job->fd_stdin = rpipe[0];
@@ -57,16 +60,7 @@ t_job	*pipe_middle(t_job *job, t_term *term, t_node *current)
 	pipe(rpipe);
 	temp_process->pid = fork_and_chain_pipes(lpipe, rpipe);
 	if (temp_process->pid == 0)
-	{
-		job = tree_traversal(job, current, term);
-		//ft_printf_fd(term->fd_stdout, "%s\r\n", job->first_process->argv[0]);
-		if (job)
-		{
-			simple_command(job->first_process);
-			exit(job->first_process->status);
-		}
-		exit(1);
-	}
+		execute_child(job, current, term);
 	close(job->fd_stdout);
 	close(job->fd_stdin);
 	job->fd_stdin = rpipe[0];
@@ -86,17 +80,7 @@ t_job	*pipe_end(t_job *job, t_term *term, t_node *current)
 	lpipe[1] = job->fd_stdout;
 	temp_process->pid = fork_and_chain_pipes(lpipe, NULL);
 	if (temp_process->pid == 0)
-	{
-		dup2(term->fd_stdout, STDOUT_FILENO);
-		job = tree_traversal(NULL, current, term);
-		if (job)
-		{
-			//ft_printf_fd(term->fd_stdout, "%s\r\n", job->first_process->argv[0]);
-			simple_command(job->first_process);
-			exit(job->first_process->status);
-		}
-		exit(1);
-	}
+		execute_child(job, current, term);
 	close(lpipe[0]);
 	close(lpipe[1]);
 	waitpid(temp_process->pid, &temp_process->status, 0);

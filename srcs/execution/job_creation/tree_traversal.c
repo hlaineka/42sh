@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 11:58:18 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/30 14:59:40 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 12:52:04 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 #include "execution.h"
 #include "includes.h"
 
-static const op_function g_op_functions[] =
-{
+static const op_function	g_op_functions[] = {
 	[tkn_token] = token_null,
 	[tkn_word] = NULL,
 	[tkn_operator] = NULL,

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:51:19 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 11:26:15 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 12:24:52 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,16 @@
 #include "libft.h"
 #include <sys/wait.h>
 
+/*
+** Handles the execution and pipe line creation of pipe operator.
+** If there is other pipes in the command, traverses the tree
+** and then executes the commands.
+*/
+
 t_job	*token_pipe(t_job *job, t_term *term, t_node *current)
 {
 	t_job	*returnable;
-	
+
 	if (!current->left || (!job && !current->right))
 		return (NULL);
 	returnable = job;
