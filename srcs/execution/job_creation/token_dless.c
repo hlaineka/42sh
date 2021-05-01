@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 19:45:44 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/30 15:01:56 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 10:56:29 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,32 +43,92 @@ char	*ft_strjoin_all(char *str1, char *str2, int mode)
 	return (returnable); 
 }
 
+t_job	*heredoc_pipe_start(t_job *job, t_term *term, t_process *new)
+{
+	int			rpipe[2];
+	
+	job->next = term->jobs;
+	term->jobs = job;
+	new->next = job->first_process;
+	job->first_process = new;
+	pipe(rpipe);
+	new->pid = fork_and_chain_pipes(NULL, rpipe);
+	if (new->pid == 0)
+	{
+		simple_command(new);
+		exit(new->status);
+	}
+	close(job->fd_stdout);
+	close(job->fd_stdin);
+	job->fd_stdin = rpipe[0];
+	job->fd_stdout = rpipe[1];
+	return (job);
+}
+
+t_job	*heredoc_pipe_end(t_job *job, t_term *term)
+{
+	t_process	*temp_process;
+	int			lpipe[2];
+
+	temp_process = job->first_process->next;
+	lpipe[0] = job->fd_stdin;
+	lpipe[1] = job->fd_stdout;
+	temp_process->pid = fork_and_chain_pipes(lpipe, NULL);
+	if (temp_process->pid == 0)
+	{
+		dup2(term->fd_stdout, STDOUT_FILENO);
+			simple_command(temp_process);
+			exit(temp_process->status);
+		exit(1);
+	}
+	close(lpipe[0]);
+	close(lpipe[1]);
+	waitpid(temp_process->pid, &temp_process->status, 0);
+	dup2(term->fd_stdout, STDOUT_FILENO);
+	dup2(term->fd_stdin, STDIN_FILENO);
+	dup2(term->fd_stderr, STDERR_FILENO);
+	return (job);
+}
+
+static char	**strarr_add(char **argv, char *command)
+{
+	int		i;
+
+	i = 0;
+	while (argv[i])
+		i++;
+	argv[i] = ft_strdup(command);
+	return(argv);
+}
+
 t_job	*token_dless(t_job *job, t_term *term, t_node *current)
 {
-	char	*delimiter;
-	int		lpipe[2];
-	char	*output;
-	t_job	*returnable;
+	char		*delimiter;
+	char		*output;
+	t_job		*returnable;
+	t_process	*new;
 
 	output = NULL;
-	returnable = get_left_job(job, current, term);
+	returnable = NULL;
+	if (current->left)
+		returnable = tree_traversal(job, current->left, term);
 	delimiter = get_filename(current);  
 	delimiter = ft_strjoin_frees1(delimiter, "\n");
 	output = get_input_heredoc(delimiter, term->here_input, term);
+	new = init_process(term);
+	strarr_add(new->argv, "echo");
+	strarr_add(new->argv, output);
 	if (returnable)
 	{
-		pipe(lpipe);
-		write(lpipe[1], output, ft_strlen(output));
-		dup2(lpipe[0], STDIN_FILENO);
-		returnable->first_process->status = simple_command(returnable->first_process);
-		close(lpipe[0]);
-		close(lpipe[1]);
-		dup2(term->fd_stdin, STDIN_FILENO);
+		returnable = heredoc_pipe_start(returnable, term, new);
+		returnable = heredoc_pipe_end(returnable, term);
 	}
 	else
 	{
-		write(STDOUT_FILENO, output, ft_strlen(output));
-		write(STDOUT_FILENO, "\n", 1);
+		returnable = init_job(term);
+		new->next = returnable->first_process;
+		returnable->first_process = new;
+		simple_command(new);
 	}
 	ft_memdel((void**)&output);
 	return (returnable);
