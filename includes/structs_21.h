@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/30 19:18:33 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 09:32:14 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
 
 # define KEY_ESC 27
 
-typedef struct termios	t_termios;
-typedef struct stat		t_stat;
-
 typedef struct s_clist
 {
 	void				*content;
@@ -29,6 +26,11 @@ typedef struct s_clist
 	struct s_clist		*prev;
 	struct s_clist		*next;
 }						t_clist;
+
+/*
+**	int					prompt_row; //limit y
+**	int					prompt_col; //limit x
+*/
 
 typedef struct s_input
 {
@@ -47,35 +49,64 @@ typedef struct s_input
 	size_t				prompt_length;
 	int					start_row;
 	int					start_col;
-	int					prompt_row; //limit y
-	int					prompt_col; //limit x
+	int					prompt_row;
+	int					prompt_col;
 	int					cursor_row;
 	int					cursor_col;
 	int					heredoc;
 }						t_input;
 
+/*
+**typedef struct s_process
+**{
+**	struct s_process	*next;       //next process in pipeline
+**	int					argc;
+**	char				**argv;      //for exec, needs to be freed.
+**	char				**envp;		 //copied from term, needs to be freed.
+**	pid_t				pid;         //process ID
+**	char				completed;   //true if process has completed
+**	char				stopped;     //true if process has stopped
+**	int					status;      //reported status value
+**}						t_process;
+*/
+
 typedef struct s_process
 {
-	struct s_process	*next;       /* next process in pipeline */
+	struct s_process	*next;
 	int					argc;
-	char				**argv;      /* for exec */
+	char				**argv;
 	char				**envp;
-	pid_t				pid;         /* process ID */
-	char				completed;   /* true if process has completed */
-	char				stopped;     /* true if process has stopped */
-	int					status;      /* reported status value */
+	pid_t				pid;
+	char				completed;
+	char				stopped;
+	int					status;
 }						t_process;
 
-/* A job is a pipeline of processes.  */
+/* A job is a pipeline of processes.
+** typedef struct s_job
+{
+	struct s_job		*next;          //next active job, if not t_list
+	char				*command;       //command line, used for messages
+	t_process			*first_process; //list of processes in this job
+	pid_t				pgid;           //process group ID
+	char				notified;       //true if user told about stopped job
+	struct termios		tmodes;         //saved terminal modes
+	struct termios		orig_termios;   //is this the same as abowe?
+	int					fd_stdin;
+	int					fd_stdout;
+	int					fd_stderr;
+}						t_job;
+*/
+
 typedef struct s_job
 {
-	struct s_job		*next;          /* next active job, if not t_list */
-	char				*command;       /* command line, used for messages */
-	t_process			*first_process; /* list of processes in this job */
-	pid_t				pgid;           /* process group ID */
-	char				notified;       /* true if user told about stopped job */
-	t_termios			tmodes;         /* saved terminal modes */
-	t_termios			orig_termios;   /* is this the same as abowe? */
+	struct s_job		*next;
+	char				*command;
+	t_process			*first_process;
+	pid_t				pgid;
+	char				notified;
+	struct termios		tmodes;
+	struct termios		orig_termios;
 	int					fd_stdin;
 	int					fd_stdout;
 	int					fd_stderr;
@@ -147,8 +178,8 @@ typedef struct s_term
 	char				*term_buffer;
 	char				*termtype;
 	char				*buffer;
-	t_termios			orig_termios;
-	t_termios			raw;
+	struct termios		orig_termios;
+	struct termios		raw;
 	char				*ti_string;
 	char				*te_string;
 	char				*cl_string;
@@ -177,6 +208,7 @@ typedef struct s_term
 /*
 ** GLOBALS
 */
+
 t_term					*g_term;
 t_input					*g_input;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_valid_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 14:50:43 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/06 15:32:55 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/02 09:26:09 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_valid_folder(char *path)
 {
-	t_stat	buf;
+	struct stat	buf;
 
 	if (lstat(path, &buf) == -1)
 	{

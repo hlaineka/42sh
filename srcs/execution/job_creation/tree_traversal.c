@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 11:58:18 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 15:00:18 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 09:34:18 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 ** functions are named token_operatorname(). 
 */
 
-static const op_function	g_op_functions[] = {
+static const t_op_function	g_op_functions[] = {
 	[tkn_token] = token_null,
 	[tkn_word] = NULL,
 	[tkn_operator] = NULL,

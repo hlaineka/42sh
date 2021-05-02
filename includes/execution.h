@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:35:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 15:24:52 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/02 09:20:29 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "parser.h"
 # include <stdbool.h>
 
-t_job 		*execute(t_node *root, t_term *term);
+t_job		*execute(t_node *root, t_term *term);
 void		execute_jobs(t_job *jobs, t_term *term);
 int			exec_tprocess(t_process *proc);
 
@@ -73,12 +73,11 @@ int			close_fd(int old_fd);
 t_job		*token_null(t_job *job, t_term *term, t_node *current);
 t_job		*token_semi(t_job *job, t_term *term, t_node *current);
 t_job		*token_pipe(t_job *job, t_term *term, t_node *current);
-t_job 		*token_great(t_job *job, t_term *term, t_node *current);
+t_job		*token_great(t_job *job, t_term *term, t_node *current);
 t_job		*token_less(t_job *job, t_term *term, t_node *current);
 t_job		*token_dgreat(t_job *job, t_term *term, t_node *current);
 t_job		*token_greatand(t_job *job, t_term *term, t_node *current);
 t_job		*token_lessand(t_job *job, t_term *term, t_node *current);
 t_job		*token_dless(t_job *job, t_term *term, t_node *current);
-
 
 #endif
