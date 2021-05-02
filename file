@@ -1,0 +1,18 @@
+in check fdread rightswrite rights21sh
+abc
+author
+dup_fd
+err
+file
+images
+includes
+libft
+libft.a
+Makefile
+objs
+out
+README.md
+run2.sh
+run.sh
+srcs
+test_file

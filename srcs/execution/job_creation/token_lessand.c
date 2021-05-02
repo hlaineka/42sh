@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:49:07 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 15:18:04 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 15:45:04 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ static int	dup_fd(int old_fd, char *tkn_word)
 	new_fd = atoi(tkn_word);
 	if (new_fd == -1)
 		return (-1);
-	returnable = close_fd(old_fd);
+	returnable = 0;
+	if (-1 != check_fd(old_fd))	
+		returnable = close_fd(old_fd);
 	if (returnable != -1)
 	{
 		if (old_fd == 0)
@@ -44,13 +46,15 @@ t_job	*token_lessand(t_job *job, t_term *term, t_node *current)
 	char	*tkn_word;
 	t_job	*returnable;
 
-	returnable = get_left_job(job, current, term);
-	if (!returnable)
-		return (NULL);
 	old_fd = get_fd(current, 0);
 	tkn_word = get_filename(current);
 	if (ft_strequ(tkn_word, "-"))
 	{
+		if (-1 != check_fd(old_fd))
+		{
+			ft_printf_fd(STDERR_FILENO, "Bad file descriptor\n");
+			return (NULL);
+		}
 		if (-1 == close_fd(old_fd))
 			return (NULL);
 	}
@@ -60,9 +64,9 @@ t_job	*token_lessand(t_job *job, t_term *term, t_node *current)
 			return (NULL);
 	}
 	else
-	{
-		free_job(returnable);
 		return (NULL);
-	}
+	returnable = get_left_job(job, current, term);
+	if (!returnable)
+		return (NULL);
 	return (returnable);
 }

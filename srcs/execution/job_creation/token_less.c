@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:52:24 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/02 12:55:00 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 15:42:37 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ static int	open_fd(char *filename, int old_fd)
 {
 	int	returnable;
 
-	//add filename path checking
-	returnable = close(old_fd);
+	returnable = 0;
+	if (-1 != check_fd(old_fd))	
+		returnable = close(old_fd);
 	if (returnable >= 0)
 		returnable = open(filename, O_RDONLY);
 	if (returnable == -1)
@@ -43,20 +44,14 @@ t_job	*token_less(t_job *job, t_term *term, t_node *current)
 	t_job	*returnable;
 
 	old_fd = get_fd(current, 0);
+	filename = get_filename(current);
+	if (!filename)
+		return (NULL);
+	new_fd = open_fd(filename, old_fd);
+	if (-1 == new_fd)
+		return (NULL);
 	returnable = get_left_job(job, current, term);
 	if (!returnable)
 		return (NULL);
-	filename = get_filename(current);
-	if (!filename)
-	{
-		free_job(returnable);
-		return (NULL);
-	}
-	new_fd = open_fd(filename, old_fd);
-	if (-1 == new_fd)
-	{
-		free_job(returnable);
-		return (NULL);
-	}
 	return (returnable);
 }

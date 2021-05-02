@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:35:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/02 12:01:37 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/02 15:27:29 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ t_job		*get_right_job(t_job *job, t_node *current, t_term *term);
 char		*get_filename(t_node *current);
 int			get_fd(t_node *current, int default_fd);
 int			close_fd(int old_fd);
+
+int			check_fd(int fd);
 
 /*
 ** execution/job_creation: operation function pointers, all in their own files

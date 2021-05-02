@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 12:25:59 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/02 12:54:01 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 15:38:14 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ static int	open_fd(char *filename, int old_fd)
 {
 	int	returnable;
 
-	returnable = close(old_fd);
+	returnable = 0;
+	if (-1 != check_fd(old_fd))
+		returnable = close(old_fd);
 	if (returnable >= 0)
 		returnable = open(filename, O_RDWR | O_APPEND | O_CREAT, S_IRWXU
 				| S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
@@ -43,20 +45,14 @@ t_job	*token_dgreat(t_job *job, t_term *term, t_node *current)
 	t_job	*returnable;
 
 	old_fd = get_fd(current, 1);
+	filename = get_filename(current);
+	if (!filename)
+		return NULL;
+	new_fd = open_fd(filename, old_fd);
+	if (-1 == new_fd)
+		return (NULL);
 	returnable = get_left_job(job, current, term);
 	if (!returnable)
 		return (NULL);
-	filename = get_filename(current);
-	if (!filename)
-	{
-		free_job(returnable);
-		return NULL;
-	}
-	new_fd = open_fd(filename, old_fd);
-	if (-1 == new_fd)
-	{
-		free_job(returnable);
-		return (NULL);
-	}
 	return (returnable);
 }

@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/05/02 13:05:15 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/05/02 15:27:16 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -129,7 +129,8 @@ _SRC_JOB_CREATION = job_creation.c \
 					token_dgreat.c \
 					token_greatand.c \
 					token_lessand.c \
-					token_dless.c
+					token_dless.c \
+					check_fd.c
 
 
 SRC_MAIN = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))
