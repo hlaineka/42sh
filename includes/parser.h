@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/02 09:37:59 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 22:50:13 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,6 +251,7 @@ int					handle_operator_token(char *str, char *source, int *i,
 						int *maintoken);
 int					handle_word_token(char *str, char *source, int *i,
 						int *maintoken);
+void				free_tokens_sub(t_token *tokens);
 
 /*
 ** parser/tokenization/basic_tokens.c

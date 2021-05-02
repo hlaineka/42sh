@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 17:58:27 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 15:22:01 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 22:49:49 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,27 @@ t_token	*add_subtoken(t_token *current, t_token *sub)
 		sub->prev = returnable;
 	}
 	return (returnable);
+}
+
+void	free_tokens_sub(t_token *tokens)
+{
+	t_token	*temp;
+	t_token	*temp_sub;
+	t_token	*next_temp;
+	t_token	*next_temp_sub;
+
+	temp = tokens;
+	while (temp)
+	{
+		next_temp = temp->next;
+		temp_sub = temp->subtokens;
+		while (temp_sub)
+		{
+			next_temp_sub = temp_sub->next;
+			free_token(temp_sub);
+			temp_sub = next_temp_sub;
+		}
+		free_token(temp);
+		temp = next_temp;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 19:22:30 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/02 09:17:11 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 22:28:56 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_strpastei(char *dest, char *new, int i)
 
 	returnable = ft_strnew(ft_strlen(dest) + ft_strlen(new) + 1);
 	w = 0;
-	while (w <= i && dest && dest[w])
+	while (w < i && dest && dest[w])
 	{
 		returnable[w] = dest[w];
 		w++;
