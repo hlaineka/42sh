@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   enable_raw_mode.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 19:20:26 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/26 11:45:11 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/02 09:24:50 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 
-static void	ft_cfmakeraw(t_termios *termios_p)
+static void	ft_cfmakeraw(struct termios *termios_p)
 {
 	termios_p->c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP
 			| INLCR | IGNCR | ICRNL | IXON);
@@ -24,7 +24,7 @@ static void	ft_cfmakeraw(t_termios *termios_p)
 
 void	get_termios_modes(t_term *term)
 {
-	t_termios	raw;
+	struct termios	raw;
 
 	if (tcgetattr(STDIN_FILENO, &raw) == -1)
 		err_fatal(ERR_MESSAGE, "tcgetattr", term);

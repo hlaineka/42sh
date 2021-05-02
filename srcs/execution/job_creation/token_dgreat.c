@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 12:25:59 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 09:59:34 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 09:09:35 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static int	open_fd(char *filename, int old_fd)
 
 	returnable = close(old_fd);
 	if (returnable >= 0)
-		returnable = open(filename, O_RDWR | O_APPEND | O_CREAT, S_IRWXU | S_IRGRP
-					| S_IXGRP | S_IROTH | S_IXOTH);
+		returnable = open(filename, O_RDWR | O_APPEND | O_CREAT, S_IRWXU
+				| S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
 	if (returnable == -1)
 		ft_printf("open failed\n"); //
 	return (returnable);
@@ -41,7 +41,7 @@ t_job	*token_dgreat(t_job *job, t_term *term, t_node *current)
 	int		old_fd;
 	char	*filename;
 	t_job	*returnable;
-	
+
 	old_fd = get_fd(current, 1);
 	returnable = get_left_job(job, current, term);
 	if (!returnable)
@@ -49,6 +49,6 @@ t_job	*token_dgreat(t_job *job, t_term *term, t_node *current)
 	filename = get_filename(current);
 	new_fd = open_fd(filename, old_fd);
 	if (-1 == new_fd)
-		return(NULL);
-	return(returnable);
+		return (NULL);
+	return (returnable);
 }

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 11:23:19 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/01 15:19:49 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 19:25:04 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ void				ft_strtoupper(char *str);
 char				*ft_strcut(char *str, int start, int end);
 int					ft_is_nbrstr(char *str);
 char				*ft_strjoin_all(char *str1, char *str2, int mode);
+char				*ft_strpastei(char *dest, char *new, int i);
 
 #endif

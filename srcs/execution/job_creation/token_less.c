@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:52:24 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 10:01:53 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 09:13:37 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	open_fd(char *filename, int old_fd)
 	if (returnable >= 0)
 		returnable = open(filename, O_RDONLY);
 	if (returnable == -1)
-		ft_printf("open failed\n"); //
+		ft_printf("open failed\n");
 	return (returnable);
 }
 
@@ -49,6 +49,6 @@ t_job	*token_less(t_job *job, t_term *term, t_node *current)
 	filename = get_filename(current);
 	new_fd = open_fd(filename, old_fd);
 	if (-1 == new_fd)
-		return(NULL);
-	return(returnable);
+		return (NULL);
+	return (returnable);
 }

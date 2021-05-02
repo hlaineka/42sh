@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/05/01 15:20:34 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/05/01 19:25:35 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -207,6 +207,7 @@ _SRC_STRINGS = ft_char_str_join.c \
 			ft_strjoin_frees2.c \
 			ft_strlast.c \
 			ft_strpaste.c \
+			ft_strpastei.c \
 			ft_strpaste_digits.c \
 			ft_strpaste_end.c \
 			ft_strstr_remove.c \

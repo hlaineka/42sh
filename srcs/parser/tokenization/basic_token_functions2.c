@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:54:13 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 15:43:00 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 21:30:57 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ bool *double_quote)
 		*single_quote = !*single_quote;
 	if (c == 92)
 		*backslash = TRUE;
-	if (double_quote)
+	if (*double_quote)
 		returnable = returnable + 34;
-	if (single_quote)
+	if (*single_quote)
 		returnable = returnable + 39;
-	if (backslash)
+	if (*backslash)
 		returnable = returnable + 92;
 	if (c != 92 && *backslash == TRUE)
 		*backslash = FALSE;

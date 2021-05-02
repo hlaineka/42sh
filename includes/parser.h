@@ -6,14 +6,13 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/01 18:48:42 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 09:37:59 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-//# include "includes.h"
 # include "structs_21.h"
 # include <stdbool.h>
 
@@ -145,14 +144,15 @@ typedef struct s_node
 	char			*command;
 }					t_node;
 
-typedef t_job *(*op_function)(t_job *job, t_term *term, t_node *current);
+typedef t_job *(*t_op_function)(t_job *job, t_term *term, t_node *current);
 
 /*
 ** parser/parser.c
 */
 
 t_node				*parser(char *input, t_term *term);
-void				debug_print_tree(t_node *node, char *prefix, int left_right);
+void				debug_print_tree(t_node *node, char *prefix,
+						int left_right);
 
 /*
 ** parser/ast_creation/ast_builder.c
@@ -216,13 +216,11 @@ int					add_filename_tkn(t_token *current);
 
 t_token				*validate_operator_tokens(t_token *first);
 
-
 /*
 ** parser/tokenization/quote_removal.c
 */
 
 void				quote_removal(t_token *first);
-
 
 /*
 ** parser/tokenization/basic_token_functions.c
@@ -240,7 +238,8 @@ void				free_token(t_token *to_free);
 
 t_token				*init_token(void);
 t_token				*add_quotearray(t_token *current);
-void				check_quotes(char c, bool *single_quoted, bool *double_quoted);
+void				check_quotes(char c, bool *single_quoted,
+						bool *double_quoted);
 void				check_backslash(char *str, char c, bool *backslash);
 
 /*
@@ -248,13 +247,33 @@ void				check_backslash(char *str, char c, bool *backslash);
 */
 
 t_token				*add_subtoken(t_token *current, t_token *sub);
-int					handle_operator_token(char *str, char *source, int *i, int *maintoken);
-int					handle_word_token(char *str, char *source, int *i, int *maintoken);
+int					handle_operator_token(char *str, char *source, int *i,
+						int *maintoken);
+int					handle_word_token(char *str, char *source, int *i,
+						int *maintoken);
 
 /*
 ** parser/tokenization/basic_tokens.c
 */
 
 t_token				*define_basic_tokens(char *input);
+
+/*
+** parser/tokenization/tilde_expansion.c
+*/
+
+int					tilde_expansion(t_token *tkn, t_term *term, int tilde);
+
+/*
+** parser/tokenization/dollar_expansion.c
+*/
+
+int					dollar_expansion(t_token *tkn, t_term *term, int dollar);
+
+/*
+** parser/tokenization/word_expansion.c
+*/
+
+t_token				*word_expansions(t_token *first, t_term *term);
 
 #endif
