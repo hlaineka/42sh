@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/05/02 12:01:22 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/05/02 12:21:49 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,8 @@ _SRC_INPUT = read_input_user.c \
 			copy_envp.c \
 			clear_rows_starting_y.c \
 			get_input_heredoc.c \
-			cut_copy_paste.c
+			cut_copy_paste.c \
+			double_input_mem.c
 
 _SRC_PARSER = 	parser.c \
 
