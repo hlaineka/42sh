@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:21:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/07 15:59:40 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/02 12:28:04 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	print_envp(char **envp)
 	}
 }
 
-int		env_get_options(char *flags, char **envp)
+int	env_get_options(char *flags, char **envp)
 {
 	int		i;
 	int		options;
@@ -59,8 +59,6 @@ int		env_get_options(char *flags, char **envp)
 		if (flags[i] == 'i')
 		{
 			clear_envp(envp);
-//			ft_strarrdel(envp);
-//			*envp = ft_memalloc(sizeof(char*));
 		}
 		else if (flags[i] == 'P')
 			options |= ENV_P_FLAG;
@@ -96,8 +94,6 @@ int	execute_env(char **argv, char **envp, char *altpath, int options)
 	}
 	else
 		print_envp(envp);
-//		ft_printf("ENVIN PRINTTAUS\n");
-//		ft_lstiter(envl->next, &ft_lstprint);
 	return (0);
 }
 
