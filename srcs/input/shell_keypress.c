@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/01 19:45:58 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/02 12:51:03 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,53 +20,40 @@ static int	is_special_key(char *rc)
 	return (0);
 }
 
-static char	*double_allocation(char *str, size_t size)
+static void	do_esc_keys(char *rc, t_input *input, t_term *term)
 {
-	char	*new;
-
-	new = ft_memalloc(sizeof(char) * size * 2);
-	if (!new)
-		return (NULL);
-	ft_strcat(new, str);
-	free(str);
-	return (new);
-}
-
-int	double_input_mem(t_input *input, t_term *term)
-{
-	input->ls = double_allocation(input->ls, input->ls_size);
-	input->rrs = double_allocation(input->rrs, input->rrs_size);
-	if (!input->ls || !input->rrs)
-		err_fatal(ERR_MALLOC, NULL, term);
-	input->ls_size *= 2;
-	input->rrs_size *= 2;
-	return (0);
+	if (ft_is_home_key(rc))
+		home_keypress(input, term);
+	else if (ft_is_end_key(rc))
+		end_keypress(input, term);
+	else if (ft_is_up_key(rc))
+		history_up(input, term);
+	else if (ft_is_down_key(rc))
+		history_down(input, term);
+	else if (ft_is_left_key(rc))
+		left_keypress(input, term);
+	else if (ft_is_right_key(rc))
+		right_keypress(input, term);
+	else if (ft_is_delete_key(rc))
+		delete_keypress(input, term);
+	else if (ft_is_right_key(rc + 1))
+		move_next_word(input, term);
+	else if (ft_is_left_key(rc + 1))
+		move_prev_word(input, term);
+	else if (ft_is_up_key(rc + 1))
+		alt_up_keypress(input, term);
+	else if (ft_is_down_key(rc + 1))
+		alt_down_keypress(input, term);
 }
 
 static int	do_special_keys(char *rc, t_input *input, t_term *term)
 {
-	ft_is_home_key(rc) == TRUE ? home_keypress(input, term) : 0;
-	ft_is_end_key(rc) == TRUE ? end_keypress(input, term) : 0;
-	ft_is_up_key(rc) == TRUE ? history_up(input, term) : 0;
-	ft_is_down_key(rc) == TRUE ? history_down(input, term) : 0;
-	ft_is_left_key(rc) == TRUE ? left_keypress(input, term) : 0;
-	ft_is_right_key(rc) == TRUE ? right_keypress(input, term) : 0;
-	ft_is_delete_key(rc) == TRUE ? delete_keypress(input, term) : 0;
 	if (rc[0] == -61 && rc[1] == -89)
 		copy_input_to_clipboard(input, term);
-	if (rc[0] == -30 && rc[1] == -120 && rc[2] == -102)
+	else if (rc[0] == -30 && rc[1] == -120 && rc[2] == -102)
 		paste_clipboard_to_input(input, term);
-	if (rc[0] == KEY_ESC)
-	{
-		if (ft_is_right_key(rc + 1))
-			move_next_word(input, term);
-		else if (ft_is_left_key(rc + 1))
-			move_prev_word(input, term);
-		else if (ft_is_up_key(rc + 1))
-			alt_up_keypress(input, term);
-		else if (ft_is_down_key(rc + 1))
-			alt_down_keypress(input, term);
-	}
+	else if (rc[0] == KEY_ESC)
+		do_esc_keys(rc, input, term);
 	else if (rc[0] == 127)
 		backspace_keypress(input, term);
 	if (rc[0] == 4)

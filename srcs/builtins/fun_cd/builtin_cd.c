@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 14:22:43 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 12:49:56 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 13:03:19 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 void	builtin_cd(void *proc)
 {
 	t_process	*process;
-	int		argc;
-	char	**argv;
-	char	**envp;
+	int			argc;
+	char		**argv;
+	char		**envp;
 	process = proc;
 	envp = process->envp;
 	argv = process->argv;

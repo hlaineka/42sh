@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/19 14:14:32 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/02 13:04:09 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	builtin_echo(void *proc)
 {
 	t_process	*process;
 	char		**argv;
-	int		i;
+	int			i;
 
 	process = proc;
 	argv = process->argv;
@@ -33,6 +33,5 @@ void	builtin_echo(void *proc)
 	if (!argv[1] || ft_strcmp(argv[1], "-n"))
 		ft_putchar_fd('\n', STDOUT_FILENO);
 	process->completed = 1;
-//	process->stopped = 1;
 	process->status = 0;
 }

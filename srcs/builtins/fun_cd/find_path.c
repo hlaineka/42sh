@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 11:03:24 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/11 12:25:20 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/02 13:02:57 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ static int	is_path_file(char *file, char *folder, char *path)
 	return (0);
 }
 
+/*
+** 	if (!folders)
+**		return (-1); // do proper error printing!!!
+*/
+
 int	find_path(char *file, char *path_env, char *buf)
 {
 	char	**folders;
@@ -35,7 +40,7 @@ int	find_path(char *file, char *path_env, char *buf)
 	ft_bzero(buf, 1024);
 	folders = ft_strsplit(path_env, ':');
 	if (!folders)
-		return (-1); // do proper error printing!!!
+		return (-1);
 	while (folders[i])
 	{
 		if (is_path_file(file, folders[i], buf))
@@ -44,7 +49,7 @@ int	find_path(char *file, char *path_env, char *buf)
 	}
 	if (!folders[i])
 		buf[0] = '\0';
-	ft_strarray_free(folders); // ok?
+	ft_strarray_free(folders);
 	if (buf[0])
 		return (1);
 	return (0);
