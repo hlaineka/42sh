@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 14:48:16 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 22:28:46 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 11:50:09 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	push_word(t_token *tkn, t_node **node_stack)
 	new_node = init_node();
 	new_node->command = ft_strdup(tkn->value);
 	new_node->operation = tkn->maintoken;
-	delete_token(tkn);
 	node_stack[i] = new_node;
 	return (0);
 }
@@ -92,7 +91,6 @@ int	push_operator(t_token *tkn, t_node **node_stack)
 	}
 	node_stack[i] = NULL;
 	node_stack[i] = new_node;
-	delete_token(tkn);
 	return (0);
 }
 

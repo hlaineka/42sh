@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 09:58:07 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/29 09:59:56 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 12:03:14 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,47 @@
 /*
 ** Functions to add subtokens to redirection operators.
 */
+
+static char	*get_io_returnable(char *str, int start, int end)
+{
+	int		i;
+	int		w;
+	char	*returnable;
+
+	i = start;
+	w = 0;
+	returnable = malloc(end - start + 1);
+	while (i < end)
+	{
+		returnable[w] = str[i];
+		w++;
+		i++;
+	}
+	returnable[w] = '\0';
+	return (returnable);
+}
+
+static char	*ft_strcut_io(char *str, int start, int end)
+{
+	char	*returnable;
+	int		i;
+	int		w;
+	int		len;
+
+	returnable = get_io_returnable(str, start, end);
+	len = ft_strlen(str);
+	i = start;
+	w = end;
+	while (str[w])
+	{
+		str[i] = str[w];
+		i++;
+		w++;
+	}
+	while (i <= len)
+		str[i++] = '\0';
+	return (returnable);
+}
 
 int	handle_tkn_io_number(t_token *current)
 {
@@ -31,7 +72,7 @@ int	handle_tkn_io_number(t_token *current)
 	{
 		new_subtoken = init_token();
 		new_subtoken->maintoken = tkn_io_number;
-		new_subtoken->value = ft_strcut(current->value, 0, i);
+		new_subtoken->value = ft_strcut_io(current->value, 0, i);
 		add_subtoken(current, new_subtoken);
 	}
 	return (0);
