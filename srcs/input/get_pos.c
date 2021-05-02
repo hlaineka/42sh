@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 10:24:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/26 11:50:25 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/02 11:35:03 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	get_pos(int *y, int *x)
 	{
 		if (!(read(0, &ch, 1)))
 		{
-			ft_printf_fd(2, "cursor position reading failed.\n\r"); //change
+			ft_printf_fd(2, "cursor position reading failed.\n\r");
 			return (-1);
 		}
 		buf[i++] = ch;

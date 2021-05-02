@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 10:34:59 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/21 11:24:10 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/02 11:22:35 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,23 @@ void	sig_handler_input(int signo)
 		init_input_tty(input, PROMPT_HEREDOC);
 	else
 		init_input_tty(input, PROMPT_START);
+}
+
+void	set_signal_input(void)
+{
+	if ((signal(SIGINT, sig_handler_input) == SIG_ERR)
+		|| (signal(SIGCONT, sig_handler_input) == SIG_ERR)
+		|| (signal(SIGINT, sig_handler_input) == SIG_ERR)
+		|| (signal(SIGTSTP, sig_handler_input) == SIG_ERR)
+		|| (signal(SIGTERM, sig_handler_input) == SIG_ERR)
+		|| (signal(SIGQUIT, sig_handler_input) == SIG_ERR)
+		|| (signal(SIGHUP, sig_handler_input) == SIG_ERR)
+		|| (signal(SIGPIPE, sig_handler_input) == SIG_ERR)
+		|| (signal(SIGALRM, sig_handler_input) == SIG_ERR)
+		|| (signal(SIGXCPU, sig_handler_input) == SIG_ERR)
+		|| (signal(SIGXFSZ, sig_handler_input) == SIG_ERR)
+		|| (signal(SIGABRT, sig_handler_input) == SIG_ERR)
+		|| (signal(SIGVTALRM, sig_handler_input) == SIG_ERR)
+		|| (signal(SIGPROF, sig_handler_input) == SIG_ERR))
+		ft_exit(0);
 }

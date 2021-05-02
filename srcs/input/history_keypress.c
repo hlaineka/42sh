@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 10:52:51 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/11 12:06:07 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/02 11:35:55 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	history_up(t_input *input, t_term *term)
 		return ;
 	x = input->prompt_col - 1;
 	y = input->prompt_row - 1;
-	if (ft_strlen(input->ls) + ft_strlen(input->rrs) + input->prompt_length > term->nrows)
+	if (ft_strlen(input->ls) + ft_strlen(input->rrs)
+		+ input->prompt_length > term->nrows)
 		clear_rows_starting_y(y + 1, term);
 	tputs(tgoto(term->cm_string, x, y), 1, ft_putc);
 	tputs(term->ce_string, 1, ft_putc);
@@ -51,7 +52,8 @@ void	history_down(t_input *input, t_term *term)
 		return ;
 	x = input->prompt_col - 1;
 	y = input->prompt_row - 1;
-	if (ft_strlen(input->ls) + ft_strlen(input->rrs) + input->prompt_length > term->nrows)
+	if (ft_strlen(input->ls) + ft_strlen(input->rrs)
+		+ input->prompt_length > term->nrows)
 		clear_rows_starting_y(y + 1, term);
 	tputs(tgoto(term->cm_string, x, y), 1, ft_putc);
 	tputs(term->ce_string, 1, ft_putc);

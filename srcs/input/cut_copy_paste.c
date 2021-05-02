@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 19:10:53 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/01 19:49:22 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/02 11:10:22 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	copy_input_to_clipboard(t_input *input, t_term *term)
 	char	*clipboard;
 
 	(void)term;
-	clipboard = ft_memalloc(sizeof(char) * (ft_strlen(input->ls) + ft_strlen(input->rrs) + 1));
+	clipboard = ft_memalloc(sizeof(char) * (ft_strlen(input->ls)
+				+ ft_strlen(input->rrs) + 1));
 	if (!clipboard)
 		return ;
 	ft_strcpy(clipboard, input->ls);
