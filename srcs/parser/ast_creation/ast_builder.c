@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 14:48:16 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/30 10:37:34 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/01 22:28:46 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,6 @@ t_node	*ast_builder(t_token *new_first)
 	}
 	if (node_stack[1])
 	{
-		ft_printf((node_stack[0])->command);
-		ft_printf((node_stack[1])->command);
 		ft_printf_fd(2, "syntax error");
 		return (NULL);
 	}

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:32:34 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 10:00:08 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 09:09:15 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ static int	open_fd(char *filename, t_term *term, int old_fd)
 	if (returnable >= 0)
 	{
 		if (term->flag_noclobber == 0)
-			returnable = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU | S_IRGRP
-					| S_IXGRP | S_IROTH | S_IXOTH);
+			returnable = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU
+					| S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
 		else
 			returnable = open(filename, O_RDWR | O_APPEND);
 	}
 	if (returnable == -1)
-		ft_printf("open failed\n"); //
+		ft_printf("open failed\n");
 	return (returnable);
 }
 
@@ -47,7 +47,7 @@ t_job	*token_great(t_job *job, t_term *term, t_node *current)
 	int		old_fd;
 	char	*filename;
 	t_job	*returnable;
-	
+
 	old_fd = get_fd(current, 1);
 	returnable = get_left_job(job, current, term);
 	if (!returnable)
@@ -55,6 +55,6 @@ t_job	*token_great(t_job *job, t_term *term, t_node *current)
 	filename = get_filename(current);
 	new_fd = open_fd(filename, term, old_fd);
 	if (-1 == new_fd)
-		return(NULL);
-	return(returnable);
+		return (NULL);
+	return (returnable);
 }

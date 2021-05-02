@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:40:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 13:15:01 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 09:14:26 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,31 @@
 #include "execution.h"
 #include "includes.h"
 
-static void	debug_printing(t_job *next_job)
+static void	debug_print_process(t_process *temp_process, int processes)
 {
 	int			i;
+
+	if (temp_process->completed == 1)
+		ft_printf("completed. ");
+	if (temp_process->stopped == 1)
+		ft_printf("stopped. ");
+	ft_printf("argv of the %i process: ", processes);
+	i = 0;
+	while (temp_process->argv && temp_process->argv[i])
+	{
+		ft_printf("%s, ", temp_process->argv[i]);
+		i++;
+	}
+	ft_printf("\n");
+}
+
+static void	debug_printing(t_job *next_job)
+{
 	t_job		*temp_job;
 	t_process	*temp_process;
 	int			jobs;
 	int			processes;
 
-	i = 0;
 	jobs = 1;
 	processes = 1;
 	temp_job = next_job;
@@ -33,18 +49,7 @@ static void	debug_printing(t_job *next_job)
 		processes = 1;
 		while (temp_process)
 		{
-			if (temp_process->completed == 1)
-				ft_printf("completed. ");
-			if (temp_process->stopped == 1)
-				ft_printf("stopped. ");
-			ft_printf("argv of the %i process: ", processes);
-			i = 0;
-			while (temp_process->argv && temp_process->argv[i])
-			{
-				ft_printf("%s, ", temp_process->argv[i]);
-				i++;
-			}
-			ft_printf("\n");
+			debug_print_process(temp_process, processes);
 			temp_process = temp_process->next;
 			processes++;
 		}
@@ -66,7 +71,8 @@ t_job	*job_creation(t_node *root, t_term *term)
 	{
 		returnable->next = term->jobs;
 		term->jobs = returnable;
-		returnable->first_process->status = simple_command(returnable->first_process);
+		returnable->first_process->status
+			= simple_command(returnable->first_process);
 	}
 	if (returnable)
 		term->last_return = returnable->first_process->status;
