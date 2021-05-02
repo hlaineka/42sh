@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 09:49:01 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 11:27:32 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	main(int argc, char **argv, char **envp)
 	initialize(&input, &term, envp, argv);
 	init_input(&here_input);
 	term.here_input = &here_input;
+	exit_value = 0;
 	while (exit_value == 0)
 		exit_value = prompt_cycle(argv, &term, &input);
 	(void)argc;
