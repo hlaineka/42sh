@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:21:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 12:38:37 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 13:38:00 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,36 +74,37 @@ int	get_env_options(char **argv, char **envp, int *options, char *altpath)
 	return (i);
 }
 
-void	builtin_env(void *proc)
+static void	execute_env_child(int argc, char **argv, char **envp)
 {
-	t_process	*process;
-	int		argc;
-	char	**argv;
-	char	**envp;
-	process = proc;
-	argc = process->argc;
-	argv = process->argv;
-	envp = process->envp;
-
 	char	altpath[1024];
 	int		options;
 	int		i;
 
 	i = 0;
 	options = 0;
-	if ((g_pid = fork()) < 0)
-	{
-		err_builtin(E_FORK, argv[0], NULL);
-		return ;
-	}
+	i = get_env_options(argv, envp, &options, altpath);
+	if (i < 0)
+		exit(-1);
+	i = get_setenvs(argc, argv, envp, i);
+	if (i < 0)
+		exit(-1);
+	exit(execute_env(argv + i, envp, altpath, options));
+}
+
+void	builtin_env(void *proc)
+{
+	int		argc;
+	char	**argv;
+	char	**envp;
+
+	argc = ((t_process *)proc)->argc;
+	argv = ((t_process *)proc)->argv;
+	envp = ((t_process *)proc)->envp;
+	g_pid = fork();
+	if (g_pid < 0)
+		return ((void)err_builtin(E_FORK, argv[0], NULL));
 	else if (g_pid == 0)
-	{
-		if ((i = get_env_options(argv, envp, &options, altpath)) < 0)
-			exit(-1);
-		if ((i = get_setenvs(argc, argv, envp, i)) < 0)
-			exit(-1);
-		exit(execute_env(argv + i, envp, altpath, options));
-	}
+		execute_env_child(argc, argv, envp);
 	else
 		wait(NULL);
 	g_pid = 0;
