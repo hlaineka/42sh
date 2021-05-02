@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/16 11:42:01 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/02 11:42:00 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_input(t_input *input)
 	ft_bzero(input, sizeof(t_input));
 	input->ls = ft_memalloc(sizeof(char) * 2048);
 	if (!input->ls)
-		exit(1); //fix
+		exit(1);
 	input->rrs = ft_memalloc(sizeof(char) * 2048);
 	if (!input->rrs)
 	{
@@ -29,11 +29,11 @@ void	init_input(t_input *input)
 	{
 		free(input->ls);
 		free(input->rrs);
-		exit(1); // FIX
+		exit(1);
 	}
 	input->history = ft_clstnew(NULL, 0);
 	if (!input->history)
-		exit(1); //FIX this
+		exit(1);
 	input->last_comm = input->history;
 	input->ls_size = 2048;
 	input->rrs_size = 2048;
@@ -61,7 +61,6 @@ void	init_term(t_term *term)
 	int		success;
 	char	*buffer;
 
-	ft_bzero(term, sizeof(t_term));
 	term->termtype = getenv("TERM");
 	if (!isatty(1))
 		term->fd_stdout = open(ttyname(ttyslot()), O_RDWR);
@@ -74,7 +73,8 @@ void	init_term(t_term *term)
 		err_quit(ERR_TERMCAPS_NO_ACCESS, NULL);
 	if (success == 0)
 		err_quit(ERR_TERMTYPE_NOT_FOUND, term->termtype);
-	if (!(term->buffer = ft_memalloc(sizeof(char) * 2048)))
+	term->buffer = ft_memalloc(sizeof(char) * 2048);
+	if (!term->buffer)
 		err_fatal(ERR_MALLOC, NULL, term);
 	buffer = term->buffer;
 	get_termcaps_strings(term, buffer);
@@ -94,6 +94,7 @@ void	init_flags(t_term *term, char **argv)
 
 void	initialize(t_input *input, t_term *term, char **envp, char **argv)
 {
+	ft_bzero(term, sizeof(t_term));
 	init_term(term);
 	init_flags(term, argv);
 	init_input(input);
