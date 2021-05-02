@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 12:25:59 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/02 15:38:14 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 20:36:47 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_job	*token_dgreat(t_job *job, t_term *term, t_node *current)
 	old_fd = get_fd(current, 1);
 	filename = get_filename(current);
 	if (!filename)
-		return NULL;
+		return (NULL);
 	new_fd = open_fd(filename, old_fd);
 	if (-1 == new_fd)
 		return (NULL);

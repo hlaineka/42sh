@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 16:40:21 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/02 15:42:19 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 20:35:18 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	dup_fd(int old_fd, char *tkn_word)
 	if (new_fd == -1)
 		return (-1);
 	returnable = 0;
-	if (-1 != check_fd(old_fd))	
+	if (-1 != check_fd(old_fd))
 		returnable = close_fd(old_fd);
 	if (returnable != -1)
 	{
@@ -50,12 +50,7 @@ t_job	*token_greatand(t_job *job, t_term *term, t_node *current)
 	tkn_word = get_filename(current);
 	if (ft_strequ(tkn_word, "-"))
 	{
-		if (-1 != check_fd(old_fd))
-		{
-			ft_printf_fd(STDERR_FILENO, "Bad filedescriptor\n");
-			return (NULL);
-		}
-		if (-1 == close_fd(old_fd))
+		if ((-1 == check_fd(old_fd)) || (-1 == close_fd(old_fd)))
 			return (NULL);
 	}
 	else if (ft_is_nbrstr(tkn_word))

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:52:24 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/02 15:42:37 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 20:37:14 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	open_fd(char *filename, int old_fd)
 	int	returnable;
 
 	returnable = 0;
-	if (-1 != check_fd(old_fd))	
+	if (-1 != check_fd(old_fd))
 		returnable = close(old_fd);
 	if (returnable >= 0)
 		returnable = open(filename, O_RDONLY);
