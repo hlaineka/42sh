@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 13:15:25 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/15 15:05:43 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/02 11:55:30 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	left_keypress(t_input *input, t_term *term)
 	if (!input->ls[0])
 		return ;
 	if (input->ls[ft_strlen(input->ls) - 1] == 13
-			|| input->ls[ft_strlen(input->ls) - 1] == 9)
+		|| input->ls[ft_strlen(input->ls) - 1] == 9)
 	{
 		move_char_from_s1_to_s2(input->ls, input->rrs, input->rrs_size);
 		col = input->prompt_col - 1;
