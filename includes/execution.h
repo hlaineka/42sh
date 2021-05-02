@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:35:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/02 09:20:29 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 12:01:37 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 t_job		*execute(t_node *root, t_term *term);
 void		execute_jobs(t_job *jobs, t_term *term);
-int			exec_tprocess(t_process *proc);
 
 int			fork_and_chain_pipes(int *lpipe, int *rpipe);
 

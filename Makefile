@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/05/02 11:07:17 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/05/02 12:01:22 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,8 +108,7 @@ _SRC_SETENV =	builtin_setenv.c
 
 _SRC_UNSETENV =	builtin_unsetenv.c
 
-_SRC_EXECUTION =	exec_tprocess.c \
-					execution.c \
+_SRC_EXECUTION =	execution.c \
 					simple_command.c \
 					fork_and_chain_pipes.c
 
