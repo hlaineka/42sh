@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 09:32:39 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 12:49:17 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		is_builtin(t_process *process);
 void	builtin_cd(void *proc);
 int		find_path(char *file, char *path_env, char *buf);
 int		is_absolute_path(char *path);
-int		is_valid_folder(char *path);
+int		is_valid_folder(char *path, char *progname);
 char	*get_absolute_path_to_buf(char *rel, char **envp, char *buf);
 
 /*
@@ -68,5 +68,14 @@ void	builtin_setenv(void *proc);
 */
 
 void	builtin_unsetenv(void *proc);
+
+/*
+** ENV BUILTIN:
+*/
+
+void	clear_envp(char **envp);
+void	print_envp(char **envp);
+int		env_get_options(char *flags, char **envp);
+int		get_setenvs(int argc, char **argv, char **envp, int i);
 
 #endif

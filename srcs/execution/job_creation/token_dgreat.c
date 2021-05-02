@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 12:25:59 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/02 09:09:35 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 12:54:01 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,16 @@ t_job	*token_dgreat(t_job *job, t_term *term, t_node *current)
 	if (!returnable)
 		return (NULL);
 	filename = get_filename(current);
+	if (!filename)
+	{
+		free_job(returnable);
+		return NULL;
+	}
 	new_fd = open_fd(filename, old_fd);
 	if (-1 == new_fd)
+	{
+		free_job(returnable);
 		return (NULL);
+	}
 	return (returnable);
 }

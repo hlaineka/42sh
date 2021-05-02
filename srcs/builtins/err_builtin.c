@@ -3,17 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   err_builtin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 14:27:47 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/11 12:45:10 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/02 12:46:54 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes.h"
 
-static const char	*g_errstr[] =
-{
+/*
+** not yet done: ERR_PATH_NOT_SET, ERR_INVALID_INPUT
+** if (error_no == E_TOO_FEW_ARGS)
+** 		ft_printf_fd(STDERR_FILENO, "%s: Too few arguments.\n", name);
+** 	if (error_no == E_TOO_MANY_ARGS)
+** 		ft_printf_fd(STDERR_FILENO, "%s: Too many arguments.\n", name);
+** 	if (error_no == E_ONLYALNUM)
+**		ft_printf_fd(STDERR_FILENO, "%s: Variable name must contain
+**			alphanumeric characters.\n", name);
+**	if (error_no == E_FIRST_ALPHA)
+**		ft_printf_fd(STDERR_FILENO, "%s: Variable name must begin with a
+**		letter.\n", name);
+*/
+
+static const char	*g_errstr[] = {
 	"\0",
 	"Operation not permitted",
 	"No such file or directory",
@@ -133,23 +146,9 @@ static const char	*g_errstr[] =
 
 int	err_builtin(int error_no, char *name, char *arg)
 {
-// not yet done: ERR_PATH_NOT_SET, ERR_INVALID_INPUT
-
 	ft_printf_fd(STDERR_FILENO, "%s: %s", name, g_errstr[error_no]);
 	if (arg)
 		ft_printf_fd(STDERR_FILENO, ": %s", arg);
 	ft_putchar_fd('\n', STDERR_FILENO);
-/*
-	if (error_no == E_TOO_FEW_ARGS)
-		ft_printf_fd(STDERR_FILENO, "%s: Too few arguments.\n", name);
-	if (error_no == E_TOO_MANY_ARGS)
-		ft_printf_fd(STDERR_FILENO, "%s: Too many arguments.\n", name);
-	if (error_no == E_ONLYALNUM)
-		ft_printf_fd(STDERR_FILENO, "%s: Variable name must contain alphanumeric characters.\n", name);
-	if (error_no == E_FIRST_ALPHA)
-		ft_printf_fd(STDERR_FILENO, "%s: Variable name must begin with a letter.\n", name);
-
-*/
-
 	return (1);
 }

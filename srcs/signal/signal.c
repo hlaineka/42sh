@@ -6,43 +6,35 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 10:00:31 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/02 09:47:25 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 12:24:58 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_signal.h"
-//#include "ft_debug.h"
 #include "libft.h"
 
 void	signwinch_handler(int signo)
 {
 	if (signo == SIGWINCH)
 	{
-		//reset_screen(g_term);
-		//print_selections(g_term, g_term->first);
 	}
 }
 
 void	sig_handler(int signo)
 {
-	//h_disable_rawmode();
 	if (signo == SIGCHLD)
 		sig_child_handler();
 	else
-	{
-		ft_exit(0);
-	}
+		exit(0);
 }
 
 void	sigcont_handler(int signo)
 {
 	if (signo == SIGCONT)
 	{
-		//check_tty(g_term);
-		if (tcsetattr(g_term->fd_stdout, TCSAFLUSH, &g_term->orig_termios) == -1)
+		if (tcsetattr(g_term->fd_stdout, TCSAFLUSH, &g_term->orig_termios)
+			== -1)
 			die("tcsetattr");
-		//tputs(g_term->ti_string, g_term->nrows, &ft_putc);
-		//tputs(tgoto(g_term->cm_string, 0, 0), g_term->nrows, &ft_putc);
 	}
 }
 
@@ -50,10 +42,8 @@ void	sigtstp_handler(int signo)
 {
 	if (signo == SIGTSTP)
 	{
-		//h_disable_rawmode();
 		signal(SIGTSTP, SIG_DFL);
 		ioctl(STDERR_FILENO, TIOCSTI, "\x1A");
-		//tputs(g_term->te_string, g_term->nrows, &ft_putc);
 	}
 }
 
@@ -78,6 +68,5 @@ void	start_signal(void)
 		|| (signal(SIGTRAP, sig_handler) == SIG_ERR)
 		|| (signal(SIGSYS, sig_handler) == SIG_ERR)
 		|| (signal(SIGSEGV, sig_handler) == SIG_ERR))
-		//|| (signal(SIGCHLD, sig_handler) == SIG_ERR))
 		ft_exit(0);
 }

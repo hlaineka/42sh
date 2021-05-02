@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:21:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 12:28:04 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/02 12:38:37 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,57 +19,6 @@
 ** NOTIONS:
 ** - ENV with -i flag will print info that env has been cleared.
 */
-
-void	clear_envp(char **envp)
-{
-	int		i;
-
-	i = 0;
-	while (envp && envp[i])
-	{
-		free(envp[i]);
-		envp[i] = NULL;
-		i++;
-	}
-}
-
-static void	print_envp(char **envp)
-{
-	int		i;
-
-	i = 0;
-	if (!envp)
-		return ;
-	while (envp[i])
-	{
-		ft_putendl_fd(envp[i], STDOUT_FILENO);
-		i++;
-	}
-}
-
-int	env_get_options(char *flags, char **envp)
-{
-	int		i;
-	int		options;
-
-	i = 1;
-	options = 0;
-	while (flags[i])
-	{
-		if (flags[i] == 'i')
-		{
-			clear_envp(envp);
-		}
-		else if (flags[i] == 'P')
-			options |= ENV_P_FLAG;
-		else if (flags[i] == 'u')
-			options |= ENV_U_FLAG;
-		else
-			return (-1);
-		i++;
-	}
-	return (options);
-}
 
 int	execute_env(char **argv, char **envp, char *altpath, int options)
 {
@@ -97,23 +46,6 @@ int	execute_env(char **argv, char **envp, char *altpath, int options)
 	return (0);
 }
 
-int	get_setenvs(int argc, char **argv, char **envp, int i)
-{
-	char	*ptr;
-
-	while (i < argc)
-	{
-		ptr = ft_strchr(argv[i], '=');
-		if (!ptr)
-			break ;
-		*ptr = '\0';
-		if (ft_setenv(argv[i], ++ptr, 1, envp) < 0)
-			return (-1);
-		i++;
-	}
-	return (i);
-}
-
 int	get_env_options(char **argv, char **envp, int *options, char *altpath)
 {
 	int		o;
@@ -135,15 +67,12 @@ int	get_env_options(char **argv, char **envp, int *options, char *altpath)
 			i++;
 			if (!argv[i] || !ft_isalpha(argv[i][0]))
 				return (err_builtin(E_ILLEGAL_OPTION, "env", argv[i]));
-//				return (err_builtin(E_INVALID_INPUT, "env"));
 			ft_unsetenv(argv[i], envp);
 		}
 		i++;
 	}
 	return (i);
 }
-
-//int	builtin_env(int argc, char **argv, char **envp)
 
 void	builtin_env(void *proc)
 {
@@ -166,20 +95,16 @@ void	builtin_env(void *proc)
 	{
 		err_builtin(E_FORK, argv[0], NULL);
 		return ;
-//		return (err_builtin(E_FORK, argv[0], NULL));
 	}
-//		return (err_minishell(ERR_FORK_ERROR, argv[0]));
 	else if (g_pid == 0)
 	{
 		if ((i = get_env_options(argv, envp, &options, altpath)) < 0)
 			exit(-1);
 		if ((i = get_setenvs(argc, argv, envp, i)) < 0)
 			exit(-1);
-//		ft_printf("BEFORE: argv+1:%s, 
 		exit(execute_env(argv + i, envp, altpath, options));
 	}
 	else
 		wait(NULL);
 	g_pid = 0;
-//	return (0);
 }

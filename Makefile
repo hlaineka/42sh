@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/05/02 12:01:22 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/05/02 12:36:08 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ DIR_CD = srcs/builtins/fun_cd/
 DIR_ECHO = srcs/builtins/fun_echo/
 DIR_SETENV = srcs/builtins/fun_setenv/
 DIR_UNSETENV = srcs/builtins/fun_unsetenv/
+DIR_ENV = srcs/builtins/fun_env/
 DIR_EXECUTION = srcs/execution/
 DIR_OBJS = objs/
 
@@ -89,8 +90,7 @@ _SRC_SIGNAL =	signal.c \
 				signal_execution.c \
 				signal_to_default.c
 
-_SRC_BUILTIN =	builtin_env.c \
-				err_builtin.c \
+_SRC_BUILTIN =	err_builtin.c \
 				ft_getenv.c \
 				ft_setenv.c \
 				ft_unsetenv.c \
@@ -107,6 +107,9 @@ _SRC_ECHO =	builtin_echo.c
 _SRC_SETENV =	builtin_setenv.c
 
 _SRC_UNSETENV =	builtin_unsetenv.c
+
+_SRC_ENV = 	builtin_env.c \
+			env_functions.c
 
 _SRC_EXECUTION =	execution.c \
 					simple_command.c \
@@ -137,14 +140,15 @@ SRC_AST_CREATION = $(addprefix $(DIR_AST_CREATION), $(_SRC_AST_CREATION))
 SRC_SIGNAL = $(addprefix $(DIR_SIGNAL), $(_SRC_SIGNAL))
 SRC_BUILTIN = $(addprefix $(DIR_BUILTIN), $(_SRC_BUILTIN))
 SRC_CD = $(addprefix $(DIR_CD), $(_SRC_CD))
+SRC_ENV = $(addprefix $(DIR_ENV), $(_SRC_ENV))
 SRC_ECHO = $(addprefix $(DIR_ECHO), $(_SRC_ECHO))
 SRC_SETENV = $(addprefix $(DIR_SETENV), $(_SRC_SETENV))
 SRC_UNSETENV = $(addprefix $(DIR_UNSETENV), $(_SRC_UNSETENV))
 SRC_EXECTUION =  $(addprefix $(DIR_EXECUTION), $(_SRC_EXECUTION))
 
-SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER) $(SRC_SIGNAL) $(SRC_BUILTIN) $(SRC_CD) $(SRC_ECHO) $(SRC_SETENV) $(SRC_UNSETENV) $(SRC_EXECUTION) $(SRC_JOB_CREATION) $(SRC_TOKENIZATION) $(SRC_AST_CREATION)
+SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER) $(SRC_SIGNAL) $(SRC_BUILTIN) $(SRC_CD) $(SRC_ECHO) $(SRC_SETENV) $(SRC_UNSETENV) $(SRC_ENV) $(SRC_EXECUTION) $(SRC_JOB_CREATION) $(SRC_TOKENIZATION) $(SRC_AST_CREATION)
 
-_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL) $(_SRC_BUILTIN) $(_SRC_CD) $(_SRC_ECHO) $(_SRC_SETENV) $(_SRC_UNSETENV) $(_SRC_EXECUTION) $(_SRC_JOB_CREATION) $(_SRC_TOKENIZATION) $(_SRC_AST_CREATION)
+_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL) $(_SRC_BUILTIN) $(_SRC_CD) $(_SRC_ECHO) $(_SRC_SETENV) $(_SRC_UNSETENV) $(_SRC_ENV) $(_SRC_EXECUTION) $(_SRC_JOB_CREATION) $(_SRC_TOKENIZATION) $(_SRC_AST_CREATION)
 
 OBJ_FILES = $(_SRC:.c=.o)
 OBJS = $(patsubst %, $(DIR_OBJS)%, $(_SRC:.c=.o))
@@ -201,6 +205,9 @@ $(DIR_OBJS)%.o: $(DIR_ECHO)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 $(DIR_OBJS)%.o: $(DIR_SETENV)%.c $(INC)
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(DIR_OBJS)%.o: $(DIR_ENV)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 $(DIR_OBJS)%.o: $(DIR_UNSETENV)%.c $(INC)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 10:34:59 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 11:22:35 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/02 12:25:50 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	sig_handler_input(int signo)
 	int		col;
 	int		row;
 
-	(void)signo; // check if or something
+	(void)signo;
 	col = g_input->prompt_col - 1;
 	row = g_input->prompt_row - 1;
 	term = g_term;
@@ -31,9 +31,8 @@ void	sig_handler_input(int signo)
 	input->rrs[0] = '\0';
 	*input->quote = PROMPT_NORMAL;
 	ft_putstr_fd("\n\r", STDOUT_FILENO);
-	ft_memdel((void**)input->ret_str);
+	ft_memdel((void **)input->ret_str);
 	*input->input_temp = NULL;
-// is quote on?
 	if (input->heredoc)
 		init_input_tty(input, PROMPT_HEREDOC);
 	else

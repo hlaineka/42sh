@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:07:56 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/01 16:21:33 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/02 12:22:47 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,25 @@ void	kill_processes_before_pid(t_job *job, pid_t pid)
 	}
 }
 
+void	handle_process(t_process *proc, int status)
+{
+	proc->status = status;
+	if (WIFEXITED(status))
+	{
+		proc->completed = 1;
+		proc->status = WEXITSTATUS(status);
+	}
+	else if (WIFSTOPPED(status))
+	{
+		proc->stopped = 1;
+		proc->status = WIFSTOPPED(status);
+	}
+	else if (WIFSIGNALED(status))
+	{
+		proc->completed = 1;
+		proc->status = WTERMSIG(status);
+	}
+}
 
 void	sig_child_handler(void)
 {
@@ -34,7 +53,6 @@ void	sig_child_handler(void)
 	t_process	*proc;
 
 	pid = waitpid(-1, &status, WNOHANG);
-	//ft_printf("pid=%i", pid);
 	jobs = g_term->jobs;
 	while (jobs)
 	{
@@ -43,25 +61,8 @@ void	sig_child_handler(void)
 		{
 			if (pid == proc->pid)
 			{
-				proc->status = status;
-				if (WIFEXITED(status))
-				{
-					proc->completed = 1;
-					proc->status = WEXITSTATUS(status);
-				}
-				else if (WIFSTOPPED(status))
-				{
-					proc->stopped = 1;
-					proc->status = WIFSTOPPED(status);
-				}
-				else if (WIFSIGNALED(status))
-				{
-					proc->completed = 1;
-					proc->status = WTERMSIG(status);
-				}
-				ft_putendl("before kill");
+				handle_process(proc, status);
 				kill_processes_before_pid(jobs, pid);
-// if debug on, print which process ended
 				return ;
 			}
 			proc = proc->next;
@@ -83,7 +84,7 @@ void	sig_handler_exec(int signo)
 		while (jobs)
 		{
 			proc = jobs->first_process;
-			while(proc)
+			while (proc)
 			{
 				kill(proc->pid, SIGINT);
 				proc = proc->next;
@@ -91,26 +92,4 @@ void	sig_handler_exec(int signo)
 			jobs = jobs->next;
 		}
 	}
-/*
-	(void)signo;
-	jobs = g_term->jobs;
-	while (jobs)
-	{
-		proc = jobs->first_process;
-		while(proc)
-		{
-			if (proc->pid && (!proc->completed || !proc->stopped))
-			{
-				//check with macro if stopped or completed or what
-				proc->completed = 1;
-				proc->
-				kill(proc->pid, SIGINT);
-			// set proc->completed or stopped to something
-			}
-			proc = proc->next;
-		}
-		jobs = jobs->next;
-	}
-	ft_printf_fd(g_term->fd_stdout, "\n");
-*/
 }
