@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 14:49:07 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/03 10:34:41 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/03 17:06:00 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_job	*token_lessand(t_job *job, t_term *term, t_node *current)
 	tkn_word = get_filename(current);
 	if (ft_strequ(tkn_word, "-"))
 	{
-		if ((-1 == check_fd(old_fd, 1)) || (-1 == close_fd(old_fd)))
+		if (-1 == close_fd(old_fd))
 			return (NULL);
 	}
 	else if (ft_is_nbrstr(tkn_word))

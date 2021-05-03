@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 13:30:11 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/03 12:06:49 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/03 17:02:49 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ int	close_fd(int old_fd)
 	int			returnable;
 
 	if (old_fd == 0)
-		returnable = close(0);
+		returnable = close(STDIN_FILENO);
 	else if (old_fd == 1)
-		returnable = close(1);
+		returnable = close(STDOUT_FILENO);
 	else if (old_fd == 2)
-		returnable = close(2);
+		returnable = close(STDERR_FILENO);
 	else
 		returnable = close(old_fd);
 	if (returnable == -1)

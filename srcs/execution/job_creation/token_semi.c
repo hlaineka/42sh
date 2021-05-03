@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 19:42:21 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 12:27:52 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/03 17:11:18 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,24 @@
 ** or pipe operators in the command.
 */
 
+void	update_fds(t_term *term)
+{
+	if (-1 != check_fd(0, 0))
+		close(0);
+	dup(term->fd_stdin);
+	if (-1 != check_fd(1, 0))
+		close(1);
+	dup(term->fd_stdout);
+	if (-1 != check_fd(2, 0))
+		close(2);
+	dup(term->fd_stderr);
+}
+
 static void	get_right(t_node *current, t_term *term)
 {
 	t_job	*right;
 
+	update_fds(term);
 	right = tree_traversal(NULL, current->right, term);
 	if (right && current->right->operation != tkn_semi
 		&& current->right->operation != tkn_pipe)
@@ -41,6 +55,7 @@ t_job	*token_semi(t_job *job, t_term *term, t_node *current)
 	left = NULL;
 	if (!current->left || job)
 		return (NULL);
+	update_fds(term);
 	left = tree_traversal(NULL, current->left, term);
 	if (left && current->left->operation != tkn_semi
 		&& current->left->operation != tkn_pipe)

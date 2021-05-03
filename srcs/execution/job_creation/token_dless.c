@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 19:45:44 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/03 16:31:57 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/03 17:16:09 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	redirect_heredoc(t_node *current, t_term *term)
 	delimiter = get_filename(current);
 	delimiter = ft_strjoin_all(delimiter, "\n", 0);
 	output = get_input_heredoc(delimiter, term->here_input, term);
-	fd = open("temp_files/heredoc.txt", O_RDWR | O_CREAT | O_TRUNC, S_IRWXU
+	fd = open("/tmp/heredoc.txt", O_RDWR | O_CREAT | O_TRUNC, S_IRWXU
 			| S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
 	if (fd != -1)
 	{
@@ -39,7 +39,7 @@ int	redirect_heredoc(t_node *current, t_term *term)
 		write(fd, "\n", 1);
 		close(fd);
 		if (-1 != fd)
-			fd = open("temp_files/heredoc.txt", O_RDONLY);
+			fd = open("/tmp/heredoc.txt", O_RDONLY);
 		dup2(fd, STDIN_FILENO);
 	}
 	ft_free(output);
