@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:33:35 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 18:55:03 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/03 12:11:30 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,6 @@ void	free_job(t_job *job_to_free)
 	t_process	*temp_process;
 	t_process	*temp;
 
-	close(job_to_free->fd_stdin);
-	close(job_to_free->fd_stdout);
-	close(job_to_free->fd_stderr);
 	temp_process = job_to_free->first_process;
 	while (temp_process)
 	{
@@ -91,9 +88,9 @@ t_job	*init_job(t_term *term)
 	returnable->next = NULL;
 	returnable->command = NULL;
 	returnable->first_process = first_process;
-	returnable->fd_stdin = dup(STDIN_FILENO);
-	returnable->fd_stdout = dup(STDOUT_FILENO);
-	returnable->fd_stderr = dup(STDERR_FILENO);
+	returnable->fd_stdin = 0;
+	returnable->fd_stdout = 1;
+	returnable->fd_stderr = 2;
 	return (returnable);
 }
 
@@ -112,7 +109,13 @@ t_process	*init_process(t_term *term)
 
 void	restore_fds(t_term *term)
 {
-	dup2(term->fd_stdin, STDIN_FILENO);
-	dup2(term->fd_stdout, STDOUT_FILENO);
-	dup2(term->fd_stderr, STDERR_FILENO);
+	close(0);
+	close(1);
+	close(2);
+	dup2(term->fd_stdin, 0);
+	dup2(term->fd_stdout, 1);
+	dup2(term->fd_stderr, 2);
+	close(term->fd_stdin);
+	close(term->fd_stdout);
+	close(term->fd_stderr);
 }

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 13:30:11 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 11:11:12 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/03 12:06:49 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,14 @@ int	close_fd(int old_fd)
 {
 	int			returnable;
 
-	returnable = close(old_fd);
+	if (old_fd == 0)
+		returnable = close(0);
+	else if (old_fd == 1)
+		returnable = close(1);
+	else if (old_fd == 2)
+		returnable = close(2);
+	else
+		returnable = close(old_fd);
 	if (returnable == -1)
 		ft_printf_fd(2, "Bad file descriptor %i", old_fd);
 	return (returnable);

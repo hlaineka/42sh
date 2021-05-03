@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 21:42:57 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/02 22:24:05 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/03 11:00:56 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ int	tilde_expansion(t_token *tkn, t_term *term, int tilde)
 	}
 	else
 		homedir = get_user_homedir(tkn, tilde, end);
-	ft_printf(">>%s<<", tkn->value);
-	ft_printf(">>%s<<", homedir);
 	if (homedir == NULL)
 		return (-1);
 	tkn->value = ft_strpastei(tkn->value, homedir, tilde);

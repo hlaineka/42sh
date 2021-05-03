@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 11:26:20 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 18:47:26 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/03 12:23:16 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ t_job	*pipe_start(t_job *job, t_term *term, t_node *current)
 	temp_process->pid = fork_and_chain_pipes(NULL, rpipe);
 	if (temp_process->pid == 0)
 		execute_child(job, current, term);
-	close(job->fd_stdout);
-	close(job->fd_stdin);
 	job->fd_stdin = rpipe[0];
 	job->fd_stdout = rpipe[1];
 	return (job);

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/02 22:50:13 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/03 11:27:14 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,8 +249,7 @@ void				check_backslash(char *str, char c, bool *backslash);
 t_token				*add_subtoken(t_token *current, t_token *sub);
 int					handle_operator_token(char *str, char *source, int *i,
 						int *maintoken);
-int					handle_word_token(char *str, char *source, int *i,
-						int *maintoken);
+int					handle_word_token(char *str, char *source, int *i);
 void				free_tokens_sub(t_token *tokens);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 15:11:21 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/02 20:46:24 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/03 11:58:49 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-int	check_fd(int fd)
+int	check_fd(int fd, int errormessage)
 {
 	struct stat	*buf;
 	int			returnable;
@@ -25,7 +25,9 @@ int	check_fd(int fd)
 	returnable = 0;
 	if (-1 == fstat(fd, buf))
 	{
-		ft_printf_fd(STDERR_FILENO, "Bad file descriptor\n");
+		if (errormessage == 1)
+			ft_printf_fd(STDERR_FILENO, "Bad file descriptor\n");
+		ft_free(buf);
 		return (-1);
 	}
 	if (buf->st_mode & S_IRUSR)
@@ -33,5 +35,5 @@ int	check_fd(int fd)
 	if (buf->st_mode & S_IWUSR)
 		returnable++;
 	ft_free(buf);
-	return (0);
+	return (returnable);
 }

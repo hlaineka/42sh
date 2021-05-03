@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 19:45:44 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/02 20:35:53 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/03 12:36:48 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	redirect_heredoc(t_node *current, t_term *term)
 			| S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
 	write(fd, output, ft_strlen(output));
 	close(fd);
-	if ((-1 != check_fd(0)) && (-1 == close(0)))
+	if ((-1 != check_fd(0, 1)) || (-1 == close(0)))
 		return (-1);
 	fd = open("temp_files/heredoc.txt", O_RDONLY);
 	ft_free(output);

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 11:59:34 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/02 11:49:12 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/03 11:34:22 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	find_delimiters(char **source, int *i, char *returnable, int *maintoken)
 		*i = *i + 1;
 		return (0);
 	}
-	if (ft_strchr(OPCHARS, source[0][*i]))
+	else if (ft_strchr(OPCHARS, source[0][*i]))
 	{
 		if (0 == handle_operator_token(returnable, *source, i, maintoken))
 			return (0);
@@ -37,6 +37,9 @@ int	find_delimiters(char **source, int *i, char *returnable, int *maintoken)
 	//	check_expansions(returnable, source[0][*i]);
 	//if (source[0][*i] == '#')
 	//	handle_comment(returnable, *source, &i);
+	else
+		if (0 == handle_word_token(returnable, *source, i))
+			return (0);
 	return (1);
 }
 
@@ -57,12 +60,13 @@ char	*get_tokenstr(char **source, int *maintoken)
 	{
 		check_quotes(source[0][i], &single_quoted, &double_quoted);
 		check_backslash(returnable, source[0][i], &backslash);
-		if (!single_quoted && !double_quoted && !backslash
-			&& 0 == find_delimiters(source, &i, returnable, maintoken))
-			break ;
-		if (!ft_strchr(OPCHARS, source[0][i])
-			&& 0 == handle_word_token(returnable, *source, &i, maintoken))
-			break ;
+		if (!single_quoted && !double_quoted && !backslash)
+		{
+			if (0 == find_delimiters(source, &i, returnable, maintoken))
+				break ;
+		}
+		else if (0 == handle_word_token(returnable, *source, &i))
+				break ;
 		i++;
 	}
 	*source = *source + i;

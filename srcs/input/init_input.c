@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 11:42:00 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/03 09:53:25 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ void	init_term(t_term *term)
 	get_termcaps_strings(term, buffer);
 	term->nrows = tgetnum("li");
 	term->ncolumns = tgetnum("co");
-	term->fd_stdin = dup(STDIN_FILENO);
-	term->fd_stdout = dup(STDOUT_FILENO);
-	term->fd_stderr = dup(STDERR_FILENO);
+	term->fd_stdin = STDIN_FILENO;
+	term->fd_stdout = STDOUT_FILENO;
+	term->fd_stderr = STDERR_FILENO;
 }
 
 void	init_flags(t_term *term, char **argv)
