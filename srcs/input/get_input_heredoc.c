@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 21:48:18 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/03 16:09:35 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/03 17:21:40 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ static void	heredoc_change_streams_start(t_term *term, int streams[])
 	dup2(term->fd_stderr, STDERR_FILENO);
 }
 
-static void	heredoc_change_streams_end(int streams[])
+static void	heredoc_change_streams_end(int streams[], t_term *term)
 {
+	disable_raw_mode_continue(term);
+	signals_to_default();
 	dup2(streams[0], STDIN_FILENO);
 	dup2(streams[1], STDOUT_FILENO);
 	dup2(streams[2], STDERR_FILENO);
@@ -66,9 +68,7 @@ char	*get_input_heredoc(char *eof, t_input *input, t_term *term)
 	}
 	free(temp);
 	ret[ft_strlen(ret) - 1] = '\0';
-	disable_raw_mode_continue(term);
 	input->heredoc = 0;
-	signals_to_default();
-	heredoc_change_streams_end(streams);
+	heredoc_change_streams_end(streams, term);
 	return (ret);
 }

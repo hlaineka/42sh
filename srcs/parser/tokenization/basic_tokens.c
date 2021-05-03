@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 11:59:34 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/03 15:25:15 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/03 17:25:36 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,12 @@ char	*get_tokenstr(char **source, int *maintoken)
 	{
 		check_quotes(source[0][i], &single_quoted, &double_quoted);
 		check_backslash(returnable, source[0][i], &backslash);
-		if (!single_quoted && !double_quoted && !backslash)
-		{
-			if (0 == find_delimiters(source, &i, returnable, maintoken))
-				break ;
-		}
-		else if (0 == handle_word_token(returnable, *source, &i, maintoken))
-				break ;
+		if (!single_quoted && !double_quoted && !backslash
+			&& 0 == find_delimiters(source, &i, returnable, maintoken))
+			break ;
+		if ((single_quoted || double_quoted || backslash)
+			&& 0 == handle_word_token(returnable, *source, &i, maintoken))
+			break ;
 		i++;
 	}
 	*source = *source + i;
