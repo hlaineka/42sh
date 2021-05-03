@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/01 15:22:30 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/03 17:37:04 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	get_status_and_condition(t_process *proc, int status)
 		proc->completed = 1;
 		proc->status = WTERMSIG(status) + 128;
 	}
-	else if (WIFSTOPPED(status)) // should this be before signaled?
+	else if (WIFSTOPPED(status))
 	{
 		proc->stopped = 1;
 		proc->status = WIFSTOPPED(status);
@@ -78,7 +78,7 @@ int	simple_command(t_process *proc)
 	if (!proc->argv || !proc->argv[0] || proc->argv[0][0] == '\0')
 	{
 		ft_printf("empty argv");
-		return (-1); // is this needed? what error?
+		return (-1);
 	}
 	if (is_builtin(proc))
 		return (proc->status);
@@ -89,7 +89,7 @@ int	simple_command(t_process *proc)
 	if (pid == 0)
 		exit(execve_process(proc));
 	proc->pid = pid;
-	waitpid(pid, &status, 0); // check the status with those macros?
+	waitpid(pid, &status, 0);
 	get_status_and_condition(proc, status);
 	return (proc->status);
 }

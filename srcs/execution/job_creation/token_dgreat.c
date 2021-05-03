@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 12:25:59 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/03 10:33:45 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/03 17:37:19 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	open_fd(char *filename, int old_fd)
 		returnable = open(filename, O_RDWR | O_APPEND | O_CREAT, S_IRWXU
 				| S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
 	if (returnable == -1)
-		ft_printf("open failed\n"); //
+		ft_printf("open failed\n");
 	return (returnable);
 }
 
