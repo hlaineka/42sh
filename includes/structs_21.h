@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 09:32:14 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/03 16:16:41 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,7 @@ typedef struct s_term
 	int					fd_stdin;
 	int					fd_stdout;
 	int					fd_stderr;
+	int					heredoc_fd;
 	int					last_return;
 	int					flag_debug;
 	int					flag_noclobber;

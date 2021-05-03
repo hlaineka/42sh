@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:40:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/03 12:17:09 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/03 16:17:41 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	save_fds(t_term *term)
 	term->fd_stdin = dup(STDIN_FILENO);
 	term->fd_stdout = dup(STDOUT_FILENO);
 	term->fd_stderr = dup(STDERR_FILENO);
+	term->heredoc_fd = -1;
 }
 
 t_job	*job_creation(t_node *root, t_term *term)

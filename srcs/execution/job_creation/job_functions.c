@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:33:35 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/03 12:11:30 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/03 16:32:02 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,21 @@ t_process	*init_process(t_term *term)
 
 void	restore_fds(t_term *term)
 {
-	close(0);
-	close(1);
-	close(2);
-	dup2(term->fd_stdin, 0);
-	dup2(term->fd_stdout, 1);
-	dup2(term->fd_stderr, 2);
-	close(term->fd_stdin);
-	close(term->fd_stdout);
-	close(term->fd_stderr);
+	if (-1 != check_fd(0, 0))
+		close(0);
+	dup(term->fd_stdin);
+	if (-1 != check_fd(1, 0))
+		close(1);
+	dup(term->fd_stdout);
+	if (-1 != check_fd(2, 0))
+		close(2);
+	dup(term->fd_stderr);
+	if (-1 != check_fd(term->fd_stdin, 0))
+		close(term->fd_stdin);
+	if (-1 != check_fd(term->fd_stdout, 0))
+		close(term->fd_stdout);
+	if (-1 != check_fd(term->fd_stderr, 0))
+		close(term->fd_stderr);
+	if (term->heredoc_fd != -1)
+		close(term->heredoc_fd);
 }
