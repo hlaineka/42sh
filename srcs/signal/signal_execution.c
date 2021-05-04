@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:07:56 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 12:22:47 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/04 07:14:22 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ void	sig_handler_exec(int signo)
 			}
 			jobs = jobs->next;
 		}
+		ft_putchar('\n');
 	}
 }
