@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:32:34 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/03 10:36:55 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/04 10:38:43 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,20 @@ static int	open_fd(char *filename, t_term *term, int old_fd)
 {
 	int	returnable;
 
-	returnable = 0;
-	if (-1 != check_fd(old_fd, 1))
-		returnable = close(old_fd);
-	if (returnable >= 0)
+	returnable = check_fd(old_fd, 0);
+	if (-1 != returnable || old_fd < 3)
 	{
-		if (term->flag_noclobber == 0)
-			returnable = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU
-					| S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
-		else
-			returnable = open(filename, O_RDWR | O_APPEND);
+		if (-1 != returnable)
+			returnable = close_fd(old_fd);
+		if (returnable >= 0)
+		{
+			if (term->flag_noclobber == 0)
+				returnable = open(filename, O_WRONLY | O_CREAT | O_TRUNC,
+						S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
+			else
+				returnable = open(filename, O_RDWR | O_APPEND);
+		}
 	}
-	if (returnable == -1)
-		ft_printf("open failed\n");
 	return (returnable);
 }
 
@@ -44,7 +45,6 @@ static int	open_fd(char *filename, t_term *term, int old_fd)
 
 t_job	*token_great(t_job *job, t_term *term, t_node *current)
 {
-	int		new_fd;
 	int		old_fd;
 	char	*filename;
 	t_job	*returnable;
@@ -53,10 +53,7 @@ t_job	*token_great(t_job *job, t_term *term, t_node *current)
 	filename = get_filename(current);
 	if (!filename)
 		return (NULL);
-	new_fd = open_fd(filename, term, old_fd);
-	check_fd(new_fd, 1);
-	if (-1 == new_fd)
-		return (NULL);
+	open_fd(filename, term, old_fd);
 	returnable = get_left_job(job, current, term);
 	if (!returnable)
 		return (NULL);

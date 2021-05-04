@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 10:52:24 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/03 10:34:29 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/04 10:38:16 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,17 @@
 static int	open_fd(char *filename, int old_fd)
 {
 	int	returnable;
+	int	closed_fd;
 
 	returnable = 0;
-	if (-1 != check_fd(old_fd, 1))
-		returnable = close(old_fd);
-	if (returnable >= 0)
-		returnable = open(filename, O_RDONLY);
-	if (returnable == -1)
-		ft_printf("open failed\n");
+	closed_fd = check_fd(old_fd, 0);
+	if (-1 != closed_fd || old_fd < 3)
+	{
+		if (-1 != closed_fd)
+			returnable = close_fd(old_fd);
+		if (returnable >= 0)
+			returnable = open(filename, O_RDONLY);
+	}
 	return (returnable);
 }
 
@@ -38,7 +41,6 @@ static int	open_fd(char *filename, int old_fd)
 
 t_job	*token_less(t_job *job, t_term *term, t_node *current)
 {
-	int		new_fd;
 	int		old_fd;
 	char	*filename;
 	t_job	*returnable;
@@ -47,9 +49,7 @@ t_job	*token_less(t_job *job, t_term *term, t_node *current)
 	filename = get_filename(current);
 	if (!filename)
 		return (NULL);
-	new_fd = open_fd(filename, old_fd);
-	if (-1 == new_fd)
-		return (NULL);
+	open_fd(filename, old_fd);
 	returnable = get_left_job(job, current, term);
 	if (!returnable)
 		return (NULL);
