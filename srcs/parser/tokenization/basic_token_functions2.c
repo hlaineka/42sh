@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:54:13 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/07 13:41:01 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/07 15:14:41 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ bool *double_quote)
 	returnable = 0;
 	if (c == 34 && *single_quote == FALSE && *backslash == FALSE)
 		*double_quote = !*double_quote;
-	if (c == 44 && *double_quote == FALSE && *backslash == FALSE)
+	if (c == 39 && *double_quote == FALSE && *backslash == FALSE)
 		*single_quote = !*single_quote;
 	if (c == 92 && *single_quote == FALSE)
 		*backslash = TRUE;
@@ -48,8 +48,6 @@ bool *double_quote)
 		returnable = returnable + 39;
 	if (*backslash == TRUE)
 		returnable = returnable + 92;
-	if (c != 92 && *backslash == TRUE)
-		*backslash = FALSE;
 	return (returnable);
 }
 
@@ -82,8 +80,12 @@ t_token	*add_quotearray(t_token *current)
 		{
 			quotearray[i] = get_quotevalue(current->value[i], &backslash,
 					&single_quote, &double_quote);
+			if (i > 0 && current->value[i - 1] == 92 && backslash == TRUE)
+				backslash = FALSE;
+			ft_printf(" %c,%i ", current->value[i], quotearray[i]);
 			i++;
 		}
+		ft_printf("\n");
 		current->quotes = quotearray;
 	}
 	return (current);
@@ -101,6 +103,6 @@ void	check_backslash(char *str, char c, bool *backslash, bool single_quoted)
 {
 	if (c == 92 && !single_quoted)
 		*backslash = TRUE;
-	else if (str && str[0] && str[ft_strlen(str) - 1] != 92)
+	else if (*backslash == TRUE && str && str[0] && str[ft_strlen(str) - 2] == 92)
 		*backslash = FALSE;
 }
