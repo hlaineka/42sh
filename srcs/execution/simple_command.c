@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/03 17:37:04 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/07 14:30:28 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,10 @@ int	simple_command(t_process *proc)
 	int		status;
 
 	if (!proc->argv || !proc->argv[0] || proc->argv[0][0] == '\0')
-	{
-		ft_printf("empty argv");
 		return (-1);
-	}
 	if (is_builtin(proc))
 		return (proc->status);
-	signal(SIGINT, sig_handler_exec);
+	set_signal_execution();
 	pid = fork();
 	if (pid < 0)
 		return (err_builtin(E_FORK, proc->argv[0], NULL));
