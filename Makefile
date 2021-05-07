@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/05/07 10:02:46 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/05/07 11:41:30 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ _SRC_INPUT = read_input_user.c \
 			init_input.c \
 			prompt.c \
 			ft_isarrows.c \
+			ft_isshiftarrows.c \
 			ft_iskey.c \
 			ft_clstnew.c \
 			ft_is_quote_open.c \

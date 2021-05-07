@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/07 09:23:08 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/07 11:43:57 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static void	do_esc_keys(char *rc, t_input *input, t_term *term)
 		right_keypress(input, term);
 	else if (ft_is_delete_key(rc))
 		delete_keypress(input, term);
-	else if (ft_is_right_key(rc + 1))
+	else if (ft_is_shift_right_key(rc))
 		move_next_word(input, term);
-	else if (ft_is_left_key(rc + 1))
+	else if (ft_is_shift_left_key(rc))
 		move_prev_word(input, term);
-	else if (ft_is_up_key(rc + 1))
+	else if (ft_is_shift_up_key(rc))
 		alt_up_keypress(input, term);
-	else if (ft_is_down_key(rc + 1))
+	else if (ft_is_shift_down_key(rc))
 		alt_down_keypress(input, term);
 }
 

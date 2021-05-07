@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/07 10:58:29 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/07 11:42:45 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,10 @@ int			ft_is_up_key(char *str);
 int			ft_is_down_key(char *str);
 int			ft_is_left_key(char *str);
 int			ft_is_right_key(char *str);
+int			ft_is_shift_up_key(char *str);
+int			ft_is_shift_down_key(char *str);
+int			ft_is_shift_left_key(char *str);
+int			ft_is_shift_right_key(char *str);
 int			ft_is_home_key(char *str);
 int			ft_is_end_key(char *str);
 int			ft_is_altx_key(char *str);
