@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:40:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/04 10:19:34 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/07 10:00:50 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ static void	debug_printing(t_job *next_job)
 
 void	save_fds(t_term *term)
 {
-	term->fd_stdin = dup2(STDIN_FILENO, 500);
-	term->fd_stdout = dup2(STDOUT_FILENO, 501);
-	term->fd_stderr = dup2(STDERR_FILENO, 502);
+	term->fd_stdin = dup2(STDIN_FILENO, 20);
+	term->fd_stdout = dup2(STDOUT_FILENO, 21);
+	term->fd_stderr = dup2(STDERR_FILENO, 22);
 	term->heredoc_fd = -1;
 }
 

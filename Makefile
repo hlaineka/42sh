@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/05/02 15:27:16 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/05/07 10:02:46 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -130,7 +130,10 @@ _SRC_JOB_CREATION = job_creation.c \
 					token_greatand.c \
 					token_lessand.c \
 					token_dless.c \
-					check_fd.c
+					token_or_if.c \
+					token_and_if.c \
+					check_fd.c \
+
 
 
 SRC_MAIN = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))
@@ -228,7 +231,7 @@ clean:
 	@rm -f libft.a
 	@echo library object files removed.
 
-fclean:
+fclean: clean
 	@make -C libft fclean
 	@rm -f $(NAME)
 	@rm -rf $(DIR_OBJS)
