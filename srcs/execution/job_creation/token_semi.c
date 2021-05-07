@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 19:42:21 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/03 17:11:18 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/07 10:42:44 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	update_fds(t_term *term)
 	dup(term->fd_stderr);
 }
 
-static void	get_right(t_node *current, t_term *term)
+void	get_right(t_node *current, t_term *term)
 {
 	t_job	*right;
 
