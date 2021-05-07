@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/07 11:42:45 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/07 12:18:18 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void		delete_keypress(t_input *input, t_term *term);
 void		paste_clipboard_to_input(t_input *input, t_term *term);
 void		copy_input_to_clipboard(t_input *input, t_term *term);
 void		cut_input_to_clipboard(t_input *input, t_term *term);
+int			react_to_eof(t_input *input, t_term *term);
 
 int			get_pos(int *y, int *x);
 

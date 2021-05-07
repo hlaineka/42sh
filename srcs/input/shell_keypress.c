@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/07 11:43:57 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/07 12:20:19 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,7 @@ static int	do_special_keys(char *rc, t_input *input, t_term *term)
 	else if (rc[0] == 127)
 		backspace_keypress(input, term);
 	if (rc[0] == 4)
-	{
-		if (input->ls[0] || input->rrs[0])
-			tputs(term->bl_string, 1, ft_putc);
-		else
-		{
-			if (input->heredoc)
-				ft_strcpy(input->ls, "EOF");
-			else
-				ft_strcpy(input->ls, "exit");
-			input->rrs[0] = '\0';
-			return (1);
-		}
-	}
+		return (react_to_eof(input, term));
 	if (rc[0] == 13)
 		return (1);
 	return (0);
