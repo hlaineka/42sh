@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:54:13 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 21:30:57 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/07 13:41:01 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ bool *double_quote)
 	int	returnable;
 
 	returnable = 0;
-	if (c == 34)
+	if (c == 34 && *single_quote == FALSE && *backslash == FALSE)
 		*double_quote = !*double_quote;
-	if (c == 44)
+	if (c == 44 && *double_quote == FALSE && *backslash == FALSE)
 		*single_quote = !*single_quote;
-	if (c == 92)
+	if (c == 92 && *single_quote == FALSE)
 		*backslash = TRUE;
-	if (*double_quote)
+	if (*double_quote == TRUE)
 		returnable = returnable + 34;
-	if (*single_quote)
+	if (*single_quote == TRUE)
 		returnable = returnable + 39;
-	if (*backslash)
+	if (*backslash == TRUE)
 		returnable = returnable + 92;
 	if (c != 92 && *backslash == TRUE)
 		*backslash = FALSE;
@@ -91,15 +91,15 @@ t_token	*add_quotearray(t_token *current)
 
 void	check_quotes(char c, bool *single_quoted, bool *double_quoted)
 {
-	if (c == 34)
+	if (c == 34 && !*single_quoted)
 		*double_quoted = !*double_quoted;
-	if (c == 39)
+	if (c == 39 && ! *double_quoted)
 		*single_quoted = !*single_quoted;
 }
 
-void	check_backslash(char *str, char c, bool *backslash)
+void	check_backslash(char *str, char c, bool *backslash, bool single_quoted)
 {
-	if (c == 92)
+	if (c == 92 && !single_quoted)
 		*backslash = TRUE;
 	else if (str && str[0] && str[ft_strlen(str) - 1] != 92)
 		*backslash = FALSE;

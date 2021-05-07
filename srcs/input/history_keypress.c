@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history_keypress.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 10:52:51 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/07 09:50:41 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/07 11:12:07 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	history_up(t_input *input, t_term *term)
 {
 	char	*str;
-	int		x;
-	int		y;
+	//int		x;
+	//int		y;
 
 	if (input->hist_cur->next == NULL)
 		return ;
@@ -26,8 +26,8 @@ void	history_up(t_input *input, t_term *term)
 	str = input->hist_cur->content;
 	if (!str)
 		return ;
-	x = input->prompt_col - 1;
-	y = input->prompt_row - 1;
+	//x = input->prompt_col - 1;
+	//y = input->prompt_row - 1;
 	clear_screen_after_prompt(input, term);
 	ft_bzero(input->ls, input->ls_size);
 	ft_bzero(input->rrs, input->rrs_size);
@@ -39,8 +39,8 @@ void	history_up(t_input *input, t_term *term)
 void	history_down(t_input *input, t_term *term)
 {
 	char	*str;
-	int		x;
-	int		y;
+	//int		x;
+	//int		y;
 
 	if (input->hist_cur->prev == NULL)
 		return ;
@@ -48,8 +48,8 @@ void	history_down(t_input *input, t_term *term)
 	str = input->hist_cur->content;
 	if (!str)
 		return ;
-	x = input->prompt_col - 1;
-	y = input->prompt_row - 1;
+	//x = input->prompt_col - 1;
+	//y = input->prompt_row - 1;
 	clear_screen_after_prompt(input, term);
 	ft_bzero(input->ls, input->ls_size);
 	ft_bzero(input->rrs, input->rrs_size);

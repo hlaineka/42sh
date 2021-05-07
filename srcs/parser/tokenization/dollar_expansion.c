@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 21:44:33 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/03 17:36:03 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/07 13:52:08 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ static int	dollar_parameter(t_token *tkn, t_term *term, int start)
 	end = start;
 	while (tkn->value[end])
 	{
-		if (tkn->value[end] == '}' && tkn->quotes[end] == 0)
+		if (tkn->value[end] == '}' && (tkn->quotes[end] == 0 || tkn->quotes[end] == 34))
 			break ;
 		end++;
 	}
-	if (tkn->value[end] != '}' || tkn->quotes[end] != 0)
+	if (tkn->value[end] != '}' || (tkn->quotes[end] != 0 && tkn->quotes[end] != 34))
 	{
 		ft_printf_fd(2, "syntax error near token $");
 		return (-1);
@@ -58,9 +58,10 @@ static int	dollar_parameter(t_token *tkn, t_term *term, int start)
 
 int	dollar_expansion(t_token *tkn, t_term *term, int dollar)
 {
-	if (tkn->quotes[dollar] != 0)
+	if (tkn->quotes[dollar] != 0 && tkn->quotes[dollar] != 34)
 		return (0);
-	if (tkn->value[dollar + 1] == '{' && tkn->quotes[dollar + 1] == 0)
+	if (tkn->value[dollar + 1] == '{' && (tkn->quotes[dollar + 1] == 0
+		|| tkn->quotes[dollar + 1] == 34))
 	{	
 		if (-1 == dollar_parameter(tkn, term, dollar + 2))
 			return (-1);
