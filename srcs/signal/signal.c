@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 10:00:31 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/07 10:14:11 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/07 13:30:49 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	signwinch_handler(int signo)
 
 void	sig_handler(int signo)
 {
+	ft_printf("sig_handler");
 	if (signo == SIGCHLD)
 		sig_child_handler();
 	else
@@ -30,6 +31,7 @@ void	sig_handler(int signo)
 
 void	sigcont_handler(int signo)
 {
+	ft_printf("sigcont_handler");
 	if (signo == SIGCONT)
 	{
 		if (tcsetattr(g_term->fd_stdout, TCSAFLUSH, &g_term->orig_termios)
