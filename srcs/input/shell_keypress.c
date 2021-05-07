@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 12:51:03 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/07 09:23:08 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,12 @@ static void	do_esc_keys(char *rc, t_input *input, t_term *term)
 
 static int	do_special_keys(char *rc, t_input *input, t_term *term)
 {
-	if (rc[0] == -61 && rc[1] == -89)
+	if (rc[0] == 25)
 		copy_input_to_clipboard(input, term);
-	else if (rc[0] == -30 && rc[1] == -120 && rc[2] == -102)
+	else if (rc[0] == 16)
 		paste_clipboard_to_input(input, term);
+	else if (rc[0] == 11)
+		cut_input_to_clipboard(input, term);
 	else if (rc[0] == KEY_ESC)
 		do_esc_keys(rc, input, term);
 	else if (rc[0] == 127)
