@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/07 11:49:53 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/07 16:51:03 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,7 +240,8 @@ t_token				*init_token(void);
 t_token				*add_quotearray(t_token *current);
 void				check_quotes(char c, bool *single_quoted,
 						bool *double_quoted);
-void				check_backslash(char *str, char c, bool *backslash, bool single_quoted);
+void				check_backslash(char *str, char c, bool *backslash,
+						bool single_quoted);
 
 /*
 ** parser/tokenization/basic_token_functions3.c
@@ -252,6 +253,7 @@ int					handle_operator_token(char *str, char *source, int *i,
 int					handle_word_token(char *str, char *source, int *i,
 						int *maintoken);
 void				free_tokens_sub(t_token *tokens);
+int					*init_quotearray(t_token *current);
 
 /*
 ** parser/tokenization/basic_tokens.c
