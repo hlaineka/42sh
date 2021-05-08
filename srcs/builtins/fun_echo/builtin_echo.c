@@ -6,11 +6,22 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 13:04:09 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/08 17:18:00 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes.h"
+
+static int	validate_stdout(t_process *process)
+{
+	if (check_fd(STDOUT_FILENO, 1) == -1)
+	{
+		process->completed = 1;
+		process->status = 1;
+		return (1);
+	}
+	return (0);
+}
 
 void	builtin_echo(void *proc)
 {
@@ -21,6 +32,8 @@ void	builtin_echo(void *proc)
 	process = proc;
 	argv = process->argv;
 	i = 1;
+	if (validate_stdout(proc))
+		return ;
 	if (argv[1] && !ft_strcmp(argv[1], "-n"))
 		i++;
 	while (argv[i])
