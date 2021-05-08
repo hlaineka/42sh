@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 13:28:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/03/25 20:12:59 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/08 13:46:43 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	backspace_keypress(t_input *input, t_term *term)
 
 	if (!input->ls[0])
 		return ;
-	if (ft_strchr(input->ls, 13) || ft_strchr(input->rrs, 13))
+	if (ft_strchr(input->ls, 13) || ft_strchr(input->rrs, 13)
+		|| ft_strchr(input->ls, 10) || ft_strchr(input->rrs, 10))
 	{
 		input->ls[ft_strlen(input->ls) - 1] = '\0';
 		print_clean_pos(input, term);
@@ -64,7 +65,8 @@ void	delete_keypress(t_input *input, t_term *term)
 	if (!input->rrs[0])
 		return ;
 	last = ft_strlen(input->rrs) - 1;
-	if (ft_strchr(input->ls, 13) || ft_strchr(input->rrs, 13))
+	if (ft_strchr(input->ls, 13) || ft_strchr(input->rrs, 13)
+		|| ft_strchr(input->ls, 10) || ft_strchr(input->rrs, 10))
 	{
 		input->rrs[last] = '\0';
 		print_clean_pos(input, term);
