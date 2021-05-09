@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 16:07:19 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/20 20:31:19 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/09 13:23:52 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_token	*handle_parenthesis(t_token **op_stack, t_token **input,
 		}
 		if (!(*op_stack))
 		{
-			ft_printf_fd(2, "wrong amount of paranthesis");
+			ft_printf_fd(STDERR_FILENO, "wrong amount of paranthesis");
 			return (NULL);
 		}
 		*input = delete_token(*input);

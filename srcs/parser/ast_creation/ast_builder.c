@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 14:48:16 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/02 11:50:09 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/09 13:22:49 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int	push_word(t_token *tkn, t_node **node_stack)
 	i = 0;
 	while (node_stack[i] && i < 30)
 		i++;
-	if (i == 30)
+	if (i >= 29)
 	{
-		ft_printf_fd(2, "node stack full");
+		ft_printf_fd(STDERR_FILENO, "node stack full\n");
 		return (-1);
 	}
 	new_node = init_node();
@@ -78,9 +78,9 @@ int	push_operator(t_token *tkn, t_node **node_stack)
 	i = 0;
 	while (node_stack[i] && i < 30)
 		i++;
-	if (i == 30)
+	if (i >= 29)
 	{
-		ft_printf_fd(2, "node stack full");
+		ft_printf_fd(STDERR_FILENO, "node stack full\n");
 		return (-1);
 	}
 	new_node = create_opnode(tkn, node_stack, &i);
@@ -109,13 +109,13 @@ t_node	*ast_builder(t_token *new_first)
 			if (-1 == (push_word(new_first, node_stack)))
 				return (NULL);
 		}
-		else
-			push_operator(new_first, node_stack);
+		else if (-1 == push_operator(new_first, node_stack))
+				return (NULL);
 		new_first = temp;
 	}
 	if (node_stack[1])
 	{
-		ft_printf_fd(2, "syntax error");
+		ft_printf_fd(STDERR_FILENO, "syntax error");
 		return (NULL);
 	}
 	return (node_stack[0]);

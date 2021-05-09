@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 14:37:51 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/02 20:17:46 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/09 13:26:25 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,17 @@ void	debug_print_tree(t_node *node, char *prefix, int left_right)
 		return ;
 	if (prefix != NULL)
 	{
-		ft_printf(prefix);
+		ft_printf_fd(STDOUT_FILENO, prefix);
 		if (ft_strlen(prefix) > 0 && prefix[ft_strlen(prefix) - 1] == '|')
-			ft_printf("--");
+			ft_printf_fd(STDOUT_FILENO, "--");
 		else
-			ft_printf("|--");
+			ft_printf_fd(STDOUT_FILENO, "|--");
 	}
 	if (left_right == 1)
-		ft_printf ("left ");
+		ft_printf_fd(STDOUT_FILENO, "left ");
 	if (left_right == 2)
-		ft_printf("right ");
-	ft_printf("[%s]\n", node->command);
+		ft_printf_fd(STDOUT_FILENO, "right ");
+	ft_printf_fd(STDOUT_FILENO, "[%s]\n", node->command);
 	if (node->right)
 		debug_print_right(node, prefix);
 	if (node->left)

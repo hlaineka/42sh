@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 21:44:33 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/07 16:43:59 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/09 13:24:12 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	dollar_parameter(t_token *tkn, t_term *term, int start)
 	if (tkn->value[end] != '}' || (tkn->quotes[end] != 0 && tkn->quotes[end]
 			!= 34))
 	{
-		ft_printf_fd(2, "syntax error near token $");
+		ft_printf_fd(STDERR_FILENO, "syntax error near token $");
 		return (-1);
 	}
 	substitute_dollar(tkn, term, start, end);

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:32:48 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/03 15:10:04 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/09 13:24:48 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ static void	debug_print_tokens(t_token *tokens)
 	t_token	*temp;
 
 	temp = tokens;
-	ft_printf("tokens after first tokenization:\n");
+	ft_printf_fd(STDOUT_FILENO, "tokens after first tokenization:\n");
 	while (temp)
 	{
-		ft_printf("%s = %i, ", temp->value, temp->maintoken);
+		ft_printf_fd(STDOUT_FILENO, "%s = %i, ", temp->value, temp->maintoken);
 		temp = temp->next;
 	}
-	ft_printf("\n");
+	ft_printf_fd(STDOUT_FILENO, "\n");
 }
 
 t_token	*lexer(char *input, t_term *term)
