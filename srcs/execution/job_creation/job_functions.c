@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:33:35 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/10 20:30:52 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/10 20:39:55 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ t_process	*init_process(t_term *term)
 void	restore_fds(t_term *term)
 {
 	int	fd_status;
-	
+
 	fd_status = check_fd(0, 0);
 	if (-1 != fd_status)
 		close(0);

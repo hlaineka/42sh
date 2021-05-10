@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 14:48:16 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/09 17:33:34 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/10 20:39:19 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	push_word(t_token *tkn, t_node **node_stack)
 	if (i >= NODE_STACK_SIZE)
 	{
 		ft_printf_fd(STDERR_FILENO, "node stack full\n");
+		free_nodestack(node_stack);
 		return (-1);
 	}
 	new_node = init_node();
@@ -81,6 +82,7 @@ int	push_operator(t_token *tkn, t_node **node_stack)
 	if (i >= NODE_STACK_SIZE)
 	{
 		ft_printf_fd(STDERR_FILENO, "node stack full\n");
+		free_nodestack(node_stack);
 		return (-1);
 	}
 	new_node = create_opnode(tkn, node_stack, &i);
@@ -119,16 +121,10 @@ t_node	*ast_builder(t_token *new_first)
 		if (new_first->precedence == 0)
 		{
 			if (-1 == (push_word(new_first, node_stack)))
-			{
-				free_nodestack(node_stack);
 				return (NULL);
-			}
 		}
 		else if (-1 == push_operator(new_first, node_stack))
-		{
-			free_nodestack(node_stack);
 			return (NULL);
-		}
 		new_first = temp;
 	}
 	if (node_stack[1])
