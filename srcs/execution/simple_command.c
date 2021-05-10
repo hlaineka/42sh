@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/07 14:30:28 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/10 20:01:35 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	get_status_and_condition(t_process *proc, int status)
 	{
 		proc->stopped = 1;
 		proc->status = WIFSTOPPED(status);
+		ft_putchar('\n');
 	}
 	else
 	{
@@ -86,7 +87,7 @@ int	simple_command(t_process *proc)
 	if (pid == 0)
 		exit(execve_process(proc));
 	proc->pid = pid;
-	waitpid(pid, &status, 0);
+	waitpid(pid, &status, WUNTRACED);
 	get_status_and_condition(proc, status);
 	return (proc->status);
 }

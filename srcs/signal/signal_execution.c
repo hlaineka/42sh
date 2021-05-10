@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:07:56 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/07 14:39:54 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/10 19:52:20 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	sig_child_handler(void)
 	t_job		*jobs;
 	t_process	*proc;
 
-	ft_printf("BOBO");
 	pid = waitpid(-1, &status, WNOHANG);
 	jobs = g_term->jobs;
 	while (jobs)
@@ -95,11 +94,10 @@ void	sig_handler_exec(int signo)
 	t_job		*jobs;
 	t_process	*proc;
 
-	ft_printf("signo:%d", signo);
 	if (signo == SIGCHLD)
 		sig_child_handler();
-	if (signo == SIGTSTP)
-		sig_tstp_handler();
+//	if (signo == SIGTSTP)
+//		sig_tstp_handler();
 	if (signo == SIGINT)
 	{
 		jobs = g_term->jobs;
