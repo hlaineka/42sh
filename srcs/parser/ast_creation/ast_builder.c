@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 14:48:16 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/09 13:22:49 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/09 17:33:34 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	push_word(t_token *tkn, t_node **node_stack)
 	t_node	*new_node;
 
 	i = 0;
-	while (node_stack[i] && i < 30)
+	while (node_stack[i] && i < NODE_STACK_SIZE)
 		i++;
-	if (i >= 29)
+	if (i >= NODE_STACK_SIZE)
 	{
 		ft_printf_fd(STDERR_FILENO, "node stack full\n");
 		return (-1);
@@ -76,9 +76,9 @@ int	push_operator(t_token *tkn, t_node **node_stack)
 	t_node	*new_node;
 
 	i = 0;
-	while (node_stack[i] && i < 30)
+	while (node_stack[i] && i < NODE_STACK_SIZE)
 		i++;
-	if (i >= 29)
+	if (i >= NODE_STACK_SIZE)
 	{
 		ft_printf_fd(STDERR_FILENO, "node stack full\n");
 		return (-1);
@@ -94,28 +94,47 @@ int	push_operator(t_token *tkn, t_node **node_stack)
 	return (0);
 }
 
+void	init_stack(t_node *stack[])
+{
+	int	i;
+
+	i = 0;
+	while (i < NODE_STACK_SIZE)
+	{
+		stack[i] = NULL;
+		i++;
+	}
+}
+
 t_node	*ast_builder(t_token *new_first)
 {
-	t_node	*node_stack[30];
+	t_node	*node_stack[NODE_STACK_SIZE];
 	t_token	*temp;
 
 	temp = NULL;
-	ft_bzero(node_stack, sizeof(t_node *) * 30);
+	init_stack(node_stack);
 	while (new_first)
 	{
 		temp = new_first->next;
 		if (new_first->precedence == 0)
 		{
 			if (-1 == (push_word(new_first, node_stack)))
+			{
+				free_nodestack(node_stack);
 				return (NULL);
+			}
 		}
 		else if (-1 == push_operator(new_first, node_stack))
-				return (NULL);
+		{
+			free_nodestack(node_stack);
+			return (NULL);
+		}
 		new_first = temp;
 	}
 	if (node_stack[1])
 	{
 		ft_printf_fd(STDERR_FILENO, "syntax error");
+		free_nodestack(node_stack);
 		return (NULL);
 	}
 	return (node_stack[0]);

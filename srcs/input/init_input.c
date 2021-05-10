@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/07 10:04:47 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/10 14:29:34 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	init_term(t_term *term)
 	term->fd_stdin = dup2(STDIN_FILENO, 20);
 	term->fd_stdout = dup2(STDOUT_FILENO, 21);
 	term->fd_stderr = dup2(STDERR_FILENO, 22);
+	term->heredoc_fd = -1;
 }
 
 void	init_flags(t_term *term, char **argv)

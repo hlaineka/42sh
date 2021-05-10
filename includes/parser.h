@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/07 16:51:03 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/09 17:12:47 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define REDIROPS "&<>|"
 # define SPECIALPARAMS "@*#?-$!0~"
 # define EXPANSIONCHARS "$`"
+# define NODE_STACK_SIZE 20
 
 /*
 **enum e_token
@@ -173,6 +174,7 @@ t_node				*ast_creator(t_token *first, t_term *term);
 t_node				*init_node(void);
 int					is_unaryop(t_token *tkn);
 void				free_ast(t_node *root);
+void				free_nodestack(t_node *stack[]);
 
 /*
 ** parser/ast_creation/precedence.c

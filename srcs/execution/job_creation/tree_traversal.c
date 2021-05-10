@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 11:58:18 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/02 09:34:18 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/10 14:31:50 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static const t_op_function	g_op_functions[] = {
 	[tkn_pipe] = token_pipe,
 	[tkn_less] = token_less,
 	[tkn_great] = token_great,
-	[tkn_and_if] = NULL,
-	[tkn_or_if] = NULL,
+	[tkn_and_if] = token_and_if,
+	[tkn_or_if] = token_or_if,
 	[tkn_dsemi] = NULL,
 	[tkn_dless] = token_dless,
 	[tkn_dgreat] = token_dgreat,

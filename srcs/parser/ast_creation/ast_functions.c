@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 15:34:07 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/28 16:04:05 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/09 17:09:29 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,16 @@ void	free_ast(t_node *root)
 		free_ast(root->left);
 	if (root)
 		free_node(root);
+}
+
+void	free_nodestack(t_node *stack[])
+{
+	int	i;
+
+	i = 0;
+	while (stack[i] && i < NODE_STACK_SIZE)
+	{
+		free_ast(stack[i]);
+		i++;
+	}
 }
