@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:52:24 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/07 18:16:26 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/08 20:24:11 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ void	builtin_setenv(void *proc)
 		process->status = ft_setenv(argv[1], "", 1, envp);
 	else
 		process->status = ft_setenv(argv[1], argv[2], 1, envp);
+	if (process->status)
+		err_builtin(process->status, argv[0], argv[1]);
 	process->completed = 1;
 }

@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 20:06:23 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/07 16:52:31 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/08 20:20:37 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ int	ft_setenv(const char *name, const char *val, int over, char **envp)
 	i = 0;
 	len = ft_strlen(name);
 	if (!name || ft_strchr(name, '='))
-		return (-E_INVAL);
+		return (E_INVAL);
 	if (ft_getenv(name, envp) && !over)
 		return (0);
 	new = make_new_env_str(name, val);
 	if (!new)
-		return (-E_NOMEM);
+		return (E_NOMEM);
 	while (envp[i])
 	{
 		if (!ft_strncmp(envp[i], name, len) && envp[i][len] == '=')

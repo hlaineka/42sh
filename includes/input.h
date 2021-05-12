@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/01 19:47:00 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/07 12:18:18 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void		backspace_keypress(t_input *input, t_term *term);
 void		delete_keypress(t_input *input, t_term *term);
 void		paste_clipboard_to_input(t_input *input, t_term *term);
 void		copy_input_to_clipboard(t_input *input, t_term *term);
+void		cut_input_to_clipboard(t_input *input, t_term *term);
+int			react_to_eof(t_input *input, t_term *term);
 
 int			get_pos(int *y, int *x);
 
@@ -101,6 +103,10 @@ int			ft_is_up_key(char *str);
 int			ft_is_down_key(char *str);
 int			ft_is_left_key(char *str);
 int			ft_is_right_key(char *str);
+int			ft_is_shift_up_key(char *str);
+int			ft_is_shift_down_key(char *str);
+int			ft_is_shift_left_key(char *str);
+int			ft_is_shift_right_key(char *str);
 int			ft_is_home_key(char *str);
 int			ft_is_end_key(char *str);
 int			ft_is_altx_key(char *str);
@@ -113,6 +119,7 @@ int			ft_is_quote_open(int quote, char *str);
 t_clist		*ft_clstnew(void const *content, size_t content_size);
 
 void		clear_rows_starting_y(int y, t_term *term);
+void		clear_screen_after_prompt(t_input *input, t_term *term);
 
 int			double_input_mem(t_input *input, t_term *term);
 #endif

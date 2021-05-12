@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 12:51:03 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/07 12:20:19 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,40 +36,30 @@ static void	do_esc_keys(char *rc, t_input *input, t_term *term)
 		right_keypress(input, term);
 	else if (ft_is_delete_key(rc))
 		delete_keypress(input, term);
-	else if (ft_is_right_key(rc + 1))
+	else if (ft_is_shift_right_key(rc))
 		move_next_word(input, term);
-	else if (ft_is_left_key(rc + 1))
+	else if (ft_is_shift_left_key(rc))
 		move_prev_word(input, term);
-	else if (ft_is_up_key(rc + 1))
+	else if (ft_is_shift_up_key(rc))
 		alt_up_keypress(input, term);
-	else if (ft_is_down_key(rc + 1))
+	else if (ft_is_shift_down_key(rc))
 		alt_down_keypress(input, term);
 }
 
 static int	do_special_keys(char *rc, t_input *input, t_term *term)
 {
-	if (rc[0] == -61 && rc[1] == -89)
+	if (rc[0] == 25)
 		copy_input_to_clipboard(input, term);
-	else if (rc[0] == -30 && rc[1] == -120 && rc[2] == -102)
+	else if (rc[0] == 16)
 		paste_clipboard_to_input(input, term);
+	else if (rc[0] == 11)
+		cut_input_to_clipboard(input, term);
 	else if (rc[0] == KEY_ESC)
 		do_esc_keys(rc, input, term);
 	else if (rc[0] == 127)
 		backspace_keypress(input, term);
 	if (rc[0] == 4)
-	{
-		if (input->ls[0] || input->rrs[0])
-			tputs(term->bl_string, 1, ft_putc);
-		else
-		{
-			if (input->heredoc)
-				ft_strcpy(input->ls, "EOF");
-			else
-				ft_strcpy(input->ls, "exit");
-			input->rrs[0] = '\0';
-			return (1);
-		}
-	}
+		return (react_to_eof(input, term));
 	if (rc[0] == 13)
 		return (1);
 	return (0);

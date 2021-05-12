@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:54:13 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 21:30:57 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/07 16:52:00 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,18 @@ bool *double_quote)
 	int	returnable;
 
 	returnable = 0;
-	if (c == 34)
+	if (c == 34 && *single_quote == FALSE && *backslash == FALSE)
 		*double_quote = !*double_quote;
-	if (c == 44)
+	if (c == 39 && *double_quote == FALSE && *backslash == FALSE)
 		*single_quote = !*single_quote;
-	if (c == 92)
+	if (c == 92 && *single_quote == FALSE)
 		*backslash = TRUE;
-	if (*double_quote)
+	if (*double_quote == TRUE)
 		returnable = returnable + 34;
-	if (*single_quote)
+	if (*single_quote == TRUE)
 		returnable = returnable + 39;
-	if (*backslash)
+	if (*backslash == TRUE)
 		returnable = returnable + 92;
-	if (c != 92 && *backslash == TRUE)
-		*backslash = FALSE;
 	return (returnable);
 }
 
@@ -70,10 +68,7 @@ t_token	*add_quotearray(t_token *current)
 
 	if (current)
 	{
-		if (current->quotes)
-			ft_free(current->quotes);
-		quotearray = malloc(sizeof(int) * ft_strlen(current->value) + 1);
-		ft_bzero(quotearray, sizeof(int) * ft_strlen(current->value));
+		quotearray = init_quotearray(current);
 		double_quote = FALSE;
 		single_quote = FALSE;
 		backslash = FALSE;
@@ -82,6 +77,8 @@ t_token	*add_quotearray(t_token *current)
 		{
 			quotearray[i] = get_quotevalue(current->value[i], &backslash,
 					&single_quote, &double_quote);
+			if (i > 0 && current->value[i - 1] == 92 && backslash == TRUE)
+				backslash = FALSE;
 			i++;
 		}
 		current->quotes = quotearray;
@@ -91,16 +88,17 @@ t_token	*add_quotearray(t_token *current)
 
 void	check_quotes(char c, bool *single_quoted, bool *double_quoted)
 {
-	if (c == 34)
+	if (c == 34 && !*single_quoted)
 		*double_quoted = !*double_quoted;
-	if (c == 39)
+	if (c == 39 && ! *double_quoted)
 		*single_quoted = !*single_quoted;
 }
 
-void	check_backslash(char *str, char c, bool *backslash)
+void	check_backslash(char *str, char c, bool *backslash, bool single_quoted)
 {
-	if (c == 92)
+	if (c == 92 && !single_quoted)
 		*backslash = TRUE;
-	else if (str && str[0] && str[ft_strlen(str) - 1] != 92)
+	else if (*backslash == TRUE && str && str[0]
+		&& str[ft_strlen(str) - 2] == 92)
 		*backslash = FALSE;
 }

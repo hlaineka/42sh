@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 11:59:34 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/03 17:36:17 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/12 10:53:36 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ int	find_delimiters(char **source, int *i, char *returnable, int *maintoken)
 	else
 		if (0 == handle_word_token(returnable, *source, i, maintoken))
 			return (0);
+	//if (ft_strchr(EXPANSIONCHARS, source[0][*i]))
+	//	check_expansions(returnable, source[0][*i]);
+	//if (source[0][*i] == '#')
+	//	handle_comment(returnable, *source, &i)
 	return (1);
 }
 
@@ -55,7 +59,7 @@ char	*get_tokenstr(char **source, int *maintoken)
 	while (source[0][i])
 	{
 		check_quotes(source[0][i], &single_quoted, &double_quoted);
-		check_backslash(returnable, source[0][i], &backslash);
+		check_backslash(returnable, source[0][i], &backslash, single_quoted);
 		if (!single_quoted && !double_quoted && !backslash
 			&& 0 == find_delimiters(source, &i, returnable, maintoken))
 			break ;

@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_fd.c                                         :+:      :+:    :+:   */
+/*   signal_execution2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/02 15:11:21 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/08 17:38:05 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/05/12 10:37:48 by hlaineka          #+#    #+#             */
+/*   Updated: 2021/05/12 10:38:21 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
+#include "includes.h"
 
-int	check_fd(int fd, int errormessage)
+void	kill_processes_before_pid(t_job *job, pid_t pid)
 {
-	struct stat	buf;
-	int			returnable;
+	t_process	*proc;
 
-	returnable = 0;
-	if (-1 == fstat(fd, &buf))
+	proc = job->first_process;
+	while (proc)
 	{
-		if (errormessage == 1)
-			ft_printf_fd(STDERR_FILENO, "Bad file descriptor\n");
-		return (-1);
+		if (!proc->completed && (proc->pid != pid))
+			kill(proc->pid, SIGKILL);
+		proc = proc->next;
 	}
-	if (buf.st_mode & S_IRUSR)
-		returnable = 3;
-	if (buf.st_mode & S_IWUSR)
-		returnable++;
-	return (returnable);
 }

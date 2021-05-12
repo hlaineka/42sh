@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:52:15 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/08 19:44:19 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/08 16:01:41 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ void	builtin_unsetenv(void *proc)
 	argc = process->argc;
 	argv = process->argv;
 	envp = process->envp;
+	process->status = 0;
 	if (argc < 2)
 	{
 		process->status = err_builtin(E_TOO_FEW_ARGS, "unsetenv", NULL);
 		ft_printf_fd(2, "usage: unsetenv [name]*\n");
+		process->status = 1;
 	}
 	while (argv[i])
 	{
@@ -37,5 +39,4 @@ void	builtin_unsetenv(void *proc)
 		i++;
 	}
 	process->completed = 1;
-	process->status = 0;
 }

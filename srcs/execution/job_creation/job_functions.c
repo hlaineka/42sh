@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:33:35 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/04 10:37:07 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/10 20:39:55 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,17 +115,17 @@ void	restore_fds(t_term *term)
 	if (-1 != fd_status)
 		close(0);
 	dup(term->fd_stdin);
-	close(term->fd_stdin);
+	dup2(0, STDIN_FILENO);
 	fd_status = check_fd(1, 0);
 	if (-1 != fd_status)
 		close(1);
 	dup(term->fd_stdout);
-	close(term->fd_stdout);
+	dup2(1, STDOUT_FILENO);
 	fd_status = check_fd(2, 0);
 	if (-1 != fd_status)
 		close(2);
 	dup(term->fd_stderr);
-	close(term->fd_stderr);
+	dup2(2, STDERR_FILENO);
 	if (term->heredoc_fd != -1)
 		close(term->heredoc_fd);
 }

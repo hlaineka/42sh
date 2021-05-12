@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/03 17:37:04 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/10 20:01:35 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	get_status_and_condition(t_process *proc, int status)
 	{
 		proc->stopped = 1;
 		proc->status = WIFSTOPPED(status);
+		ft_putchar('\n');
 	}
 	else
 	{
@@ -76,20 +77,17 @@ int	simple_command(t_process *proc)
 	int		status;
 
 	if (!proc->argv || !proc->argv[0] || proc->argv[0][0] == '\0')
-	{
-		ft_printf("empty argv");
 		return (-1);
-	}
 	if (is_builtin(proc))
 		return (proc->status);
-	signal(SIGINT, sig_handler_exec);
+	set_signal_execution();
 	pid = fork();
 	if (pid < 0)
 		return (err_builtin(E_FORK, proc->argv[0], NULL));
 	if (pid == 0)
 		exit(execve_process(proc));
 	proc->pid = pid;
-	waitpid(pid, &status, 0);
+	waitpid(pid, &status, WUNTRACED);
 	get_status_and_condition(proc, status);
 	return (proc->status);
 }

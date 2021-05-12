@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 13:30:11 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/04 09:49:18 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/12 10:55:29 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char	*get_filename(t_node *current)
 	if (temp->maintoken != tkn_word)
 		return (NULL);
 	returnable = temp->value;
+	//check filename and path
 	return (returnable);
 }
 
@@ -84,6 +85,6 @@ int	close_fd(int old_fd)
 	else
 		returnable = close(old_fd);
 	if (returnable == -1)
-		ft_printf_fd(2, "Bad file descriptor %i", old_fd);
+		ft_printf_fd(STDERR_FILENO, "Bad file descriptor %i", old_fd);
 	return (returnable);
 }

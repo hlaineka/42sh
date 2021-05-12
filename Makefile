@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/05/04 20:10:04 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/05/12 10:42:33 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ _SRC_INPUT = read_input_user.c \
 			init_input.c \
 			prompt.c \
 			ft_isarrows.c \
+			ft_isshiftarrows.c \
 			ft_iskey.c \
 			ft_clstnew.c \
 			ft_is_quote_open.c \
@@ -63,7 +64,8 @@ _SRC_INPUT = read_input_user.c \
 			clear_rows_starting_y.c \
 			get_input_heredoc.c \
 			cut_copy_paste.c \
-			double_input_mem.c
+			double_input_mem.c \
+			react_to_eof.c
 
 _SRC_PARSER = 	parser.c \
 
@@ -89,6 +91,7 @@ _SRC_AST_CREATION = ast_creation.c \
 _SRC_SIGNAL =	signal.c \
 				signal_input.c \
 				signal_execution.c \
+				signal_execution2.c \
 				signal_to_default.c
 
 _SRC_BUILTIN =	err_builtin.c \
@@ -232,7 +235,7 @@ clean:
 	@rm -f libft.a
 	@echo library object files removed.
 
-fclean:
+fclean: clean
 	@make -C libft fclean
 	@rm -f $(NAME)
 	@rm -rf $(DIR_OBJS)

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 11:26:20 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/03 12:23:16 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/10 20:04:35 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	wait_till_ready(t_job *job)
 	proc = job->first_process;
 	while (proc)
 	{
-		waitpid(proc->pid, &status, 0);
+		waitpid(proc->pid, &status, WUNTRACED);
 		get_status_and_condition(proc, status);
 		proc = proc->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 21:42:57 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/03 11:00:56 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/09 13:25:22 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*get_user_homedir(t_token *tkn, int tilde, int end)
 	temp_pwd = getpwnam(temp);
 	if (!temp_pwd)
 	{
-		ft_printf_fd(2, "username %s not found\n", temp);
+		ft_printf_fd(STDERR_FILENO, "username %s not found\n", temp);
 		ft_free(temp);
 		return (NULL);
 	}
@@ -58,7 +58,7 @@ int	tilde_expansion(t_token *tkn, t_term *term, int tilde)
 	{
 		homedir = ft_getenv("HOME", term->envp);
 		if (!homedir)
-			ft_printf_fd(2, "HOME not set\n");
+			ft_printf_fd(STDERR_FILENO, "HOME not set\n");
 		ft_strcut(tkn->value, tilde, tilde + 1);
 	}
 	else

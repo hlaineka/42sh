@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:35:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/05 15:23:19 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/12 10:42:43 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,8 @@ t_job		*token_lessand(t_job *job, t_term *term, t_node *current);
 t_job		*token_dless(t_job *job, t_term *term, t_node *current);
 t_job		*token_and_if(t_job *job, t_term *term, t_node *current);
 t_job		*token_or_if(t_job *job, t_term *term, t_node *current);
+
+void		get_right(t_node *current, t_term *term);
+void		update_fds(t_term *term);
 
 #endif

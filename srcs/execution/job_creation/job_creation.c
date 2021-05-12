@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:40:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/05 11:28:41 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/12 10:41:50 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ static void	debug_print_process(t_process *temp_process, int processes)
 	int			i;
 
 	if (temp_process->completed == 1)
-		ft_printf("completed. ");
+		ft_printf_fd(STDOUT_FILENO, "completed. ");
 	if (temp_process->stopped == 1)
-		ft_printf("stopped. ");
-	ft_printf("argv of the %i process: ", processes);
+		ft_printf_fd(STDOUT_FILENO, "stopped. ");
+	ft_printf_fd(STDOUT_FILENO, "argv of the %i process: ", processes);
 	i = 0;
 	while (temp_process->argv && temp_process->argv[i])
 	{
-		ft_printf("%s, ", temp_process->argv[i]);
+		ft_printf_fd(STDOUT_FILENO, "%s, ", temp_process->argv[i]);
 		i++;
 	}
-	ft_printf("\n");
+	ft_printf_fd(STDOUT_FILENO, "\n");
 }
 
 static void	debug_printing(t_job *next_job)
@@ -44,7 +44,7 @@ static void	debug_printing(t_job *next_job)
 	temp_job = next_job;
 	while (temp_job)
 	{
-		ft_printf("the %i job:\n", jobs);
+		ft_printf_fd(STDOUT_FILENO, "the %i job:\n", jobs);
 		temp_process = temp_job->first_process;
 		processes = 1;
 		while (temp_process)
@@ -58,24 +58,15 @@ static void	debug_printing(t_job *next_job)
 	}
 }
 
-void	save_fds(t_term *term)
-{
-	term->fd_stdin = dup2(STDIN_FILENO, 10);
-	term->fd_stdout = dup2(STDOUT_FILENO, 11);
-	term->fd_stderr = dup2(STDERR_FILENO, 12);
-	term->heredoc_fd = -1;
-}
-
 t_job	*job_creation(t_node *root, t_term *term)
 {
 	t_job	*returnable;
 
 	if (!root)
 		return (NULL);
-	save_fds(term);
 	returnable = tree_traversal(NULL, root, term);
 	if (returnable == NULL)
-		ft_printf_fd(2, "job syntax_error\n");
+		ft_printf_fd(STDERR_FILENO, "job syntax_error\n");
 	if (returnable && returnable->first_process->pid == 0)
 	{
 		returnable->next = term->jobs;

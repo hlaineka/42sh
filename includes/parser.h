@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/03 17:37:31 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/09 17:12:47 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define REDIROPS "&<>|"
 # define SPECIALPARAMS "@*#?-$!0~"
 # define EXPANSIONCHARS "$`"
+# define NODE_STACK_SIZE 20
 
 /*
 **enum e_token
@@ -173,6 +174,7 @@ t_node				*ast_creator(t_token *first, t_term *term);
 t_node				*init_node(void);
 int					is_unaryop(t_token *tkn);
 void				free_ast(t_node *root);
+void				free_nodestack(t_node *stack[]);
 
 /*
 ** parser/ast_creation/precedence.c
@@ -240,7 +242,8 @@ t_token				*init_token(void);
 t_token				*add_quotearray(t_token *current);
 void				check_quotes(char c, bool *single_quoted,
 						bool *double_quoted);
-void				check_backslash(char *str, char c, bool *backslash);
+void				check_backslash(char *str, char c, bool *backslash,
+						bool single_quoted);
 
 /*
 ** parser/tokenization/basic_token_functions3.c
@@ -252,6 +255,7 @@ int					handle_operator_token(char *str, char *source, int *i,
 int					handle_word_token(char *str, char *source, int *i,
 						int *maintoken);
 void				free_tokens_sub(t_token *tokens);
+int					*init_quotearray(t_token *current);
 
 /*
 ** parser/tokenization/basic_tokens.c

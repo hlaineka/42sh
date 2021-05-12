@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/03 09:53:25 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/12 10:35:10 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	init_input(t_input *input)
 	input->clipboard_size = 2048;
 }
 
-static void	get_termcaps_strings(t_term *term, char *buffer)
+static void	init_term_values(t_term *term, char *buffer)
 {
 	term->ti_string = tgetstr("ti", &buffer);
 	term->te_string = tgetstr("te", &buffer);
@@ -54,6 +54,12 @@ static void	get_termcaps_strings(t_term *term, char *buffer)
 	term->rc_string = tgetstr("rc", &buffer);
 	term->dc_string = tgetstr("dc", &buffer);
 	term->bl_string = tgetstr("bl", &buffer);
+	term->nrows = tgetnum("li");
+	term->ncolumns = tgetnum("co");
+	term->fd_stdin = dup2(STDIN_FILENO, 20);
+	term->fd_stdout = dup2(STDOUT_FILENO, 21);
+	term->fd_stderr = dup2(STDERR_FILENO, 22);
+	term->heredoc_fd = -1;
 }
 
 void	init_term(t_term *term)
@@ -77,12 +83,7 @@ void	init_term(t_term *term)
 	if (!term->buffer)
 		err_fatal(ERR_MALLOC, NULL, term);
 	buffer = term->buffer;
-	get_termcaps_strings(term, buffer);
-	term->nrows = tgetnum("li");
-	term->ncolumns = tgetnum("co");
-	term->fd_stdin = STDIN_FILENO;
-	term->fd_stdout = STDOUT_FILENO;
-	term->fd_stderr = STDERR_FILENO;
+	init_term_values(term, buffer);
 }
 
 void	init_flags(t_term *term, char **argv)
