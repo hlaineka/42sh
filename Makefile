@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/05/02 15:27:16 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/05/04 20:10:04 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,6 +118,7 @@ _SRC_EXECUTION =	execution.c \
 
 _SRC_JOB_CREATION = job_creation.c \
 					job_functions.c \
+					job_functions2.c \
 					token_null.c \
 					tree_traversal.c \
 					pipe_functions.c \
@@ -130,7 +131,10 @@ _SRC_JOB_CREATION = job_creation.c \
 					token_greatand.c \
 					token_lessand.c \
 					token_dless.c \
-					check_fd.c
+					token_or_if.c \
+					token_and_if.c \
+					check_fd.c \
+
 
 
 SRC_MAIN = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))
