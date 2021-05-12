@@ -6,24 +6,11 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:07:56 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/10 19:52:20 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/12 10:38:17 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes.h"
-
-void	kill_processes_before_pid(t_job *job, pid_t pid)
-{
-	t_process	*proc;
-
-	proc = job->first_process;
-	while (proc)
-	{
-		if (!proc->completed && (proc->pid != pid))
-			kill(proc->pid, SIGKILL);
-		proc = proc->next;
-	}
-}
 
 void	handle_process(t_process *proc, int status)
 {
@@ -96,8 +83,6 @@ void	sig_handler_exec(int signo)
 
 	if (signo == SIGCHLD)
 		sig_child_handler();
-//	if (signo == SIGTSTP)
-//		sig_tstp_handler();
 	if (signo == SIGINT)
 	{
 		jobs = g_term->jobs;

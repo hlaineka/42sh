@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_signal.h                                        :+:      :+:    :+:   */
+/*   signal_execution2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/15 11:12:09 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/12 10:38:43 by hlaineka         ###   ########.fr       */
+/*   Created: 2021/05/12 10:37:48 by hlaineka          #+#    #+#             */
+/*   Updated: 2021/05/12 10:38:21 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_SIGNAL_H
-# define FT_SIGNAL_H
+#include "includes.h"
 
-# include <signal.h>
-# include "includes.h"
+void	kill_processes_before_pid(t_job *job, pid_t pid)
+{
+	t_process	*proc;
 
-void	start_signal(void);
-void	set_signal_input(void);
-void	sig_handler_input(int signo);
-void	set_signal_execution(void);
-void	sig_handler_exec(int signo);
-void	signals_to_default(void);
-void	sig_child_handler(void);
-void	kill_processes_before_pid(t_job *job, pid_t pid);
-
-#endif
+	proc = job->first_process;
+	while (proc)
+	{
+		if (!proc->completed && (proc->pid != pid))
+			kill(proc->pid, SIGKILL);
+		proc = proc->next;
+	}
+}

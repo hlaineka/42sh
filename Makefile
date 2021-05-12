@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/05/07 12:18:35 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/05/12 10:39:06 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,6 +91,7 @@ _SRC_AST_CREATION = ast_creation.c \
 _SRC_SIGNAL =	signal.c \
 				signal_input.c \
 				signal_execution.c \
+				signal_execution2.c \
 				signal_to_default.c
 
 _SRC_BUILTIN =	err_builtin.c \

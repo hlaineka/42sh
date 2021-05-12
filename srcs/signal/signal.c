@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 10:00:31 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/07 13:30:49 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/12 10:36:12 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ void	sigcont_handler(int signo)
 
 void	sigtstp_handler(int signo)
 {
-	//signal(SIGTSTP, SIG_DFL);
-	//ioctl(g_term->fd_stderr, TIOCSTI, "\x1A");
 	(void)signo;
 }
 
