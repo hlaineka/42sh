@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   read_input_user.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 11:54:30 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/17 11:48:42 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "input.h"
+#include "init.h"
 
 static void	print_input(char *str, t_input *input, t_term *term)
 {

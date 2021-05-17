@@ -6,11 +6,12 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:31:46 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 11:11:45 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/17 11:49:48 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
+#include "init.h"
 
 void	disable_raw_mode_continue(t_term *term)
 {

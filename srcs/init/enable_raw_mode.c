@@ -6,11 +6,12 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 19:20:26 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 09:24:50 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/17 11:50:02 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
+#include "init.h"
 
 static void	ft_cfmakeraw(struct termios *termios_p)
 {

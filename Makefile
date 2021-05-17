@@ -6,11 +6,11 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/05/12 10:42:33 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/05/17 11:50:23 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = 21sh
+NAME = 42sh
 
 CC = gcc
 
@@ -32,16 +32,14 @@ DIR_SETENV = srcs/builtins/fun_setenv/
 DIR_UNSETENV = srcs/builtins/fun_unsetenv/
 DIR_ENV = srcs/builtins/fun_env/
 DIR_EXECUTION = srcs/execution/
+DIR_INIT = srcs/init/
 DIR_OBJS = objs/
 
 _SRC_MAIN = main.c
 
 _SRC_INPUT = read_input_user.c \
-			disable_raw_mode.c \
-			enable_raw_mode.c \
 			errors.c \
 			ft_putc.c \
-			init_input.c \
 			prompt.c \
 			ft_isarrows.c \
 			ft_isshiftarrows.c \
@@ -66,6 +64,10 @@ _SRC_INPUT = read_input_user.c \
 			cut_copy_paste.c \
 			double_input_mem.c \
 			react_to_eof.c
+
+_SRC_INIT = disable_raw_mode.c \
+			enable_raw_mode.c \
+			init_input.c
 
 _SRC_PARSER = 	parser.c \
 
@@ -154,10 +156,11 @@ SRC_ECHO = $(addprefix $(DIR_ECHO), $(_SRC_ECHO))
 SRC_SETENV = $(addprefix $(DIR_SETENV), $(_SRC_SETENV))
 SRC_UNSETENV = $(addprefix $(DIR_UNSETENV), $(_SRC_UNSETENV))
 SRC_EXECTUION =  $(addprefix $(DIR_EXECUTION), $(_SRC_EXECUTION))
+SRC_INIT =  $(addprefix $(DIR_INIT), $(_SRC_INIT))
 
-SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER) $(SRC_SIGNAL) $(SRC_BUILTIN) $(SRC_CD) $(SRC_ECHO) $(SRC_SETENV) $(SRC_UNSETENV) $(SRC_ENV) $(SRC_EXECUTION) $(SRC_JOB_CREATION) $(SRC_TOKENIZATION) $(SRC_AST_CREATION)
+SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER) $(SRC_SIGNAL) $(SRC_BUILTIN) $(SRC_CD) $(SRC_ECHO) $(SRC_SETENV) $(SRC_UNSETENV) $(SRC_ENV) $(SRC_EXECUTION) $(SRC_JOB_CREATION) $(SRC_TOKENIZATION) $(SRC_AST_CREATION) $(SRC_INIT)
 
-_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL) $(_SRC_BUILTIN) $(_SRC_CD) $(_SRC_ECHO) $(_SRC_SETENV) $(_SRC_UNSETENV) $(_SRC_ENV) $(_SRC_EXECUTION) $(_SRC_JOB_CREATION) $(_SRC_TOKENIZATION) $(_SRC_AST_CREATION)
+_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL) $(_SRC_BUILTIN) $(_SRC_CD) $(_SRC_ECHO) $(_SRC_SETENV) $(_SRC_UNSETENV) $(_SRC_ENV) $(_SRC_EXECUTION) $(_SRC_JOB_CREATION) $(_SRC_TOKENIZATION) $(_SRC_AST_CREATION) $(_SRC_INIT)
 
 OBJ_FILES = $(_SRC:.c=.o)
 OBJS = $(patsubst %, $(DIR_OBJS)%, $(_SRC:.c=.o))
@@ -223,6 +226,9 @@ $(DIR_OBJS)%.o: $(DIR_UNSETENV)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 $(DIR_OBJS)%.o: $(DIR_EXECUTION)%.c $(INC)
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(DIR_OBJS)%.o: $(DIR_INIT)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 libft:

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 17:40:33 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/11 12:07:24 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/17 11:48:58 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
+#include "init.h"
 
 static void	get_error_str(char *buf, int error_no)
 {

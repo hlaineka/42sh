@@ -6,11 +6,12 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 21:48:18 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/03 17:21:40 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/17 11:49:17 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes.h"
+#include "init.h"
 
 static void	init_heredoc_reading(char **ret, t_input *input, char **temp)
 {

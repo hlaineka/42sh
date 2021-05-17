@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/10 14:30:29 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/17 11:48:13 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "parser.h"
 #include "ft_signal.h"
 #include "execution.h"
+#include "init.h"
 
 int	prompt_cycle(char **argv, t_term *term, t_input *input)
 {
