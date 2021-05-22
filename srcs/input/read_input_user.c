@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/22 12:41:21 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/22 13:35:20 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ char	*read_input_tty(int prompt_mode, t_input *input, t_term *term)
 			end_keypress(input, term);
 			ft_strcat(str, input->ls);
 			ft_strncat(str, "\n", 1);
-//			print_input(str, input, term);
 			ft_putstr("\n\r");
 			break ;
 		}
