@@ -6,24 +6,13 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/17 11:48:42 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/22 12:41:21 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "input.h"
 #include "init.h"
-
-static void	print_input(char *str, t_input *input, t_term *term)
-{
-	int		col;
-	int		row;
-
-	col = input->prompt_col - 1;
-	row = input->prompt_row - 1;
-	tputs(tgoto(term->cm_string, col, row), 1, ft_putc);
-	ft_putstr_input(str, input, term);
-}
 
 void	init_input_tty(t_input *input, int prompt_mode)
 {
@@ -58,7 +47,8 @@ char	*read_input_tty(int prompt_mode, t_input *input, t_term *term)
 			end_keypress(input, term);
 			ft_strcat(str, input->ls);
 			ft_strncat(str, "\n", 1);
-			print_input(str, input, term);
+//			print_input(str, input, term);
+			ft_putstr("\n\r");
 			break ;
 		}
 	}
@@ -100,7 +90,7 @@ char	*get_input(int argc, char **argv, t_term *term, t_input *input)
 
 	str = NULL;
 	input->ret_str = &str;
-	set_signal_input();
+	signals_to_ignore();
 	if (argc == 1)
 	{
 		enable_raw_mode(term);

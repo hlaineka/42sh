@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/05/17 11:50:23 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/05/22 12:28:57 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,7 +94,8 @@ _SRC_SIGNAL =	signal.c \
 				signal_input.c \
 				signal_execution.c \
 				signal_execution2.c \
-				signal_to_default.c
+				signal_to_default.c \
+				signal_to_ignore.c
 
 _SRC_BUILTIN =	err_builtin.c \
 				ft_getenv.c \
