@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_absolute_path.c                                :+:      :+:    :+:   */
+/*   signal_to_ignore.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/06 14:40:06 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/22 13:33:38 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/04/23 14:38:09 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/05/22 11:37:30 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes.h"
 
-char	*get_absolute_path_to_buf(char *rel, char **envp, char *buf)
+void	signals_to_ignore(void)
 {
-	char	*cdpath;
+	int		i;
 
-	if (is_absolute_path(rel))
-		return (ft_strcpy(buf, rel));
-	cdpath = ft_getenv("CDPATH", envp);
-	if (cdpath && find_path(rel, cdpath, buf))
-		return (buf);
-	buf = getcwd(buf, 1024);
-	if (ft_strcmp("/", buf))
-		buf = ft_strcat(buf, "/");
-	buf = ft_strcat(buf, rel);
-	return (buf);
+	i = 1;
+	while (i < 32)
+	{
+		signal(i, SIG_IGN);
+		i++;
+	}
+	signal(SIGTSTP, SIG_IGN);
 }
