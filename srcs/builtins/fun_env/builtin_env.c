@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:21:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 13:38:00 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/22 11:53:42 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	execute_env(char **argv, char **envp, char *altpath, int options)
 		else
 		{
 			if (!ft_getenv("PATH", envp))
-				return (err_builtin(ERR_PATH_NOT_SET, "env", NULL));
+				return (err_builtin(E_ENV_PATH_NOT_SET, "env", NULL));
 			ret = find_path(argv[0], ft_getenv("PATH", envp), path);
 		}
 		if (ret < 0)
@@ -56,7 +56,7 @@ int	get_env_options(char **argv, char **envp, int *options, char *altpath)
 	{
 		o = env_get_options(argv[i], envp);
 		if (o == -1 || (o > 8 && o != 16))
-			return (err_builtin(ERR_INVALID_INPUT, "env", argv[i]));
+			return (err_builtin(E_INVALID_INPUT, "env", argv[i]));
 		else if (o & ENV_P_FLAG)
 		{
 			ft_strncpy(altpath, argv[++i], 1024);

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 12:49:17 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/22 11:47:55 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,6 @@
 
 # define ENV_P_FLAG 1
 # define ENV_U_FLAG 2
-
-/*
-** termporary error nums
-*/
-
-# define ERR_PATH_NOT_SET 123
-# define ERR_FILE_NOT_FOUND 124
-# define ERR_INVALID_INPUT 134
 
 pid_t	g_pid;
 

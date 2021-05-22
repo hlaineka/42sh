@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 14:50:43 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 12:48:54 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/22 11:51:39 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,17 @@ int	is_valid_folder(char *path, char *progname)
 {
 	struct stat	buf;
 
-	if (lstat(path, &buf) == -1)
+	if (stat(path, &buf) == -1 || lstat(path, &buf) == -1)
 	{
 		if (access(path, F_OK))
 			return (err_builtin(E_NOENT, progname, path));
 		if (access(path, X_OK))
 			return (err_builtin(E_ACCES, progname, path));
 	}
+	if (access(path, F_OK))
+		return (err_builtin(E_NOENT, progname, path));
+	if (access(path, X_OK))
+		return (err_builtin(E_ACCES, progname, path));
 	if ((buf.st_mode & S_IFMT) == S_IFLNK && stat(path, &buf) == -1)
 		return (err_builtin(E_LOOP, progname, path));
 	if ((buf.st_mode & S_IFMT) != S_IFDIR)
