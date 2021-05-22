@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/09 17:12:47 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/22 14:05:46 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,6 +262,11 @@ int					*init_quotearray(t_token *current);
 */
 
 t_token				*define_basic_tokens(char *input);
+
+/*
+**
+*/
+char				*remove_backslash(char *input);
 
 /*
 ** parser/tokenization/tilde_expansion.c

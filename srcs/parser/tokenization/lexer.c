@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:32:48 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/09 13:24:48 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/22 14:03:16 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_token	*lexer(char *input, t_term *term)
 	t_token	*first;
 
 	first = NULL;
+	input = remove_backslash(input);
 	first = define_basic_tokens(input);
 	if (term->flag_debug == 1)
 		debug_print_tokens(first);
