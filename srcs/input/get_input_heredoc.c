@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 21:48:18 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/22 13:26:44 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/22 15:45:58 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*get_input_heredoc2(char *eof, t_input *input, t_term *term)
 	while (1)
 	{
 		temp = read_input_tty(prompt, input, term);
-		if (ft_strequ(eof, temp) || ft_strequ("EOF\n", temp))
+		if (ft_strequ(eof, temp) || (temp[0] == 4 && temp[1] == '\n'))
 			break ;
 		temp2 = ft_strjoin(*input->ret_str, temp);
 		free(*input->ret_str);
