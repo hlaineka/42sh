@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 10:06:04 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/24 20:01:11 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/24 23:33:55 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ static void	check_character(char c, int *quote, int *temp_quote)
 		*temp_quote = '"';
 		*quote = '\\';
 	}
-	else if ((*quote == '\\' && c != '\n') || (*quote == c))
-		*quote = 0;
-	if (*quote != '\\' && *temp_quote)
+	else if (*quote == '\\' || *quote == c)
 	{
 		*quote = *temp_quote;
 		*temp_quote = 0;
