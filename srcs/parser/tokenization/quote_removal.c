@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 10:49:09 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/24 16:46:33 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/24 19:15:11 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,19 @@ int	get_escchar_value(char *str, int *i)
 ** character with no special meaning.
 */
 
-int	handle_quoted_escchar(char *str, int *i)
+void	handle_quoted_escchar(char *str, int *i, int *w)
 {
-	int	returnable;
-
-	returnable = str[*i];
 	*i = *i + 1;
 	if (str[*i] == 36 || str[*i] == 96 || str[*i] == 34 || str[*i] == 92)
-	{
-		returnable = str[*i];
-		*i = *i + 1;
-	}
+		str[*w] = str[*i];
 	else if (str[*i] == '\n')
+		*w = *w - 1;
+	else
 	{
-		returnable = str[*i + 1];
-		*i = *i + 1;
+		str[*w] = str[*i - 1];
+		*w = *w + 1;
+		str[*w] = str[*i];
 	}
-	return (returnable);
 }
 
 /*
@@ -85,7 +81,7 @@ char	*remove_quotes(char *str, int *quotes)
 			|| (str[i] == 39 && quotes[i] != 34 && quotes[i] != 92))
 			continue ;
 		if (str[i] == 92 && quotes[i] == 126)
-			str[w] = handle_quoted_escchar(str, &i);
+			handle_quoted_escchar(str, &i, &w);
 		else if (str[i] == 92 && quotes[i] != 39)
 			str[w] = get_escchar_value(str, &i);
 		else

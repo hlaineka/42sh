@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:54:13 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/07 16:52:00 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/24 19:08:55 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ t_token	*add_quotearray(t_token *current)
 	return (current);
 }
 
-void	check_quotes(char c, bool *single_quoted, bool *double_quoted)
+void	check_quotes(char c, bool *single_quoted, bool *double_quoted, bool *backslash)
 {
-	if (c == 34 && !*single_quoted)
+	if (c == 34 && !*single_quoted && !*backslash)
 		*double_quoted = !*double_quoted;
 	if (c == 39 && ! *double_quoted)
 		*single_quoted = !*single_quoted;
@@ -99,6 +99,6 @@ void	check_backslash(char *str, char c, bool *backslash, bool single_quoted)
 	if (c == 92 && !single_quoted)
 		*backslash = TRUE;
 	else if (*backslash == TRUE && str && str[0]
-		&& str[ft_strlen(str) - 2] == 92)
+		&& str[ft_strlen(str) - 1] == 92)
 		*backslash = FALSE;
 }

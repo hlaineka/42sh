@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 12:13:24 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/07 12:17:05 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/22 15:45:47 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int	react_to_eof(t_input *input, t_term *term)
 	else
 	{
 		if (input->heredoc)
-			ft_strcpy(input->ls, "EOF");
+		{
+			input->ls[0] = 4;
+			input->ls[1] = '\0';
+		}
 		else
 			ft_strcpy(input->ls, "exit");
 		input->rrs[0] = '\0';
