@@ -6,11 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2021/05/22 14:06:17 by hlaineka         ###   ########.fr        #
-=======
-#    Updated: 2021/05/22 12:28:57 by hhuhtane         ###   ########.fr        #
->>>>>>> d6a2003e178bfad18fecf65063d83cd895ad52a7
+#    Updated: 2021/05/24 16:48:13 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +80,6 @@ _SRC_TOKENIZATION = lexer.c \
 					operator_tokens.c \
 					operator_tokens_functions.c \
 					advanced_tokenization.c \
-					remove_backslash.c \
 					word_expansion.c \
 					tilde_expansion.c \
 					dollar_expansion.c
