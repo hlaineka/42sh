@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:32:48 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/24 19:14:51 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/27 12:52:12 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,65 @@ static void	debug_print_tokens(t_token *tokens)
 	ft_printf_fd(STDOUT_FILENO, "\n");
 }
 
+static char	*handle_backslash_remove(char *str, int i)
+{
+	char	*new;
+	int		w;
+	int		len;
+
+	len = ft_strlen(str) + 1;
+	new = ft_strnew(len + 1);
+	w = 0;
+	while (w < i)
+	{
+		new[w] = str[w];
+		w++;
+	}
+	ft_printf("%s\n", new);
+	new[w++] = 39;
+	ft_printf("%s\n", new);
+	i++;
+	new[w++] = str[i++];
+	ft_printf("%s\n", new);
+	new[w++] = 39;
+	ft_printf("%s\n", new);
+	while(w < len)
+		new[w++] = str[i++];
+	new[w] = '\0';
+	ft_printf("%s\n", new);
+	return (new);
+}
+
+/*
+** ascii 92 == \
+*/
+
+char	*remove_backslash(char *str)
+{
+	int		i;
+	bool	single_quoted;
+	bool	double_quoted;
+
+	i = 0;
+	single_quoted = FALSE;
+	double_quoted = FALSE;
+	while (str[i])
+	{
+		if (!single_quoted && !double_quoted && str[i] == 92 && str[i + 1] == '\n')
+			str = ft_strcut(str, i, i + 2);
+		else if (!single_quoted && !double_quoted && str[i] == 92)
+			str = handle_backslash_remove(str, i);
+		i++;
+	}
+	return (str);
+}
+
 t_token	*lexer(char *input, t_term *term)
 {
 	t_token	*first;
 
 	first = NULL;
+	input = remove_backslash(input);
 	first = define_basic_tokens(input);
 	if (term->flag_debug == 1)
 		debug_print_tokens(first);
