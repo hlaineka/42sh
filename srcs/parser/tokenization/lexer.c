@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:32:48 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/27 17:01:58 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/27 17:11:38 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static char	*handle_backslash_remove(char *str, int i)
 	i++;
 	new[w++] = str[i++];
 	new[w++] = 39;
-	while(w < len)
+	while (w < len)
 		new[w++] = str[i++];
 	new[w] = '\0';
 	ft_free(str);
@@ -78,9 +78,10 @@ char	*remove_backslash(char *str)
 			double_quoted = !double_quoted;
 		if (str[i] == 39)
 			single_quoted = !single_quoted;
-		if (!single_quoted && !double_quoted && str[i] == 92 && str[i + 1] == '\n')
+		if (!single_quoted && !double_quoted && str[i] == 92
+			&& str[i + 1] == '\n')
 			str = ft_strcut(str, i, i + 2);
-		else if (!single_quoted && !double_quoted && str[i] == 92)
+		else if (!single_quoted && !double_quoted && str[i] == 92 && str[i + 1] != 39)
 		{
 			str = handle_backslash_remove(str, i);
 			i = -1;

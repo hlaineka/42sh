@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:54:13 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/24 19:08:55 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/27 17:17:10 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	check_quotes(char c, bool *single_quoted, bool *double_quoted, bool *backsl
 {
 	if (c == 34 && !*single_quoted && !*backslash)
 		*double_quoted = !*double_quoted;
-	if (c == 39 && ! *double_quoted)
+	if (c == 39 && !*double_quoted && !*backslash)
 		*single_quoted = !*single_quoted;
 }
 
