@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:32:48 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/27 16:42:23 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/27 16:45:53 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,10 @@ char	*remove_backslash(char *str)
 	double_quoted = FALSE;
 	while (str[i])
 	{
+		if (str[i] == 34)
+			double_quoted = !double_quoted;
+		if (str[i] == 39)
+			single_quoted = !single_quoted;
 		if (!single_quoted && !double_quoted && str[i] == 92 && str[i + 1] == '\n')
 			str = ft_strcut(str, i, i + 2);
 		else if (!single_quoted && !double_quoted && str[i] == 92)
