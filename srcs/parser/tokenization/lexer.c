@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:32:48 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/27 16:56:09 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/27 17:01:58 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	*remove_backslash(char *str)
 		else if (!single_quoted && !double_quoted && str[i] == 92)
 		{
 			str = handle_backslash_remove(str, i);
-			i++;
+			i = -1;
 		}
 		i++;
 	}
