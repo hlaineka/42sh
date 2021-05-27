@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:32:48 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/27 16:19:27 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/27 16:35:13 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static char	*handle_backslash_remove(char *str, int i)
 	while(w < len)
 		new[w++] = str[i++];
 	new[w] = '\0';
+	ft_free(str);
 	return (new);
 }
 
