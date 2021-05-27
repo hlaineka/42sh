@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 17:00:59 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/27 12:25:36 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/27 17:28:45 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,5 @@
 
 void	ft_free(void *variable)
 {
-	free(variable);
 	ft_memdel(&variable);
 }
