@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/27 01:18:00 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/27 10:57:24 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static int	do_ctrl_c_key(t_input *input, t_term *term)
 	if (!input->heredoc)
 		*input->quote = PROMPT_NORMAL;
 	ft_memdel((void **)input->ret_str);
+	term->last_return = 1;
 	return (-1);
 }
 
