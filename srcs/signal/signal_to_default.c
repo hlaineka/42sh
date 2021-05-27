@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 14:38:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 12:25:12 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/27 11:18:23 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ void	signals_to_default(void)
 		signal(i, SIG_DFL);
 		i++;
 	}
+	signal(SIGTSTP, SIG_IGN);
 }

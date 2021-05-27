@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 21:48:18 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/22 15:45:58 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/05/27 01:20:21 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static char	*get_input_heredoc2(char *eof, t_input *input, t_term *term)
 	int		prompt;
 
 	temp = NULL;
+	temp2 = NULL;
 	input->input_temp = &temp;
 	prompt = PROMPT_HEREDOC;
 	while (1)
@@ -54,9 +55,8 @@ static char	*get_input_heredoc2(char *eof, t_input *input, t_term *term)
 		free(temp);
 		*input->ret_str = temp2;
 	}
-	ft_memdel((void **)&temp);
-	temp2[ft_strlen(temp2) - 1] = '\0';
-	*input->ret_str = temp2;
+	if (temp != NULL)
+		ft_memdel((void **)&temp);
 	return (*input->ret_str);
 }
 
@@ -74,5 +74,7 @@ char	*get_input_heredoc(char *eof, t_input *input, t_term *term)
 	str = get_input_heredoc2(eof, input, term);
 	input->heredoc = 0;
 	heredoc_change_streams_end(streams, term);
+	if (ft_strlen(str) > 0)
+		str[ft_strlen(str) - 1] = '\0';
 	return (str);
 }
