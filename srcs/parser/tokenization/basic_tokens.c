@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 11:59:34 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/27 17:17:19 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/28 16:08:21 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,8 @@ int	find_delimiters(char **source, int *i, char *returnable, int *maintoken)
 		if (0 == handle_operator_token(returnable, *source, i, maintoken))
 			return (0);
 	}
-	else
-		if (0 == handle_word_token(returnable, *source, i, maintoken))
-			return (0);
-	//if (ft_strchr(EXPANSIONCHARS, source[0][*i]))
-	//	check_expansions(returnable, source[0][*i]);
-	//if (source[0][*i] == '#')
-	//	handle_comment(returnable, *source, &i)
+	else if (0 == handle_word_token(returnable, *source, i, maintoken))
+		return (0);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 13:30:11 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/12 10:55:29 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/28 16:08:50 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ char	*get_filename(t_node *current)
 	if (temp->maintoken != tkn_word)
 		return (NULL);
 	returnable = temp->value;
-	//check filename and path
 	return (returnable);
 }
 

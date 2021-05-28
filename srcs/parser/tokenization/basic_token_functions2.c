@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:54:13 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/27 17:17:10 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/28 16:06:50 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ t_token	*add_quotearray(t_token *current)
 	return (current);
 }
 
-void	check_quotes(char c, bool *single_quoted, bool *double_quoted, bool *backslash)
+void	check_quotes(char c, bool *single_quoted, bool *double_quoted,
+		bool *backslash)
 {
 	if (c == 34 && !*single_quoted && !*backslash)
 		*double_quoted = !*double_quoted;

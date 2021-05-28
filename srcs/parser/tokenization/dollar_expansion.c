@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 21:44:33 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/12 10:52:29 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/28 16:06:33 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ int	dollar_expansion(t_token *tkn, t_term *term, int dollar)
 		if (-1 == dollar_parameter(tkn, term, dollar + 2))
 			return (-1);
 	}
-	//else if (tkn->value[dollar + 1] == '(' && tkn->quotes[dollar + 1] == 0)
-	//	command_substitution(tkn, term, dollar + 2);
 	else
 		return (0);
 	return (0);

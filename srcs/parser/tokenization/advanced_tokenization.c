@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:01:44 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/12 10:48:25 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/05/28 16:07:47 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,6 @@
 
 t_token	*advanced_tokenization(t_token *first, t_term *term)
 {
-	//assignment_words
-	//alias handling call
-	//reserved words recognition call
-	//positional parameteres check call
-	//special parameters and substitution, word expansions
 	first = word_expansions(first, term);
-	//field splitting = extra empty character removal that came from expansions & aliases
-	//pathname extensions
 	return (first);
 }
