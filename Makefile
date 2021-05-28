@@ -6,11 +6,11 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/05/24 16:50:14 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/05/28 16:51:28 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = 42sh
+NAME = 21sh
 
 CC = gcc
 
