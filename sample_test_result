@@ -1,0 +1,40 @@
+21sh
+42sh
+author
+includes
+libft
+libft.a
+Makefile
+objs
+srcs
+testresult
+total 2700
+drwxr-xr-x  7 helvi helvi    4096 Jun 12 17:02 ./
+drwxr-xr-x 43 helvi helvi    4096 Jun 12 12:43 ../
+-rwxr-xr-x  1 helvi helvi  671248 Jun 12 16:41 21sh*
+-rwxr-xr-x  1 helvi helvi  675432 Jun 12 17:02 42sh*
+-rw-r--r--  1 helvi helvi      18 May 28 16:05 author
+drwxr-xr-x  8 helvi helvi    4096 May 28 16:52 .git/
+-rw-r--r--  1 helvi helvi     644 May 27 16:48 .gitignore
+drwxr-xr-x  2 helvi helvi    4096 Jun 12 16:29 includes/
+drwxr-xr-x 13 helvi helvi    4096 Jun 12 17:02 libft/
+-rw-r--r--  1 helvi helvi 1366472 Jun 12 17:02 libft.a
+-rw-r--r--  1 helvi helvi    6843 Jun 12 16:42 Makefile
+drwxr-xr-x  2 helvi helvi    4096 Jun 12 17:02 objs/
+drwxr-xr-x  8 helvi helvi    4096 May 17 11:37 srcs/
+-rwxr-xr-x  1 helvi helvi      70 Jun 12 17:02 testresult*
+total 2700
+drwxr-xr-x  7 helvi helvi    4096 Jun 12 17:02 ./
+drwxr-xr-x 43 helvi helvi    4096 Jun 12 12:43 ../
+-rwxr-xr-x  1 helvi helvi  671248 Jun 12 16:41 21sh*
+-rwxr-xr-x  1 helvi helvi  675432 Jun 12 17:02 42sh*
+-rw-r--r--  1 helvi helvi      18 May 28 16:05 author
+drwxr-xr-x  8 helvi helvi    4096 May 28 16:52 .git/
+-rw-r--r--  1 helvi helvi     644 May 27 16:48 .gitignore
+drwxr-xr-x  2 helvi helvi    4096 Jun 12 16:29 includes/
+drwxr-xr-x 13 helvi helvi    4096 Jun 12 17:02 libft/
+-rw-r--r--  1 helvi helvi 1366472 Jun 12 17:02 libft.a
+-rw-r--r--  1 helvi helvi    6843 Jun 12 16:42 Makefile
+drwxr-xr-x  2 helvi helvi    4096 Jun 12 17:02 objs/
+drwxr-xr-x  8 helvi helvi    4096 May 17 11:37 srcs/
+-rwxr-xr-x  1 helvi helvi     840 Jun 12 17:02 testresult*

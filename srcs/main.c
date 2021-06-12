@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/27 16:41:56 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/06/12 17:02:14 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "ft_signal.h"
 #include "execution.h"
 #include "init.h"
+#include "autotest.h"
 
 int	prompt_cycle(char **argv, t_term *term, t_input *input)
 {
@@ -35,6 +36,31 @@ int	prompt_cycle(char **argv, t_term *term, t_input *input)
 	return (0);
 }
 
+void	autotest(t_term *term)
+{
+	char		*input_str;
+	t_node		*root;
+	int			i;
+	char		c;
+
+	i = 0;
+	while (g_autotest[i])
+	{
+		input_str = ft_strdup(g_autotest[i]);
+		if (!ft_strcmp(input_str, "exit\n"))
+		{
+			free(input_str);
+			return ;
+		}
+		root = parser(input_str, term);
+		execute(root, term);
+		free_jobs(term);
+		i++;
+	}
+	ft_printf("press enter to exit: ");
+	read(term->fd_stdin, &c, 1);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_term		term;
@@ -49,11 +75,13 @@ int	main(int argc, char **argv, char **envp)
 	init_input(&here_input);
 	term.here_input = &here_input;
 	exit_value = 0;
-	while (exit_value == 0)
-		exit_value = prompt_cycle(argv, &term, &input);
-	(void)argc;
-	(void)argv;
-	(void)envp;
+	if (argc == 2 && ft_strequ(argv[1], "autotest"))
+		autotest(&term);
+	else
+	{
+		while (exit_value == 0)
+			exit_value = prompt_cycle(argv, &term, &input);
+	}
 	disable_raw_mode(&term);
 	exit (0);
 	return (0);
