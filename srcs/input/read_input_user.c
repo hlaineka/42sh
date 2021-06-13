@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/27 10:55:31 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/06/13 11:33:52 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*get_input(int argc, char **argv, t_term *term, t_input *input)
 	str = NULL;
 	input->ret_str = &str;
 	signals_to_ignore();
-	if (argc == 1)
+	if (term->intern_variables->flag_rawmode && argc == 1)
 	{
 		enable_raw_mode(term);
 		str = get_input_tty(term, input);
@@ -118,6 +118,8 @@ char	*get_input(int argc, char **argv, t_term *term, t_input *input)
 			err_fatal(ERR_MALLOC, NULL, term);
 		disable_raw_mode_continue(term);
 	}
+	else
+		get_next_line(STDIN_FILENO, &str);
 	(void)argv;
 	return (str);
 }

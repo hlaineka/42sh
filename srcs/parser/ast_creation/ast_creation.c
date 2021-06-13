@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 20:11:26 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/09 13:23:28 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/06/13 11:36:08 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_node	*ast_creator(t_token *first, t_term *term)
 	new_first = shunting_yard(first);
 	if (!new_first)
 		return (NULL);
-	if (term->flag_debug == 1)
+	if (term->intern_variables->flag_debug == 1)
 		debug_printing(new_first);
 	root = ast_builder(new_first);
 	return (root);

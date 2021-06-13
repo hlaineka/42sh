@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/06/12 17:02:14 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/06/13 11:25:06 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int	main(int argc, char **argv, char **envp)
 		while (exit_value == 0)
 			exit_value = prompt_cycle(argv, &term, &input);
 	}
-	disable_raw_mode(&term);
+	if (term.intern_variables->flag_rawmode)
+		disable_raw_mode(&term);
 	exit (0);
 	return (0);
 }

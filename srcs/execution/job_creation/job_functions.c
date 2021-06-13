@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:33:35 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/10 20:39:55 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/06/13 13:26:18 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,21 +111,30 @@ void	restore_fds(t_term *term)
 {
 	int	fd_status;
 
-	fd_status = check_fd(0, 0);
-	if (-1 != fd_status)
-		close(0);
-	dup(term->fd_stdin);
-	dup2(0, STDIN_FILENO);
-	fd_status = check_fd(1, 0);
-	if (-1 != fd_status)
-		close(1);
-	dup(term->fd_stdout);
-	dup2(1, STDOUT_FILENO);
-	fd_status = check_fd(2, 0);
-	if (-1 != fd_status)
-		close(2);
-	dup(term->fd_stderr);
-	dup2(2, STDERR_FILENO);
-	if (term->heredoc_fd != -1)
-		close(term->heredoc_fd);
+	if (term->intern_variables->flag_rawmode)
+	{
+		fd_status = check_fd(0, 0);
+		if (-1 != fd_status)
+			close(0);
+		dup(term->fd_stdin);
+		dup2(0, STDIN_FILENO);
+		fd_status = check_fd(1, 0);
+		if (-1 != fd_status)
+			close(1);
+		dup(term->fd_stdout);
+		dup2(1, STDOUT_FILENO);
+		fd_status = check_fd(2, 0);
+		if (-1 != fd_status)
+			close(2);
+		dup(term->fd_stderr);
+		dup2(2, STDERR_FILENO);
+		if (term->heredoc_fd != -1)
+			close(term->heredoc_fd);
+	}
+	else
+	{
+		dup2(term->fd_stdin, STDIN_FILENO);
+		dup2(term->fd_stdout, STDOUT_FILENO);
+		dup2(term->fd_stderr, STDERR_FILENO);
+	}
 }

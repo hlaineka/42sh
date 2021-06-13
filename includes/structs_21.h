@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/12 14:35:21 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/06/13 13:17:32 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,6 @@ typedef struct s_job
 typedef struct s_term
 {
 	char				*envp[1024];
-	char				*intern[1024];
 	t_input				*input;
 	t_input				*here_input;
 	char				*term_buffer;
@@ -203,9 +202,16 @@ typedef struct s_term
 	int					fd_stderr;
 	int					heredoc_fd;
 	int					last_return;
+	struct s_intrn_vars	*intern_variables;
+}						t_term;
+
+typedef struct s_intrn_vars
+{
 	int					flag_debug;
 	int					flag_noclobber;
-}						t_term;
+	int					flag_rawmode;
+	char				*intern[1024];
+}						t_intrn_vars;
 
 /*
 ** GLOBALS
@@ -215,3 +221,4 @@ t_term					*g_term;
 t_input					*g_input;
 
 #endif
+

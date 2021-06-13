@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:40:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/12 10:41:50 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/06/13 11:34:58 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_job	*job_creation(t_node *root, t_term *term)
 	if (returnable)
 		term->last_return = returnable->first_process->status;
 	restore_fds(term);
-	if (term->flag_debug == 1)
+	if (term->intern_variables->flag_debug == 1)
 		debug_printing(term->jobs);
 	free_ast(root);
 	return (returnable);

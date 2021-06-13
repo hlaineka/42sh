@@ -1,0 +1,9 @@
+ls
+ls -la
+ls -l -a
+ls -l -a -F
+ls doesnotexist
+foo
+
+ 
+   \t\t

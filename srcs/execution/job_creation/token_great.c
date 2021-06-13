@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 15:32:34 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/04 10:38:43 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/06/13 11:35:19 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	open_fd(char *filename, t_term *term, int old_fd)
 			returnable = close_fd(old_fd);
 		if (returnable >= 0)
 		{
-			if (term->flag_noclobber == 0)
+			if (term->intern_variables->flag_noclobber == 0)
 				returnable = open(filename, O_WRONLY | O_CREAT | O_TRUNC,
 						S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
 			else
