@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/10 20:01:35 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/06/16 21:30:08 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	simple_command(t_process *proc)
 	if (pid == 0)
 		exit(execve_process(proc));
 	proc->pid = pid;
+	signal(SIGCHLD, SIG_DFL);
 	waitpid(pid, &status, WUNTRACED);
 	get_status_and_condition(proc, status);
 	return (proc->status);

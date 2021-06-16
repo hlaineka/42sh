@@ -6,13 +6,13 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 10:31:46 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/06/13 11:05:54 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/06/13 23:24:50 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
 #include "init.h"
-#include <libexplain/tcsetattr.h>
+//#include <libexplain/tcsetattr.h>
 
 void	disable_raw_mode_continue(t_term *term)
 {
