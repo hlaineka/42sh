@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/06/12 16:42:09 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/06/21 12:57:04 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -139,6 +139,7 @@ _SRC_JOB_CREATION = job_creation.c \
 					token_dless.c \
 					token_or_if.c \
 					token_and_if.c \
+					token_and.c \
 					check_fd.c \
 
 

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 21:48:18 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/27 01:20:21 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/06/13 18:42:52 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,34 @@ static char	*get_input_heredoc2(char *eof, t_input *input, t_term *term)
 char	*get_input_heredoc(char *eof, t_input *input, t_term *term)
 {
 	char	*str;
+	char	*buf;
 	int		streams[3];
 
 	str = ft_strnew(0);
+	buf = ft_strnew(0);
 	input->ret_str = &str;
 	input->heredoc = 1;
 	signals_to_ignore();
-	heredoc_change_streams_start(term, streams);
-	enable_raw_mode(term);
-	str = get_input_heredoc2(eof, input, term);
+	if (term->intern_variables->flag_rawmode)
+	{
+		heredoc_change_streams_start(term, streams);
+		enable_raw_mode(term);
+		str = get_input_heredoc2(eof, input, term);
+	}
+	else
+	{	
+		while (!ft_strequ(eof, buf))
+		{
+			get_next_line(STDIN_FILENO, &buf);
+			str = ft_strjoin_frees1(str, buf);
+		}
+	}
 	input->heredoc = 0;
-	heredoc_change_streams_end(streams, term);
-	if (ft_strlen(str) > 0)
-		str[ft_strlen(str) - 1] = '\0';
+	if (term->intern_variables->flag_rawmode)
+	{
+		heredoc_change_streams_end(streams, term);
+		if (ft_strlen(str) > 0)
+			str[ft_strlen(str) - 1] = '\0';
+	}
 	return (str);
 }

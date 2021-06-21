@@ -1,9 +1,65 @@
+echo 21sh tests
+
 ls
+/bin/ls
 ls -la
 ls -l -a
 ls -l -a -F
+ls -laF
+/bin/ls -laF
+/bin/ls -l -a -F
 ls doesnotexist
 foo
 
  
-   \t\t
+
+echo "it works"
+echo it works
+cd /root
+/bin/pwd
+cd /home/helvi
+/bin/pwd
+cd Documents/hive
+/bin/pwd
+cd
+/bin/pwd
+cd -
+/bin/pwd
+cd ~/Documents
+/bin/pwd
+cd hive/42sh
+
+echo ---------------------------------------
+echo 21sh environment
+echo ---------------------------------------
+
+env
+
+echo ---------------------------------------
+echo 21sh pipes and redirections
+echo ---------------------------------------
+
+ls | cat -e
+ls -la | sort | cat -e
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'
+ls -1; touch newfile; ls -1; rm newfile
+rm nosuchfile 2>&-
+rm nosuchfile 2>&1 | cat -e
+echo "No dollar character" 1>&2 | cat -e
+
+echo ---------------------------------------
+echo 21sh quotes
+echo ---------------------------------------
+
+echo "
+Roses are red
+Violets are blue
+All my base are belong to you
+I love you
+"
+

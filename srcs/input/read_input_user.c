@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/06/13 11:33:52 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/06/19 18:53:00 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,12 @@ static char	*get_input_tty(t_term *term, t_input *input)
 char	*get_input(int argc, char **argv, t_term *term, t_input *input)
 {
 	char	*str;
+	int		quote;
 
 	str = NULL;
 	input->ret_str = &str;
 	signals_to_ignore();
-	if (term->intern_variables->flag_rawmode && argc == 1)
+	if (term->intern_variables->flag_rawmode || argc == 1)
 	{
 		enable_raw_mode(term);
 		str = get_input_tty(term, input);
@@ -119,7 +120,16 @@ char	*get_input(int argc, char **argv, t_term *term, t_input *input)
 		disable_raw_mode_continue(term);
 	}
 	else
+	{
+		quote = 0;
 		get_next_line(STDIN_FILENO, &str);
+		quote = ft_is_quote_open(quote, str);
+		while (quote)
+		{
+			get_next_line(STDIN_FILENO, &str);
+			quote = ft_is_quote_open(quote, str);
+		}
+	}
 	(void)argv;
 	return (str);
 }

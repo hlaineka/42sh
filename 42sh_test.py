@@ -22,3 +22,9 @@ while True:
         break
     shell42.stdin.write(input.encode(encoding='ascii'))
     bash.stdin.write(input.encode(encoding='ascii'))
+inputfile = open("./redirectiontests.txt", "r")
+while True:
+    input = inputfile.readline()
+    if not input:
+        break
+    shell42.stdin.write(input.encode(encoding='ascii'))
