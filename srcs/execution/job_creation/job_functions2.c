@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:41:23 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/06/21 12:56:07 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/06/30 20:03:17 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,6 @@ void	get_right(t_node *current, t_term *term)
 		//if (right->first_process->pid == 0 && current->operation == tkn_and)
 			//start process detached
 		if (right->first_process->pid == 0)
-			right->first_process->status = simple_command(right->first_process);
+			right->first_process->status = simple_command(right->first_process, term);
 	}
 }

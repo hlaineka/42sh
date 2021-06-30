@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/06/21 12:57:04 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/06/30 16:47:06 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ _SRC_TOKENIZATION = lexer.c \
 					operator_tokens.c \
 					operator_tokens_functions.c \
 					advanced_tokenization.c \
+					word_assignment_marking.c \
 					word_expansion.c \
 					tilde_expansion.c \
 					dollar_expansion.c
@@ -140,6 +141,7 @@ _SRC_JOB_CREATION = job_creation.c \
 					token_or_if.c \
 					token_and_if.c \
 					token_and.c \
+					token_assignment_word.c \
 					check_fd.c \
 
 

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/24 16:53:26 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/06/30 16:08:57 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,6 +274,12 @@ int					tilde_expansion(t_token *tkn, t_term *term, int tilde);
 */
 
 int					dollar_expansion(t_token *tkn, t_term *term, int dollar);
+
+/*
+** parser/tokenization/word_assignment_marking.c
+*/
+
+t_token				*word_assignment_marking(t_token *first);
 
 /*
 ** parser/tokenization/word_expansion.c

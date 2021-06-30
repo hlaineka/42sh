@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/06/16 21:30:08 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/06/30 20:01:45 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,15 @@ void	get_status_and_condition(t_process *proc, int status)
 	}
 }
 
-int	simple_command(t_process *proc)
+int	simple_command(t_process *proc, t_term *term)
 {
 	pid_t	pid;
 	int		status;
 
 	if (!proc->argv || !proc->argv[0] || proc->argv[0][0] == '\0')
 		return (-1);
+	if (!proc->envp)
+		proc->envp = term->envp;
 	if (is_builtin(proc))
 		return (proc->status);
 	set_signal_execution();

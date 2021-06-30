@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 11:58:18 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/06/21 12:57:23 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/06/30 16:46:25 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static const t_op_function	g_op_functions[] = {
 	[tkn_word] = NULL,
 	[tkn_operator] = NULL,
 	[tkn_name] = NULL,
-	[tkn_assignment_word] = NULL,
+	[tkn_assignment_word] = token_assignment_word,
 	[tkn_io_number] = NULL,
 	[tkn_and] = token_and,
 	[tkn_lpar] = NULL,

@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "tcsetattr.h": "c"
+        "tcsetattr.h": "c",
+        "type_traits": "cpp"
     }
 }

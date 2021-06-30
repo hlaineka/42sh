@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 16:07:19 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/09 13:23:52 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/06/30 16:35:58 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_token	*shunting_yard(t_token *first)
 	while (input)
 	{
 		temp = input->next;
-		if (input->maintoken == 1)
+		if (input->precedence == 0)
 			output = push_to_end(input, output);
 		else
 			output = handle_operator(&op_stack, &input, output);

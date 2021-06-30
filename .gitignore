@@ -8,6 +8,7 @@
 *~
 shelloutput.txt
 testoutput.txt
+.vscode/
 
 # Prerequisites
 *.d

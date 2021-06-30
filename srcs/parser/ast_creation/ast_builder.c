@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 14:48:16 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/10 20:39:19 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/06/30 16:38:42 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ t_node	*ast_builder(t_token *new_first)
 	while (new_first)
 	{
 		temp = new_first->next;
-		if (new_first->precedence == 0)
+		if (new_first->maintoken == 1)
 		{
 			if (-1 == (push_word(new_first, node_stack)))
 				return (NULL);
@@ -129,7 +129,7 @@ t_node	*ast_builder(t_token *new_first)
 	}
 	if (node_stack[1])
 	{
-		ft_printf_fd(STDERR_FILENO, "syntax error");
+		ft_printf_fd(STDERR_FILENO, "ast tree syntax error\n");
 		free_nodestack(node_stack);
 		return (NULL);
 	}

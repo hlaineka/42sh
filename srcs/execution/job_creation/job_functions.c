@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:33:35 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/06/13 13:26:18 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/06/30 20:06:39 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	free_job(t_job *job_to_free)
 	job_to_free = NULL;
 }
 
-t_job	*init_job(t_term *term)
+t_job	*init_job()
 {
 	t_job		*returnable;
 	t_process	*first_process;
@@ -84,7 +84,7 @@ t_job	*init_job(t_term *term)
 	first_process->next = NULL;
 	first_process->argv = malloc(ARGV_SIZE);
 	ft_bzero(first_process->argv, ARGV_SIZE);
-	first_process->envp = term->envp;
+	first_process->envp = NULL;
 	returnable->next = NULL;
 	returnable->command = NULL;
 	returnable->first_process = first_process;

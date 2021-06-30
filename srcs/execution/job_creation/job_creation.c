@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:40:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/06/13 11:34:58 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/06/30 20:03:01 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_job	*job_creation(t_node *root, t_term *term)
 		returnable->next = term->jobs;
 		term->jobs = returnable;
 		returnable->first_process->status
-			= simple_command(returnable->first_process);
+			= simple_command(returnable->first_process, term);
 	}
 	if (returnable)
 		term->last_return = returnable->first_process->status;

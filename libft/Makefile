@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/05/01 19:25:35 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/06/30 16:07:53 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -188,6 +188,7 @@ _SRC_STRINGARRAYS = ft_addstr.c \
 
 _SRC_STRINGS = ft_char_str_join.c \
 			ft_dynamic_string.c \
+			ft_is_name.c \
 			ft_putchar_fd.c \
 			ft_putendl_fd.c \
 			ft_putnbr_fd.c \

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:39:06 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/12 10:42:02 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/06/30 20:05:03 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_job	*token_and_if(t_job *job, t_term *term, t_node *current)
 		left->next = term->jobs;
 		term->jobs = left;
 		if (left->first_process->pid == 0)
-			left->first_process->status = simple_command(left->first_process);
+			left->first_process->status = simple_command(left->first_process, term);
 	}
 	if (left->first_process->status == 0)
 		get_right(current, term);

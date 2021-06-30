@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 16:01:36 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/28 15:52:37 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/06/30 16:41:08 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 int	is_redirectionop(t_token *tkn)
 {
-	if (tkn && (tkn->maintoken == tkn_io_number || tkn->maintoken == tkn_less
+	if (tkn && (tkn->maintoken == tkn_assignment_word || tkn->maintoken == tkn_less
 			|| tkn->maintoken == tkn_great || tkn->maintoken == tkn_dless
 			|| tkn->maintoken == tkn_dgreat || tkn->maintoken == tkn_lessand
 			|| tkn->maintoken == tkn_greatand || tkn->maintoken == tkn_lessgreat
@@ -89,11 +89,7 @@ t_token	*add_precedence(t_token *first)
 	{
 		temp->left_associative = FALSE;
 		temp = add_delimiter_token(temp);
-		if (temp->maintoken == tkn_less || temp->maintoken == tkn_great
-			|| temp->maintoken == tkn_dless || temp->maintoken == tkn_dgreat
-			|| temp->maintoken == tkn_lessand || temp->maintoken == tkn_greatand
-			|| temp->maintoken == tkn_lessgreat || temp->maintoken
-			== tkn_dlessdash || temp->maintoken == tkn_clobber)
+		if (is_redirectionop(temp))
 			temp->precedence = 4;
 		else if (temp->maintoken == tkn_pipe)
 			temp->precedence = 3;

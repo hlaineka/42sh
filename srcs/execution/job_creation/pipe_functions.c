@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 11:26:20 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/06/16 21:33:07 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/06/30 20:04:11 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	execute_child(t_job *job, t_node *current, t_term *term)
 	job = tree_traversal(job, current, term);
 	if (job)
 	{
-		simple_command(job->first_process);
+		simple_command(job->first_process, term);
 		exit(job->first_process->status);
 	}
 	exit(1);

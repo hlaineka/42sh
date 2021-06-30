@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 20:11:26 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/06/13 11:36:08 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/06/30 16:32:22 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	debug_printing(t_token *tokens)
 	ft_printf_fd(STDOUT_FILENO, "tokens after shunting yard:\n");
 	while (temp)
 	{
-		ft_printf_fd(STDOUT_FILENO, "%s, ", temp->value);
+		ft_printf_fd(STDOUT_FILENO, "%s p=%i, ", temp->value, temp->precedence);
 		temp = temp->next;
 	}
 	ft_printf_fd(STDOUT_FILENO, "\n");
@@ -50,6 +50,8 @@ t_node	*ast_creator(t_token *first, t_term *term)
 		return (NULL);
 	root = NULL;
 	new_first = add_precedence(first);
+	if (term->intern_variables->flag_debug == 1)
+		debug_printing(new_first);
 	new_first = shunting_yard(first);
 	if (!new_first)
 		return (NULL);

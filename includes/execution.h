@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:35:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/06/21 12:58:07 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/06/30 20:06:46 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		execute_jobs(t_job *jobs, t_term *term);
 
 int			fork_and_chain_pipes(int *lpipe, int *rpipe);
 
-int			simple_command(t_process *proc);
+int			simple_command(t_process *proc, t_term *term);
 
 void		get_status_and_condition(t_process *proc, int status);
 
@@ -36,7 +36,7 @@ t_job		*job_creation(t_node *root, t_term *term);
 */
 
 void		free_jobs(t_term *term);
-t_job		*init_job(t_term *term);
+t_job		*init_job();
 t_process	*init_process(t_term *term);
 void		free_job(t_job *job_to_free);
 void		restore_fds(t_term *term);
@@ -90,6 +90,7 @@ t_job		*token_dless(t_job *job, t_term *term, t_node *current);
 t_job		*token_and_if(t_job *job, t_term *term, t_node *current);
 t_job		*token_or_if(t_job *job, t_term *term, t_node *current);
 t_job       *token_and(t_job *job, t_term *term, t_node *current);
+t_job       *token_assignment_word(t_job *job, t_term *term, t_node *current);
 
 void		get_right(t_node *current, t_term *term);
 void		update_fds(t_term *term);
