@@ -1,4 +1,6 @@
 
+.vscode/
+
 *ft_ls
 21sh
 42sh
@@ -8,7 +10,6 @@
 *~
 shelloutput.txt
 testoutput.txt
-.vscode/
 
 # Prerequisites
 *.d
