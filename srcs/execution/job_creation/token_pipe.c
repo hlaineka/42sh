@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:51:19 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/03 12:24:40 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/01 11:07:46 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 ** and then executes the commands.
 */
 
-t_job	*token_pipe(t_job *job, t_term *term, t_node *current)
+t_job	*pipe_child(t_job *job, t_term *term, t_node *current)
 {
 	t_job	*returnable;
 
@@ -42,5 +42,40 @@ t_job	*token_pipe(t_job *job, t_term *term, t_node *current)
 		returnable = pipe_middle(returnable, term, current->right);
 	else
 		returnable = pipe_end(returnable, term, current->right);
+	return (returnable);
+}
+
+t_job	*token_pipe(t_job *job, t_term *term, t_node *current)
+{
+	t_job	*returnable;
+	int		pid;
+	int		status;
+
+	//fork if job == NULL
+	//parent calls setpgid, tcsetpgrp, waitpid, tcsetpgrp
+	//child does the tree traversal and starts the other children
+	// parent waits for child.
+	pid = 0;
+	if (job != NULL)
+		returnable = pipe_child(job, term, current);
+	else
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			returnable = pipe_child(job, term, current);
+			exit(job->first_process->status);
+		}
+		else
+		{
+			returnable = init_job();
+			returnable->first_process->pid = pid;
+			setpgid(pid, 0);
+			//tcsetpgrp()
+			waitpid(pid, &status, WUNTRACED);
+			returnable->first_process->status = status;
+			//tcsetpgrp()
+		}
+	}
 	return (returnable);
 }
