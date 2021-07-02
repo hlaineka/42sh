@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/06/30 20:01:45 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/02 20:09:35 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,17 @@ int	simple_command(t_process *proc, t_term *term)
 	waitpid(pid, &status, WUNTRACED);
 	get_status_and_condition(proc, status);
 	return (proc->status);
+}
+
+int	simple_command_pipe(t_process *proc, t_term *term)
+{
+	if (!proc->argv || !proc->argv[0] || proc->argv[0][0] == '\0')
+		return (-1);
+	if (!proc->envp)
+		proc->envp = term->envp;
+	if (is_builtin(proc))
+		exit(proc->status);
+//		return (proc->status);
+	exit(execve_process(proc));
+	return (-1);
 }

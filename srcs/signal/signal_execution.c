@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:07:56 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/12 10:38:17 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/02 20:11:57 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ void	set_signal_execution(void)
 		|| (signal(SIGXFSZ, sig_handler_exec) == SIG_ERR)
 		|| (signal(SIGABRT, sig_handler_exec) == SIG_ERR)
 		|| (signal(SIGVTALRM, sig_handler_exec) == SIG_ERR)
+		|| (signal(SIGTTOU, SIG_IGN) == SIG_ERR)
+		|| (signal(SIGTTIN, SIG_IGN) == SIG_ERR)
 		|| (signal(SIGPROF, sig_handler_exec) == SIG_ERR))
 		ft_exit(0);
 }
