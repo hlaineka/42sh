@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/07/04 19:13:24 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/07/04 19:50:01 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ DIR_INC = includes/
 DIR_MAIN = srcs/
 DIR_INPUT = srcs/input/
 DIR_PARSER = srcs/parser/
+DIR_JOB_CONTROL = srcs/job_control/
 DIR_JOB_CREATION = srcs/execution/job_creation/
 DIR_TOKENIZATION = srcs/parser/tokenization/
 DIR_AST_CREATION = srcs/parser/ast_creation/
@@ -122,6 +123,11 @@ _SRC_UNSETENV =	builtin_unsetenv.c
 _SRC_ENV = 	builtin_env.c \
 			env_functions.c
 
+_SRC_JOB_CONTROL =	find_last_stopped_job.c \
+					is_job_completed.c \
+					is_job_stopped.c \
+					start_stopped_job.c
+
 _SRC_EXECUTION =	execution.c \
 					fork_and_chain_pipes.c \
 					simple_command.c \
@@ -164,12 +170,12 @@ SRC_ECHO = $(addprefix $(DIR_ECHO), $(_SRC_ECHO))
 SRC_FG = $(addprefix $(DIR_FG), $(_SRC_FG))
 SRC_SETENV = $(addprefix $(DIR_SETENV), $(_SRC_SETENV))
 SRC_UNSETENV = $(addprefix $(DIR_UNSETENV), $(_SRC_UNSETENV))
-SRC_EXECTUION =  $(addprefix $(DIR_EXECUTION), $(_SRC_EXECUTION))
+SRC_EXECUTION =  $(addprefix $(DIR_EXECUTION), $(_SRC_EXECUTION))
 SRC_INIT =  $(addprefix $(DIR_INIT), $(_SRC_INIT))
 
-SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER) $(SRC_SIGNAL) $(SRC_BUILTIN) $(SRC_CD) $(SRC_ECHO) $(SRC_FG) $(SRC_SETENV) $(SRC_UNSETENV) $(SRC_ENV) $(SRC_EXECUTION) $(SRC_JOB_CREATION) $(SRC_TOKENIZATION) $(SRC_AST_CREATION) $(SRC_INIT)
+SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER) $(SRC_SIGNAL) $(SRC_BUILTIN) $(SRC_CD) $(SRC_ECHO) $(SRC_FG) $(SRC_SETENV) $(SRC_UNSETENV) $(SRC_ENV) $(SRC_EXECUTION) $(SRC_JOB_CREATION) $(SRC_TOKENIZATION) $(SRC_AST_CREATION) $(SRC_INIT) $(SRC_JOB_CONTROL)
 
-_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL) $(_SRC_BUILTIN) $(_SRC_CD) $(_SRC_ECHO) $(_SRC_FG) $(_SRC_SETENV) $(_SRC_UNSETENV) $(_SRC_ENV) $(_SRC_EXECUTION) $(_SRC_JOB_CREATION) $(_SRC_TOKENIZATION) $(_SRC_AST_CREATION) $(_SRC_INIT)
+_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL) $(_SRC_BUILTIN) $(_SRC_CD) $(_SRC_ECHO) $(_SRC_FG) $(_SRC_SETENV) $(_SRC_UNSETENV) $(_SRC_ENV) $(_SRC_EXECUTION) $(_SRC_JOB_CREATION) $(_SRC_TOKENIZATION) $(_SRC_AST_CREATION) $(_SRC_INIT) $(_SRC_JOB_CONTROL)
 
 OBJ_FILES = $(_SRC:.c=.o)
 OBJS = $(patsubst %, $(DIR_OBJS)%, $(_SRC:.c=.o))
@@ -181,7 +187,8 @@ _INC = 	input.h \
 		ft_signal.h \
 		builtins.h \
 		typedefs.h \
-		execution.h
+		execution.h \
+		job_control.h
 
 INC = $(addprefix $(DIR_INC), $(_INC))
 
@@ -241,6 +248,9 @@ $(DIR_OBJS)%.o: $(DIR_EXECUTION)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 $(DIR_OBJS)%.o: $(DIR_INIT)%.c $(INC)
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(DIR_OBJS)%.o: $(DIR_JOB_CONTROL)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 libft:

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/04 19:18:16 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/04 21:28:42 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	get_status_and_condition(t_process *proc, int status)
 	}
 }
 
-int	simple_command(t_process *proc, t_term *term)
+int	simple_command(t_process *proc, t_job *job, t_term *term)
 {
 	pid_t	pid;
 //	int		status;
@@ -93,10 +93,11 @@ int	simple_command(t_process *proc, t_term *term)
 		exit(execve_process(proc));
 	}
 	setpgid(pid, 0);
+	job->pgid = pid;
 	tcsetpgrp(term->fd_stderr, pid);	// if not bg
 	proc->pid = pid;
-	signal(SIGCHLD, SIG_DFL);
-	wait_to_get_status(proc, pid);
+//	signal(SIGCHLD, SIG_DFL);	// put to set_signal_execution();
+	wait_to_get_status(proc);
 	tcsetpgrp(term->fd_stderr, getpgrp());	// if not bg
 //	waitpid(pid, &status, WUNTRACED);
 //	get_status_and_condition(proc, status);

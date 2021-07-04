@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:35:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/04 19:12:45 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/04 21:28:20 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ void		execute_jobs(t_job *jobs, t_term *term);
 
 int			fork_and_chain_pipes(int *lpipe, int *rpipe);
 
-int			simple_command(t_process *proc, t_term *term);
+int			simple_command(t_process *proc, t_job *job, t_term *term);
 int			simple_command_pipe(t_process *proc, t_term *term);
 
 void		get_status_and_condition(t_process *proc, int status);
-void		wait_to_get_status(t_process *proc, pid_t pid);
+void		wait_to_get_status(t_process *proc);
+void		wait_job_and_get_status(t_job *job, t_term *term);
 
 /*
 ** execution/job_creation/job_creation.c

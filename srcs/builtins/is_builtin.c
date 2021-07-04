@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 18:45:48 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/02 20:37:00 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/04 20:20:45 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	is_builtin(t_process *process)
 
 	i = 0;
 	argv = process->argv;
-	while (i < 5 && g_builtins[i])
+	while (i < 6 && g_builtins[i])
 	{
 		if (!ft_strcmp(argv[0], g_builtins[i]))
 		{

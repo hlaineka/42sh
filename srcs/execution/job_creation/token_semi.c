@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 19:42:21 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/06/30 20:04:33 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/04 21:30:16 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_job	*token_semi(t_job *job, t_term *term, t_node *current)
 		left->next = term->jobs;
 		term->jobs = left;
 		if (left->first_process->pid == 0)
-			left->first_process->status = simple_command(left->first_process, term);
+			left->first_process->status = simple_command(left->first_process, left, term);
 	}
 	if (current->right)
 		get_right(current, term);
