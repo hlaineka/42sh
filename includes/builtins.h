@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/06/12 16:42:42 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/02 20:44:26 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ int		ft_setenv(const char *name, const char *val, int over, char **envp);
 int		ft_unsetenv(const char *name, char **envp);
 
 void	builtin_env(void *proc);
+
+/*
+** FG BUILTIN:
+*/
+
+void	builtin_fg(void *proc);
 
 /*
 ** SETENV BUILTIN:

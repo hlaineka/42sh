@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 18:45:48 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/08 13:33:04 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/02 20:37:00 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static const char	*g_builtins[] = {
 	"echo",
 	"env",
 	"setenv",
-	"unsetenv"
+	"unsetenv",
+	"fg"
 };
 
 static const t_fp	g_builtin_fps[] = {
@@ -25,7 +26,8 @@ static const t_fp	g_builtin_fps[] = {
 	&builtin_echo,
 	&builtin_env,
 	&builtin_setenv,
-	&builtin_unsetenv
+	&builtin_unsetenv,
+	&builtin_fg
 };
 
 int	is_builtin(t_process *process)

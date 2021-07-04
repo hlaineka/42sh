@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:33:35 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/06/30 20:06:39 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/02 20:42:07 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ t_process	*init_process(t_term *term)
 
 	first_process = malloc(sizeof(t_process));
 	ft_bzero(first_process, sizeof(t_process));
+	first_process->term_ptr = term;
 	first_process->next = NULL;
 	first_process->argv = malloc(ARGV_SIZE);
 	ft_bzero(first_process->argv, ARGV_SIZE);

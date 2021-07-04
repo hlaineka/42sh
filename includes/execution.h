@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:35:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/02 20:10:34 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/04 19:12:45 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define EXECUTION_H
 
 # include "parser.h"
+# include "typedefs.h"
 # include <stdbool.h>
 
 t_job		*execute(t_node *root, t_term *term);
@@ -25,6 +26,7 @@ int			simple_command(t_process *proc, t_term *term);
 int			simple_command_pipe(t_process *proc, t_term *term);
 
 void		get_status_and_condition(t_process *proc, int status);
+void		wait_to_get_status(t_process *proc, pid_t pid);
 
 /*
 ** execution/job_creation/job_creation.c

@@ -6,11 +6,12 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/02 20:09:35 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/04 19:18:16 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes.h"
+#include "execution.h"
+#include "ft_signal.h"
 
 /*
 ** BASH MANUAL says:
@@ -74,7 +75,7 @@ void	get_status_and_condition(t_process *proc, int status)
 int	simple_command(t_process *proc, t_term *term)
 {
 	pid_t	pid;
-	int		status;
+//	int		status;
 
 	if (!proc->argv || !proc->argv[0] || proc->argv[0][0] == '\0')
 		return (-1);
@@ -87,18 +88,26 @@ int	simple_command(t_process *proc, t_term *term)
 	if (pid < 0)
 		return (err_builtin(E_FORK, proc->argv[0], NULL));
 	if (pid == 0)
+	{
+		setpgid(0, 0);
 		exit(execve_process(proc));
+	}
+	setpgid(pid, 0);
+	tcsetpgrp(term->fd_stderr, pid);	// if not bg
 	proc->pid = pid;
 	signal(SIGCHLD, SIG_DFL);
-	waitpid(pid, &status, WUNTRACED);
-	get_status_and_condition(proc, status);
+	wait_to_get_status(proc, pid);
+	tcsetpgrp(term->fd_stderr, getpgrp());	// if not bg
+//	waitpid(pid, &status, WUNTRACED);
+//	get_status_and_condition(proc, status);
 	return (proc->status);
 }
 
 int	simple_command_pipe(t_process *proc, t_term *term)
 {
+	signals_to_default();
 	if (!proc->argv || !proc->argv[0] || proc->argv[0][0] == '\0')
-		return (-1);
+		exit(1);
 	if (!proc->envp)
 		proc->envp = term->envp;
 	if (is_builtin(proc))

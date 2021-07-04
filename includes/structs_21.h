@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/06/13 13:17:32 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/02 20:43:32 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_input
 
 typedef struct s_process
 {
+	struct s_term		*term_ptr;
 	struct s_process	*next;
 	int					argc;
 	char				**argv;
