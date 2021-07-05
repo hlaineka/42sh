@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/02 20:44:26 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/05 19:31:45 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,12 @@ void	builtin_env(void *proc);
 */
 
 void	builtin_fg(void *proc);
+
+/*
+** JOBS BUILTIN:
+*/
+
+void	builtin_jobs(void *proc);
 
 /*
 ** SETENV BUILTIN:

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:33:35 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/04 20:37:28 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/05 17:36:16 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "execution.h"
 #include "libft.h"
 #include "includes.h"
+#include "job_control.h"
 
 /*
 ** Helper functions for job creation.
@@ -30,8 +31,9 @@ void	free_jobs(t_term *term)
 	while (job_to_free)
 	{
 		next = job_to_free->next;
-		if (job_to_free->first_process->completed == 1
-			|| job_to_free->first_process->stopped == 1)
+//		if (job_to_free->first_process->completed == 1
+//			|| job_to_free->first_process->stopped == 1)
+		if (is_job_completed(job_to_free))
 		{
 			if (prev == term->jobs)
 			{
