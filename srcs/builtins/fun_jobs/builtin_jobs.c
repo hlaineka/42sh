@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/05 19:35:41 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/05 19:44:50 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,22 @@
 
 static char	*get_job_argv(t_job *job, char *buf)
 {
-	(void)job;
-	ft_strcpy(buf, "TESTI 123");
+	t_process	*proc;
+	char		**argv;
+
+	proc = job->first_process;
+	ft_bzero(buf, 1024);
+	while (proc)
+	{
+		argv = proc->argv;
+		while (argv && *argv)
+		{
+			ft_strcat(buf, " ");
+			ft_strcat(buf, *argv);
+			argv++;
+		}
+		proc = proc->next;
+	}
 	return (buf);
 }
 
