@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/04 21:28:42 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/06 16:57:12 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ int	simple_command(t_process *proc, t_job *job, t_term *term)
 		exit(execve_process(proc));
 	}
 	setpgid(pid, 0);
-	job->pgid = pid;
+	job->pgid = get_next_job_pgid(term->jobs);
+//	job->pgid = pid;
 	tcsetpgrp(term->fd_stderr, pid);	// if not bg
 	proc->pid = pid;
 //	signal(SIGCHLD, SIG_DFL);	// put to set_signal_execution();

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/05 19:44:50 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/06 17:16:45 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,11 @@ static const char	*current_job_status(t_job *job)
 void	list_active_jobs(t_job *jobs)
 {
 	char	buf[1024];
-	int		i;
 
-	i = 1;
-	while (jobs)
-	{
-		if (!(is_job_completed(jobs)))
-			ft_printf("[%d]   %s          %s\n", i++,
-				current_job_status(jobs), get_job_argv(jobs, buf));
-		jobs = jobs->next;
-	}
+	if (jobs->next)
+		list_active_jobs(jobs->next);
+	ft_printf("[%d]   %s          %s\n", jobs->pgid,
+		current_job_status(jobs), get_job_argv(jobs, buf));
 }
 
 void	builtin_jobs(void *proc)
@@ -66,5 +61,7 @@ void	builtin_jobs(void *proc)
 	process = proc;
 	term = g_term;
 	jobs = term->jobs;
-	list_active_jobs(jobs);
+	if (!jobs->next)
+		return ;
+	list_active_jobs(jobs->next);
 }

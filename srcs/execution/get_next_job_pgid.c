@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_last_stopped_job.c                            :+:      :+:    :+:   */
+/*   get_next_job_pgid.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/03 12:34:35 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/06 17:07:53 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/07/06 16:49:36 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/07/06 16:53:50 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "job_control.h"
+#include "structs_21.h"
 
-t_job	*find_last_stopped_job(t_term *term)
+int	get_next_job_pgid(t_job *jobs)
 {
-	t_job		*jobs;
-//	t_job		*last_stopped_job;
-	t_process	*proc;
+	int		largest;
 
-//	last_stopped_job = NULL;
-	jobs = term->jobs;
+	largest = 0;
+	if (!jobs)
+		return (1);
 	while (jobs)
 	{
-		proc = jobs->first_process;
-		while (proc)
-		{
-			if (proc->stopped)
-				return (jobs);
-//				last_stopped_job = jobs;
-			proc = proc->next;
-		}
+		if (largest < jobs->pgid)
+			largest = jobs->pgid;
 		jobs = jobs->next;
 	}
-	return (NULL);
-//	return (last_stopped_job);
+	largest++;
+	return (largest);
 }
