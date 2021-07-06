@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:51:45 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/05 20:04:53 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/06 21:23:24 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	wait_job_and_get_status(t_job *job, t_term *term)
 	proc = job->first_process;
 	while (proc)
 	{
-		if (proc->completed || proc->stopped)
+		if (!proc->completed && !proc->stopped)
 		{
 			wait_to_get_status(proc);
 			term->last_return = proc->status;

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/06 16:57:12 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/06 21:31:38 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,17 @@ void	get_status_and_condition(t_process *proc, int status)
 	{
 		proc->completed = 1;
 		proc->status = WTERMSIG(status) + 128;
+		ft_putchar('\n');
 	}
 	else if (WIFSTOPPED(status))
 	{
 		proc->stopped = 1;
-		proc->status = WIFSTOPPED(status);
+		proc->status = WSTOPSIG(status) + 128;
 		ft_putchar('\n');
 	}
 	else
 	{
-		proc->stopped = 1;
+		proc->completed = 1;
 		proc->status = status;
 	}
 }
