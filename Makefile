@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/07/06 16:52:53 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/07/06 19:30:12 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,6 +105,7 @@ _SRC_BUILTIN =	err_builtin.c \
 				ft_getenv.c \
 				ft_setenv.c \
 				ft_unsetenv.c \
+				get_arg_options.c \
 				is_builtin.c
 
 _SRC_CD =	builtin_cd.c \
@@ -127,6 +128,7 @@ _SRC_ENV = 	builtin_env.c \
 			env_functions.c
 
 _SRC_JOB_CONTROL =	find_last_stopped_job.c \
+					find_pgid_job.c \
 					is_job_completed.c \
 					is_job_stopped.c \
 					start_stopped_job.c
