@@ -6,13 +6,15 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/06 19:11:19 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/08 19:34:47 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
+# include <unistd.h>
+# include "structs_21.h"
 # include "typedefs.h"
 
 # define ENV_P_FLAG 1
@@ -88,6 +90,7 @@ void	builtin_fg(void *proc);
 */
 
 void	builtin_jobs(void *proc);
+int		print_active_job(t_job *job, int options, t_term *term);
 
 /*
 ** SETENV BUILTIN:

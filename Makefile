@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/07/06 19:30:12 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/07/08 19:28:33 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,7 +118,8 @@ _SRC_ECHO =	builtin_echo.c
 
 _SRC_FG =	builtin_fg.c
 
-_SRC_JOBS =	builtin_jobs.c
+_SRC_JOBS =	builtin_jobs.c \
+			print_active_job.c
 
 _SRC_SETENV =	builtin_setenv.c
 
@@ -129,6 +130,7 @@ _SRC_ENV = 	builtin_env.c \
 
 _SRC_JOB_CONTROL =	find_last_stopped_job.c \
 					find_pgid_job.c \
+					get_job_status.c \
 					is_job_completed.c \
 					is_job_stopped.c \
 					start_stopped_job.c

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/06 20:58:24 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/08 19:30:18 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "job_control.h"
 #include "typedefs.h"
 
+/*
 static char	*get_job_argv(t_job *job, char *buf)
 {
 	t_process	*proc;
@@ -53,6 +54,13 @@ static void	print_job(t_job *job, int options)
 		ft_printf("%d\n", job->first_process->pid);
 		return ;
 	}
+	if (options != (1 << L_FLAG))
+	{
+		ft_printf("[%d]%c %s %s\n", job->pgid);
+		ft_printf("%c %s %s\n", );
+
+<current>, <state>, <command>
+	}
 	if (options != (1 << P_FLAG))
 		ft_printf("[%d]%c ", job->pgid, '+'); // todo plus/minus what?
 	if (options == (1 << L_FLAG))
@@ -60,6 +68,7 @@ static void	print_job(t_job *job, int options)
 			job->first_process->status);
 	ft_printf(" %s %s\n", current_job_status(job), get_job_argv(job, buf));
 }
+*/
 
 static void	list_active_jobs(t_job *jobs, int options, char *jobspec_str)
 {
@@ -68,12 +77,14 @@ static void	list_active_jobs(t_job *jobs, int options, char *jobspec_str)
 	if (jobspec_str)
 	{
 		temp = find_pgid_job(g_term, ft_atoi(jobspec_str));
-		print_job(temp, options);
+		print_active_job(temp, options, g_term);
+//		print_job(temp, options);
 		return ;
 	}
 	if (jobs->next)
 		list_active_jobs(jobs->next, options, jobspec_str);
-	print_job(jobs, options);
+//	print_job(jobs, options);
+	print_active_job(jobs, options, g_term);
 //	ft_printf("[%d]   %s          %s\n", jobs->pgid,
 //		current_job_status(jobs), get_job_argv(jobs, buf));
 }
