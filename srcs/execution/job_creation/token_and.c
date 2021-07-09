@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:47:26 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/04 21:31:21 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/08 21:46:44 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_job	*token_and(t_job *job, t_term *term, t_node *current)
 		&& current->left->operation != tkn_pipe
 		&& current->left->operation != tkn_and)
 	{
-		left->next = term->jobs;
-		term->jobs = left;
+		left->next = term->jobs->next;
+		term->jobs->next = left;
 		if (left->first_process->pid == 0)
 		{
 			//start process detached instead of next line
@@ -36,5 +36,5 @@ t_job	*token_and(t_job *job, t_term *term, t_node *current)
 	}
 	if (current->right)
 		get_right(current, term);
-	return (term->jobs);
+	return (term->jobs->next);
 }

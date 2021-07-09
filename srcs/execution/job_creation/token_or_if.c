@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:47:10 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/04 21:30:41 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/08 21:47:10 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ t_job	*token_or_if(t_job *job, t_term *term, t_node *current)
 	if (left && current->left->operation != tkn_semi
 		&& current->left->operation != tkn_pipe)
 	{
-		left->next = term->jobs;
-		term->jobs = left;
+		left->next = term->jobs->next;
+		term->jobs->next = left;
 		if (left->first_process->pid == 0)
 			left->first_process->status = simple_command(left->first_process, left, term);
 	}
 	if (left->first_process->status != 0)
 		get_right(current, term);
-	return (term->jobs);
+	return (term->jobs->next);
 }

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:40:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/04 21:29:15 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/08 21:46:07 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ t_job	*job_creation(t_node *root, t_term *term)
 		ft_printf_fd(STDERR_FILENO, "job syntax_error\n");
 	if (returnable && returnable->first_process->pid == 0)
 	{
-		returnable->next = term->jobs;
-		term->jobs = returnable;
+		returnable->next = term->jobs->next;
+		term->jobs->next = returnable;
 		returnable->first_process->status
 			= simple_command(returnable->first_process, returnable, term);
 	}
@@ -78,7 +78,7 @@ t_job	*job_creation(t_node *root, t_term *term)
 		term->last_return = returnable->first_process->status;
 	restore_fds(term);
 	if (term->intern_variables->flag_debug == 1)
-		debug_printing(term->jobs);
+		debug_printing(term->jobs->next);
 	free_ast(root);
 	return (returnable);
 }

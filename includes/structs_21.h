@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/04 19:56:19 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/09 21:20:50 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ typedef struct s_job
 	struct s_job		*next;
 	char				*command;
 	t_process			*first_process;
+	pid_t				job_id;
 	pid_t				pgid;
 	char				notified;
 	struct termios		tmodes;

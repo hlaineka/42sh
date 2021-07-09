@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/08 19:30:18 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/08 20:10:56 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	builtin_jobs(void *proc)
 	options = 0;
 	process = proc;
 	term = g_term;
-	jobs = term->jobs;
+	jobs = term->jobs->next;
 	if (!jobs->next)
 		return ;
 	if (process->argc == 1)

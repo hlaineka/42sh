@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_pgid_job.c                                    :+:      :+:    :+:   */
+/*   get_last_process.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/03 12:34:35 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/08 20:12:34 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/07/08 21:59:59 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/07/08 22:05:00 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "job_control.h"
+#include "structs_21.h"
+#include "typedefs.h"
+#include "execution.h"
 
-t_job	*find_pgid_job(t_term *term, pid_t pgid)
+pid_t	get_last_process_pid(t_job *job)
 {
-	t_job		*jobs;
+	t_process	*proc;
 
-	jobs = term->jobs->next;
-	while (jobs)
-	{
-		if (jobs->pgid == pgid)
-			return (jobs);
-		jobs = jobs->next;
-	}
-	return (NULL);
+	proc = job->first_process;
+	while (proc->next)
+		proc = proc->next;
+	return (proc->pid);
 }

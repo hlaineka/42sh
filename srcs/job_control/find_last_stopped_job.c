@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 12:34:35 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/06 17:07:53 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/08 20:12:22 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_job	*find_last_stopped_job(t_term *term)
 	t_process	*proc;
 
 //	last_stopped_job = NULL;
-	jobs = term->jobs;
+	jobs = term->jobs->next;
 	while (jobs)
 	{
 		proc = jobs->first_process;

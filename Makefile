@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/07/08 19:28:33 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/07/08 22:04:31 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -137,6 +137,7 @@ _SRC_JOB_CONTROL =	find_last_stopped_job.c \
 
 _SRC_EXECUTION =	execution.c \
 					fork_and_chain_pipes.c \
+					get_last_process.c \
 					get_next_job_pgid.c \
 					simple_command.c \
 					wait_to_get_status.c

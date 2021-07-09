@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 11:26:20 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/06 16:55:37 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/09 21:48:44 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ t_job	*pipe_start(t_job *job, t_term *term, t_node *current)
 	int			rpipe[2];
 
 	set_signal_execution();		// put this to somewhere else
-	job = init_job(term);
-	job->next = term->jobs;
-	term->jobs = job;
+	job = init_job();
+	job->next = term->jobs->next;
+	term->jobs->next = job;
 	temp_process = job->first_process;
 	pipe(rpipe);
 	temp_process->pid = fork_and_chain_pipes(NULL, rpipe);
@@ -47,8 +47,9 @@ t_job	*pipe_start(t_job *job, t_term *term, t_node *current)
 	}
 	setpgid(temp_process->pid, 0);
 	tcsetpgrp(term->fd_stderr, temp_process->pid);	// if !bg
-	job->pgid = get_next_job_pgid(term->jobs);
-//	job->pgid = temp_process->pid;
+	ft_printf("%s %d\n", __func__, temp_process->pid);
+	job->job_id = get_next_job_pgid(term->jobs->next);
+	job->pgid = temp_process->pid;
 	job->fd_stdin = rpipe[0];
 	job->fd_stdout = rpipe[1];
 	return (job);
@@ -69,32 +70,15 @@ t_job	*pipe_middle(t_job *job, t_term *term, t_node *current)
 	temp_process->pid = fork_and_chain_pipes(lpipe, rpipe);
 	if (temp_process->pid == 0)
 	{
-//		setpgid(0, job->pgid);
-		setpgid(0, job->first_process->pid);
+		setpgid(0, job->pgid);
 		execute_child(job, current, term);
 	}
-//	setpgid(temp_process->pid, job->pgid);
-	setpgid(temp_process->pid, job->first_process->pid);
+	setpgid(temp_process->pid, job->pgid);
 	close(job->fd_stdout);
 	close(job->fd_stdin);
 	job->fd_stdin = rpipe[0];
 	job->fd_stdout = rpipe[1];
 	return (job);
-}
-
-static void	wait_till_ready(t_job *job)
-{
-	t_process	*proc;
-	int			status;
-
-	proc = job->first_process;
-	signal(SIGCHLD, SIG_DFL);
-	while (proc)
-	{
-		waitpid(proc->pid, &status, WUNTRACED);
-		get_status_and_condition(proc, status);
-		proc = proc->next;
-	}
 }
 
 t_job	*pipe_end(t_job *job, t_term *term, t_node *current)
@@ -110,17 +94,14 @@ t_job	*pipe_end(t_job *job, t_term *term, t_node *current)
 	temp_process->pid = fork_and_chain_pipes(lpipe, NULL);
 	if (temp_process->pid == 0)
 	{
-//		setpgid(0, job->pgid);
-		setpgid(0, job->first_process->pid);
+		setpgid(0, job->pgid);
 		execute_child(job, current, term);
 	}
-//	setpgid(temp_process->pid, job->pgid);
-	setpgid(temp_process->pid, job->first_process->pid);
+	setpgid(temp_process->pid, job->pgid);
 	close(lpipe[0]);
 	close(lpipe[1]);
 	close(job->fd_stderr);
-	signal(SIGINT, sig_handler_exec);
-	wait_till_ready(job);
+	wait_job_and_get_status(job, term);
 	tcsetpgrp(term->fd_stderr, getpgrp());	// if !bg
 	dup2(term->fd_stdout, STDOUT_FILENO);	// return_fds_to_normal_fn
 	dup2(term->fd_stdin, STDIN_FILENO);

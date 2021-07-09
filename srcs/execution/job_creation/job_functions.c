@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:33:35 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/05 17:36:16 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/08 21:45:10 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,27 @@
 
 void	free_jobs(t_term *term)
 {
+	t_job		*job_to_free;
+	t_job		*prev;
+
+	job_to_free = term->jobs->next;
+	prev = term->jobs;
+	while (job_to_free)
+	{
+		if (is_job_completed(job_to_free))
+		{
+			if (job_to_free->next)
+				prev->next = job_to_free->next;
+			else
+				prev->next = NULL;
+			free_job(job_to_free);
+			job_to_free = prev->next;
+		}
+		else
+			job_to_free = job_to_free->next;
+	}
+
+/*
 	t_job		*next;
 	t_job		*job_to_free;
 	t_job		*prev;
@@ -48,6 +69,7 @@ void	free_jobs(t_term *term)
 			prev = job_to_free;
 		job_to_free = next;
 	}
+*/
 }
 
 void	free_job(t_job *job_to_free)
