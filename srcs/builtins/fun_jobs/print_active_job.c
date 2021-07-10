@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 18:23:21 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/09 21:47:44 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/10 12:09:22 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	print_job_current(t_job *job, t_term *term)
 
 	if (!term->jobs)
 		return ;
-	current = term->jobs->next;
+	current = term->jobs->next->next;
+	if (!current)
+		return ;
 	if (job == current)
 		ft_putchar('+');
 	else if (job == current->next)
@@ -52,7 +54,7 @@ void	print_job_state(t_job *job)
 int	print_active_job(t_job *job, int options, t_term *term)
 {
 	if (options == (1 << P_FLAG))
-		return (ft_printf("%d\n", job->first_process->pid));
+		return (ft_printf("%d\n", job->job_id));
 	ft_printf("[%d]", job->job_id);
 	print_job_current(job, term);
 	print_job_state(job);

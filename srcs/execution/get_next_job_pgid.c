@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 16:49:36 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/06 16:53:50 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/10 12:07:36 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	get_next_job_pgid(t_job *jobs)
 		return (1);
 	while (jobs)
 	{
-		if (largest < jobs->pgid)
-			largest = jobs->pgid;
+		if (largest < jobs->job_id)
+			largest = jobs->job_id;
 		jobs = jobs->next;
 	}
 	largest++;

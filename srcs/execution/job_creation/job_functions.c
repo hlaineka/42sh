@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:33:35 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/08 21:45:10 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/10 12:32:44 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ void	free_jobs(t_term *term)
 			job_to_free = prev->next;
 		}
 		else
+		{
 			job_to_free = job_to_free->next;
+			prev = prev->next;
+		}
 	}
 
 /*

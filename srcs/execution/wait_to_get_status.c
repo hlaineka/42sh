@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:51:45 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/09 21:35:44 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/10 12:36:10 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void	recursive_wait(t_process *proc, t_term *term)
 		wait_to_get_status(proc);
 		term->last_return = proc->status;
 	}
-	ft_printf("proc_id %d\n", proc->pid);
 }
 
 void	wait_job_and_get_status(t_job *job, t_term *term)
