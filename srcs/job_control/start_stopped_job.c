@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 12:34:35 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/10 17:02:15 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/10 23:00:09 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	start_stopped_job(t_job *job, t_term *term)
 	if (!job || !job->first_process)
 		return (0);
 	proc = job->first_process;
-	kill(-(job->first_process->pid), SIGCONT);
+	kill(-(job->pgid), SIGCONT);
 //	if (!job->bg)	// here or after first SIGCONT signal?
 	if (!job->bg)
 		tcsetpgrp(term->fd_stderr, job->pgid);

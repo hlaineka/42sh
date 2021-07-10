@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/10 16:44:39 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/10 21:16:33 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	get_status_and_condition(t_process *proc, int status)
 int	simple_command(t_process *proc, t_job *job, t_term *term)
 {
 	pid_t	pid;
-//	int		status;
 
 	if (!proc->argv || !proc->argv[0] || proc->argv[0][0] == '\0')
 		return (-1);
@@ -96,14 +95,11 @@ int	simple_command(t_process *proc, t_job *job, t_term *term)
 	setpgid(pid, 0);
 	job->job_id = get_next_job_pgid(term->jobs->next);
 	job->pgid = pid;
-//	job->job_id = pid;
-	tcsetpgrp(term->fd_stderr, pid);	// if not bg
+	if (!job->bg)
+		tcsetpgrp(term->fd_stderr, pid);
 	proc->pid = pid;
-//	signal(SIGCHLD, SIG_DFL);	// put to set_signal_execution();
 	wait_to_get_status(proc, job->bg);
 	tcsetpgrp(term->fd_stderr, getpgrp());	// if not bg
-//	waitpid(pid, &status, WUNTRACED);
-//	get_status_and_condition(proc, status);
 	return (proc->status);
 }
 

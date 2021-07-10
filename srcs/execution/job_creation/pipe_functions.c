@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 11:26:20 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/09 21:48:44 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/10 23:00:37 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ t_job	*pipe_start(t_job *job, t_term *term, t_node *current)
 		execute_child(job, current, term);
 	}
 	setpgid(temp_process->pid, 0);
-	tcsetpgrp(term->fd_stderr, temp_process->pid);	// if !bg
-	ft_printf("%s %d\n", __func__, temp_process->pid);
+	if (!job->bg)
+		tcsetpgrp(term->fd_stderr, temp_process->pid);	// if !bg
+//	ft_printf("%s %d\n", __func__, temp_process->pid);
 	job->job_id = get_next_job_pgid(term->jobs->next);
 	job->pgid = temp_process->pid;
 	job->fd_stdin = rpipe[0];
