@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/17 11:44:49 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/10 17:36:47 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 
 # include "includes.h"
 # include "structs_21.h"
+
+void		pre_prompt_jobs_check(t_term *term);
 
 char		*get_input(int argc, char **argv, t_term *term, t_input *input);
 char		*get_input_heredoc(char *eof, t_input *input, t_term *term);

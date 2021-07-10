@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/10 16:51:50 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/10 16:58:36 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	change_job_to_current(t_job *job, t_term *term)
 	term->jobs->next = job;
 }
 
-// not in makefile etc yet. work in progress.
 void	builtin_bg(void *proc)
 {
 	t_term		*term;

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/06/19 18:53:00 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/10 17:04:02 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ char	*get_input(int argc, char **argv, t_term *term, t_input *input)
 	signals_to_ignore();
 	if (term->intern_variables->flag_rawmode || argc == 1)
 	{
+		pre_prompt_jobs_check(term);
 		enable_raw_mode(term);
 		str = get_input_tty(term, input);
 		input->history = command_to_history(input, str);

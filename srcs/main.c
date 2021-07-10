@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/05 17:38:28 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/10 17:42:44 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	prompt_cycle(char **argv, t_term *term, t_input *input)
 	}
 	root = parser(input_str, term);
 	execute(root, term);
-	free_jobs(term);
+//	free_jobs(term);
 	return (0);
 }
 
