@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:35:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/08 19:33:59 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/10 21:09:15 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,6 @@ int			is_job_completed(t_job *job);
 int			is_job_stopped(t_job *job);
 int			start_stopped_job(t_job *job, t_term *term);
 
+t_job		*get_current_job(t_term *term);
+t_job		*get_current_job_builtin(t_term *term);
 #endif

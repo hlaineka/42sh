@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/10 13:16:04 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/10 21:13:05 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	builtin_fg(void *proc)
 	process = proc;
 	term = g_term;
 	if (process->argc == 1)
-		job = find_last_stopped_job(term);
+		job = get_current_job_builtin(term);
+//		job = find_last_stopped_job(term);
 	else
 		job = find_pgid_job(term, ft_atoi(process->argv[1]));
 	if (!job)
