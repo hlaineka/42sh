@@ -6,25 +6,11 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 12:34:35 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/10 13:02:40 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/10 13:17:26 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "job_control.h"
-
-/*
-static void	change_job_to_current(t_job *job, t_term *term)
-{
-	t_job		*temp;
-
-	temp = term->jobs;
-	while(temp->next != job || temp->next != NULL)
-		temp = temp->next;
-	temp->next = job->next;
-	job->next = term->jobs->next;
-	term->jobs->next = job;
-}
-*/
 
 int	start_stopped_job(t_job *job, t_term *term)
 {
