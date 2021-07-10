@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:35:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/08 22:03:24 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/10 16:13:08 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			simple_command_pipe(t_process *proc, t_term *term);
 int			get_next_job_pgid(t_job *jobs);
 pid_t		get_last_process_pid(t_job *job);
 void		get_status_and_condition(t_process *proc, int status);
-void		wait_to_get_status(t_process *proc);
+void		wait_to_get_status(t_process *proc, int bg);
 void		wait_job_and_get_status(t_job *job, t_term *term);
 
 /*

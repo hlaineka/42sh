@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/08 19:34:47 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/10 16:12:33 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,12 @@ void	builtin_env(void *proc);
 */
 
 void	builtin_fg(void *proc);
+
+/*
+** BG BUILTIN:
+*/
+
+void	builtin_bg(void *proc);
 
 /*
 ** JOBS BUILTIN:
