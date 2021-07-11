@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 11:26:20 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/10 23:00:37 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 13:47:03 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ t_job	*pipe_end(t_job *job, t_term *term, t_node *current)
 	close(lpipe[1]);
 	close(job->fd_stderr);
 	wait_job_and_get_status(job, term);
+	if (!job->bg)
+		job->notified = 1;
 	tcsetpgrp(term->fd_stderr, getpgrp());	// if !bg
 	dup2(term->fd_stdout, STDOUT_FILENO);	// return_fds_to_normal_fn
 	dup2(term->fd_stdin, STDIN_FILENO);
