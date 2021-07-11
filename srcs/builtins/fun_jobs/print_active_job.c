@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 18:23:21 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/11 10:37:39 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:52:21 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 #include "job_control.h"
 #include "typedefs.h"
 
-void	print_job_current(t_job *job, t_term *term)
+static void	print_job_current(t_job *job, t_term *term, int opt)
 {
 	t_job	*current;
 
 	if (!term->jobs)
 		return ;
-	current = term->jobs->next->next;
+	if (opt & (1 << J_FLAG))
+		current = term->jobs->next->next;
+	else
+		current = term->jobs->next;
 	if (!current)
 		return ;
 	if (job == current)
@@ -32,7 +35,7 @@ void	print_job_current(t_job *job, t_term *term)
 	ft_putchar('\t');
 }
 
-void	print_job_state(t_job *job)
+static void	print_job_state(t_job *job)
 {
 	int		status;
 
@@ -57,11 +60,11 @@ int	print_active_job(t_job *job, int options, t_term *term)
 	t_process	*proc;
 
 	proc = job->first_process;
-	if (options == (1 << P_FLAG))
+	if (options & (1 << P_FLAG))
 		return (ft_printf("%d\n", job->pgid));
 	ft_printf("[%d]", job->job_id);
-	print_job_current(job, term);
-	if (options != (1 << L_FLAG))
+	print_job_current(job, term, options);
+	if (!(options & (1 << L_FLAG)))
 	{
 		print_job_state(job);
 		ft_printf("%s\n", job->first_process->argv[0]);

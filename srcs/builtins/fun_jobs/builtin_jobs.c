@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/11 14:41:35 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:54:16 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	list_active_jobs(int opt, char *jobspec_str, int lst)
 	if (jobspec_str)
 	{
 		temp = find_pgid_job(g_term, ft_atoi(jobspec_str));
-		print_active_job(temp, opt, g_term);
+		print_active_job(temp, opt | (1 << J_FLAG), g_term);
 		return ;
 	}
 	while (i <= lst)
@@ -35,7 +35,7 @@ static void	list_active_jobs(int opt, char *jobspec_str, int lst)
 		i++;
 		if (!temp)
 			continue ;
-		print_active_job(temp, opt, g_term);
+		print_active_job(temp, opt | (1 << J_FLAG), g_term);
 		temp->notified = 1;
 		if (is_job_completed(temp))
 			free_jobs(g_term);
@@ -60,7 +60,7 @@ void	builtin_jobs(void *proc)
 		return ;
 	if (process->argc == 1)
 	{
-		list_active_jobs(options, NULL, get_next_job_pgid(jobs));
+		list_active_jobs(0, NULL, get_next_job_pgid(jobs));
 		return ;
 	}
 	i = get_argv_options(process->argv, &options);
