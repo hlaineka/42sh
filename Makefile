@@ -88,7 +88,8 @@ _SRC_TOKENIZATION = lexer.c \
 					word_assignment_marking.c \
 					word_expansion.c \
 					tilde_expansion.c \
-					dollar_expansion.c
+					dollar_expansion.c \
+					add_full_command.c
 
 _SRC_AST_CREATION = ast_creation.c \
 					precedence.c \

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 11:26:20 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/10 23:00:37 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:56:17 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_job	*pipe_start(t_job *job, t_term *term, t_node *current)
 	int			rpipe[2];
 
 	set_signal_execution();		// put this to somewhere else
-	job = init_job();
+	job = init_job(current);
 	job->next = term->jobs->next;
 	term->jobs->next = job;
 	temp_process = job->first_process;

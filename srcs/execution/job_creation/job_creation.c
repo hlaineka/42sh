@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:40:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/08 21:46:07 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 15:07:23 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	debug_printing(t_job *next_job)
 	while (temp_job)
 	{
 		ft_printf_fd(STDOUT_FILENO, "the %i job:\n", jobs);
+		ft_printf_fd(STDOUT_FILENO, "command: %s\n", temp_job->command);
 		temp_process = temp_job->first_process;
 		processes = 1;
 		while (temp_process)
