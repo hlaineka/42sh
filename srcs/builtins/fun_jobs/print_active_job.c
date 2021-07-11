@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 18:23:21 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/11 22:03:11 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 23:25:28 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,12 @@ int	print_active_job(t_job *job, int options, t_term *term)
 		return (ft_printf("%d\n", job->pgid));
 	ft_printf("[%d]", job->job_id);
 	print_job_current(job, term, options);
+	if (options & (1 << B_FLAG))
+	{
+		ft_putchar('\t');
+		ft_printf("%s\n", job->command);
+		return (0);
+	}
 	if (!(options & (1 << L_FLAG)))
 	{
 		print_job_state(job);

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/11 09:49:00 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 23:32:13 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	builtin_fg(void *proc)
 	}
 	job->bg = 0;
 	job->notified = 1;
-	ft_printf("change to just job->command %s\n", job->command);
+	print_active_job(job, ((1 << B_FLAG) | (1 << J_FLAG)), term);
+//	ft_printf("change to just job->command %s\n", job->command);
 	start_stopped_job(job, term);
 	wait_job_and_get_status(job, term);
 	change_job_to_current(job, term);

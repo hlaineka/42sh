@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/11 12:21:17 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 23:31:07 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	builtin_bg(void *proc)
 	}
 	job->bg = 1;
 	job->notified = 0;
-	ft_printf("todo: set job->command %s\n", job->command);
+	print_active_job(job, ((1 << B_FLAG) | (1 << J_FLAG)), term);
+//	ft_printf("todo: set job->command %s\n", job->command);
 	start_stopped_job(job, term);
 //	update_status(term);
 //	wait_job_and_get_status(job, term);
