@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:35:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/10 21:09:15 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 09:39:42 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include "structs_21.h"
 # include "typedefs.h"
 # include "execution.h"
+
+void		do_job_notification(t_job *j_prev, t_term *term);
+void		update_status(t_term *term);
 
 t_job		*find_last_stopped_job(t_term *term);
 t_job		*find_pgid_job(t_term *term, pid_t pgid);

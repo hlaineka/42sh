@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/07/10 21:07:50 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/07/11 09:42:43 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -132,13 +132,15 @@ _SRC_UNSETENV =	builtin_unsetenv.c
 _SRC_ENV = 	builtin_env.c \
 			env_functions.c
 
-_SRC_JOB_CONTROL =	find_last_stopped_job.c \
+_SRC_JOB_CONTROL =	do_job_notification.c \
+					find_last_stopped_job.c \
 					find_pgid_job.c \
 					get_current_job.c \
 					get_job_status.c \
 					is_job_completed.c \
 					is_job_stopped.c \
-					start_stopped_job.c
+					start_stopped_job.c \
+					update_status.c
 
 _SRC_EXECUTION =	execution.c \
 					fork_and_chain_pipes.c \
