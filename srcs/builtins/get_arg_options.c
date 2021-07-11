@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 17:46:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/06 20:07:28 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 23:43:16 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	get_arg_options(char *arg)
 	int		options;
 
 	options = 0;
-//	ft_printf("options %s ", arg);
 	arg++;
 	while (*arg)
 	{
@@ -26,7 +25,6 @@ static int	get_arg_options(char *arg)
 		options = options | (1 << (*arg - 97));
 		arg++;
 	}
-//	ft_printf("%d \n", options);
 	return (options);
 }
 
@@ -53,6 +51,5 @@ int	get_argv_options(char **argv, int *options)
 		*options = temp | *options;
 		i++;
 	}
-	
 	return (i);
 }

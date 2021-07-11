@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 18:23:21 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/11 23:25:28 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 23:42:32 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ static void	print_process(t_process *proc, t_job *job)
 	ft_putchar('\t');
 	ft_printf("%s ", job->command);
 	ft_putchar('\n');
-
 }
 
 int	print_active_job(t_job *job, int options, t_term *term)
@@ -114,18 +113,4 @@ int	print_active_job(t_job *job, int options, t_term *term)
 	}
 	print_process(proc, job);
 	return (0);
-/*
-	while(proc)
-	{
-		if (proc != job->first_process)
-			ft_putchar('\t');
-		ft_printf("%d ", proc->pid);
-		print_job_state(job);
-		ft_putchar('\t');
-		ft_printf("%s ", job->command);
-		ft_putchar('\n');
-		proc = proc->next;
-	}
-	return (0);
-*/
 }
