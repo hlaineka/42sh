@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 15:34:07 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/09 17:09:29 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:49:37 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_node	*init_node(void)
 	returnable->left = NULL;
 	returnable->right = NULL;
 	returnable->command = NULL;
+	returnable->full_command = NULL;
 	return (returnable);
 }
 
@@ -44,6 +45,8 @@ void	free_node(t_node *node)
 			ft_free(node->command);
 		if (node->subtokens)
 			free_tokens(node->subtokens);
+		if (node->full_command)
+			ft_free(node->full_command);
 		ft_free(node);
 	}
 }

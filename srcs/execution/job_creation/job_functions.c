@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:33:35 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/11 14:38:28 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 17:35:55 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	free_job(t_job *job_to_free)
 	job_to_free = NULL;
 }
 
-t_job	*init_job()
+t_job	*init_job(t_node *node)
 {
 	t_job		*returnable;
 	t_process	*first_process;
@@ -114,6 +114,8 @@ t_job	*init_job()
 	first_process->envp = NULL;
 	returnable->next = NULL;
 	returnable->command = NULL;
+	if (node)
+		returnable->command = ft_strdup(node->full_command);
 	returnable->first_process = first_process;
 	returnable->fd_stdin = 0;
 	returnable->fd_stdout = 1;

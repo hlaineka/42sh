@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 17:32:13 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/02 09:10:42 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:58:21 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_job	*token_null(t_job *job, t_term *term, t_node *current)
 	if (job && term)
 		returnable = job;
 	else
-		returnable = init_job(term);
+		returnable = init_job(current);
 	traverse_nulls(current, returnable->first_process->argv);
 	returnable->first_process->argc
 		= ft_strarrlen(returnable->first_process->argv);
