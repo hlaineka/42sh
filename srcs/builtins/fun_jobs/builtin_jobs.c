@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/10 14:00:33 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 10:21:33 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ void	builtin_jobs(void *proc)
 		&& (options != (1 << L_FLAG))
 		&& (options != (1 << P_FLAG)))
 		return ((void)err_builtin(E_ILLEGAL_OPTION, "jobs", NULL));
-	list_active_jobs(options, process->argv[i], 0);
+	list_active_jobs(options, process->argv[i], get_next_job_pgid(jobs));
 }
