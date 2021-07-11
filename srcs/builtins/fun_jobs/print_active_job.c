@@ -6,12 +6,13 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 18:23:21 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/11 10:20:48 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 10:37:39 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "job_control.h"
+#include "typedefs.h"
 
 void	print_job_current(t_job *job, t_term *term)
 {
@@ -53,20 +54,28 @@ void	print_job_state(t_job *job)
 
 int	print_active_job(t_job *job, int options, t_term *term)
 {
+	t_process	*proc;
+
+	proc = job->first_process;
 	if (options == (1 << P_FLAG))
 		return (ft_printf("%d\n", job->pgid));
 	ft_printf("[%d]", job->job_id);
 	print_job_current(job, term);
-	print_job_state(job);
-	if (options == L_FLAG)
+	if (options != (1 << L_FLAG))
 	{
-
+		print_job_state(job);
+		ft_printf("%s\n", job->first_process->argv[0]);
+		return (0);
 	}
-	ft_printf("%s\n", job->first_process->argv[0]);
+	while(proc)
+	{
+		if (proc != job->first_process)
+			ft_putchar('\t');
+		ft_printf("%d ", proc->pid);
+		ft_printf("%s ", job->command);
+		print_job_state(job);
+		ft_putchar('\n');
+		proc = proc->next;
+	}
 	return (0);
-//	if (options == (1 << L_FLAG))
-//	{
-//		return (1);
-//	}
-//	ft_printf("%d\n", job->first_process->pid);
 }
