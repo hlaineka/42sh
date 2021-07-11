@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 18:23:21 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/11 21:23:34 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 22:03:11 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,32 @@ static void	print_job_state(t_job *job)
 	{
 		status = get_job_status(job);
 		if (status == 0)
-			ft_printf("Done");
+			ft_printf("Done\t\t");
 		else
-			ft_printf("Done(%d)", status);
+			ft_printf("Done(%d)\t\t", status);
 	}
 	else if (is_job_stopped(job))
-		ft_printf("Stopped (%s)", get_stop_signal_str(job));
+		ft_printf("Stopped %s", get_stop_signal_str(job));
+	else
+		ft_printf("Running");
+	ft_putchar(' ');
+}
+
+static void	print_process_state(t_process *proc)
+{
+	int		status;
+
+	status = 0;
+	if (proc->completed)
+	{
+		status = proc->status;
+		if (status == 0)
+			ft_printf("Done\t\t");
+		else
+			ft_printf("Done(%d)\t\t", status);
+	}
+	else if (proc->stopped)
+		ft_printf("Stopped %s", get_proc_stop_signal_str(proc));
 	else
 		ft_printf("Running");
 	ft_putchar(' ');
@@ -63,7 +83,7 @@ static void	print_process(t_process *proc, t_job *job)
 		ft_putchar('\t');
 	}
 	ft_printf("%d ", proc->pid);
-	print_job_state(job);
+	print_process_state(proc);
 	ft_putchar('\t');
 	ft_printf("%s ", job->command);
 	ft_putchar('\n');

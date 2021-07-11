@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:35:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/11 09:39:42 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 21:53:25 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_job		*find_last_stopped_job(t_term *term);
 t_job		*find_pgid_job(t_term *term, pid_t pgid);
 int			get_job_status(t_job *job);
 const char	*get_stop_signal_str(t_job *job);
+const char	*get_proc_stop_signal_str(t_process *proc);
 int			is_job_completed(t_job *job);
 int			is_job_stopped(t_job *job);
 int			start_stopped_job(t_job *job, t_term *term);
