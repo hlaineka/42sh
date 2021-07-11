@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 12:34:35 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/03 12:37:44 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 10:57:25 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	is_job_completed(t_job *job)
 	proc = job->first_process;
 	while (proc)
 	{
-		if (proc->completed)
-			return (1);
+		if (!proc->completed)
+			return (0);
 		proc = proc->next;
 	}
-	return (0);
+	return (1);
 }
