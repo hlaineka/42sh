@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 10:34:59 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/10 20:46:56 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:28:37 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	set_signal_input(void)
 {
 	if ((signal(SIGINT, sig_handler_input) == SIG_ERR)
 		|| (signal(SIGCONT, sig_handler_input) == SIG_ERR)
+		|| (signal(SIGCHLD, sig_handler_exec) == SIG_ERR)
 		|| (signal(SIGINT, sig_handler_input) == SIG_ERR)
 		|| (signal(SIGTSTP, sig_handler_input) == SIG_ERR)
 		|| (signal(SIGTERM, sig_handler_input) == SIG_ERR)

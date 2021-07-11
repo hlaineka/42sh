@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 09:05:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/11 13:44:20 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:19:46 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,23 @@
 #include "builtins.h"
 #include "ft_signal.h"
 
-static int	mark_process_status(t_job *j, pid_t pid, int status, t_term *term)
+static int	mark_process_status(pid_t pid, int status, t_term *term, int o)
 {
+	t_job		*j;
 	t_process	*proc;
 
+	j = term->jobs->next;
 	if (pid <= 0)
 		return (1);
 	while (j)
 	{
-//		ft_printf("%s pid=%d status=%d\n", __FUNCTION__, pid, status);
 		proc = j->first_process;
 		while (proc)
 		{
 			if (pid == proc->pid)
 			{
 				get_status_and_condition(proc, status);
-				if (WIFSIGNALED(status))
+				if (o == 2 && WIFSIGNALED(status))
 					print_active_job(j, 0, term);
 				return (0);
 			}
@@ -41,6 +42,19 @@ static int	mark_process_status(t_job *j, pid_t pid, int status, t_term *term)
 	}
 	ft_printf("miksi pid=%d status=%d\n", pid, status);
 	return (0);		// todo error or 1?
+}
+
+void	update_status_jobs(t_term *term)
+{
+	int			status;
+	pid_t		pid;
+
+	set_signal_execution();
+	pid = waitpid (-1, &status, WUNTRACED | WNOHANG);
+	while (!mark_process_status(pid, status, term, 1))
+	{
+		pid = waitpid (-1, &status, WUNTRACED|WNOHANG);
+	}
 }
 
 void	update_status(t_term *term)
@@ -69,7 +83,7 @@ void	update_status(t_term *term)
 */
 	set_signal_execution();
 	pid = waitpid (-1, &status, WUNTRACED | WNOHANG);
-	while (!mark_process_status(term->jobs->next, pid, status, term))
+	while (!mark_process_status(pid, status, term, 0))
 	{
 		pid = waitpid (-1, &status, WUNTRACED|WNOHANG);
 	}

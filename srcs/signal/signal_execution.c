@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:07:56 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/08 22:11:54 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:25:23 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ void	sig_child_handler(void)
 		{
 			if (pid == proc->pid)
 			{
-				handle_process(proc, status);
-				kill_processes_before_pid(jobs, pid);
+				get_status_and_condition(proc, status);
+//				handle_process(proc, status);
+//				kill_processes_before_pid(jobs, pid);
 				return ;
 			}
 			proc = proc->next;

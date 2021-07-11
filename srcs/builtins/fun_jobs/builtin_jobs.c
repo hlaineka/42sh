@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/11 10:21:33 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:41:35 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ static void	list_active_jobs(int opt, char *jobspec_str, int lst)
 		if (!temp)
 			continue ;
 		print_active_job(temp, opt, g_term);
+		temp->notified = 1;
+		if (is_job_completed(temp))
+			free_jobs(g_term);
 	}
 }
 
@@ -52,6 +55,7 @@ void	builtin_jobs(void *proc)
 	process = proc;
 	term = g_term;
 	jobs = term->jobs->next;
+	update_status(term);
 	if (!jobs->next)
 		return ;
 	if (process->argc == 1)
