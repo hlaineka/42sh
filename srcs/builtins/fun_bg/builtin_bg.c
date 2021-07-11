@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/10 21:09:45 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 09:48:41 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	builtin_bg(void *proc)
 	term = g_term;
 	if (process->argc == 1)
 		job = get_current_job_builtin(term);
-//		job = term->jobs->next->next;
-//		job = find_last_stopped_job(term);
 	else
 		job = find_pgid_job(term, ft_atoi(process->argv[1]));
 	if (!job)
@@ -46,6 +44,7 @@ void	builtin_bg(void *proc)
 		return ((void)err_builtin(E_NO_SUCH_JOB, "bg", process->argv[1]));
 	}
 	job->bg = 1;
+	job->notified = 0;
 	ft_printf("todo: set job->command %s\n", job->command);
 	start_stopped_job(job, term);
 	wait_job_and_get_status(job, term);
