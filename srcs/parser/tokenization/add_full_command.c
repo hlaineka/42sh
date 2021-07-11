@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 13:40:15 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/11 15:01:10 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/11 16:41:47 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_token	*add_full_command(t_token *first)
 {
     t_token	*temp;
 	t_token	*command_first;
-    char	command[STR_LENGTH + 1];
+    char	command[STR_LENGTH];
 	int		i;
 	int		w;
 

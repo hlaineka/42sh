@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/07/11 13:58:04 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/11 16:34:36 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,5 +294,11 @@ t_token				*word_expansions(t_token *first, t_term *term);
 */
 
 t_token				*add_full_command(t_token *first);
+
+/*
+**
+*/
+
+t_token				*bang_history(t_token *first, t_term *term);
 
 #endif
