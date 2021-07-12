@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 13:02:28 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/12 14:41:45 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/12 15:27:31 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@
 
 const char	*bang_word_fun(char *word_str, t_term *term)
 {
-//	int		n;
-//	int		i;
+	int		i;
+	int		len;
 
-	(void)word_str;
-	(void)term;
-	return ("WORD!");
-/*
-	n = ft_atoi(number_str);
+	len = ft_strlen(word_str);
 	i = get_last_history_index(term->history);
 	if (i == -1)
 		return (NULL);	// todo: error & print no history or something
-	i = i - n;
-	if (!term->history[i])
-		return (NULL);
-	return (term->history[i]);
-*/
+
+	while (i > 0)
+	{
+		i--;
+		if (!ft_strncmp(term->history[i], word_str, len))
+			return (term->history[i]);
+	}
+	ft_printf_fd(STDERR_FILENO, "42sh: %s: bad word specifier\n", word_str);
+	return (NULL);
 }
