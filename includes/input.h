@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/10 17:36:47 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/12 11:35:34 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int			get_pos(int *y, int *x);
 
 void		move_char_from_s1_to_s2(char *s1, char *s2, int s2_limit);
 void		move_nchars_from_s1_to_s2(char *s1, char *s2, int limit, int n);
-t_clist		*command_to_history(t_input *input, char *str);
+int			command_to_history(char *str, t_term *term);
 
 /*
 ** PRINT FUNCTIONS

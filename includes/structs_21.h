@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/09 21:20:50 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/12 11:40:36 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include "libft.h"
 
 # define KEY_ESC 27
+
+# define HISTORY_SIZE 1024
 
 typedef struct s_clist
 {
@@ -34,9 +36,10 @@ typedef struct s_clist
 
 typedef struct s_input
 {
-	t_clist				*hist_cur;
-	t_clist				*history;
-	t_clist				*last_comm;
+	int					hist_i;
+//	t_clist				*hist_cur;
+//	t_clist				*history;
+//	t_clist				*last_comm;
 	char				**ret_str;
 	char				**input_temp;
 	int					*quote;
@@ -177,6 +180,7 @@ typedef struct s_job
 typedef struct s_term
 {
 	char				*envp[1024];
+	char				*history[HISTORY_SIZE];		// use macro?
 	t_input				*input;
 	t_input				*here_input;
 	char				*term_buffer;
