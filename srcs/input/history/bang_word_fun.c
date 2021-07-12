@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_cmd_to_history.c                               :+:      :+:    :+:   */
+/*   bang_word_fun.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/12 09:16:18 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/12 15:09:01 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/07/12 13:02:28 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/07/12 14:41:45 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "input.h"
-#include "history.h"
 #include "structs_21.h"
+#include "history.h"
+#include "input.h"
 
-int	add_cmd_to_history(char *cmd, char **history)
+const char	*bang_word_fun(char *word_str, t_term *term)
 {
-	int		i;
-	char	*ptr;
+//	int		n;
+//	int		i;
 
-	i = get_last_history_index(history);
-	if (i < 0)
-		return (-1);
-//	ft_printf("%s i=%d\n", __FUNCTION__, i);
-	history[i] = ft_strdup(cmd);
-	if (!history[i])
-		return (-1);	//todo error
-	ptr = ft_strrchr(history[i], '\n');
-	if (ptr)
-		*ptr = '\0';
-	return (0);			//todo or 0;
+	(void)word_str;
+	(void)term;
+	return ("WORD!");
+/*
+	n = ft_atoi(number_str);
+	i = get_last_history_index(term->history);
+	if (i == -1)
+		return (NULL);	// todo: error & print no history or something
+	i = i - n;
+	if (!term->history[i])
+		return (NULL);
+	return (term->history[i]);
+*/
 }
