@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/14 12:43:01 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/14 14:24:40 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	do_esc_keys(char *rc, t_input *input, t_term *term)
 		alt_down_keypress(input, term);
 }
 
-static int	do_ctrl_c_key(t_input *input, t_term *term)
+int	do_ctrl_c_key(t_input *input, t_term *term)
 {
 	int		col;
 	int		row;

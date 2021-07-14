@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/14 12:35:23 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/14 14:25:03 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,9 @@ t_clist		*ft_clstnew(void const *content, size_t content_size);
 
 void		clear_rows_starting_y(int y, t_term *term);
 void		clear_screen_after_prompt(t_input *input, t_term *term);
+void		clear_screen_after_start(t_input *input, t_term *term);
 
 int			double_input_mem(t_input *input, t_term *term);
+
+int			do_ctrl_c_key(t_input *input, t_term *term);
 #endif
