@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:10:18 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/12 18:15:48 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/14 13:33:47 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	print_prompt(int mode)
 	if (mode == PROMPT_ESCAPECHAR)
 		return (ft_printf_fd(STDOUT_FILENO, "> "));
 	if (mode == PROMPT_SEARCH)
-		return (ft_printf_fd(STDOUT_FILENO, "(reverse-i-search)`': "));
+		return (ft_printf_fd(STDOUT_FILENO, "(reverse-i-search): "));
 	if (mode == PROMPT_HEREDOC)
 		return (ft_printf_fd(STDOUT_FILENO, "heredoc> "));
 	return (ft_printf_fd(STDOUT_FILENO, "$> "));
