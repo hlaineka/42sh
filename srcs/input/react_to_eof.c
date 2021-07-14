@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 12:13:24 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/22 15:45:47 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/13 19:37:12 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	react_to_eof(t_input *input, t_term *term)
 		tputs(term->bl_string, 1, ft_putc);
 	else
 	{
-		if (input->heredoc)
+		if (input->input_mode == HEREDOC_MODE)
 		{
 			input->ls[0] = 4;
 			input->ls[1] = '\0';

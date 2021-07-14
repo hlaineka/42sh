@@ -6,14 +6,15 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/27 10:57:24 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/14 12:43:01 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "input.h"
+#include "history.h"
 
-static int	is_special_key(char *rc)
+int	is_special_key(char *rc)
 {
 	if (rc != 0 && (rc[0] < 32 || rc[0] == 127))
 		return (1);
@@ -58,13 +59,15 @@ static int	do_ctrl_c_key(t_input *input, t_term *term)
 	ft_putrstr_input(input->rrs, input, term);
 	input->ls[0] = '\0';
 	input->rrs[0] = '\0';
-	if (input->heredoc)
+	if (input->input_mode == HEREDOC_MODE)
 	{
 		input->ls[0] = 4;
 		input->ls[1] = '\0';
 	}
-	if (!input->heredoc)
+	if (!input->input_mode)
 		*input->quote = PROMPT_NORMAL;
+	if (input->input_mode == PROMPT_SEARCH)
+		ft_printf("DING\n");	//todo remove
 	ft_memdel((void **)input->ret_str);
 	term->last_return = 1;
 	return (-1);
@@ -76,6 +79,10 @@ static int	do_special_keys(char *rc, t_input *input, t_term *term)
 		copy_input_to_clipboard(input, term);
 	else if (rc[0] == 16)
 		paste_clipboard_to_input(input, term);
+	else if (rc[0] == 18)
+		history_search_start(input, term);
+//		incremental_history_search(input, term);
+
 	else if (rc[0] == 11)
 		cut_input_to_clipboard(input, term);
 	else if (rc[0] == KEY_ESC)
@@ -100,7 +107,9 @@ int	shell_keypress(char *rc, t_input *input, t_term *term)
 	ret = 0;
 	if (!rc[0])
 		return (0);
-	if (is_special_key(rc))
+	if (input->input_mode == SEARCH_MODE)
+		ret = incremental_history_search(rc, input, term);
+	else if (is_special_key(rc))
 		ret = do_special_keys(rc, input, term);
 	else
 	{

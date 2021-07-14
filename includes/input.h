@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/12 11:35:34 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/14 12:35:23 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define PROMPT_BQUOTE 96
 # define PROMPT_ESCAPECHAR 92
 # define PROMPT_HEREDOC 127
+# define PROMPT_SEARCH 512
 
 # include "includes.h"
 # include "structs_21.h"
@@ -47,6 +48,8 @@ void		err_quit(int error_no, char *s_str);
 int			err_return(int error_no, char *s_str);
 
 void		init_input_tty(t_input *input, int prompt_mode);
+
+int			is_special_key(char *rc);
 
 /*
 ** TERMINAL

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 10:34:59 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/12 11:49:11 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/13 19:38:49 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	sig_handler_input(int signo)
 	ft_putstr_fd("\n\r", STDOUT_FILENO);
 	ft_memdel((void **)input->ret_str);
 	*input->input_temp = NULL;
-	if (input->heredoc)
+	if (input->input_mode == HEREDOC_MODE)
 		init_input_tty(input, PROMPT_HEREDOC);
 	else
 		init_input_tty(input, PROMPT_START);

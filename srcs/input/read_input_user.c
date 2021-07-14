@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/12 11:49:35 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/13 19:39:20 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	react_to_keypress(int ret, char **str, t_input *input, t_term *term)
 	{
 		term->last_return = 1;
 		*str = ft_strnew(3);
-		if (input->heredoc)
+		if (input->input_mode == HEREDOC_MODE)
 			*str[0] = 4;
 		ft_strcat(*str, "\n");
 	}

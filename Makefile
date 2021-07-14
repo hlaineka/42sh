@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/07/12 14:45:29 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/07/13 19:58:22 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -179,8 +179,8 @@ _SRC_HISTORY =		add_cmd_to_history.c \
 					bang_number_fun.c \
 					bang_selector.c \
 					bang_word_fun.c \
-					get_last_history_index.c
-
+					get_last_history_index.c \
+					incremental_history_search.c
 
 SRC_MAIN = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))
 SRC_INPUT = $(addprefix $(DIR_INPUT), $(_SRC_INPUT))

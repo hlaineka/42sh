@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/12 12:31:12 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/13 20:07:57 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ void	initialize(t_input *input, t_term *term, char **envp, char **argv)
 	init_input(input);
 	copy_envp(envp, term);
 	term->input = input;
-	term->history[0] = ft_strnew(0);
 	ft_bzero(term->history, sizeof(char) * HISTORY_SIZE);
+	term->history[0] = ft_strnew(0);
 	if (term->intern_variables->flag_rawmode)
 	{
 		get_termios_modes(term);

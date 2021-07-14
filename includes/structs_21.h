@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/12 11:40:36 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/13 19:34:43 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # define KEY_ESC 27
 
 # define HISTORY_SIZE 1024
+
+# define HEREDOC_MODE 2
+# define SEARCH_MODE 4
 
 typedef struct s_clist
 {
@@ -56,7 +59,7 @@ typedef struct s_input
 	int					prompt_col;
 	int					cursor_row;
 	int					cursor_col;
-	int					heredoc;
+	int					input_mode;
 }						t_input;
 
 /*
