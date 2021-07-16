@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/13 19:34:43 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/14 16:29:45 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,12 @@ typedef struct s_intrn_vars
 	int					flag_rawmode;
 	char				*intern[1024];
 }						t_intrn_vars;
+
+typedef struct s_fc
+{
+	char				path[1024];
+	char				editor[1024];
+}						t_fc;
 
 /*
 ** GLOBALS

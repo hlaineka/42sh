@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/07/13 19:58:22 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/07/14 16:42:41 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ DIR_UNSETENV = srcs/builtins/fun_unsetenv/
 DIR_ENV = srcs/builtins/fun_env/
 DIR_EXECUTION = srcs/execution/
 DIR_INIT = srcs/init/
+DIR_FC = srcs/builtins/fun_fc/
 DIR_OBJS = objs/
 
 _SRC_MAIN = main.c
@@ -125,6 +126,8 @@ _SRC_FG =	builtin_fg.c
 
 _SRC_BG =	builtin_bg.c
 
+_SRC_FC =	builtin_fc.c
+
 _SRC_JOBS =	builtin_jobs.c \
 			print_active_job.c
 
@@ -203,7 +206,7 @@ SRC_INIT =  $(addprefix $(DIR_INIT), $(_SRC_INIT))
 
 SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER) $(SRC_SIGNAL) $(SRC_BUILTIN) $(SRC_CD) $(SRC_ECHO) $(SRC_FG) $(SRC_SETENV) $(SRC_UNSETENV) $(SRC_ENV) $(SRC_EXECUTION) $(SRC_JOB_CREATION) $(SRC_TOKENIZATION) $(SRC_AST_CREATION) $(SRC_INIT) $(SRC_JOB_CONTROL) $(SRC_JOBS) $(SRC_BG)
 
-_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL) $(_SRC_BUILTIN) $(_SRC_CD) $(_SRC_ECHO) $(_SRC_FG) $(_SRC_SETENV) $(_SRC_UNSETENV) $(_SRC_ENV) $(_SRC_EXECUTION) $(_SRC_JOB_CREATION) $(_SRC_TOKENIZATION) $(_SRC_AST_CREATION) $(_SRC_INIT) $(_SRC_JOB_CONTROL) $(_SRC_JOBS) $(_SRC_BG) $(_SRC_HISTORY)
+_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL) $(_SRC_BUILTIN) $(_SRC_CD) $(_SRC_ECHO) $(_SRC_FG) $(_SRC_SETENV) $(_SRC_UNSETENV) $(_SRC_ENV) $(_SRC_EXECUTION) $(_SRC_JOB_CREATION) $(_SRC_TOKENIZATION) $(_SRC_AST_CREATION) $(_SRC_INIT) $(_SRC_JOB_CONTROL) $(_SRC_JOBS) $(_SRC_BG) $(_SRC_HISTORY) $(_SRC_FC)
 
 OBJ_FILES = $(_SRC:.c=.o)
 OBJS = $(patsubst %, $(DIR_OBJS)%, $(_SRC:.c=.o))
@@ -289,6 +292,9 @@ $(DIR_OBJS)%.o: $(DIR_BG)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 $(DIR_OBJS)%.o: $(DIR_HISTORY)%.c $(INC)
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(DIR_OBJS)%.o: $(DIR_FC)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 libft:
