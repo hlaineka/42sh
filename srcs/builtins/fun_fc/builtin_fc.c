@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/16 10:29:21 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/16 10:58:50 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	fc_el(t_term *term, int options)
 {
 	int			last;
 	int			i;
+	int			temp_i;
 	char		**history;
 	
 
@@ -43,11 +44,18 @@ static void	fc_el(t_term *term, int options)
 		i = 1;
 	while (i <= last)
 	{
-		if (options & (1 << N_FLAG))
-			ft_printf("\t%s\n", history[i]);
+		if (options & (1 << R_FLAG))
+			temp_i = last;
 		else
-			ft_printf("%d\t%s\n", i, history[i]);
-		i++;
+			temp_i = i;
+		if (options & (1 << N_FLAG))
+			ft_printf("\t%s\n", history[temp_i]);
+		else
+			ft_printf("%d\t%s\n", temp_i, history[temp_i]);
+		if (options & (1 << R_FLAG))
+			last--;
+		else
+			i++;
 	}
 }
 
