@@ -6,13 +6,14 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/06/19 18:53:00 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/11 09:41:39 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "input.h"
 #include "init.h"
+#include "job_control.h"
 
 void	init_input_tty(t_input *input, int prompt_mode)
 {
@@ -112,6 +113,9 @@ char	*get_input(int argc, char **argv, t_term *term, t_input *input)
 	signals_to_ignore();
 	if (term->intern_variables->flag_rawmode || argc == 1)
 	{
+		set_signal_input();
+		do_job_notification(term->jobs, term);
+//		pre_prompt_jobs_check(term);
 		enable_raw_mode(term);
 		str = get_input_tty(term, input);
 		input->history = command_to_history(input, str);

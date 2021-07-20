@@ -6,14 +6,16 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:35:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/06/30 20:06:46 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:54:57 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
 
+# include <unistd.h>
 # include "parser.h"
+# include "typedefs.h"
 # include <stdbool.h>
 
 t_job		*execute(t_node *root, t_term *term);
@@ -21,9 +23,14 @@ void		execute_jobs(t_job *jobs, t_term *term);
 
 int			fork_and_chain_pipes(int *lpipe, int *rpipe);
 
-int			simple_command(t_process *proc, t_term *term);
+int			simple_command(t_process *proc, t_job *job, t_term *term);
+int			simple_command_pipe(t_process *proc, t_term *term);
 
+int			get_next_job_pgid(t_job *jobs);
+pid_t		get_last_process_pid(t_job *job);
 void		get_status_and_condition(t_process *proc, int status);
+void		wait_to_get_status(t_process *proc, int bg);
+void		wait_job_and_get_status(t_job *job, t_term *term);
 
 /*
 ** execution/job_creation/job_creation.c
@@ -36,7 +43,7 @@ t_job		*job_creation(t_node *root, t_term *term);
 */
 
 void		free_jobs(t_term *term);
-t_job		*init_job();
+t_job		*init_job(t_node *node);
 t_process	*init_process(t_term *term);
 void		free_job(t_job *job_to_free);
 void		restore_fds(t_term *term);

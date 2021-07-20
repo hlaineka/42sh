@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/06/13 13:15:09 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/08 20:09:48 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,11 @@ void	init_flags(t_term *term, char **argv)
 void	init_term(t_term *term)
 {
 	int		success;
-	char	*buffer;
 
+	term->jobs = ft_memalloc(sizeof(t_job));
 	term->buffer = ft_memalloc(sizeof(char) * 2048);
 	if (!term->buffer)
 		err_fatal(ERR_MALLOC, NULL, term);
-	buffer = term->buffer;
 	if (term->intern_variables->flag_rawmode)
 	{
 		term->termtype = getenv("TERM");
@@ -102,7 +101,7 @@ void	init_term(t_term *term)
 			err_quit(ERR_TERMCAPS_NO_ACCESS, NULL);
 		if (success == 0)
 			err_quit(ERR_TERMTYPE_NOT_FOUND, term->termtype);
-		init_term_values(term, buffer);
+		init_term_values(term, term->buffer);
 	}
 	else
 	{

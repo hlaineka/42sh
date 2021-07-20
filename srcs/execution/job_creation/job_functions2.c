@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:41:23 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/06/30 20:03:17 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/08 20:46:55 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ void	get_right(t_node *current, t_term *term)
 		&& current->right->operation != tkn_pipe
 		&& current->right->operation != tkn_and)
 	{
-		right->next = term->jobs;
-		term->jobs = right;
+		right->next = term->jobs->next;
+		term->jobs->next = right;
 		//if (right->first_process->pid == 0 && current->operation == tkn_and)
 			//start process detached
 		if (right->first_process->pid == 0)
-			right->first_process->status = simple_command(right->first_process, term);
+			right->first_process->status = simple_command(right->first_process, right, term);
 	}
 }

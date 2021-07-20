@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_to_ignore.c                                 :+:      :+:    :+:   */
+/*   get_next_job_pgid.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/23 14:38:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/02 20:12:20 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/07/06 16:49:36 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/07/10 12:07:36 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes.h"
+#include "structs_21.h"
 
-void	signals_to_ignore(void)
+int	get_next_job_pgid(t_job *jobs)
 {
-	int		i;
+	int		largest;
 
-	i = 1;
-	while (i < 32)
+	largest = 0;
+	if (!jobs)
+		return (1);
+	while (jobs)
 	{
-		signal(i, SIG_IGN);
-		i++;
+		if (largest < jobs->job_id)
+			largest = jobs->job_id;
+		jobs = jobs->next;
 	}
+	largest++;
+	return (largest);
 }

@@ -6,11 +6,12 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/06/30 20:01:45 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/10 21:16:33 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes.h"
+#include "execution.h"
+#include "ft_signal.h"
 
 /*
 ** BASH MANUAL says:
@@ -57,24 +58,24 @@ void	get_status_and_condition(t_process *proc, int status)
 	{
 		proc->completed = 1;
 		proc->status = WTERMSIG(status) + 128;
+		ft_putchar('\n');
 	}
 	else if (WIFSTOPPED(status))
 	{
 		proc->stopped = 1;
-		proc->status = WIFSTOPPED(status);
+		proc->status = WSTOPSIG(status) + 128;
 		ft_putchar('\n');
 	}
-	else
-	{
-		proc->stopped = 1;
-		proc->status = status;
-	}
+//	else
+//	{
+//		proc->completed = 1;
+//		proc->status = status;
+//	}
 }
 
-int	simple_command(t_process *proc, t_term *term)
+int	simple_command(t_process *proc, t_job *job, t_term *term)
 {
 	pid_t	pid;
-	int		status;
 
 	if (!proc->argv || !proc->argv[0] || proc->argv[0][0] == '\0')
 		return (-1);
@@ -87,10 +88,31 @@ int	simple_command(t_process *proc, t_term *term)
 	if (pid < 0)
 		return (err_builtin(E_FORK, proc->argv[0], NULL));
 	if (pid == 0)
+	{
+		setpgid(0, 0);
 		exit(execve_process(proc));
+	}
+	setpgid(pid, 0);
+	job->job_id = get_next_job_pgid(term->jobs->next);
+	job->pgid = pid;
+	if (!job->bg)
+		tcsetpgrp(term->fd_stderr, pid);
 	proc->pid = pid;
-	signal(SIGCHLD, SIG_DFL);
-	waitpid(pid, &status, WUNTRACED);
-	get_status_and_condition(proc, status);
+	wait_to_get_status(proc, job->bg);
+	tcsetpgrp(term->fd_stderr, getpgrp());	// if not bg
 	return (proc->status);
+}
+
+int	simple_command_pipe(t_process *proc, t_term *term)
+{
+	signals_to_default();
+	if (!proc->argv || !proc->argv[0] || proc->argv[0][0] == '\0')
+		exit(1);
+	if (!proc->envp)
+		proc->envp = term->envp;
+	if (is_builtin(proc))
+		exit(proc->status);
+//		return (proc->status);
+	exit(execve_process(proc));
+	return (-1);
 }

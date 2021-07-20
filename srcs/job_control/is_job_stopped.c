@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_to_ignore.c                                 :+:      :+:    :+:   */
+/*   is_job_stopped.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/23 14:38:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/02 20:12:20 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/07/03 12:34:35 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/07/03 12:37:05 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes.h"
+#include "job_control.h"
 
-void	signals_to_ignore(void)
+int	is_job_stopped(t_job *job)
 {
-	int		i;
+	t_process	*proc;
 
-	i = 1;
-	while (i < 32)
+	proc = job->first_process;
+	while (proc)
 	{
-		signal(i, SIG_IGN);
-		i++;
+		if (proc->stopped)
+			return (1);
+		proc = proc->next;
 	}
+	return (0);
 }

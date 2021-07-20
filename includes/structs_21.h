@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/06/13 13:17:32 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/09 21:20:50 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_input
 
 typedef struct s_process
 {
+	struct s_term		*term_ptr;
 	struct s_process	*next;
 	int					argc;
 	char				**argv;
@@ -103,6 +104,7 @@ typedef struct s_job
 	struct s_job		*next;
 	char				*command;
 	t_process			*first_process;
+	pid_t				job_id;
 	pid_t				pgid;
 	char				notified;
 	struct termios		tmodes;
@@ -110,6 +112,8 @@ typedef struct s_job
 	int					fd_stdin;
 	int					fd_stdout;
 	int					fd_stderr;
+	int					bg;		// bg or fg?
+	int					fg;		// bg or fg?
 }						t_job;
 
 /*

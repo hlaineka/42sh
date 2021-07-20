@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 14:27:47 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 16:49:05 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/10 12:35:27 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,8 @@ static const char	*g_errstr[] = {
 	"Environment HOME is not set",
 	"Invalid input",
 	"Command not found",
-	"Environment PATH is not set"
+	"Environment PATH is not set",
+	"no such job"
 };
 
 int	err_builtin(int error_no, char *name, char *arg)

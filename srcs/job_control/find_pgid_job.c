@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_to_ignore.c                                 :+:      :+:    :+:   */
+/*   find_pgid_job.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/23 14:38:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/02 20:12:20 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/07/03 12:34:35 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/07/10 12:12:18 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes.h"
+#include "job_control.h"
 
-void	signals_to_ignore(void)
+t_job	*find_pgid_job(t_term *term, pid_t pgid)
 {
-	int		i;
+	t_job		*jobs;
 
-	i = 1;
-	while (i < 32)
+	jobs = term->jobs->next;
+	while (jobs)
 	{
-		signal(i, SIG_IGN);
-		i++;
+		if (jobs->job_id == pgid)
+			return (jobs);
+		jobs = jobs->next;
 	}
+	return (NULL);
 }

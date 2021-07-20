@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_to_ignore.c                                 :+:      :+:    :+:   */
+/*   get_last_process.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/23 14:38:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/02 20:12:20 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/07/08 21:59:59 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/07/08 22:05:00 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes.h"
+#include "structs_21.h"
+#include "typedefs.h"
+#include "execution.h"
 
-void	signals_to_ignore(void)
+pid_t	get_last_process_pid(t_job *job)
 {
-	int		i;
+	t_process	*proc;
 
-	i = 1;
-	while (i < 32)
-	{
-		signal(i, SIG_IGN);
-		i++;
-	}
+	proc = job->first_process;
+	while (proc->next)
+		proc = proc->next;
+	return (proc->pid);
 }

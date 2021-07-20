@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/06/30 16:08:57 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/11 16:34:36 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define REDIROPS "&<>|"
 # define SPECIALPARAMS "@*#?-$!0~"
 # define EXPANSIONCHARS "$`"
-# define NODE_STACK_SIZE 20
+# define NODE_STACK_SIZE 50
 
 /*
 **enum e_token
@@ -129,6 +129,7 @@ typedef struct s_token
 	int				precedence;
 	bool			left_associative;
 	char			*value;
+	char			*full_command;
 	struct s_token	*subtokens;
 	struct s_token	*next;
 	struct s_token	*prev;
@@ -143,6 +144,7 @@ typedef struct s_node
 	int				state;
 	int				operation;
 	char			*command;
+	char			*full_command;
 }					t_node;
 
 typedef t_job *(*t_op_function)(t_job *job, t_term *term, t_node *current);
@@ -286,5 +288,17 @@ t_token				*word_assignment_marking(t_token *first);
 */
 
 t_token				*word_expansions(t_token *first, t_term *term);
+
+/*
+** parser/tokenization/add_full_command.c
+*/
+
+t_token				*add_full_command(t_token *first);
+
+/*
+**
+*/
+
+t_token				*bang_history(t_token *first, t_term *term);
 
 #endif

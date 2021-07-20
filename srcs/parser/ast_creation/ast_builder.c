@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 14:48:16 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/06/30 16:38:42 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:48:25 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	push_word(t_token *tkn, t_node **node_stack)
 	}
 	new_node = init_node();
 	new_node->command = ft_strdup(tkn->value);
+	new_node->full_command = ft_strdup(tkn->full_command);
 	new_node->operation = tkn->maintoken;
 	node_stack[i] = new_node;
 	return (0);
@@ -57,6 +58,7 @@ t_node	*create_opnode(t_token *tkn, t_node **node_stack, int *i)
 
 	new_node = init_node();
 	new_node->command = ft_strdup(tkn->value);
+	new_node->full_command = ft_strdup(tkn->full_command);
 	new_node->operation = tkn->maintoken;
 	new_node->subtokens = tkn->subtokens;
 	if (is_unaryop(tkn))
