@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:44:14 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/11 14:57:57 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/20 20:11:44 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ t_job       *token_assignment_word(t_job *job, t_term *term, t_node *current)
 	{
 		job = init_job(current);
 		job->first_process->pid = -1; 
-		ft_setenv(name, value, 1, term->envp);
+		if (ft_getenv(name, term->envp))
+			ft_setenv(name, value, 1, term->envp);
+		else
+			ft_setenv(name, value, 1, term->intern_variables->intern);
 	}
 	return(job);
 }
