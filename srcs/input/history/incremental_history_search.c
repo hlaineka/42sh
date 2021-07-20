@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 17:55:17 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/14 14:34:52 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/20 21:29:39 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "history.h"
 #include "input.h"
 
-const char	*find_cmd_from_history(char *cmd, char **hist, int len)
+static const char	*cmd_in_history(char *cmd, char **hist, int len)
 {
 	int		i;
 
@@ -28,6 +28,14 @@ const char	*find_cmd_from_history(char *cmd, char **hist, int len)
 	return (NULL);
 }
 
+static int	react_to_enter_history(t_input *input, const char *cmd)
+{
+	ft_printf("`%s': ", input->ls);
+	ft_strcpy(input->ls, cmd);
+	ft_strcat(input->ls, "\n");
+	return (1);
+}
+
 static int	do_special_keys_history(char *rc, t_input *input, t_term *term)
 {
 	int			ret;
@@ -39,21 +47,15 @@ static int	do_special_keys_history(char *rc, t_input *input, t_term *term)
 	len = ft_strlen(input->ls);
 	if (rc[0] == 3)
 	{
-		ft_strcpy(input->ls, find_cmd_from_history(input->ls, term->history, len));
+		ft_strcpy(input->ls, cmd_in_history(input->ls, term->history, len));
 		return (do_ctrl_c_key(input, term));
 	}
 	clear_screen_after_start(input, term);
 	print_prompt(PROMPT_NORMAL);
 	get_pos(&input->prompt_row, &input->prompt_col);
-	cmd = find_cmd_from_history(input->ls, term->history, len);
+	cmd = cmd_in_history(input->ls, term->history, len);
 	if (rc[0] == 13)
-	{
-		ft_printf("`%s': ", input->ls);
-		ret = 1;
-		ft_strcpy(input->ls, cmd);
-		ft_strcat(input->ls, "\n");
-		return (1);
-	}
+		return (react_to_enter_history(input, cmd));
 	else
 	{
 		ft_strcpy(input->ls, cmd);
@@ -76,18 +78,15 @@ int	incremental_history_search(char *rc, t_input *input, t_term *term)
 	if (is_special_key(rc))
 		return (do_special_keys_history(rc, input, term));
 	input->ls[len] = rc[0];
-//	hist[len] = buf[0];
-	cmd = find_cmd_from_history(input->ls, term->history, len + 1);
+	cmd = cmd_in_history(input->ls, term->history, len + 1);
 	if (!cmd)
 	{
 		input->ls[len] = '\0';
 		tputs(term->bl_string, 1, ft_putc);
 		return (0);
 	}
-//	ft_strcpy(input->ls, cmd);
 	clear_screen_after_prompt(input, term);
 	ft_printf("`%s': ", input->ls);
-//	tputs(tgoto(term->cm_string, term->prompt_col, term->prompt_row, 1, ft_putc);
 	ft_putstr_input((char *)cmd, input, term);
 	return (0);
 }

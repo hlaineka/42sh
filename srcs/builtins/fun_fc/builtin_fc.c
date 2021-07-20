@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/20 21:04:52 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/20 21:11:17 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,14 @@ static int	write_history_to_file(t_fc *fc, char **hist, t_term *term, t_process 
 	builtin_env(proc);
 	fd = open_temp_file_read();
 	ret = get_next_line(fd, &line);
-//	ft_printf("line=%s ret=%d\n", line, ret);
 	while (ret > 0)
 	{
 		parse_and_execute(line, term);
 		ret = get_next_line(fd, &line);
-//		ft_printf("line=%s ret=%d\n", line, ret);
 	}
 	close(fd);
 	if (line)
 		free(line);
-//	parse_and_execute(line, term);
 	return (1);
 }
 
@@ -82,7 +79,6 @@ static int	get_command_index_with_arg(t_fc *fc, t_term *term, t_process *pr)
 			return (0);
 		while (i-- > 0)
 		{
-//			ft_printf("i=%d\n", i);
 			if (ft_strnstr(term->history[i], pr->argv[fc->i],
 				ft_strlen(pr->argv[fc->i])))
 			{
@@ -101,9 +97,7 @@ static int	get_command_index_with_arg(t_fc *fc, t_term *term, t_process *pr)
 static int	get_first_and_last(t_process *proc, t_term *term, t_fc *fc)
 {
 	fc->first = get_command_index_with_arg(fc, term, proc);
-//	ft_printf("first=%d\n", fc->first);
 	fc->last = get_command_index_with_arg(fc, term, proc);
-//	ft_printf("last=%d\n", fc->last);
 	if (fc->first < 0 || fc->last < 0)
 		return (-1); //todo error message
 	if (fc->last == 0)
@@ -118,8 +112,6 @@ static int	get_first_and_last(t_process *proc, t_term *term, t_fc *fc)
 			fc->first = 1;
 		return (0);
 	}
-
-//	ft_printf("first=%d last=%d\n", fc->first, fc->last);
 	return (0);
 }
 
@@ -199,12 +191,9 @@ void	builtin_fc(void *proc)
 	if (options & ~((1 << E_FLAG) | (1 << L_FLAG) | (1 << N_FLAG)
 		| (1 << R_FLAG) | (1 << S_FLAG)))
 		return ((void)err_builtin(E_ILLEGAL_OPTION, "fc", NULL));
-//	ft_printf("fc options correct. fc.i=%d\n", fc.i);
 	if (!(fc.options & (1 << L_FLAG)))
 		ft_memdel((void**)(&term->history[get_last_history_index(term->history) - 1]));
-//	ft_printf("before get_first_and_last\n");
 	get_first_and_last(proc, term, &fc);
-//	ft_printf("editor=%s first=%d last=%d\n", fc.editor, fc.first, fc.last);
 	if (options & (1 << L_FLAG))
 		fc_el(term, &fc, fc.options);
 	else if (options & (1 << S_FLAG))

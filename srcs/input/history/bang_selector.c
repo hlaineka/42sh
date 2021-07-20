@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 12:48:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/20 19:24:44 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/20 21:31:46 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,4 @@ const char	*bang_selector(char *bang_param, t_term *term)
 	if (is_bang_minus_number(bang_param))
 		return (bang_minus_number_fun(bang_param + 2, term));
 	return (bang_word_fun(bang_param + 1, term));
-
 }
