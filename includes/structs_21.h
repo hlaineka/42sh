@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/14 16:29:45 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/19 11:21:38 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,11 @@ typedef struct s_intrn_vars
 
 typedef struct s_fc
 {
+	int					i;
+	int					options;
+	int					first;
+	int					last;
+	char				first_str[1024];
 	char				path[1024];
 	char				editor[1024];
 }						t_fc;

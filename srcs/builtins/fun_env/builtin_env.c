@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:21:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/22 11:53:42 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/19 19:50:59 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,14 @@ void	builtin_env(void *proc)
 	argc = ((t_process *)proc)->argc;
 	argv = ((t_process *)proc)->argv;
 	envp = ((t_process *)proc)->envp;
+//	tputs(g_term->ti_string, 1, ft_putc);
 	g_pid = fork();
 	if (g_pid < 0)
 		return ((void)err_builtin(E_FORK, argv[0], NULL));
 	else if (g_pid == 0)
 		execute_env_child(argc, argv, envp);
-	else
-		wait(NULL);
+//	else
+	wait(NULL);
+//	tputs(g_term->te_string, 1, ft_putc);
 	g_pid = 0;
 }

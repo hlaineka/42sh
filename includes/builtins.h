@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/14 16:41:03 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/20 08:49:04 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ pid_t	g_pid;
 
 int		is_builtin(t_process *process);
 int		get_argv_options(char **argv, int *options);
+int		get_argv_options_next(char **argv, int *options);
 
 /*
 ** CD BUILTIN:
@@ -123,5 +124,7 @@ int		get_setenvs(int argc, char **argv, char **envp, int i);
 ** FC BUILTIN:
 */
 void	builtin_fc(void *proc);
+int		fc_es(t_term *term, t_fc *fc, int options);
+int		parse_and_execute(char *cmd, t_term *term);
 
 #endif

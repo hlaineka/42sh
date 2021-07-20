@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 17:46:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/11 23:43:16 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/19 15:04:17 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,24 @@ static int	get_arg_options(char *arg)
 **    return value is the next index (argv[i]) that is not an option
 **    argument.
 */
+
+int	get_argv_options_next(char **argv, int *options)
+{
+	int		temp;
+	int		i;
+
+	i = 0;
+	temp = 0;
+	while (argv[i] && argv[i][0] == '-')
+	{
+		temp = get_arg_options(argv[i]);
+		if (temp == 0)
+			return (i);
+		*options = temp | *options;
+		i++;
+	}
+	return (i);
+}
 
 int	get_argv_options(char **argv, int *options)
 {

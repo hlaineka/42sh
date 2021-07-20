@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/07/14 16:42:41 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/07/20 08:06:23 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -126,7 +126,8 @@ _SRC_FG =	builtin_fg.c
 
 _SRC_BG =	builtin_bg.c
 
-_SRC_FC =	builtin_fc.c
+_SRC_FC =	builtin_fc.c \
+			fc_es.c
 
 _SRC_JOBS =	builtin_jobs.c \
 			print_active_job.c

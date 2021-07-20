@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/13 20:07:57 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/19 20:04:03 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	initialize(t_input *input, t_term *term, char **envp, char **argv)
 	if (term->intern_variables->flag_rawmode)
 	{
 		get_termios_modes(term);
-		tputs(term->ti_string, 1, ft_putc);
+//		tputs(term->ti_string, 1, ft_putc);
 		tputs(tgoto(term->cm_string, 0, 0), 1, ft_putc);
 		tputs(term->cd_string, 1, ft_putc);
 	}
