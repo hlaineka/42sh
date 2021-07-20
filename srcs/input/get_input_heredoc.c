@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 21:48:18 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/06/13 18:42:52 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/13 19:36:35 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*get_input_heredoc(char *eof, t_input *input, t_term *term)
 	str = ft_strnew(0);
 	buf = ft_strnew(0);
 	input->ret_str = &str;
-	input->heredoc = 1;
+	input->input_mode = HEREDOC_MODE;
 	signals_to_ignore();
 	if (term->intern_variables->flag_rawmode)
 	{
@@ -85,7 +85,7 @@ char	*get_input_heredoc(char *eof, t_input *input, t_term *term)
 			str = ft_strjoin_frees1(str, buf);
 		}
 	}
-	input->heredoc = 0;
+	input->input_mode = 0;
 	if (term->intern_variables->flag_rawmode)
 	{
 		heredoc_change_streams_end(streams, term);

@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   react_to_eof.c                                     :+:      :+:    :+:   */
+/*   bang_bang_fun.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/07 12:13:24 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/13 19:37:12 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/07/12 13:02:28 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/07/20 19:24:38 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "structs_21.h"
+#include "history.h"
 #include "input.h"
 
-int	react_to_eof(t_input *input, t_term *term)
+const char	*bang_bang_fun(t_term *term)
 {
-	if (input->ls[0] || input->rrs[0])
-		tputs(term->bl_string, 1, ft_putc);
-	else
-	{
-		if (input->input_mode == HEREDOC_MODE)
-		{
-			input->ls[0] = 4;
-			input->ls[1] = '\0';
-		}
-		else
-			ft_strcpy(input->ls, "exit");
-		input->rrs[0] = '\0';
-		return (1);
-	}
-	return (0);
+	int		i;
+
+	i = get_last_history_index(term->history) - 2;
+	if (i == -1)
+		return (NULL);	// todo: error & print no history or something
+//	cmd = ft_strdup(term->history[i]);
+	return (term->history[i]);
 }

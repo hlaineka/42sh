@@ -6,22 +6,31 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 10:52:51 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/07 17:06:09 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/12 12:36:21 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes.h"
+#include "history.h"
 
 void	history_up(t_input *input, t_term *term)
 {
 	char	*str;
+	int		i;
 
-	if (input->hist_cur->next == NULL)
+	i = get_last_history_index(term->history);
+	if (input->hist_i < HISTORY_SIZE && input->hist_i < i)
+		input->hist_i++;
+	else
 		return ;
-	if (!input->hist_cur->next)
-		return ;
-	input->hist_cur = input->hist_cur->next;
-	str = input->hist_cur->content;
+	str = term->history[i - input->hist_i];
+
+//	if (input->hist_cur->next == NULL)
+//		return ;
+//	if (!input->hist_cur->next)
+//		return ;
+//	input->hist_cur = input->hist_cur->next;
+//	str = input->hist_cur->content;
 	if (!str)
 		return ;
 	clear_screen_after_prompt(input, term);
@@ -35,13 +44,29 @@ void	history_up(t_input *input, t_term *term)
 void	history_down(t_input *input, t_term *term)
 {
 	char	*str;
+	int		i;
 
-	if (input->hist_cur->prev == NULL)
+	i = get_last_history_index(term->history);
+	if (input->hist_i > 0)
+		input->hist_i--;
+	else
 		return ;
-	input->hist_cur = input->hist_cur->prev;
-	str = input->hist_cur->content;
-	if (!str)
+	if (input->hist_i == 0)
+	{
+		ft_bzero(input->ls, input->ls_size);
+		ft_bzero(input->rrs, input->rrs_size);
+		clear_screen_after_prompt(input, term);
+		get_pos(&input->cursor_row, &input->cursor_col);
 		return ;
+	}
+	str = term->history[i - input->hist_i];
+
+//	if (input->hist_cur->prev == NULL)
+//		return ;
+//	input->hist_cur = input->hist_cur->prev;
+//	str = input->hist_cur->content;
+//	if (!str)
+//		return ;
 	clear_screen_after_prompt(input, term);
 	ft_bzero(input->ls, input->ls_size);
 	ft_bzero(input->rrs, input->rrs_size);
@@ -50,19 +75,25 @@ void	history_down(t_input *input, t_term *term)
 	get_pos(&input->cursor_row, &input->cursor_col);
 }
 
-t_clist	*command_to_history(t_input *input, char *str)
+int	command_to_history(char *str, t_term *term)
 {
-	t_clist	*new;
-	char	*ptr;
+//	t_clist	*new;
 
+	if (add_cmd_to_history(str, term->history))
+		return (-1);
+/*
 	new = ft_clstnew(str, ft_strlen(str) + 1);
 	if (!new)
 		return (NULL);
-	ptr = ft_strrchr(new->content, '\n');
-	*ptr = '\0';
+*/
+//	ptr = ft_strrchr(new->content, '\n');
+//	*ptr = '\0';
+/*
 	new->prev = input->last_comm;
 	new->next = input->history;
 	input->history->prev = new;
 	input->last_comm->next = new;
 	return (new);
+*/
+	return (0);
 }

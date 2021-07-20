@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/07/11 16:55:23 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/07/20 08:06:23 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ TERMCAPS = -ltermcap
 DIR_INC = includes/
 DIR_MAIN = srcs/
 DIR_INPUT = srcs/input/
+DIR_HISTORY = srcs/input/history/
 DIR_PARSER = srcs/parser/
 DIR_JOB_CONTROL = srcs/job_control/
 DIR_JOB_CREATION = srcs/execution/job_creation/
@@ -37,6 +38,7 @@ DIR_UNSETENV = srcs/builtins/fun_unsetenv/
 DIR_ENV = srcs/builtins/fun_env/
 DIR_EXECUTION = srcs/execution/
 DIR_INIT = srcs/init/
+DIR_FC = srcs/builtins/fun_fc/
 DIR_OBJS = objs/
 
 _SRC_MAIN = main.c
@@ -124,6 +126,9 @@ _SRC_FG =	builtin_fg.c
 
 _SRC_BG =	builtin_bg.c
 
+_SRC_FC =	builtin_fc.c \
+			fc_es.c
+
 _SRC_JOBS =	builtin_jobs.c \
 			print_active_job.c
 
@@ -172,7 +177,14 @@ _SRC_JOB_CREATION = job_creation.c \
 					token_assignment_word.c \
 					check_fd.c \
 
-
+_SRC_HISTORY =		add_cmd_to_history.c \
+					bang_bang_fun.c \
+					bang_minus_number_fun.c \
+					bang_number_fun.c \
+					bang_selector.c \
+					bang_word_fun.c \
+					get_last_history_index.c \
+					incremental_history_search.c
 
 SRC_MAIN = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))
 SRC_INPUT = $(addprefix $(DIR_INPUT), $(_SRC_INPUT))
@@ -195,7 +207,7 @@ SRC_INIT =  $(addprefix $(DIR_INIT), $(_SRC_INIT))
 
 SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER) $(SRC_SIGNAL) $(SRC_BUILTIN) $(SRC_CD) $(SRC_ECHO) $(SRC_FG) $(SRC_SETENV) $(SRC_UNSETENV) $(SRC_ENV) $(SRC_EXECUTION) $(SRC_JOB_CREATION) $(SRC_TOKENIZATION) $(SRC_AST_CREATION) $(SRC_INIT) $(SRC_JOB_CONTROL) $(SRC_JOBS) $(SRC_BG)
 
-_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL) $(_SRC_BUILTIN) $(_SRC_CD) $(_SRC_ECHO) $(_SRC_FG) $(_SRC_SETENV) $(_SRC_UNSETENV) $(_SRC_ENV) $(_SRC_EXECUTION) $(_SRC_JOB_CREATION) $(_SRC_TOKENIZATION) $(_SRC_AST_CREATION) $(_SRC_INIT) $(_SRC_JOB_CONTROL) $(_SRC_JOBS) $(_SRC_BG)
+_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL) $(_SRC_BUILTIN) $(_SRC_CD) $(_SRC_ECHO) $(_SRC_FG) $(_SRC_SETENV) $(_SRC_UNSETENV) $(_SRC_ENV) $(_SRC_EXECUTION) $(_SRC_JOB_CREATION) $(_SRC_TOKENIZATION) $(_SRC_AST_CREATION) $(_SRC_INIT) $(_SRC_JOB_CONTROL) $(_SRC_JOBS) $(_SRC_BG) $(_SRC_HISTORY) $(_SRC_FC)
 
 OBJ_FILES = $(_SRC:.c=.o)
 OBJS = $(patsubst %, $(DIR_OBJS)%, $(_SRC:.c=.o))
@@ -208,7 +220,8 @@ _INC = 	input.h \
 		builtins.h \
 		typedefs.h \
 		execution.h \
-		job_control.h
+		job_control.h \
+		history.h
 
 INC = $(addprefix $(DIR_INC), $(_INC))
 
@@ -277,6 +290,12 @@ $(DIR_OBJS)%.o: $(DIR_JOBS)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 $(DIR_OBJS)%.o: $(DIR_BG)%.c $(INC)
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(DIR_OBJS)%.o: $(DIR_HISTORY)%.c $(INC)
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(DIR_OBJS)%.o: $(DIR_FC)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 libft:

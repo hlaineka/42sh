@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/11 09:48:41 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 23:41:34 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	change_job_to_current(t_job *job, t_term *term)
 	t_job		*prev;
 
 	prev = term->jobs;
-	while(prev->next != job && prev->next != NULL)
+	while (prev->next != job && prev->next != NULL)
 		prev = prev->next;
 	prev->next = job->next;
 	job->next = term->jobs->next;
@@ -45,9 +45,8 @@ void	builtin_bg(void *proc)
 	}
 	job->bg = 1;
 	job->notified = 0;
-	ft_printf("todo: set job->command %s\n", job->command);
+	print_active_job(job, ((1 << B_FLAG) | (1 << J_FLAG)), term);
 	start_stopped_job(job, term);
-	wait_job_and_get_status(job, term);
 	change_job_to_current(job, term);
 	tcsetpgrp(term->fd_stderr, getpgrp());
 }

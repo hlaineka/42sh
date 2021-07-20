@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/10 16:12:33 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/20 08:49:04 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ pid_t	g_pid;
 
 int		is_builtin(t_process *process);
 int		get_argv_options(char **argv, int *options);
+int		get_argv_options_next(char **argv, int *options);
 
 /*
 ** CD BUILTIN:
@@ -77,7 +78,6 @@ char	*ft_getenv(const char *name, char **envp);
 int		ft_setenv(const char *name, const char *val, int over, char **envp);
 int		ft_unsetenv(const char *name, char **envp);
 
-void	builtin_env(void *proc);
 
 /*
 ** FG BUILTIN:
@@ -114,9 +114,17 @@ void	builtin_unsetenv(void *proc);
 ** ENV BUILTIN:
 */
 
+void	builtin_env(void *proc);
 void	clear_envp(char **envp);
 void	print_envp(char **envp);
 int		env_get_options(char *flags, char **envp);
 int		get_setenvs(int argc, char **argv, char **envp, int i);
+
+/*
+** FC BUILTIN:
+*/
+void	builtin_fc(void *proc);
+int		fc_es(t_term *term, t_fc *fc, int options);
+int		parse_and_execute(char *cmd, t_term *term);
 
 #endif

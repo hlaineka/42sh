@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:33:35 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/11 14:55:58 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/11 17:35:55 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	free_jobs(t_term *term)
 	prev = term->jobs;
 	while (job_to_free)
 	{
-		if (is_job_completed(job_to_free))
+		if (is_job_completed(job_to_free) && job_to_free->notified)
 		{
 			if (job_to_free->next)
 				prev->next = job_to_free->next;

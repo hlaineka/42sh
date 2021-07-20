@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/11 09:41:39 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/13 19:39:20 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	init_input_tty(t_input *input, int prompt_mode)
 	get_pos(&input->prompt_row, &input->prompt_col);
 	input->cursor_row = input->prompt_row;
 	input->cursor_col = input->prompt_col;
-	input->hist_cur = input->last_comm;
+//	input->hist_cur = input->last_comm;
+	input->hist_i = 0;
 }
 
 static void	react_to_keypress(int ret, char **str, t_input *input, t_term *term)
@@ -35,7 +36,7 @@ static void	react_to_keypress(int ret, char **str, t_input *input, t_term *term)
 	{
 		term->last_return = 1;
 		*str = ft_strnew(3);
-		if (input->heredoc)
+		if (input->input_mode == HEREDOC_MODE)
 			*str[0] = 4;
 		ft_strcat(*str, "\n");
 	}
@@ -118,8 +119,9 @@ char	*get_input(int argc, char **argv, t_term *term, t_input *input)
 //		pre_prompt_jobs_check(term);
 		enable_raw_mode(term);
 		str = get_input_tty(term, input);
-		input->history = command_to_history(input, str);
-		if (!input->history)
+//		input->history = command_to_history(input, str);
+//		if (!input->history)
+		if (command_to_history(str, term))
 			err_fatal(ERR_MALLOC, NULL, term);
 		disable_raw_mode_continue(term);
 	}

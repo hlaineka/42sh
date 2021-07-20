@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/08 20:09:48 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/19 20:04:03 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	init_input(t_input *input)
 		free(input->rrs);
 		exit(1);
 	}
-	input->history = ft_clstnew(NULL, 0);
-	if (!input->history)
-		exit(1);
-	input->last_comm = input->history;
+//	input->history = ft_clstnew(NULL, 0);
+//	if (!input->history)
+//		exit(1);
+//	input->last_comm = input->history;
 	input->ls_size = 2048;
 	input->rrs_size = 2048;
 	input->clipboard_size = 2048;
@@ -119,10 +119,12 @@ void	initialize(t_input *input, t_term *term, char **envp, char **argv)
 	init_input(input);
 	copy_envp(envp, term);
 	term->input = input;
+	ft_bzero(term->history, sizeof(char) * HISTORY_SIZE);
+	term->history[0] = ft_strnew(0);
 	if (term->intern_variables->flag_rawmode)
 	{
 		get_termios_modes(term);
-		tputs(term->ti_string, 1, ft_putc);
+//		tputs(term->ti_string, 1, ft_putc);
 		tputs(tgoto(term->cm_string, 0, 0), 1, ft_putc);
 		tputs(term->cd_string, 1, ft_putc);
 	}

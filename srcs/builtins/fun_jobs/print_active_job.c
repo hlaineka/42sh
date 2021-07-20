@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 18:23:21 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/11 17:32:16 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 23:42:32 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 #include "job_control.h"
 #include "typedefs.h"
 
-void	print_job_current(t_job *job, t_term *term)
+static void	print_job_current(t_job *job, t_term *term, int opt)
 {
 	t_job	*current;
 
 	if (!term->jobs)
 		return ;
-	current = term->jobs->next->next;
+	if (opt & (1 << J_FLAG))
+		current = term->jobs->next->next;
+	else
+		current = term->jobs->next;
 	if (!current)
 		return ;
 	if (job == current)
@@ -32,7 +35,7 @@ void	print_job_current(t_job *job, t_term *term)
 	ft_putchar('\t');
 }
 
-void	print_job_state(t_job *job)
+static void	print_job_state(t_job *job)
 {
 	int		status;
 
@@ -41,15 +44,49 @@ void	print_job_state(t_job *job)
 	{
 		status = get_job_status(job);
 		if (status == 0)
-			ft_printf("Done");
+			ft_printf("Done\t\t");
 		else
-			ft_printf("Done(%d)", status);
+			ft_printf("Done(%d)\t\t", status);
 	}
 	else if (is_job_stopped(job))
-		ft_printf("Stopped (%s)", get_stop_signal_str(job));
+		ft_printf("Stopped %s", get_stop_signal_str(job));
 	else
 		ft_printf("Running");
 	ft_putchar(' ');
+}
+
+static void	print_process_state(t_process *proc)
+{
+	int		status;
+
+	status = 0;
+	if (proc->completed)
+	{
+		status = proc->status;
+		if (status == 0)
+			ft_printf("Done\t\t");
+		else
+			ft_printf("Done(%d)\t\t", status);
+	}
+	else if (proc->stopped)
+		ft_printf("Stopped %s", get_proc_stop_signal_str(proc));
+	else
+		ft_printf("Running");
+	ft_putchar(' ');
+}
+
+static void	print_process(t_process *proc, t_job *job)
+{
+	if (proc->next)
+	{
+		print_process(proc->next, job);
+		ft_putchar('\t');
+	}
+	ft_printf("%d ", proc->pid);
+	print_process_state(proc);
+	ft_putchar('\t');
+	ft_printf("%s ", job->command);
+	ft_putchar('\n');
 }
 
 int	print_active_job(t_job *job, int options, t_term *term)
@@ -57,27 +94,23 @@ int	print_active_job(t_job *job, int options, t_term *term)
 	t_process	*proc;
 
 	proc = job->first_process;
-	if (options == (1 << P_FLAG))
+	if (options & (1 << P_FLAG))
 		return (ft_printf("%d\n", job->pgid));
 	ft_printf("[%d]", job->job_id);
-	print_job_current(job, term);
-	if (options != (1 << L_FLAG))
+	print_job_current(job, term, options);
+	if (options & (1 << B_FLAG))
+	{
+		ft_putchar('\t');
+		ft_printf("%s\n", job->command);
+		return (0);
+	}
+	if (!(options & (1 << L_FLAG)))
 	{
 		print_job_state(job);
 		ft_putchar('\t');
 		ft_printf("%s\n", job->command);
 		return (0);
 	}
-	while(proc)
-	{
-		if (proc != job->first_process)
-			ft_putchar('\t');
-		ft_printf("%d ", proc->pid);
-		print_job_state(job);
-		ft_putchar('\t');
-		ft_printf("%s ", job->command);
-		ft_putchar('\n');
-		proc = proc->next;
-	}
+	print_process(proc, job);
 	return (0);
 }

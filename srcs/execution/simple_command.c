@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/10 21:16:33 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/11 13:48:31 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,10 @@ int	simple_command(t_process *proc, t_job *job, t_term *term)
 	if (!proc->envp)
 		proc->envp = term->envp;
 	if (is_builtin(proc))
+	{
+		job->notified = 1;
 		return (proc->status);
+	}
 	set_signal_execution();
 	pid = fork();
 	if (pid < 0)
@@ -96,7 +99,10 @@ int	simple_command(t_process *proc, t_job *job, t_term *term)
 	job->job_id = get_next_job_pgid(term->jobs->next);
 	job->pgid = pid;
 	if (!job->bg)
+	{
 		tcsetpgrp(term->fd_stderr, pid);
+		job->notified = 1;
+	}
 	proc->pid = pid;
 	wait_to_get_status(proc, job->bg);
 	tcsetpgrp(term->fd_stderr, getpgrp());	// if not bg

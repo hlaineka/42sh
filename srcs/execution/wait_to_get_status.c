@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:51:45 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/10 16:43:30 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/16 10:39:45 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ void	wait_to_get_status(t_process *proc, int bg)
 	status = 0;
 	if (bg)
 	{
-		wpid = waitpid(proc->pid, &status, (WUNTRACED | WNOHANG));
-		if (wpid == proc->pid && (WIFEXITED(status) || WIFSIGNALED(status) || WIFSTOPPED(status)))
-			get_status_and_condition(proc, status);
+//		wpid = waitpid(proc->pid, &status, (WUNTRACED | WNOHANG));
+//		if (wpid == proc->pid && (WIFEXITED(status) || WIFSIGNALED(status) || WIFSTOPPED(status)))
+//		if (wpid == proc->pid)
+//			get_status_and_condition(proc, status);
 		return ;
 	}
 	wpid = waitpid(proc->pid, &status, WUNTRACED);

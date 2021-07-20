@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/09 21:20:50 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/19 11:21:38 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 # include "libft.h"
 
 # define KEY_ESC 27
+
+# define HISTORY_SIZE 1024
+
+# define HEREDOC_MODE 2
+# define SEARCH_MODE 4
 
 typedef struct s_clist
 {
@@ -34,9 +39,10 @@ typedef struct s_clist
 
 typedef struct s_input
 {
-	t_clist				*hist_cur;
-	t_clist				*history;
-	t_clist				*last_comm;
+	int					hist_i;
+//	t_clist				*hist_cur;
+//	t_clist				*history;
+//	t_clist				*last_comm;
 	char				**ret_str;
 	char				**input_temp;
 	int					*quote;
@@ -53,7 +59,7 @@ typedef struct s_input
 	int					prompt_col;
 	int					cursor_row;
 	int					cursor_col;
-	int					heredoc;
+	int					input_mode;
 }						t_input;
 
 /*
@@ -177,6 +183,7 @@ typedef struct s_job
 typedef struct s_term
 {
 	char				*envp[1024];
+	char				*history[HISTORY_SIZE];		// use macro?
 	t_input				*input;
 	t_input				*here_input;
 	char				*term_buffer;
@@ -216,6 +223,17 @@ typedef struct s_intrn_vars
 	int					flag_rawmode;
 	char				*intern[1024];
 }						t_intrn_vars;
+
+typedef struct s_fc
+{
+	int					i;
+	int					options;
+	int					first;
+	int					last;
+	char				first_str[1024];
+	char				path[1024];
+	char				editor[1024];
+}						t_fc;
 
 /*
 ** GLOBALS

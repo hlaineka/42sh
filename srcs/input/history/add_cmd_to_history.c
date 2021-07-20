@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   react_to_eof.c                                     :+:      :+:    :+:   */
+/*   add_cmd_to_history.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/07 12:13:24 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/13 19:37:12 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/07/12 09:16:18 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/07/12 15:09:01 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
+#include "history.h"
+#include "structs_21.h"
 
-int	react_to_eof(t_input *input, t_term *term)
+int	add_cmd_to_history(char *cmd, char **history)
 {
-	if (input->ls[0] || input->rrs[0])
-		tputs(term->bl_string, 1, ft_putc);
-	else
-	{
-		if (input->input_mode == HEREDOC_MODE)
-		{
-			input->ls[0] = 4;
-			input->ls[1] = '\0';
-		}
-		else
-			ft_strcpy(input->ls, "exit");
-		input->rrs[0] = '\0';
-		return (1);
-	}
-	return (0);
+	int		i;
+	char	*ptr;
+
+	i = get_last_history_index(history);
+	if (i < 0)
+		return (-1);
+//	ft_printf("%s i=%d\n", __FUNCTION__, i);
+	history[i] = ft_strdup(cmd);
+	if (!history[i])
+		return (-1);	//todo error
+	ptr = ft_strrchr(history[i], '\n');
+	if (ptr)
+		*ptr = '\0';
+	return (0);			//todo or 0;
 }

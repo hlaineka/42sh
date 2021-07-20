@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   react_to_eof.c                                     :+:      :+:    :+:   */
+/*   get_last_history_index.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/07 12:13:24 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/13 19:37:12 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/07/12 09:20:40 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/07/12 09:33:45 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input.h"
+#include "history.h"
+#include "structs_21.h"
 
-int	react_to_eof(t_input *input, t_term *term)
+int	get_last_history_index(char **history)
 {
-	if (input->ls[0] || input->rrs[0])
-		tputs(term->bl_string, 1, ft_putc);
-	else
-	{
-		if (input->input_mode == HEREDOC_MODE)
-		{
-			input->ls[0] = 4;
-			input->ls[1] = '\0';
-		}
-		else
-			ft_strcpy(input->ls, "exit");
-		input->rrs[0] = '\0';
-		return (1);
-	}
-	return (0);
+	int		i;
+
+	i = 0;
+	while (i < HISTORY_SIZE && history[i])
+		i++;
+	if (i == HISTORY_SIZE)
+		return (-1);
+	return (i);
 }
