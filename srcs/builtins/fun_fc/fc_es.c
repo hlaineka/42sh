@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 07:35:20 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/20 08:50:58 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/20 20:56:42 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	fc_es(t_term *term, t_fc *fc, int options)
 			fc->last--;
 		else
 			fc->first++;
-		sleep(1);
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/20 20:13:47 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/20 21:04:52 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ static int	write_history_to_file(t_fc *fc, char **hist, t_term *term, t_process 
 //		ft_printf("line=%s ret=%d\n", line, ret);
 	}
 	close(fd);
+	if (line)
+		free(line);
 //	parse_and_execute(line, term);
 	return (1);
 }
@@ -76,6 +78,8 @@ static int	get_command_index_with_arg(t_fc *fc, t_term *term, t_process *pr)
 		return (-1);
 	if (temp == 0)
 	{
+		if (pr->argv[fc->i][0] == '-' && pr->argv[fc->i][1] == '-')
+			return (0);
 		while (i-- > 0)
 		{
 //			ft_printf("i=%d\n", i);
@@ -205,7 +209,6 @@ void	builtin_fc(void *proc)
 		fc_el(term, &fc, fc.options);
 	else if (options & (1 << S_FLAG))
 	{
-		ft_putendl("S_FLAG");
 		fc_es(term, &fc, fc.options);
 		return ;
 	}
