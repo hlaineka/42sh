@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/07/20 08:06:23 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/07/22 21:14:49 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,9 @@ DIR_JOBS = srcs/builtins/fun_jobs/
 DIR_SETENV = srcs/builtins/fun_setenv/
 DIR_UNSETENV = srcs/builtins/fun_unsetenv/
 DIR_ENV = srcs/builtins/fun_env/
+DIR_EXPORT = srcs/builtins/fun_export/
+DIR_SET = srcs/builtins/fun_set/
+DIR_UNSET = srcs/builtins/fun_unset/
 DIR_EXECUTION = srcs/execution/
 DIR_INIT = srcs/init/
 DIR_FC = srcs/builtins/fun_fc/
@@ -139,6 +142,13 @@ _SRC_UNSETENV =	builtin_unsetenv.c
 _SRC_ENV = 	builtin_env.c \
 			env_functions.c
 
+_SRC_EXPORT = builtin_export.c \
+				get_name_and_value.c				
+
+_SRC_SET = builtin_set.c
+
+_SRC_UNSET = builtin_unset.c
+
 _SRC_JOB_CONTROL =	do_job_notification.c \
 					find_last_stopped_job.c \
 					find_pgid_job.c \
@@ -199,15 +209,18 @@ SRC_ENV = $(addprefix $(DIR_ENV), $(_SRC_ENV))
 SRC_ECHO = $(addprefix $(DIR_ECHO), $(_SRC_ECHO))
 SRC_FG = $(addprefix $(DIR_FG), $(_SRC_FG))
 SRC_BG = $(addprefix $(DIR_BG), $(_SRC_BG))
+SRC_EXPORT = $(addprefix $(DIR_EXPORT), $(_SRC_EXPORT))
+SRC_SET = $(addprefix $(DIR_SET), $(_SRC_SET))
+SRC_UNSET = $(addprefix $(DIR_UNSET), $(_SRC_UNSET))
 SRC_JOBS = $(addprefix $(DIR_JOBS), $(_SRC_JOBS))
 SRC_SETENV = $(addprefix $(DIR_SETENV), $(_SRC_SETENV))
 SRC_UNSETENV = $(addprefix $(DIR_UNSETENV), $(_SRC_UNSETENV))
 SRC_EXECUTION =  $(addprefix $(DIR_EXECUTION), $(_SRC_EXECUTION))
 SRC_INIT =  $(addprefix $(DIR_INIT), $(_SRC_INIT))
 
-SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER) $(SRC_SIGNAL) $(SRC_BUILTIN) $(SRC_CD) $(SRC_ECHO) $(SRC_FG) $(SRC_SETENV) $(SRC_UNSETENV) $(SRC_ENV) $(SRC_EXECUTION) $(SRC_JOB_CREATION) $(SRC_TOKENIZATION) $(SRC_AST_CREATION) $(SRC_INIT) $(SRC_JOB_CONTROL) $(SRC_JOBS) $(SRC_BG)
+SRC = $(SRC_MAIN) $(SRC_INPUT) $(SRC_PARSER) $(SRC_SIGNAL) $(SRC_BUILTIN) $(SRC_CD) $(SRC_ECHO) $(SRC_FG) $(SRC_SETENV) $(SRC_UNSETENV) $(SRC_ENV) $(SRC_EXECUTION) $(SRC_JOB_CREATION) $(SRC_TOKENIZATION) $(SRC_AST_CREATION) $(SRC_INIT) $(SRC_JOB_CONTROL) $(SRC_JOBS) $(SRC_BG) $(SRC_EXPORT) $(SRC_SET) $(SRC_UNSET)
 
-_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL) $(_SRC_BUILTIN) $(_SRC_CD) $(_SRC_ECHO) $(_SRC_FG) $(_SRC_SETENV) $(_SRC_UNSETENV) $(_SRC_ENV) $(_SRC_EXECUTION) $(_SRC_JOB_CREATION) $(_SRC_TOKENIZATION) $(_SRC_AST_CREATION) $(_SRC_INIT) $(_SRC_JOB_CONTROL) $(_SRC_JOBS) $(_SRC_BG) $(_SRC_HISTORY) $(_SRC_FC)
+_SRC = $(_SRC_MAIN) $(_SRC_INPUT) $(_SRC_PARSER) $(_SRC_SIGNAL) $(_SRC_BUILTIN) $(_SRC_CD) $(_SRC_ECHO) $(_SRC_FG) $(_SRC_SETENV) $(_SRC_UNSETENV) $(_SRC_ENV) $(_SRC_EXECUTION) $(_SRC_JOB_CREATION) $(_SRC_TOKENIZATION) $(_SRC_AST_CREATION) $(_SRC_INIT) $(_SRC_JOB_CONTROL) $(_SRC_JOBS) $(_SRC_BG) $(_SRC_HISTORY) $(_SRC_FC) $(_SRC_EXPORT) $(_SRC_SET) $(_SRC_UNSET)
 
 OBJ_FILES = $(_SRC:.c=.o)
 OBJS = $(patsubst %, $(DIR_OBJS)%, $(_SRC:.c=.o))
@@ -296,6 +309,15 @@ $(DIR_OBJS)%.o: $(DIR_HISTORY)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 $(DIR_OBJS)%.o: $(DIR_FC)%.c $(INC)
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(DIR_OBJS)%.o: $(DIR_EXPORT)%.c $(INC)
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(DIR_OBJS)%.o: $(DIR_SET)%.c $(INC)
+		$(CC) $(CFLAGS) -o $@ -c $<
+
+$(DIR_OBJS)%.o: $(DIR_UNSET)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 libft:

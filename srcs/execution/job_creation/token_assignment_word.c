@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:44:14 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/20 20:11:44 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/22 20:37:10 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,10 @@ t_job       *token_assignment_word(t_job *job, t_term *term, t_node *current)
 {
 	char	name[ARGV_SIZE];
 	char	value[ARGV_SIZE];
-	int		i;
-	int		w;
 	
 	if (current->right)
 		return (NULL);
-	i = 0;
-	while (current->command[i] != '\0' && current->command[i] != '=')
-	{
-		name[i] = current->command[i];
-		i++;
-	}
-	name[i++] = '\0';
-	w = 0;
-	while(current->command[i] != '\0')
-		value[w++] = current->command[i++];
-	value[w] = '\0';
+	get_name_and_value(current->command, value, name);
 	if (current->left || job)
 	{
 		if (!job)

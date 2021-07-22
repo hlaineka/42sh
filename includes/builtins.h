@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/20 08:49:04 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/22 21:14:21 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,21 @@ int		get_setenvs(int argc, char **argv, char **envp, int i);
 void	builtin_fc(void *proc);
 int		fc_es(t_term *term, t_fc *fc, int options);
 int		parse_and_execute(char *cmd, t_term *term);
+
+/*
+** EXPORT BUILTIN
+*/
+void	builtin_export(void *proc);
+int		get_name_and_value(char *src, char *value, char *name);
+
+/*
+** SET BUILTIN
+*/
+void	builtin_set(void *proc);
+
+/*
+** BUILTIN_UNSET
+*/
+void	builtin_unset(void *proc);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 18:45:48 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/14 16:44:49 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/22 21:16:27 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ static const char	*g_builtins[] = {
 	"fg",
 	"jobs",
 	"bg",
-	"fc"
+	"fc",
+	"export",
+	"set",
+	"unset",
+	NULL
 };
 
 static const t_fp	g_builtin_fps[] = {
@@ -33,7 +37,10 @@ static const t_fp	g_builtin_fps[] = {
 	&builtin_fg,
 	&builtin_jobs,
 	&builtin_bg,
-	&builtin_fc
+	&builtin_fc,
+	&builtin_export,
+	&builtin_set,
+	&builtin_unset
 };
 
 int	is_builtin(t_process *process)
@@ -43,7 +50,7 @@ int	is_builtin(t_process *process)
 
 	i = 0;
 	argv = process->argv;
-	while (i < 9 && g_builtins[i])
+	while (g_builtins[i])
 	{
 		if (!ft_strcmp(argv[0], g_builtins[i]))
 		{
