@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 17:45:59 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/22 18:31:26 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int		is_builtin(t_process *process);
 int		is_builtin_type(char *cmd);
 int		get_argv_options(char **argv, int *options);
 int		get_argv_options_next(char **argv, int *options);
+
+int		is_digit_str(char *str);
 
 /*
 ** CD BUILTIN:
@@ -152,5 +154,11 @@ void	z_operand(void *proc);
 void	bang_operand(void *proc);
 void	identical_operand(void *proc);
 void	notidentical_operand(void *proc);
+void	eq_operand(void *proc);
+void	ne_operand(void *proc);
+void	gt_operand(void *proc);
+void	ge_operand(void *proc);
+void	lt_operand(void *proc);
+void	le_operand(void *proc);
 
 #endif

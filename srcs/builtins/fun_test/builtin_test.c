@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 17:45:16 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/22 18:33:47 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,12 @@ static const char	*g_test_operands_single[] = {
 	NULL,
 	"=",
 	"!=",
-//	"-eq",
-//	"-ne",
-//	"-ge",
-//	"-lt",
-//	"-le",
+	"-eq",
+	"-ne",
+	"-gt",
+	"-ge",
+	"-lt",
+	"-le",
 	NULL
 };
 
@@ -60,11 +61,12 @@ static const t_fp	g_test_first_fps[] = {
 	NULL,
 	&identical_operand,
 	&notidentical_operand,
-//	&eq_operand,
-//	&ne_operand,
-//	&ge_operand,
-//	&lt_operand,
-//	&le_operand,
+	&eq_operand,
+	&ne_operand,
+	&gt_operand,
+	&ge_operand,
+	&lt_operand,
+	&le_operand,
 	NULL
 };
 
@@ -81,6 +83,7 @@ static void	comparison_funs(t_process *p, int i)
 			return (g_test_first_fps[i](p));
 		i++;
 	}
+	p->status = 2;
 }
 
 void	builtin_test(void *proc)

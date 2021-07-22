@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/07/22 17:45:42 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/07/22 18:30:53 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,7 +113,8 @@ _SRC_BUILTIN =	err_builtin.c \
 				ft_setenv.c \
 				ft_unsetenv.c \
 				get_arg_options.c \
-				is_builtin.c
+				is_builtin.c \
+				is_digit_str.c
 
 _SRC_CD =	builtin_cd.c \
 			find_path.c \
@@ -148,7 +149,13 @@ _SRC_TEST =	builtin_test.c \
 			z_operand.c \
 			bang_operand.c \
 			identical_operand.c \
-			notidentical_operand.c
+			notidentical_operand.c \
+			eq_operand.c \
+			ne_operand.c \
+			gt_operand.c \
+			ge_operand.c \
+			lt_operand.c \
+			le_operand.c
 
 _SRC_JOBS =	builtin_jobs.c \
 			print_active_job.c

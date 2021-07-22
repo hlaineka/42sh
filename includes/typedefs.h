@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:42:02 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 17:21:45 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/22 18:09:45 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,6 @@
 # define E_NO_SUCH_JOB 115
 # define E_BIN_OP_EXP 116
 # define E_UNA_OP_EXP 117
+# define E_NOT_INT 118
 
 #endif
