@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 18:31:26 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/22 20:22:19 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,4 +161,8 @@ void	ge_operand(void *proc);
 void	lt_operand(void *proc);
 void	le_operand(void *proc);
 
+/*
+** TYPE BUILTIN:
+*/
+void	builtin_type(void *proc);
 #endif
