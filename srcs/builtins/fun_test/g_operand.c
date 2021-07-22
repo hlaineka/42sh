@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 21:50:26 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 13:18:59 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/22 13:22:44 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ void	g_operand(void *proc)
 		return ;
 	if (!(buf.st_mode & S_ISGID))
 		return ;
-	p->status = 0;	// todo check if this is enough?
+	p->status = 0;
 }
