@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 14:27:47 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/10 12:35:27 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/22 11:11:11 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,8 @@ static const char	*g_errstr[] = {
 	"Invalid input",
 	"Command not found",
 	"Environment PATH is not set",
-	"no such job"
+	"no such job",
+	"binary operator expected"
 };
 
 int	err_builtin(int error_no, char *name, char *arg)

@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:42:02 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/10 12:15:10 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/22 11:09:49 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,5 +130,6 @@
 # define E_NO_COMMAND 113
 # define E_ENV_PATH_NOT_SET 114
 # define E_NO_SUCH_JOB 115
+# define E_BIN_OP_EXP 116
 
 #endif

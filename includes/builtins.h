@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/20 08:49:04 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/22 13:05:39 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define BUILTINS_H
 
 # include <unistd.h>
+# include <sys/stat.h>
 # include "structs_21.h"
 # include "typedefs.h"
 
@@ -46,10 +47,12 @@
 # define Y_FLAG 23
 # define Z_FLAG 24
 
+typedef struct stat		t_stat;
 
 pid_t	g_pid;
 
 int		is_builtin(t_process *process);
+int		is_builtin_type(char *cmd);
 int		get_argv_options(char **argv, int *options);
 int		get_argv_options_next(char **argv, int *options);
 
@@ -126,5 +129,16 @@ int		get_setenvs(int argc, char **argv, char **envp, int i);
 void	builtin_fc(void *proc);
 int		fc_es(t_term *term, t_fc *fc, int options);
 int		parse_and_execute(char *cmd, t_term *term);
+
+/*
+** TEST BUILTIN:
+*/
+void	builtin_test(void *proc);
+void	b_operand(void *proc);
+void	c_operand(void *proc);
+void	d_operand(void *proc);
+void	e_operand(void *proc);
+void	f_operand(void *proc);
+void	g_operand(void *proc);
 
 #endif
