@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 20:42:24 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/22 21:18:27 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ int		print_type(char *cmd, t_process *p, t_term *term)
 	else
 	{
 		find_path(cmd, path, buf);
+		if (buf[0] == '\0')
+			return (err_builtin(E_NO_COMMAND, "type", cmd));
+		//if buf is empty error, else this
 		ft_printf("%s is a %s\n", cmd, buf);
 	}
 	return (0);
@@ -45,7 +48,7 @@ void	builtin_type(void *proc)
 	argv++;
 	while (*argv)
 	{
-		print_type(*argv, p, p->term_ptr);
+		p->status = print_type(*argv, p, p->term_ptr);
 		argv++;
 	}
 
