@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 15:32:26 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/22 15:56:26 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static const char	*g_test_operands_single[] = {
 	"-u",
 	"-w",
 	"-x",
-//	"-z",
+	"-z",
 //	"!",
 	NULL
 };
@@ -47,7 +47,7 @@ static const t_fp	g_test_first_fps[] = {
 	&u_operand,
 	&w_operand,
 	&x_operand,
-//	&z_operand,
+	&z_operand,
 //	&bang_operand,
 	NULL
 };
@@ -69,6 +69,8 @@ void	builtin_test(void *proc)
 		process->status = 1;
 		return ;
 	}
+	if (argc == 2)
+		return ;
 	while (g_test_operands_single[i])
 	{
 		if (!ft_strcmp(argv[1], g_test_operands_single[i]))
