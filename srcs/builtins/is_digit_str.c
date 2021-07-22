@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 18:03:24 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 18:05:03 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/22 18:38:45 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 int	is_digit_str(char *str)
 {
 	if (!str)
+		return (0);
+	if (*str == '-' || *str == '+')
+		str++;
+	if (!ft_isdigit(*str))
 		return (0);
 	while (*str)
 	{
