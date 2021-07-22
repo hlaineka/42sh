@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 13:05:39 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/22 14:53:49 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,5 +140,8 @@ void	d_operand(void *proc);
 void	e_operand(void *proc);
 void	f_operand(void *proc);
 void	g_operand(void *proc);
+void	big_l_operand(void *proc);
+void	p_operand(void *proc);
+void	r_operand(void *proc);
 
 #endif

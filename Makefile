@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/07/22 13:05:25 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/07/22 14:54:21 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -136,7 +136,10 @@ _SRC_TEST =	builtin_test.c \
 			d_operand.c \
 			e_operand.c \
 			f_operand.c \
-			g_operand.c
+			g_operand.c \
+			big_l_operand.c \
+			p_operand.c \
+			r_operand.c
 
 _SRC_JOBS =	builtin_jobs.c \
 			print_active_job.c

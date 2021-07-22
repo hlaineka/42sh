@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 12:53:13 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/22 14:53:28 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static const char	*g_test_operands_single[] = {
 	"-e",
 	"-f",
 	"-g",
-//	"-L",
-//	"-p",
-//	"-r",
+	"-L",
+	"-p",
+	"-r",
 //	"-S",
 //	"-s",
 //	"-u",
@@ -39,9 +39,9 @@ static const t_fp	g_test_first_fps[] = {
 	&e_operand,
 	&f_operand,
 	&g_operand,
-//	&big_l_operand,
-//	&p_operand,
-//	&r_operand,
+	&big_l_operand,
+	&p_operand,
+	&r_operand,
 //	&big_s_operand,
 //	&s_operand,
 //	&u_operand,
