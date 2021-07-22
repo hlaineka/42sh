@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 15:19:29 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/22 15:33:11 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,5 +146,7 @@ void	r_operand(void *proc);
 void	big_s_operand(void *proc);
 void	s_operand(void *proc);
 void	u_operand(void *proc);
+void	w_operand(void *proc);
+void	x_operand(void *proc);
 
 #endif
