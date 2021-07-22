@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 16:17:20 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/22 17:45:16 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ static const char	*g_test_operands_single[] = {
 	"-x",
 	"-z",
 	"!",
+	NULL,
+	"=",
+	"!=",
+//	"-eq",
+//	"-ne",
+//	"-ge",
+//	"-lt",
+//	"-le",
 	NULL
 };
 
@@ -49,12 +57,34 @@ static const t_fp	g_test_first_fps[] = {
 	&x_operand,
 	&z_operand,
 	&bang_operand,
+	NULL,
+	&identical_operand,
+	&notidentical_operand,
+//	&eq_operand,
+//	&ne_operand,
+//	&ge_operand,
+//	&lt_operand,
+//	&le_operand,
 	NULL
 };
 
+static void	comparison_funs(t_process *p, int i)
+{
+	if (!p->argv[2])
+	{
+		p->status = 2;
+		return ;
+	}
+	while (g_test_operands_single[i])
+	{
+		if (!ft_strcmp(p->argv[2], g_test_operands_single[i]))
+			return (g_test_first_fps[i](p));
+		i++;
+	}
+}
+
 void	builtin_test(void *proc)
 {
-//	t_term		*term;
 	t_process	*process;
 	int			argc;
 	int			i;
@@ -64,12 +94,10 @@ void	builtin_test(void *proc)
 	argv = process->argv;
 	argc = process->argc;
 	i = 0;
-	if (argc == 1)
-	{
-		process->status = 1;
-		return ;
-	}
 	if (argc == 2)
+		return ;
+	process->status = 1;
+	if (argc == 1)
 		return ;
 	while (g_test_operands_single[i])
 	{
@@ -77,10 +105,7 @@ void	builtin_test(void *proc)
 			return (g_test_first_fps[i](process));
 		i++;
 	}
-
 	if (argc > 4)
-	{
-		process->status = 1;
 		return ((void)err_builtin(E_TOO_MANY_ARGS, "test", NULL));
-	}
+	comparison_funs(process, ++i);
 }

@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 21:50:26 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 16:53:19 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/22 17:33:43 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	bang_operand(void *proc)
 	builtin_test(p);
 	if (p->status == 0)
 		p->status = 1;
-	else
+	else if (p->status == 1)
 		p->status = 0;
 	p->argv--;
 	p->argc++;
