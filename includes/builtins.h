@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 15:56:59 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/22 16:31:41 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,5 +149,6 @@ void	u_operand(void *proc);
 void	w_operand(void *proc);
 void	x_operand(void *proc);
 void	z_operand(void *proc);
+void	bang_operand(void *proc);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 12:48:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/20 21:31:46 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/22 16:50:48 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,16 @@ int	is_bang_minus_number(char *str)
 /*
 ** BANG_SELECTOR:
 ** - takes the whole string "!!/!number/!-number/!word" and returns
-**   const char* to history string that should be 
+**   const char* to history string that should be used instead of
+**   bang_param. If it's just ! it will return the original string.
 */
 
 const char	*bang_selector(char *bang_param, t_term *term)
 {
 	if (!bang_param[0] || !bang_param[1])
-		return (NULL);
+		return (bang_param);
+//		return (NULL);
+
 	if (is_bang_bang(bang_param))
 		return (bang_bang_fun(term));
 	if (is_bang_number(bang_param))
