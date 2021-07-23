@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/23 15:14:24 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/23 16:45:08 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,5 +173,9 @@ void	builtin_type(void *proc);
 void	builtin_hash(void *proc);
 char	*cmd_path_from_hash_table(char *cmd, t_hash *ht);
 int		is_in_hash_table(char *cmd, t_hash *ht);
+void	create_full_cmd(char *cmd, t_hash *ht, char *buf);
+void	increase_hash_table_hits(char *cmd, t_hash *ht);
+void	add_cmd_to_hash_table(char *cmd, char **envp, t_hash *ht, char *fn);
+int		get_next_hash_table_i(t_hash *ht);
 
 #endif

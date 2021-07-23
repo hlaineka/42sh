@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/07/23 15:13:54 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/07/23 16:31:19 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -183,6 +183,7 @@ _SRC_EXECUTION =	execution.c \
 					fork_and_chain_pipes.c \
 					get_last_process.c \
 					get_next_job_pgid.c \
+					get_status_and_condition.c \
 					simple_command.c \
 					wait_to_get_status.c
 
@@ -219,7 +220,8 @@ _SRC_HISTORY =		add_cmd_to_history.c \
 _SRC_TYPE =			builtin_type.c
 
 _SRC_HASH =			builtin_hash.c \
-					is_in_hash_table.c
+					is_in_hash_table.c \
+					add_cmd_to_hash_table.c
 
 SRC_MAIN = $(addprefix $(DIR_MAIN), $(_SRC_MAIN))
 SRC_INPUT = $(addprefix $(DIR_INPUT), $(_SRC_INPUT))

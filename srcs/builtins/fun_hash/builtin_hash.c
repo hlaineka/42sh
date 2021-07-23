@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:21:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/23 12:42:57 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/23 17:06:30 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	hash_list(t_term *term)
 	}
 }
 
-static int	get_next_hash_table_i(t_hash *ht)
+int	get_next_hash_table_i(t_hash *ht)
 {
 	int		i;
 
@@ -63,29 +63,18 @@ static int	get_next_hash_table_i(t_hash *ht)
 	return (i);
 }
 
-static void	args_to_hash_table(char **argv, char **envp, t_process *p)
+static void	args_to_hash_table(char **argv, char **envp)
 {
 	t_term	*term;
 	t_hash	*ht;
 	int		i;
-	int		j;
-	char	*ptr;
 
-	(void)p;
 	i = 1;
 	term = g_term;
-	j = get_next_hash_table_i(term->hash_table);
 	ht = term->hash_table;
 	while (argv[i])
 	{
-		ptr = find_path_for_cmd(argv[i], envp, "hash");
-		if (ptr)
-		{
-			ht[j].cmd = ft_strdup(argv[i]); // todo error protection or just leave it?
-			ht[j].path = ptr;
-			ht[j].hits = 0;
-			j++;
-		}
+		add_cmd_to_hash_table(argv[i], envp, ht, "hash");
 		i++;
 	}
 }
@@ -110,5 +99,5 @@ void	builtin_hash(void *proc)
 		return ((void)err_builtin(E_ILLEGAL_OPTION, "hash", NULL));
 	if (options == (1 << R_FLAG))
 		return (hash_r(g_term));
-	args_to_hash_table(argv, envp, proc);
+	args_to_hash_table(argv, envp);
 }
