@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/23 12:03:14 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/23 15:14:24 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,4 +171,7 @@ void	builtin_type(void *proc);
 ** HASH BUILTIN:
 */
 void	builtin_hash(void *proc);
+char	*cmd_path_from_hash_table(char *cmd, t_hash *ht);
+int		is_in_hash_table(char *cmd, t_hash *ht);
+
 #endif

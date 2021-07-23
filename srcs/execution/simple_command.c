@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 21:00:39 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/23 15:15:17 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,32 @@
 ** was terminated by signal n.
 */
 
-static int	execve_process(t_process *proc)
+static int	execve_process(t_process *proc, t_term *term)
 {
-	char	command_path[1024];
+	char	*cmd;
+	char	cmd_abs[1024];
 	char	*path_ptr;
 
+	cmd = proc->argv[0];
 	path_ptr = ft_getenv("PATH", proc->envp);
-	if (is_absolute_path(proc->argv[0]))
-		ft_strcpy(command_path, proc->argv[0]);
+	if (is_absolute_path(cmd))
+		ft_strcpy(cmd_abs, cmd);
+	else if (is_in_hash_table(cmd, term->hash_table))
+	{
+		ft_strcpy(cmd_abs, cmd_path_from_hash_table(cmd, term->hash_table));
+		ft_strcat(cmd_abs, "/");
+		ft_strcat(cmd_abs, cmd);
+	}
 	else if (!path_ptr)
-		return (err_builtin(E_ENV_PATH_NOT_SET, proc->argv[0], NULL));
-	else if (find_path(proc->argv[0], path_ptr, command_path) <= 0)
-		return (err_builtin(E_NO_COMMAND, proc->argv[0], NULL));
-	if (access(command_path, F_OK == -1))
-		return (err_builtin(E_NOENT, proc->argv[0], NULL));
-	if (access(command_path, X_OK) == -1)
-		return (err_builtin(E_PERM, proc->argv[0], NULL));
+		return (err_builtin(E_ENV_PATH_NOT_SET, cmd, NULL));
+	else if (find_path(cmd, path_ptr, cmd_abs) <= 0)
+		return (err_builtin(E_NO_COMMAND, cmd, NULL));
+	if (access(cmd_abs, F_OK == -1))
+		return (err_builtin(E_NOENT, cmd, NULL));
+	if (access(cmd_abs, X_OK) == -1)
+		return (err_builtin(E_PERM, cmd, NULL));
 	signals_to_default();
-	exit(execve(command_path, proc->argv, proc->envp));
+	exit(execve(cmd_abs, proc->argv, proc->envp));
 }
 
 void	get_status_and_condition(t_process *proc, int status)
@@ -93,7 +101,7 @@ int	simple_command(t_process *proc, t_job *job, t_term *term)
 	if (pid == 0)
 	{
 		setpgid(0, 0);
-		exit(execve_process(proc));
+		exit(execve_process(proc, term));
 	}
 	setpgid(pid, 0);
 	job->job_id = get_next_job_pgid(term->jobs->next);
@@ -119,6 +127,6 @@ int	simple_command_pipe(t_process *proc, t_term *term)
 	if (is_builtin(proc))
 		exit(proc->status);
 //		return (proc->status);
-	exit(execve_process(proc));
+	exit(execve_process(proc, term));
 	return (-1);
 }
