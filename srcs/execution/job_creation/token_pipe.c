@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:51:19 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/01 11:07:46 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/20 20:22:39 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_job	*token_pipe(t_job *job, t_term *term, t_node *current)
 		}
 		else
 		{
-			returnable = init_job();
+			returnable = init_job(current);
 			returnable->first_process->pid = pid;
 			setpgid(pid, 0);
 			//tcsetpgrp()
