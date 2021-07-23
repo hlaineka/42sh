@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 18:45:48 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 20:23:38 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/23 12:08:57 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static const char	*g_builtins[] = {
 	"fc",
 	"test",
 	"type",
+	"hash",
 	NULL
 };
 
@@ -38,7 +39,9 @@ static const t_fp	g_builtin_fps[] = {
 	&builtin_bg,
 	&builtin_fc,
 	&builtin_test,
-	&builtin_type
+	&builtin_type,
+	&builtin_hash,
+	NULL
 };
 
 int	is_builtin_type(char *cmd)

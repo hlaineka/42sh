@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/19 20:04:03 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/23 12:56:07 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void	init_term(t_term *term)
 void	initialize(t_input *input, t_term *term, char **envp, char **argv)
 {
 	ft_bzero(term, sizeof(t_term));
+//	ft_bzero(term->hash_table, sizeof(t_hash *) * 1024);
 	init_flags(term, argv);
 	init_term(term);
 	init_input(input);

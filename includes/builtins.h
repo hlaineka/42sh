@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 20:22:19 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/23 12:03:14 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int		is_digit_str(char *str);
 */
 void	builtin_cd(void *proc);
 int		find_path(char *file, char *path_env, char *buf);
+char	*find_path_for_cmd(char *cmd, char **envp, const char *fn);
 int		is_absolute_path(char *path);
 int		is_valid_folder(char *path, char *progname);
 char	*get_absolute_path_to_buf(char *rel, char **envp, char *buf);
@@ -165,4 +166,9 @@ void	le_operand(void *proc);
 ** TYPE BUILTIN:
 */
 void	builtin_type(void *proc);
+
+/*
+** HASH BUILTIN:
+*/
+void	builtin_hash(void *proc);
 #endif

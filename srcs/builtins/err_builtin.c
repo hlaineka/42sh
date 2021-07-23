@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 14:27:47 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 18:08:55 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/23 11:53:56 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,8 @@ static const char	*g_errstr[] = {
 	"no such job",
 	"binary operator expected",
 	"unary operator expected",
-	"integer expression expected"
+	"integer expression expected",
+	"not found"
 };
 
 int	err_builtin(int error_no, char *name, char *arg)

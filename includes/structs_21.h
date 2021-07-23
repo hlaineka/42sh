@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/19 11:21:38 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/23 12:38:07 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,13 @@ typedef struct s_input
 **	int					status;      //reported status value
 **}						t_process;
 */
+
+typedef struct s_hash
+{
+	int					hits;
+	char				*cmd;
+	char				*path;
+}						t_hash;
 
 typedef struct s_process
 {
@@ -183,6 +190,7 @@ typedef struct s_job
 typedef struct s_term
 {
 	char				*envp[1024];
+	t_hash				hash_table[1024];			// use macro?
 	char				*history[HISTORY_SIZE];		// use macro?
 	t_input				*input;
 	t_input				*here_input;
