@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/07/23 17:50:23 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/07/24 12:35:41 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -355,6 +355,7 @@ $(DIR_OBJS)%.o: $(DIR_TYPE)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
 
 $(DIR_OBJS)%.o: $(DIR_HASH)%.c $(INC)
+		$(CC) $(CFLAGS) -o $@ -c $<
 
 $(DIR_OBJS)%.o: $(DIR_EXPORT)%.c $(INC)
 		$(CC) $(CFLAGS) -o $@ -c $<
