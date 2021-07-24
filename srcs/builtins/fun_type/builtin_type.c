@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 21:18:27 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/24 20:55:42 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,17 @@
 
 int		print_type(char *cmd, t_process *p, t_term *term)
 {
+	t_hash		*ht;
 	char		buf[1024];
 	char		*path;
 
-	(void)term;
+	ht = term->hash_table;
 	path = ft_getenv("PATH", p->envp);
 	if (is_builtin_type(cmd))
 		ft_printf("%s is a shell builtin\n", cmd);
+	else if (is_in_hash_table(cmd, term->hash_table))
+		ft_printf("%s is hashed (%s%s)\n",
+			cmd, cmd_path_from_hash_table(cmd, ht), cmd);
 	else
 	{
 		find_path(cmd, path, buf);
@@ -48,7 +52,7 @@ void	builtin_type(void *proc)
 	argv++;
 	while (*argv)
 	{
-		p->status = print_type(*argv, p, p->term_ptr);
+		p->status = print_type(*argv, p, g_term);
 		argv++;
 	}
 
