@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/20 21:11:17 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/24 13:22:32 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static int	write_history_to_file(t_fc *fc, char **hist, t_term *term, t_process 
 	char	*line;
 	int		ret;
 
+	line = NULL;
 	fd = open_temp_file_write();
 	if (fc->first)
 		i = fc->first;
