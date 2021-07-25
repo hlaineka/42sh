@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/25 17:10:05 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/25 17:58:11 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ t_token				*alias_handling(t_token *first, t_term *term)
 				prev->next = new;
 			else
 				first = new;
+			new->prev = prev;
 			temp = new;
 			while (temp->next)
 				temp = temp->next;
 			temp->next = next;
+			next->prev = temp;
 		}
 		*/
 		prev = temp;
