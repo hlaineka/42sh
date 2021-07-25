@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:35:28 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/25 16:58:33 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/25 17:57:55 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,12 @@ t_token	*bang_history(t_token *first, t_term *term)
 				prev->next = new;
 			else
 				first = new;
+			new->prev = prev;
 			temp = new;
 			while (temp->next)
 				temp = temp->next;
 			temp->next = next;
+			next->prev = temp;
 		}
 		prev = temp;
 		temp = next;
