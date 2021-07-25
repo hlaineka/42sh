@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/07/11 16:34:36 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/25 17:01:29 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,13 +194,13 @@ t_token				*shunting_yard(t_token *first);
 ** parser/tokenization/lexer.c
 */
 
-t_token				*lexer(char *input, t_term *term);
+t_token				*lexer(char *input, t_term *term, int remove_quotes);
 
 /*
 ** parser/tokenization/advanced_tokenization.c
 */
 
-t_token				*advanced_tokenization(t_token *first, t_term *term);
+t_token				*advanced_tokenization(t_token *first, t_term *term, int remove_quotes);
 
 /*
 ** parser/tokenization/io_numbers.c
@@ -296,9 +296,15 @@ t_token				*word_expansions(t_token *first, t_term *term);
 t_token				*add_full_command(t_token *first);
 
 /*
-**
+** parser/tokenization/bang_history.c
 */
 
 t_token				*bang_history(t_token *first, t_term *term);
+
+/*
+** parser/tokenization/alias_handling.c
+*/
+
+t_token				*alias_handling(t_token *first, t_term *term);
 
 #endif

@@ -1,43 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bang_history.c                                     :+:      :+:    :+:   */
+/*   alias_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/11 16:35:28 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/25 16:58:33 by hlaineka         ###   ########.fr       */
+/*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
+/*   Updated: 2021/07/25 17:10:05 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-#include "includes.h"
-#include "history.h"
 
-t_token	*bang_history(t_token *first, t_term *term)
+t_token				*alias_handling(t_token *first, t_term *term)
 {
 	t_token		*temp;
 	t_token		*next;
 	t_token		*prev;
-	t_token		*new;
-	const char	*history_cmd;
+	//t_token		*new;
+	//static char	*alias_cmd;
 
 	temp = first;
 	prev = NULL;
 	while (temp && term)
 	{
 		next = temp->next;
-		if (temp->value && temp->value[0] == '!' && !temp->quotes[0])
+		/*
+		// alias_checker ja alias_selector tekemättä, tai sitten ne voi yhdistääkin
+		if (alias_checker(temp->value))
 		{
-			history_cmd = bang_selector(temp->value, term);
-			if (!history_cmd)
-			{
-				ft_printf_fd(2, "history not found\n");
-				free_tokens(first);
-				return (NULL);
-			}
-			//ft_printf_fd(STDOUT_FILENO, "value in history: -%s-\n", history_cmd);
-			new = lexer(ft_strdup(history_cmd), term, 0);
+			alias_cmd = alias_selector(temp->value, term);
+			new = lexer(ft_strdup(alias_cmd), term, 0);
 			free_tokens(temp->subtokens);
 			delete_token(temp);
 			if (prev)
@@ -49,6 +42,7 @@ t_token	*bang_history(t_token *first, t_term *term)
 				temp = temp->next;
 			temp->next = next;
 		}
+		*/
 		prev = temp;
 		temp = next;
 	}
