@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:35:28 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/12 15:00:33 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/25 12:35:49 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,33 +17,37 @@
 t_token	*bang_history(t_token *first, t_term *term)
 {
 	t_token		*temp;
+	t_token		*next;
+	t_token		*prev;
+	t_token		*new;
 	const char	*history_cmd;
-//	char	history[STR_LENGTH];
-//	int			i;
 
 	temp = first;
+	prev = NULL;
 	while (temp && term)
 	{
+		next = temp->next;
 		if (temp->value && temp->value[0] == '!' && !temp->quotes[0])
 		{
 			history_cmd = bang_selector(temp->value, term);
 			if (!history_cmd)
 			{
-				// todo: helvi, what should we do here?
+				ft_printf_fd(2, "history not found\n");
 				free_tokens(first);
 				return (NULL);
 			}
-			ft_free(temp->value);
-			temp->value = ft_strdup(history_cmd);
-			// temp->value = get_history(history, term);
-//			ft_bzero(history, STR_LENGTH);
-//			i = 1;
-//			while (temp->value[i])
-//			{
-//				history[i - 1] = temp->value[i];
-//				i++;
-//			}
-
+			ft_printf_fd(STDOUT_FILENO, "value in history: -%s-\n", temp->value);
+			new = lexer(ft_strdup(history_cmd), term, 0);
+			free_tokens(temp->subtokens);
+			delete_token(temp);
+			if (prev)
+				prev->next = new;
+			else
+				first = new;
+			temp = new;
+			while (temp->next)
+				temp = temp->next;
+			temp->next = next;
 			// call to history function here, with const char *history as parameter
 			// now if ! is the first and unquoted char of string, we get here. Is this the rule?
 			// ft_free(temp->value);
@@ -54,9 +58,9 @@ t_token	*bang_history(t_token *first, t_term *term)
 			// print error message;
 			// return (null);
 			// remove the next line
-			ft_printf_fd(STDOUT_FILENO, "value in history: -%s-\n", temp->value);
 		}
-		temp = temp->next;
+		prev = temp;
+		temp = next;
 	}
 	return (first);
 }

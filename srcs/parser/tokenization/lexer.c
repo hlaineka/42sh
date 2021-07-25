@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:32:48 by helvi             #+#    #+#             */
-/*   Updated: 2021/07/11 14:39:07 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/25 12:31:38 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	*remove_backslash(char *str)
 	return (str);
 }
 
-t_token	*lexer(char *input, t_term *term)
+t_token	*lexer(char *input, t_term *term, int remove_quotes)
 {
 	t_token	*first;
 
@@ -106,14 +106,17 @@ t_token	*lexer(char *input, t_term *term)
 	first = validate_operator_tokens(first);
 	if (term->intern_variables->flag_debug == 1)
 		debug_print_tokens(first);
-	first = advanced_tokenization(first, term);
+	first = advanced_tokenization(first, term, remove_quotes);
 	if (term->intern_variables->flag_debug == 1)
 		debug_print_tokens(first);
 	if (!first)
 		return (NULL);
-	add_full_command(first);
-	if (term->intern_variables->flag_debug == 1)
-		debug_print_tokens(first);
-	quote_removal(first);
+	if (remove_quotes)
+	{
+		add_full_command(first);
+		if (term->intern_variables->flag_debug == 1)
+			debug_print_tokens(first);
+		quote_removal(first);
+	}
 	return (first);
 }
