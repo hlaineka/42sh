@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/23 17:16:10 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/25 18:05:14 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int	simple_command(t_process *proc, t_job *job, t_term *term)
 		proc->status = 1;
 		return (-1);
 	}
-	set_signal_execution();
 	pid = fork();
 	if (pid < 0)
 		return (err_builtin(E_FORK, proc->argv[0], NULL));
@@ -92,6 +91,7 @@ int	simple_command(t_process *proc, t_job *job, t_term *term)
 		setpgid(0, 0);
 		exit(execve_process(cmd_abs, proc));
 	}
+	set_signal_execution();
 	setpgid(pid, 0);
 	job->job_id = get_next_job_pgid(term->jobs->next);
 	job->pgid = pid;
