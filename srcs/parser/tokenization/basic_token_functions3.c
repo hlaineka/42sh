@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 17:58:27 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/07 16:49:30 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/29 19:02:34 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,45 @@
 ** returns 0 when the current tokenstr should be delimited.
 */
 
+int	handle_brackets(char *str, char *source, int *i, int *maintoken)
+{
+	ft_printf("BRACKETS FOUND %c\n", source[*i]);
+	if (source[*i] == '(')
+	{
+		if (str)
+		{
+			if (ft_strequ(str, "<"))
+				*maintoken = tkn_lesslpar;
+			else if (ft_strequ(str, ">"))
+				*maintoken = tkn_greatlpar;
+			else if (ft_strequ(str, "$"))
+				*maintoken = tkn_dollarlpar;
+			else
+				return (0);
+		}
+		else
+			*maintoken = tkn_lpar;
+	}
+	else if (source[*i] == '{')
+	{
+		if (str && str[ft_strlen(str) - 1] == '$')
+			*maintoken = tkn_dollarlbrace;
+		else
+			return (0)ö
+	}
+	*maintoken = tkn_operator;
+	str[ft_strlen(str)] = source[*i];
+	*i = *i + 1;
+	return(0);
+}
+
 int	handle_operator_token(char *str, char *source, int *i, int *maintoken)
 {
-	if (ft_strchr(REDIROPS, source[*i]))
+	if (ft_strchr(BRACKETS, source[*i]))
+	{
+		
+	}
+	else if (ft_strchr(REDIROPS, source[*i]))
 	{
 		if (*maintoken != tkn_redirop && !ft_is_nbrstr(str))
 			return (0);
