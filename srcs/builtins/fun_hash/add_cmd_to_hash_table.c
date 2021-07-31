@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 16:24:18 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/23 16:53:13 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/25 18:05:01 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	add_cmd_to_hash_table(char *cmd, char **envp, t_hash *ht, char *fn)
 	char	*ptr;
 	int		i;
 
+	if (is_absolute_path(cmd))
+		return ;
 	if (is_in_hash_table(cmd, ht))
 		return ;
 	ptr = find_path_for_cmd(cmd, envp, fn);

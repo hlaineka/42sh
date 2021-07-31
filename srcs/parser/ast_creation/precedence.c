@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 16:01:36 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/11 14:50:46 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/31 10:18:00 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ static t_token	*add_delimiter_token(t_token *tkn)
 		temp = tkn->prev;
 		while (temp && is_redirectionop(temp))
 			temp = temp->prev;
-		if (temp && (temp->maintoken == tkn_word
-				|| temp->maintoken == tkn_lpar))
+		if (temp && temp->maintoken == tkn_word)
 		{
 			new = malloc(sizeof(t_token));
 			ft_bzero(new, sizeof(t_token));

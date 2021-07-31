@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 18:45:48 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/23 17:52:00 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/29 09:18:39 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static const char	*g_builtins[] = {
 	"export",
 	"set",
 	"unset",
+	"alias",
+	"unalias",
 	NULL
 };
 
@@ -47,6 +49,8 @@ static const t_fp	g_builtin_fps[] = {
 	&builtin_export,
 	&builtin_set,
 	&builtin_unset,
+	&builtin_alias,
+	&builtin_unalias,
 	NULL
 };
 

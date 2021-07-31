@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 17:58:27 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/29 19:02:34 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/29 20:12:44 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,16 @@
 
 int	handle_brackets(char *str, char *source, int *i, int *maintoken)
 {
-	ft_printf("BRACKETS FOUND %c\n", source[*i]);
-	if (source[*i] == '(')
-	{
-		if (str)
-		{
-			if (ft_strequ(str, "<"))
-				*maintoken = tkn_lesslpar;
-			else if (ft_strequ(str, ">"))
-				*maintoken = tkn_greatlpar;
-			else if (ft_strequ(str, "$"))
-				*maintoken = tkn_dollarlpar;
-			else
-				return (0);
-		}
-		else
-			*maintoken = tkn_lpar;
-	}
-	else if (source[*i] == '{')
-	{
-		if (str && str[ft_strlen(str) - 1] == '$')
-			*maintoken = tkn_dollarlbrace;
-		else
-			return (0)ö
-	}
-	*maintoken = tkn_operator;
+	if (!str[0] && source[*i] == '(')
+		*maintoken = tkn_lpar;
+	else if (!str[0] && source[*i] == ')')
+		*maintoken = tkn_rpar;
+	else if (!str[0] && source[*i] == '{')
+		*maintoken = tkn_lbrace;
+	else if (!str[0] && source[*i] == '}')
+		*maintoken = tkn_rbrace;
+	else
+		return (1);
 	str[ft_strlen(str)] = source[*i];
 	*i = *i + 1;
 	return(0);
@@ -54,10 +39,9 @@ int	handle_brackets(char *str, char *source, int *i, int *maintoken)
 
 int	handle_operator_token(char *str, char *source, int *i, int *maintoken)
 {
-	if (ft_strchr(BRACKETS, source[*i]))
-	{
-		
-	}
+	if (ft_strchr(BRACKETS, source[*i]) && 
+		0 == handle_brackets(str, source, i, maintoken))
+			return (0);
 	else if (ft_strchr(REDIROPS, source[*i]))
 	{
 		if (*maintoken != tkn_redirop && !ft_is_nbrstr(str))

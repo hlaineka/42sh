@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/23 12:38:07 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/28 20:03:02 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define KEY_ESC 27
 
 # define HISTORY_SIZE 1024
+# define ALIAS_SIZE 1024
 
 # define HEREDOC_MODE 2
 # define SEARCH_MODE 4
@@ -82,6 +83,12 @@ typedef struct s_hash
 	char				*cmd;
 	char				*path;
 }						t_hash;
+
+typedef struct s_alias
+{
+	char				*name;
+	char				*value;
+}						t_alias;
 
 typedef struct s_process
 {
@@ -222,6 +229,7 @@ typedef struct s_term
 	int					heredoc_fd;
 	int					last_return;
 	struct s_intrn_vars	*intern_variables;
+	t_alias				alias[ALIAS_SIZE];
 }						t_term;
 
 typedef struct s_intrn_vars
