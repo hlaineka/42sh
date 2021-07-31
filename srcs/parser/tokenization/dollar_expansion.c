@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 21:44:33 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/28 16:06:33 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/29 20:30:31 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,11 @@ static int	dollar_parameter(t_token *tkn, t_term *term, int start)
 	end = start;
 	while (tkn->value[end])
 	{
-		if (tkn->value[end] == '}' && (tkn->quotes[end] == 0
-				|| tkn->quotes[end] == 34))
+		if (tkn->value[end] == '}')
 			break ;
 		end++;
 	}
-	if (tkn->value[end] != '}' || (tkn->quotes[end] != 0 && tkn->quotes[end]
-			!= 34))
+	if (tkn->value[end] != '}')
 	{
 		ft_printf_fd(STDERR_FILENO, "syntax error near token $");
 		return (-1);
@@ -62,13 +60,24 @@ int	dollar_expansion(t_token *tkn, t_term *term, int dollar)
 {
 	if (tkn->quotes[dollar] != 0 && tkn->quotes[dollar] != 34)
 		return (0);
-	if (tkn->value[dollar + 1] == '{' && (tkn->quotes[dollar + 1] == 0
-			|| tkn->quotes[dollar + 1] == 34))
+	if (!tkn->next)
+		return (0);
+	if (!tkn->value[dollar + 1] && tkn->next->maintoken == tkn_lpar)
+		tkn->maintoken = tkn_dollarlpar;
+	else if (!tkn->value[dollar + 1] && tkn->next->maintoken == tkn_lbrace)
 	{	
+		tkn->value = ft_strjoin_frees1(tkn->value, tkn->next->value);
+		delete_token(tkn->next);
+		if (!tkn->next)
+			return (0);
+		tkn->value = ft_strjoin_frees1(tkn->value, tkn->next->value);
+		delete_token(tkn->next);
+		if (!tkn->next)
+			return (0);
+		tkn->value = ft_strjoin_frees1(tkn->value, tkn->next->value);
+		delete_token(tkn->next);
 		if (-1 == dollar_parameter(tkn, term, dollar + 2))
 			return (-1);
 	}
-	else
-		return (0);
 	return (0);
 }

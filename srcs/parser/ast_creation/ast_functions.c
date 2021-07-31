@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 15:34:07 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/11 14:49:37 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/31 10:20:25 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ int	is_unaryop(t_token *tkn)
 	if (tkn->maintoken == tkn_less || tkn->maintoken == tkn_great
 		|| tkn->maintoken == tkn_dless || tkn->maintoken == tkn_dgreat
 		|| tkn->maintoken == tkn_lessand || tkn->maintoken == tkn_greatand
-		|| tkn->maintoken == tkn_lessgreat || tkn->maintoken == tkn_clobber)
+		|| tkn->maintoken == tkn_lessgreat || tkn->maintoken == tkn_clobber
+		|| tkn->maintoken == tkn_lpar || tkn->maintoken == tkn_rpar
+		|| tkn->maintoken == tkn_dollarlpar || tkn->maintoken == tkn_lbrace
+		|| tkn->maintoken == tkn_rbrace)
 		return (1);
 	return (0);
 }

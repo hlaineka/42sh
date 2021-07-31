@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/07/29 09:26:17 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/07/29 20:53:40 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -219,6 +219,9 @@ _SRC_JOB_CREATION = job_creation.c \
 					token_and_if.c \
 					token_and.c \
 					token_assignment_word.c \
+					token_dollarlpar.c \
+					token_lbrace.c \
+					token_lpar.c \
 					check_fd.c \
 
 _SRC_HISTORY =		add_cmd_to_history.c \

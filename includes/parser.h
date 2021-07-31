@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/07/25 17:01:29 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/25 18:48:01 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 # include <stdbool.h>
 
 # define BLANKS " \t\n\0"
-# define OPCHARS "&;<>|"
+# define OPCHARS "&;<>|(){}"
 # define REDIROPS "&<>|"
 # define SPECIALPARAMS "@*#?-$!0~"
 # define EXPANSIONCHARS "$`"
+# define BRACKETS "(){}"
 # define NODE_STACK_SIZE 50
 
 /*
@@ -118,6 +119,10 @@ enum e_token
 	tkn_redirop,
 	tkn_syntax_error,
 	tkn_dash,
+	tkn_lesslpar,
+	tkn_greatlpar,
+	tkn_dollarlpar,
+	tkn_dollarlbrace,
 	tkn_eoi
 };
 
