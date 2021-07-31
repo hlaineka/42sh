@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:47:26 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/23 17:43:50 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/31 16:28:38 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ t_job	*token_and(t_job *job, t_term *term, t_node *current)
 	left = tree_traversal(NULL, current->left, term);
 	if (left && current->left->operation != tkn_semi
 		&& current->left->operation != tkn_pipe
-		&& current->left->operation != tkn_and)
+		&& current->left->operation != tkn_and 
+		&& current->left->operation != tkn_and_if
+		&& current->left->operation != tkn_or_if)
 	{
 		left->next = term->jobs->next;
 		term->jobs->next = left;
