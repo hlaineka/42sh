@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/07/25 18:48:01 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/31 11:41:38 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,16 @@
 # define EXPANSIONCHARS "$`"
 # define BRACKETS "(){}"
 # define NODE_STACK_SIZE 50
+
+#define COLON_MINUS 1
+#define COLON_EQUAL 2
+#define COLON_QUESTION 4
+#define COLON_PLUS 8
+#define PRE_HASH 16
+#define PROCENT 32
+#define DPROCENT 64
+#define POST_HASH 128
+#define POST_DHASH 256
 
 /*
 **enum e_token
@@ -281,6 +291,10 @@ int					tilde_expansion(t_token *tkn, t_term *term, int tilde);
 */
 
 int					dollar_expansion(t_token *tkn, t_term *term, int dollar);
+char				*get_param_colon_word(char *param, char *word, int opt, t_term *term);
+char				*get_param_str(char *param, t_term *term);
+char				*get_param_length(char *param, t_term *term);
+
 
 /*
 ** parser/tokenization/word_assignment_marking.c

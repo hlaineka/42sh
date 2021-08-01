@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/07/29 20:53:40 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/07/31 11:31:07 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,7 +101,11 @@ _SRC_TOKENIZATION = lexer.c \
 					dollar_expansion.c \
 					add_full_command.c \
 					bang_history.c \
-					alias_handling.c
+					alias_handling.c \
+					dollar_colons.c \
+					dollar_exp_helpers.c \
+					dollar_prehash.c
+
 
 _SRC_AST_CREATION = ast_creation.c \
 					precedence.c \
