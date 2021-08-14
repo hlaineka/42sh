@@ -27,13 +27,13 @@ test -w nowrite && echo ok || echo wrong
 touch exec noexec; chmod u+x exec
 test -x exec && echo ok || echo wrong
 test -x noexec && echo ok || echo wrong
-socketfile=/var/run/vpncontrol.sock
+setenv socketfile /var/run/vpncontrol.sock
 test -S ${socketfile} && echo ok || echo wrong
 test -S /dev/null && echo ok || echo wrong
 touch emptyfile; echo "not empty" > notempty
 test -s emptyfile && echo ok || echo wrong
 test -s notempty && echo ok || echo wrong
-a='hello' b=''; unset c
+setenv a 'hello'; setenv b ''; unsetenv c
 test ${a} && echo ok || echo wrong
 test ${b} && echo ok || echo wrong
 test ${c} && echo ok || echo wrong
@@ -47,7 +47,7 @@ test 'abc' != 'abc' && echo ok || echo wrong
 test 0 -eq 1 && echo ok || echo wrong
 test -1 -eq 1 && echo ok || echo wrong
 test -1 -eq -1 && echo ok || echo wrong
-first='12' second='34'
+setenv first '12'; setenv second '34'
 test ${first} -ne ${second} && echo ok || echo wrong
 test -1 -gt -2 && echo ok || echo wrong
 test 2 -ge 2 && echo ok || echo wrong

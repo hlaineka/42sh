@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:21:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/01 13:28:44 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/14 16:46:18 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,11 @@ const char *find_alias_named_name(const char *name, t_alias *alias)
 	while (i < ALIAS_SIZE && alias[i].name)
 	{
 		if (ft_strequ(alias[i].name, name))
+		{
+//			if (!alias[i].value)
+//				return ("");
 			return (alias[i].value);
+		}
 		i++;
 	}
 	return (NULL);
