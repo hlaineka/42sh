@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/13 19:39:20 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/14 13:12:16 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,20 @@ char	*read_input_tty(int prompt_mode, t_input *input, t_term *term)
 	int		ret;
 
 	init_input_tty(input, prompt_mode);
+	if (term->intern_variables->flag_script)
+	{
+		if (term->intern_variables->script_fd == -1)
+		{
+			term->intern_variables->script_fd = open(term->intern_variables->script_file, O_RDONLY);
+		}
+		if (get_next_line(term->intern_variables->script_fd, &str) == 0)
+		{
+			close(term->intern_variables->script_fd);
+			str = ft_strdup("exit");
+		}
+		ft_printf("%s\n\r", str);
+		return (str);
+	}
 	while (1)
 	{
 		ft_bzero(read_chars, 1024);
@@ -112,7 +126,8 @@ char	*get_input(int argc, char **argv, t_term *term, t_input *input)
 	str = NULL;
 	input->ret_str = &str;
 	signals_to_ignore();
-	if (term->intern_variables->flag_rawmode || argc == 1)
+	if (term->intern_variables->flag_rawmode || (argc == 1
+		|| (argc == 3 && ft_strequ(argv[1], "script"))))
 	{
 		set_signal_input();
 		do_job_notification(term->jobs, term);

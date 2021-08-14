@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/28 20:03:02 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/14 13:07:29 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,6 +235,9 @@ typedef struct s_term
 typedef struct s_intrn_vars
 {
 	int					flag_debug;
+	int					flag_script;
+	const char			*script_file;
+	int					script_fd;
 	int					flag_noclobber;
 	int					flag_rawmode;
 	char				*intern[1024];
