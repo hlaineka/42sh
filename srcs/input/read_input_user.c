@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/14 15:54:10 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/14 22:02:26 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char	*read_input_tty(int prompt_mode, t_input *input, t_term *term)
 {
 	char	read_chars[1024];
 	char	*str;
+	char	*tmp;
 	int		ret;
 
 	init_input_tty(input, prompt_mode);
@@ -66,7 +67,11 @@ char	*read_input_tty(int prompt_mode, t_input *input, t_term *term)
 			term->intern_variables->script_fd = open(term->intern_variables->script_file, O_RDONLY);
 		}
 		else if (term->intern_variables->script_fd == -2)
+		{
 			str = ft_strdup("exit");
+			ft_printf("%s\n\r", str);
+			return (str);
+		}
 		if (get_next_line(term->intern_variables->script_fd, &str) == 0)
 		{
 			if (str)
@@ -75,7 +80,10 @@ char	*read_input_tty(int prompt_mode, t_input *input, t_term *term)
 			term->intern_variables->script_fd = -2;
 			str = ft_strdup("leaks 42sh");
 		}
-		ft_printf("%s\n\r", str);
+		ft_asprintf(&tmp, "%s\n", str);
+		free(str);
+		str = tmp;
+		ft_printf("%s\r", str);
 		return (str);
 	}
 	while (1)
