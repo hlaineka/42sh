@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/14 16:57:09 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/14 21:21:48 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_token				*alias_handling(t_token *first, t_term *term)
 		if (alias_cmd)
 		{
 			new = lexer(ft_strdup(alias_cmd), term, 0);
+			new = alias_handling(new, term);
 			free_tokens(temp->subtokens);
 			delete_token(temp);
 			if (prev)
