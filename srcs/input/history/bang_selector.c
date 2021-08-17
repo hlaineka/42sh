@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 12:48:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 16:50:48 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/17 19:26:35 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ int	is_bang_minus_number(char *str)
 
 const char	*bang_selector(char *bang_param, t_term *term)
 {
-	if (!bang_param[0] || !bang_param[1])
+	if (!bang_param[0] || !bang_param[1]
+		|| (bang_param[0] == '!' && bang_param[1] == '='))
 		return (bang_param);
 //		return (NULL);
 

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/14 13:07:29 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/15 09:51:25 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_alias
 {
 	char				*name;
 	char				*value;
+	int					state;
 }						t_alias;
 
 typedef struct s_process
