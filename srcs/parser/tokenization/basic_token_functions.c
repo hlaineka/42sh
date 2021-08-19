@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 12:58:18 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/11 14:45:05 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/19 22:04:03 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	free_tokens(t_token *tokens)
 {
 	t_token	*temp;
 
+	while (tokens && tokens->prev)
+		tokens = tokens->prev;
 	while (tokens)
 	{
 		temp = tokens->next;
@@ -96,6 +98,8 @@ void	free_token(t_token *to_free)
 		ft_free(to_free->quotes);
 	if (to_free->full_command)
 		ft_free(to_free->full_command);
+	free_tokens(to_free->subtokens);
+	to_free->subtokens = NULL;
 	ft_free(to_free);
 	to_free = NULL;
 }
