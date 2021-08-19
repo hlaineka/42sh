@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/25 18:05:14 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/19 21:03:33 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,22 @@ static int	get_abs_path_to_cmd(char *cmd, char **envp, t_hash *ht, char *buf)
 	return (0);
 }
 
-static int	execve_process(char *cmd_abs, t_process *proc)
+static int	execve_process(char *cmd_abs, t_process *proc, t_term *term)
 {
 	char	*cmd;
+	char	**envp;
 
+	if (proc->envp)
+		envp = proc->envp;
+	else
+		envp = term->envp;
 	cmd = proc->argv[0];
 	if (access(cmd_abs, F_OK == -1))
 		return (err_builtin(E_NOENT, cmd, NULL));
 	if (access(cmd_abs, X_OK) == -1)
 		return (err_builtin(E_PERM, cmd, NULL));
 	signals_to_default();
-	exit(execve(cmd_abs, proc->argv, proc->envp));
+	exit(execve(cmd_abs, proc->argv, envp));
 }
 
 int	simple_command(t_process *proc, t_job *job, t_term *term)
@@ -69,8 +74,6 @@ int	simple_command(t_process *proc, t_job *job, t_term *term)
 		proc->completed = 1; // do we need to do this with all these errors?
 		return (-1);
 	}
-	if (!proc->envp)
-		proc->envp = term->envp;
 	if (is_builtin(proc))
 	{
 		job->notified = 1;
@@ -89,7 +92,7 @@ int	simple_command(t_process *proc, t_job *job, t_term *term)
 	if (pid == 0)
 	{
 		setpgid(0, 0);
-		exit(execve_process(cmd_abs, proc));
+		exit(execve_process(cmd_abs, proc, term));
 	}
 	set_signal_execution();
 	setpgid(pid, 0);
@@ -113,13 +116,11 @@ int	simple_command_pipe(t_process *proc, t_term *term)
 	signals_to_default();
 	if (!proc->argv || !proc->argv[0] || proc->argv[0][0] == '\0')
 		exit(1);
-	if (!proc->envp)
-		proc->envp = term->envp;
 	if (is_builtin(proc))
 		exit(proc->status);
 	if (get_abs_path_to_cmd(proc->argv[0], term->envp, term->hash_table, cmd_abs) != 0)
 		exit (1);
 //		return (proc->status);
-	exit(execve_process(cmd_abs, proc));
+	exit(execve_process(cmd_abs, proc, term));
 	return (-1);
 }
