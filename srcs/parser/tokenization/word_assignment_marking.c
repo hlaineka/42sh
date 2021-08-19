@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 14:39:32 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/19 20:27:58 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/19 20:32:01 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,10 @@ int	check_assignment_word (t_token *tkn)
 	ft_bzero(name, STR_LENGTH);
 	i = 0;
 	i_equal_sign = ft_str_find_c(tkn->value, '=');
-	ft_printf("%i\n", i_equal_sign);
 	if (i_equal_sign > 0 && tkn->quotes[i_equal_sign] == 0)
 	{
 		while (i < i_equal_sign)
 		{
-			ft_printf("%s\n", name);
 			name[i] = tkn->value[i];
 			i++;
 		}
@@ -43,8 +41,6 @@ int	check_assignment_word (t_token *tkn)
 	}
 	else
 		returnable = 0;
-	ft_printf("%i\n", returnable);
-	ft_printf("%s\n", name);
 	return (returnable);
 }
 
@@ -73,11 +69,8 @@ t_token	*word_assignment_marking(t_token *first)
 	while (temp)
 	{
 		if (is_splitting_operator(temp))
-		{
 			is_first_command_word = 1;
-			continue;
-		}
-		if (is_first_command_word)
+		else if (is_first_command_word)
 		{
 			if (check_assignment_word(temp) == 0)
 			{
