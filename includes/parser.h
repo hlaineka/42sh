@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/07/31 11:41:38 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/19 19:46:47 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ enum e_token
 	tkn_greatlpar,
 	tkn_dollarlpar,
 	tkn_dollarlbrace,
+	tkn_assignment,
 	tkn_eoi
 };
 
