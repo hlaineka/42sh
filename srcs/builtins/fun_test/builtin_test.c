@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/22 18:33:47 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/14 17:57:11 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,11 @@ void	builtin_test(void *proc)
 	argc = process->argc;
 	i = 0;
 	if (argc == 2)
+	{
+		if (ft_strequ(argv[1], ""))
+			process->status = 1;
 		return ;
+	}
 	process->status = 1;
 	if (argc == 1)
 		return ;

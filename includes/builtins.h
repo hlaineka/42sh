@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/29 09:24:07 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/14 13:17:14 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,5 +203,10 @@ int			unset_alias(const char *name, t_alias *alias);
 ** UNALIAS BUILTIN
 */
 void		builtin_unalias(void *proc);
+
+/*
+** EXIT BUILTIN
+*/
+void		builtin_exit(void *proc);
 
 #endif

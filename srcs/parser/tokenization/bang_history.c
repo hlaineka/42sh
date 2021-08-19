@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:35:28 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/25 18:22:13 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/04 12:45:14 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ t_token	*bang_history(t_token *first, t_term *term)
 			history_cmd = bang_selector(temp->value, term);
 			if (!history_cmd)
 			{
+				term->last_return = 1;
 				ft_printf_fd(2, "history not found\n");
 				free_tokens(first);
 				return (NULL);
 			}
+			ft_printf("history:%s\n", history_cmd);
 			//ft_printf_fd(STDOUT_FILENO, "value in history: -%s-\n", history_cmd);
 			new = lexer(ft_strdup(history_cmd), term, 0);
 			free_tokens(temp->subtokens);
