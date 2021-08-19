@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 11:58:18 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/29 20:51:23 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/01 10:58:16 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ static const t_op_function	g_op_functions[] = {
 	[tkn_greatlpar] = NULL,
 	[tkn_dollarlpar] = token_dollarlpar,
 	[tkn_dollarlbrace] = NULL,
+	[tkn_assignment] = token_assignment_word,
 	[tkn_eoi] = NULL,
 	[tkn_eoi + 1] = NULL
 };
