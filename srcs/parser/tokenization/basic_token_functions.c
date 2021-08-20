@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 12:58:18 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/20 20:25:00 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/20 21:23:29 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void	free_tokens(t_token **tokens)
 {
 	t_token	*temp;
 
-//	while (tokens[0] && tokens[0]->prev)
-//		tokens[0] = tokens[0]->prev;
+	while (tokens[0] && tokens[0]->prev)
+		tokens[0] = tokens[0]->prev;
 	while (*tokens)
 	{
 		temp = tokens[0]->next;
