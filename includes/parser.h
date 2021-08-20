@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/08/19 19:46:47 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/20 20:01:32 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,7 @@ t_node				*ast_creator(t_token *first, t_term *term);
 
 t_node				*init_node(void);
 int					is_unaryop(t_token *tkn);
-void				free_ast(t_node *root);
+void				free_ast(t_node **root);
 void				free_nodestack(t_node *stack[]);
 
 /*
@@ -249,8 +249,8 @@ void				quote_removal(t_token *first);
 t_token				*push_to_front(t_token *input, t_token *stack);
 t_token				*push_to_end(t_token *input, t_token *output);
 t_token				*delete_token(t_token *tkn);
-void				free_tokens(t_token *tokens);
-void				free_token(t_token *to_free);
+void				free_tokens(t_token **tokens);
+void				free_token(t_token **to_free);
 
 /*
 ** parser/tokenization/basic_token_functions2.c

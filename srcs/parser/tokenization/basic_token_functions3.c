@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 17:58:27 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/29 20:12:44 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/20 20:10:57 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,10 +113,10 @@ void	free_tokens_sub(t_token *tokens)
 		while (temp_sub)
 		{
 			next_temp_sub = temp_sub->next;
-			free_token(temp_sub);
+			free_token(&temp_sub);
 			temp_sub = next_temp_sub;
 		}
-		free_token(temp);
+		free_token(&temp);
 		temp = next_temp;
 	}
 }
@@ -126,7 +126,7 @@ int	*init_quotearray(t_token *current)
 	int	*quotearray;
 
 	if (current->quotes)
-		ft_free(current->quotes);
+		ft_memdel((void **)&current->quotes);
 	quotearray = malloc(sizeof(int) * ft_strlen(current->value) + 1);
 	ft_bzero(quotearray, sizeof(int) * ft_strlen(current->value));
 	return (quotearray);

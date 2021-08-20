@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:40:47 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/31 16:13:58 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/20 20:28:02 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ t_job	*job_creation(t_node *root, t_term *term)
 	restore_fds(term);
 	if (term->intern_variables->flag_debug == 1)
 		debug_printing(term->jobs->next);
-	free_ast(root);
+	free_ast(&root);
 	return (returnable);
 }
