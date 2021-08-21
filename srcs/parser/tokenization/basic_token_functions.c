@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 12:58:18 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/20 21:23:29 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/21 18:19:46 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,6 @@ void	free_token(t_token **to_free)
 		ft_memdel((void **)&to_free[0]->quotes);
 	if (to_free[0]->full_command)
 		ft_memdel((void **)&to_free[0]->full_command);
-//	if (to_free[0]->subtokens)
-//	{
-//		free_tokens(to_free[0]->subtokens);
-//		to_free[0]->subtokens = NULL;
-//	}
-//	to_free->subtokens = NULL;
 	ft_memdel((void **)to_free);
 	to_free[0] = NULL;
 }
