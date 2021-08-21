@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/14 22:02:26 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/19 21:38:33 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ char	*read_input_tty(int prompt_mode, t_input *input, t_term *term)
 		if (term->intern_variables->script_fd == -1)
 		{
 			term->intern_variables->script_fd = open(term->intern_variables->script_file, O_RDONLY);
+			if (term->intern_variables->script_fd < 0)
+			{
+				ft_putendl_fd("Invalid script file", 2);
+				exit(1);
+			}
 		}
 		else if (term->intern_variables->script_fd == -2)
 		{
