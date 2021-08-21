@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/21 18:36:08 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/21 19:21:04 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,20 +71,15 @@ void	init_flags(t_term *term, char **argv)
 	term->intern_variables = intern_variables;
 	ft_bzero(term->intern_variables, sizeof(term->intern_variables));
 	ft_bzero(term->intern_variables->intern, 1024);
-	if (ft_array_length(argv) == 1)
-		term->intern_variables->flag_rawmode = 1;
-	if (ft_array_length(argv) == 3 || ft_strequ(argv[1], "script"))
+	term->intern_variables->flag_rawmode = 1;
+	if (ft_array_length(argv) == 3 && ft_strequ(argv[1], "script"))
 	{
-		term->intern_variables->flag_rawmode = 1;
 		term->intern_variables->flag_script = 1;
 		term->intern_variables->script_file = argv[2];
 		term->intern_variables->script_fd = -1;
 	}
 	if (ft_array_length(argv) == 2 && ft_strequ(argv[1], "debug"))
-	{
 		term->intern_variables->flag_debug = 1;
-		term->intern_variables->flag_rawmode = 1;
-	}
 }
 
 void	init_term(t_term *term)
