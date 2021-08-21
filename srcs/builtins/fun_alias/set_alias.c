@@ -6,11 +6,24 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 20:19:36 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/15 09:51:20 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/21 14:08:32 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+
+int reset_alias_state(t_alias *alias)
+{
+	int		i;
+
+	i = 0;
+	while (i < ALIAS_SIZE && alias[i].name != NULL)
+	{
+		alias[i].state = 0;
+		i++;
+	}
+	return (0);
+}
 
 int	set_alias(const char *name, const char *value, t_alias *alias)
 {

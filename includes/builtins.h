@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/14 13:17:14 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/21 12:13:49 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,7 @@ void		builtin_alias(void *proc);
 const char	*find_alias_named_name(const char *name, t_alias *alias);
 int			set_alias(const char *name, const char *value, t_alias *alias);
 int			unset_alias(const char *name, t_alias *alias);
+int			reset_alias_state(t_alias *alias);
 
 /*
 ** UNALIAS BUILTIN
