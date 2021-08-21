@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:51:19 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/01 11:07:46 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/01 12:51:23 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,6 @@ t_job	*token_pipe(t_job *job, t_term *term, t_node *current)
 	int		pid;
 	int		status;
 
-	//fork if job == NULL
-	//parent calls setpgid, tcsetpgrp, waitpid, tcsetpgrp
-	//child does the tree traversal and starts the other children
-	// parent waits for child.
 	pid = 0;
 	if (job != NULL)
 		returnable = pipe_child(job, term, current);

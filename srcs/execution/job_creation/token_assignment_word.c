@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:44:14 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/06/30 20:11:41 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/01 13:27:07 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_job       *token_assignment_word(t_job *job, t_term *term, t_node *current)
 	while(current->command[i] != '\0')
 		value[w++] = current->command[i++];
 	value[w] = '\0';
-	if (current->left || job)
+	if ((current->left || job) && current->left->operation != tkn_assignment_word)
 	{
 		if (!job)
 		{
@@ -68,6 +68,7 @@ t_job       *token_assignment_word(t_job *job, t_term *term, t_node *current)
 	}
 	else
 	{
+		if (current->left->operation == tkn_assignment_word)
 		job = init_job();
 		job->first_process->pid = -1; 
 		ft_setenv(name, value, 1, term->envp);

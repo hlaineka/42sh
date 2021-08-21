@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/06/30 16:08:57 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/01 13:24:35 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define REDIROPS "&<>|"
 # define SPECIALPARAMS "@*#?-$!0~"
 # define EXPANSIONCHARS "$`"
-# define NODE_STACK_SIZE 20
+# define NODE_STACK_SIZE 50
 
 /*
 **enum e_token
@@ -133,6 +133,19 @@ typedef struct s_token
 	struct s_token	*next;
 	struct s_token	*prev;
 }					t_token;
+
+/*
+** typedef struct s_node
+**{
+**	struct s_node	*parent;	//the parent node
+**	struct s_node	*left;		//left child
+**	struct s_node	*right;		//right child
+**	t_token			*subtokens; //possible subtokens the original token had
+**	int				state;		// is this used somewhere :D
+**	int				operation;	//the old maintoken of the token
+**	char			*command;	//the command string of the token
+**}					t_node;
+*/
 
 typedef struct s_node
 {
