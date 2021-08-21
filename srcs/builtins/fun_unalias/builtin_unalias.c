@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:21:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/29 09:11:29 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/21 10:27:30 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,11 @@ void	builtin_unalias(void *proc)
 	int		argc;
 	int		i;
 	char	**argv;
-	char	**envp;
 
 	i = 1;
 	term = g_term;
 	argc = ((t_process *)proc)->argc;
 	argv = ((t_process *)proc)->argv;
-	envp = ((t_process *)proc)->envp;
 	if (argc == 1)
 	{
 		((t_process *)proc)->status = 1;

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/24 20:55:42 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/21 10:24:36 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,11 @@ void	builtin_type(void *proc)
 {
 	t_process	*p;
 	int			argc;
-	int			i;
 	char		**argv;
 
 	p = proc;
 	argv = p->argv;
 	argc = p->argc;
-	i = 0;
 	if (argc == 1)
 		return ;
 	argv++;

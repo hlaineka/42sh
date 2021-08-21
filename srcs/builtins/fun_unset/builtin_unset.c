@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 20:50:33 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/22 21:24:30 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/21 10:26:39 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,12 @@ void	builtin_unset(void *proc)
 	t_process	*process;
 	int			argc;
 	char		**argv;
-	char		**envp;
 	int			i;
 
 	i = 1;
 	process = proc;
 	argc = process->argc;
 	argv = process->argv;
-	envp = process->envp;
 	process->status = 0;
 	if (argc < 2)
 	{

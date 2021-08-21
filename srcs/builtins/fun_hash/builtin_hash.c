@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:21:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/23 17:06:30 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/21 10:25:57 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,18 +81,15 @@ static void	args_to_hash_table(char **argv, char **envp)
 
 void	builtin_hash(void *proc)
 {
-	int		i;
 	int		argc;
 	int		options;
 	char	**argv;
 	char	**envp;
 
-	i = 0;
 	options = 0;
 	argc = ((t_process *)proc)->argc;
 	argv = ((t_process *)proc)->argv;
 	envp = ((t_process *)proc)->envp;
-	i = get_argv_options(argv, &options);
 	if (argc == 1)
 		return (hash_list(g_term));
 	if (options != 0 && options != (1 << R_FLAG))

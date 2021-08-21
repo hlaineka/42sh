@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:21:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/14 16:46:18 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/21 10:27:04 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,11 @@ void	builtin_alias(void *proc)
 	int		argc;
 	int		i;
 	char	**argv;
-	char	**envp;
 
 	i = 1;
 	term = g_term;
 	argc = ((t_process *)proc)->argc;
 	argv = ((t_process *)proc)->argv;
-	envp = ((t_process *)proc)->envp;
 	if (argc == 1)
 		return (print_alias(NULL, proc, term));
 	while (i < argc)

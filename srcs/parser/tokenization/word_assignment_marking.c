@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 14:39:32 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/19 20:32:01 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/21 10:17:15 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_token	*word_assignment_marking(t_token *first)
 			{
 				only_assignments = 0;
 				is_first_command_word = 0;
-			}
+			}	
 		}
 		else
 			only_assignments = 0;

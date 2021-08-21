@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/24 13:22:32 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/21 10:24:07 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,6 @@ static void	fc_el(t_term *term, t_fc *fc, int options)
 void	builtin_fc(void *proc)
 {
 	t_term		*term;
-	t_job		*jobs;
 	t_process	*process;
 	int			options;
 	t_fc		fc;
@@ -186,7 +185,6 @@ void	builtin_fc(void *proc)
 	signals_to_default();
 	process = proc;
 	term = g_term;
-	jobs = term->jobs->next;
 	fc = get_fc_options(process, term);
 	options = fc.options;
 	if (options & ~((1 << E_FLAG) | (1 << L_FLAG) | (1 << N_FLAG)

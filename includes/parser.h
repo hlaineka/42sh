@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/08/20 20:01:32 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/21 10:19:11 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,19 @@ typedef struct s_token
 	struct s_token	*next;
 	struct s_token	*prev;
 }					t_token;
+
+/*
+** typedef struct s_node
+**{
+**	struct s_node	*parent;	//the parent node
+**	struct s_node	*left;		//left child
+**	struct s_node	*right;		//right child
+**	t_token			*subtokens; //possible subtokens the original token had
+**	int				state;		// is this used somewhere :D
+**	int				operation;	//the old maintoken of the token
+**	char			*command;	//the command string of the token
+**}					t_node;
+*/
 
 typedef struct s_node
 {

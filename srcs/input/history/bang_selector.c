@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bang_selector.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 12:48:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/17 19:26:35 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/21 10:22:25 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	is_bang_minus_number(char *str)
 	int		i;
 
 	i = 2;
-	if (str[0] != '!' | str[1] != '-')
+	if (str[0] != '!' || str[1] != '-')
 		return (0);
 	while (str[i])
 	{

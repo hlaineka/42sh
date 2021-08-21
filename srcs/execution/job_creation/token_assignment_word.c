@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:44:14 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/01 12:22:21 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/21 10:37:00 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ t_job       *token_assignment_word(t_job *job, t_term *term, t_node *current)
 		{
 			job = init_job(current);
 			job->first_process->envp = strarr_copy(term->envp);
+			job->next = term->jobs->next;
+			term->jobs->next = job;
 		}
 		ft_setenv(name, value, 1, term->envp);
 		job = tree_traversal(job, current->left, term);
@@ -55,7 +57,11 @@ t_job       *token_assignment_word(t_job *job, t_term *term, t_node *current)
 	else
 	{
 		if (!job)
+		{
 			job = init_job(current);
+			job->next = term->jobs->next;
+			term->jobs->next = job;
+		}
 		job->first_process->pid = -1; 
 		if (ft_getenv(name, term->envp))
 			ft_setenv(name, value, 1, term->envp);

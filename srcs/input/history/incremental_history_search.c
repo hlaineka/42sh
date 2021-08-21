@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   incremental_history_search.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 17:55:17 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/20 21:29:39 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/21 10:23:13 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,9 @@ static int	do_special_keys_history(char *rc, t_input *input, t_term *term)
 
 int	incremental_history_search(char *rc, t_input *input, t_term *term)
 {
-	int			ret;
 	int			len;
 	const char	*cmd;
 
-	ret = 0;
 	len = ft_strlen(input->ls);
 	if (len > 1000)
 		return (-1);
