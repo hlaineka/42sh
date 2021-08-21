@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:44:14 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/01 13:27:07 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/21 10:37:00 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,40 +38,36 @@ t_job       *token_assignment_word(t_job *job, t_term *term, t_node *current)
 {
 	char	name[ARGV_SIZE];
 	char	value[ARGV_SIZE];
-	int		i;
-	int		w;
 	
 	if (current->right)
 		return (NULL);
-	i = 0;
-	while (current->command[i] != '\0' && current->command[i] != '=')
-	{
-		name[i] = current->command[i];
-		i++;
-	}
-	name[i++] = '\0';
-	w = 0;
-	while(current->command[i] != '\0')
-		value[w++] = current->command[i++];
-	value[w] = '\0';
-	if ((current->left || job) && current->left->operation != tkn_assignment_word)
+	get_name_and_value(current->command, value, name);
+	if (current->operation == tkn_assignment)
 	{
 		if (!job)
 		{
-			job = init_job();
+			job = init_job(current);
 			job->first_process->envp = strarr_copy(term->envp);
+			job->next = term->jobs->next;
+			term->jobs->next = job;
 		}
-		if (ft_getenv(name, term->envp))
-			ft_setenv(name, value, 1, term->envp);
-		ft_setenv(name, value, 1, job->first_process->envp);
+		ft_setenv(name, value, 1, term->envp);
 		job = tree_traversal(job, current->left, term);
 	}
 	else
 	{
-		if (current->left->operation == tkn_assignment_word)
-		job = init_job();
+		if (!job)
+		{
+			job = init_job(current);
+			job->next = term->jobs->next;
+			term->jobs->next = job;
+		}
 		job->first_process->pid = -1; 
-		ft_setenv(name, value, 1, term->envp);
+		if (ft_getenv(name, term->envp))
+			ft_setenv(name, value, 1, term->envp);
+		ft_setenv(name, value, 1, term->intern_variables->intern);
+		if (current->left)
+			job = tree_traversal(job, current->left, term);
 	}
 	return(job);
 }

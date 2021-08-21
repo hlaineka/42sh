@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:07:56 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/12 10:38:17 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:46:32 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	sig_child_handler(void)
 	t_process	*proc;
 
 	pid = waitpid(-1, &status, WNOHANG);
-	jobs = g_term->jobs;
+	jobs = g_term->jobs->next;
 	while (jobs)
 	{
 		proc = jobs->first_process;
@@ -48,8 +48,10 @@ void	sig_child_handler(void)
 		{
 			if (pid == proc->pid)
 			{
-				handle_process(proc, status);
-				kill_processes_before_pid(jobs, pid);
+				get_status_and_condition(proc, status);
+				jobs->notified = 0;
+//				handle_process(proc, status);
+//				kill_processes_before_pid(jobs, pid);
 				return ;
 			}
 			proc = proc->next;
@@ -63,7 +65,7 @@ void	sig_tstp_handler(void)
 	t_job		*jobs;
 	t_process	*proc;
 
-	jobs = g_term->jobs;
+	jobs = g_term->jobs->next;
 	while (jobs)
 	{
 		proc = jobs->first_process;
@@ -81,11 +83,13 @@ void	sig_handler_exec(int signo)
 	t_job		*jobs;
 	t_process	*proc;
 
+	if (signo == SIGTSTP)
+		sig_tstp_handler();
 	if (signo == SIGCHLD)
 		sig_child_handler();
 	if (signo == SIGINT)
 	{
-		jobs = g_term->jobs;
+		jobs = g_term->jobs->next;
 		while (jobs)
 		{
 			proc = jobs->first_process;
@@ -115,6 +119,9 @@ void	set_signal_execution(void)
 		|| (signal(SIGXFSZ, sig_handler_exec) == SIG_ERR)
 		|| (signal(SIGABRT, sig_handler_exec) == SIG_ERR)
 		|| (signal(SIGVTALRM, sig_handler_exec) == SIG_ERR)
+		|| (signal(SIGCHLD, SIG_DFL) == SIG_ERR)
+		|| (signal(SIGTTOU, SIG_IGN) == SIG_ERR)
+		|| (signal(SIGTTIN, SIG_IGN) == SIG_ERR)
 		|| (signal(SIGPROF, sig_handler_exec) == SIG_ERR))
 		ft_exit(0);
 }

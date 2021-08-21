@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/06/13 13:15:09 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/14 12:57:37 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	init_input(t_input *input)
 		free(input->rrs);
 		exit(1);
 	}
-	input->history = ft_clstnew(NULL, 0);
-	if (!input->history)
-		exit(1);
-	input->last_comm = input->history;
+//	input->history = ft_clstnew(NULL, 0);
+//	if (!input->history)
+//		exit(1);
+//	input->last_comm = input->history;
 	input->ls_size = 2048;
 	input->rrs_size = 2048;
 	input->clipboard_size = 2048;
@@ -72,6 +72,13 @@ void	init_flags(t_term *term, char **argv)
 	ft_bzero(term->intern_variables, sizeof(term->intern_variables));
 	if (ft_array_length(argv) == 1)
 		term->intern_variables->flag_rawmode = 1;
+	if (ft_array_length(argv) == 3 || ft_strequ(argv[1], "script"))
+	{
+		term->intern_variables->flag_rawmode = 1;
+		term->intern_variables->flag_script = 1;
+		term->intern_variables->script_file = argv[2];
+		term->intern_variables->script_fd = -1;
+	}
 	if (ft_array_length(argv) == 2 && ft_strequ(argv[1], "debug"))
 	{
 		term->intern_variables->flag_debug = 1;
@@ -82,12 +89,11 @@ void	init_flags(t_term *term, char **argv)
 void	init_term(t_term *term)
 {
 	int		success;
-	char	*buffer;
 
+	term->jobs = ft_memalloc(sizeof(t_job));
 	term->buffer = ft_memalloc(sizeof(char) * 2048);
 	if (!term->buffer)
 		err_fatal(ERR_MALLOC, NULL, term);
-	buffer = term->buffer;
 	if (term->intern_variables->flag_rawmode)
 	{
 		term->termtype = getenv("TERM");
@@ -102,7 +108,7 @@ void	init_term(t_term *term)
 			err_quit(ERR_TERMCAPS_NO_ACCESS, NULL);
 		if (success == 0)
 			err_quit(ERR_TERMTYPE_NOT_FOUND, term->termtype);
-		init_term_values(term, buffer);
+		init_term_values(term, term->buffer);
 	}
 	else
 	{
@@ -115,15 +121,18 @@ void	init_term(t_term *term)
 void	initialize(t_input *input, t_term *term, char **envp, char **argv)
 {
 	ft_bzero(term, sizeof(t_term));
+//	ft_bzero(term->hash_table, sizeof(t_hash *) * 1024);
 	init_flags(term, argv);
 	init_term(term);
 	init_input(input);
 	copy_envp(envp, term);
 	term->input = input;
+	ft_bzero(term->history, sizeof(char) * HISTORY_SIZE);
+	term->history[0] = ft_strnew(0);
 	if (term->intern_variables->flag_rawmode)
 	{
 		get_termios_modes(term);
-		tputs(term->ti_string, 1, ft_putc);
+//		tputs(term->ti_string, 1, ft_putc);
 		tputs(tgoto(term->cm_string, 0, 0), 1, ft_putc);
 		tputs(term->cd_string, 1, ft_putc);
 	}

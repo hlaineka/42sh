@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:42:02 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/11 12:44:37 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/07/29 09:24:01 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,12 @@
 # define E_INVALID_INPUT 112
 # define E_NO_COMMAND 113
 # define E_ENV_PATH_NOT_SET 114
+# define E_NO_SUCH_JOB 115
+# define E_BIN_OP_EXP 116
+# define E_UNA_OP_EXP 117
+# define E_NOT_INT 118
+# define E_NOT_FOUND 119
+
+typedef struct stat	t_stat;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 12:58:18 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/04/29 10:02:44 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/20 21:23:29 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,11 @@ t_token	*delete_token(t_token *tkn)
 
 	returnable = NULL;
 	if (tkn->value)
-		ft_free(tkn->value);
+		ft_memdel((void **)&tkn->value);
 	if (tkn->quotes)
-		ft_free(tkn->quotes);
+		ft_memdel((void **)&tkn->quotes);
+	if (tkn->full_command)
+		ft_memdel((void **)&tkn->full_command);
 	if (tkn->next)
 	{
 		tkn->next->prev = tkn->prev;
@@ -70,28 +72,38 @@ t_token	*delete_token(t_token *tkn)
 		if (!returnable)
 			returnable = tkn->prev;
 	}
-	ft_free(tkn);
+	ft_memdel((void **)&tkn);
 	return (returnable);
 }
 
-void	free_tokens(t_token *tokens)
+void	free_tokens(t_token **tokens)
 {
 	t_token	*temp;
 
-	while (tokens)
+	while (tokens[0] && tokens[0]->prev)
+		tokens[0] = tokens[0]->prev;
+	while (*tokens)
 	{
-		temp = tokens->next;
+		temp = tokens[0]->next;
 		free_token(tokens);
-		tokens = temp;
+		tokens[0] = temp;
 	}
 }
 
-void	free_token(t_token *to_free)
+void	free_token(t_token **to_free)
 {
-	if (to_free->value)
-		ft_free(to_free->value);
-	if (to_free->quotes)
-		ft_free(to_free->quotes);
-	ft_free(to_free);
-	to_free = NULL;
+	if (to_free[0]->value)
+		ft_memdel((void **)(&to_free[0]->value));
+	if (to_free[0]->quotes)
+		ft_memdel((void **)&to_free[0]->quotes);
+	if (to_free[0]->full_command)
+		ft_memdel((void **)&to_free[0]->full_command);
+//	if (to_free[0]->subtokens)
+//	{
+//		free_tokens(to_free[0]->subtokens);
+//		to_free[0]->subtokens = NULL;
+//	}
+//	to_free->subtokens = NULL;
+	ft_memdel((void **)to_free);
+	to_free[0] = NULL;
 }

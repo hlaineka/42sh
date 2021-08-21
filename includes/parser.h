@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/07/01 13:24:35 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/21 10:19:11 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,22 @@
 # include <stdbool.h>
 
 # define BLANKS " \t\n\0"
-# define OPCHARS "&;<>|"
+# define OPCHARS "&;<>|(){}"
 # define REDIROPS "&<>|"
 # define SPECIALPARAMS "@*#?-$!0~"
 # define EXPANSIONCHARS "$`"
+# define BRACKETS "(){}"
 # define NODE_STACK_SIZE 50
+
+#define COLON_MINUS 1
+#define COLON_EQUAL 2
+#define COLON_QUESTION 4
+#define COLON_PLUS 8
+#define PRE_HASH 16
+#define PROCENT 32
+#define DPROCENT 64
+#define POST_HASH 128
+#define POST_DHASH 256
 
 /*
 **enum e_token
@@ -118,6 +129,11 @@ enum e_token
 	tkn_redirop,
 	tkn_syntax_error,
 	tkn_dash,
+	tkn_lesslpar,
+	tkn_greatlpar,
+	tkn_dollarlpar,
+	tkn_dollarlbrace,
+	tkn_assignment,
 	tkn_eoi
 };
 
@@ -129,6 +145,7 @@ typedef struct s_token
 	int				precedence;
 	bool			left_associative;
 	char			*value;
+	char			*full_command;
 	struct s_token	*subtokens;
 	struct s_token	*next;
 	struct s_token	*prev;
@@ -156,6 +173,7 @@ typedef struct s_node
 	int				state;
 	int				operation;
 	char			*command;
+	char			*full_command;
 }					t_node;
 
 typedef t_job *(*t_op_function)(t_job *job, t_term *term, t_node *current);
@@ -186,7 +204,7 @@ t_node				*ast_creator(t_token *first, t_term *term);
 
 t_node				*init_node(void);
 int					is_unaryop(t_token *tkn);
-void				free_ast(t_node *root);
+void				free_ast(t_node **root);
 void				free_nodestack(t_node *stack[]);
 
 /*
@@ -205,13 +223,13 @@ t_token				*shunting_yard(t_token *first);
 ** parser/tokenization/lexer.c
 */
 
-t_token				*lexer(char *input, t_term *term);
+t_token				*lexer(char *input, t_term *term, int remove_quotes);
 
 /*
 ** parser/tokenization/advanced_tokenization.c
 */
 
-t_token				*advanced_tokenization(t_token *first, t_term *term);
+t_token				*advanced_tokenization(t_token *first, t_term *term, int remove_quotes);
 
 /*
 ** parser/tokenization/io_numbers.c
@@ -244,8 +262,8 @@ void				quote_removal(t_token *first);
 t_token				*push_to_front(t_token *input, t_token *stack);
 t_token				*push_to_end(t_token *input, t_token *output);
 t_token				*delete_token(t_token *tkn);
-void				free_tokens(t_token *tokens);
-void				free_token(t_token *to_free);
+void				free_tokens(t_token **tokens);
+void				free_token(t_token **to_free);
 
 /*
 ** parser/tokenization/basic_token_functions2.c
@@ -287,6 +305,10 @@ int					tilde_expansion(t_token *tkn, t_term *term, int tilde);
 */
 
 int					dollar_expansion(t_token *tkn, t_term *term, int dollar);
+char				*get_param_colon_word(char *param, char *word, int opt, t_term *term);
+char				*get_param_str(char *param, t_term *term);
+char				*get_param_length(char *param, t_term *term);
+
 
 /*
 ** parser/tokenization/word_assignment_marking.c
@@ -299,5 +321,23 @@ t_token				*word_assignment_marking(t_token *first);
 */
 
 t_token				*word_expansions(t_token *first, t_term *term);
+
+/*
+** parser/tokenization/add_full_command.c
+*/
+
+t_token				*add_full_command(t_token *first);
+
+/*
+** parser/tokenization/bang_history.c
+*/
+
+t_token				*bang_history(t_token *first, t_term *term);
+
+/*
+** parser/tokenization/alias_handling.c
+*/
+
+t_token				*alias_handling(t_token *first, t_term *term);
 
 #endif

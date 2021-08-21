@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 10:34:59 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 12:25:50 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/13 19:38:49 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,31 +29,39 @@ void	sig_handler_input(int signo)
 	ft_putrstr_input(input->rrs, input, term);
 	input->ls[0] = '\0';
 	input->rrs[0] = '\0';
+	input->hist_i = 0;
 	*input->quote = PROMPT_NORMAL;
 	ft_putstr_fd("\n\r", STDOUT_FILENO);
 	ft_memdel((void **)input->ret_str);
 	*input->input_temp = NULL;
-	if (input->heredoc)
+	if (input->input_mode == HEREDOC_MODE)
 		init_input_tty(input, PROMPT_HEREDOC);
 	else
 		init_input_tty(input, PROMPT_START);
 }
 
+void	sig_ttou_input(int signo)
+{
+	ft_printf("INPUT: SIGTTOU signal %d\n", signo);
+}
+
 void	set_signal_input(void)
 {
 	if ((signal(SIGINT, sig_handler_input) == SIG_ERR)
-		|| (signal(SIGCONT, sig_handler_input) == SIG_ERR)
-		|| (signal(SIGINT, sig_handler_input) == SIG_ERR)
-		|| (signal(SIGTSTP, sig_handler_input) == SIG_ERR)
+//		|| (signal(SIGCONT, sig_handler_input) == SIG_ERR)
+//		|| (signal(SIGCHLD, sig_handler_exec) == SIG_ERR)
+//		|| (signal(SIGINT, sig_handler_input) == SIG_ERR)
+//		|| (signal(SIGTSTP, sig_handler_input) == SIG_ERR)
 		|| (signal(SIGTERM, sig_handler_input) == SIG_ERR)
 		|| (signal(SIGQUIT, sig_handler_input) == SIG_ERR)
 		|| (signal(SIGHUP, sig_handler_input) == SIG_ERR)
-		|| (signal(SIGPIPE, sig_handler_input) == SIG_ERR)
-		|| (signal(SIGALRM, sig_handler_input) == SIG_ERR)
+//		|| (signal(SIGPIPE, sig_handler_input) == SIG_ERR)
+//		|| (signal(SIGALRM, sig_handler_input) == SIG_ERR)
 		|| (signal(SIGXCPU, sig_handler_input) == SIG_ERR)
-		|| (signal(SIGXFSZ, sig_handler_input) == SIG_ERR)
-		|| (signal(SIGABRT, sig_handler_input) == SIG_ERR)
-		|| (signal(SIGVTALRM, sig_handler_input) == SIG_ERR)
-		|| (signal(SIGPROF, sig_handler_input) == SIG_ERR))
+//		|| (signal(SIGXFSZ, sig_handler_input) == SIG_ERR)
+//		|| (signal(SIGABRT, sig_handler_input) == SIG_ERR)
+//		|| (signal(SIGVTALRM, sig_handler_input) == SIG_ERR)
+//		|| (signal(SIGPROF, sig_handler_input) == SIG_ERR)
+		|| (signal(SIGTTOU, sig_ttou_input) == SIG_ERR))
 		ft_exit(0);
 }

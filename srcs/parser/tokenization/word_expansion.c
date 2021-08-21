@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 19:27:06 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/01 21:52:54 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/20 20:03:02 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_token	*word_expansions(t_token *first, t_term *term)
 	{
 		if (-1 == token_value_expansion(temp, term))
 		{
-			free_tokens(first);
+			free_tokens(&first);
 			return (NULL);
 		}
 		temp_sub = temp->subtokens;
@@ -53,7 +53,7 @@ t_token	*word_expansions(t_token *first, t_term *term)
 		{
 			if (-1 == token_value_expansion(temp_sub, term))
 			{
-				free_tokens(first);
+				free_tokens(&first);
 				return (NULL);
 			}
 			temp_sub = temp_sub->next;

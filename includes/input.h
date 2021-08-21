@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/17 11:44:49 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/14 14:25:03 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,12 @@
 # define PROMPT_BQUOTE 96
 # define PROMPT_ESCAPECHAR 92
 # define PROMPT_HEREDOC 127
+# define PROMPT_SEARCH 512
 
 # include "includes.h"
 # include "structs_21.h"
+
+void		pre_prompt_jobs_check(t_term *term);
 
 char		*get_input(int argc, char **argv, t_term *term, t_input *input);
 char		*get_input_heredoc(char *eof, t_input *input, t_term *term);
@@ -45,6 +48,8 @@ void		err_quit(int error_no, char *s_str);
 int			err_return(int error_no, char *s_str);
 
 void		init_input_tty(t_input *input, int prompt_mode);
+
+int			is_special_key(char *rc);
 
 /*
 ** TERMINAL
@@ -77,7 +82,7 @@ int			get_pos(int *y, int *x);
 
 void		move_char_from_s1_to_s2(char *s1, char *s2, int s2_limit);
 void		move_nchars_from_s1_to_s2(char *s1, char *s2, int limit, int n);
-t_clist		*command_to_history(t_input *input, char *str);
+int			command_to_history(char *str, t_term *term);
 
 /*
 ** PRINT FUNCTIONS
@@ -112,6 +117,9 @@ t_clist		*ft_clstnew(void const *content, size_t content_size);
 
 void		clear_rows_starting_y(int y, t_term *term);
 void		clear_screen_after_prompt(t_input *input, t_term *term);
+void		clear_screen_after_start(t_input *input, t_term *term);
 
 int			double_input_mem(t_input *input, t_term *term);
+
+int			do_ctrl_c_key(t_input *input, t_term *term);
 #endif

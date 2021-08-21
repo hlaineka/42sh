@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 11:59:34 by helvi             #+#    #+#             */
-/*   Updated: 2021/05/28 16:08:21 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/20 20:09:51 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_token	*get_basic_token(char **source)
 	while ((!str || !str[0]) && source && *source && source[0][0])
 	{
 		if (str)
-			ft_free(str);
+			ft_memdel((void **)(&str));
 		str = get_tokenstr(source, &maintoken);
 	}
 	current = NULL;
@@ -115,6 +115,6 @@ t_token	*define_basic_tokens(char *input)
 		current = get_basic_token(&str_ptr);
 	}
 	if (current)
-		free_token(current);
+		free_token(&current);
 	return (returnable);
 }

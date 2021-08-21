@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 16:01:36 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/06/30 16:41:08 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/01 10:57:17 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	is_redirectionop(t_token *tkn)
 			|| tkn->maintoken == tkn_dgreat || tkn->maintoken == tkn_lessand
 			|| tkn->maintoken == tkn_greatand || tkn->maintoken == tkn_lessgreat
 			|| tkn->maintoken == tkn_dlessdash || tkn->maintoken
-			== tkn_clobber))
+			== tkn_clobber || tkn->maintoken == tkn_assignment))
 		return (1);
 	return (0);
 }
@@ -52,12 +52,12 @@ static t_token	*add_delimiter_token(t_token *tkn)
 		temp = tkn->prev;
 		while (temp && is_redirectionop(temp))
 			temp = temp->prev;
-		if (temp && (temp->maintoken == tkn_word
-				|| temp->maintoken == tkn_lpar))
+		if (temp && temp->maintoken == tkn_word)
 		{
 			new = malloc(sizeof(t_token));
 			ft_bzero(new, sizeof(t_token));
 			new->value = ft_strdup("(null)");
+			new->full_command = ft_strdup(temp->full_command);
 			new->precedence = 5;
 			new->prev = tkn->prev;
 			new->next = tkn;

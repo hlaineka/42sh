@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:54:13 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/28 16:06:50 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/07/11 14:45:26 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_token	*init_token(void)
 
 	returnable = (t_token *)malloc(sizeof(t_token));
 	ft_bzero(returnable, sizeof(t_token));
+	returnable->full_command = NULL;
 	returnable->value = NULL;
 	returnable->subtokens = NULL;
 	returnable->next = NULL;

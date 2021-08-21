@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 14:37:51 by helvi             #+#    #+#             */
-/*   Updated: 2021/06/13 11:34:27 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/20 20:26:53 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ t_node	*parser(char *input, t_term *term)
 	t_token	*tokens;
 	t_node	*root;
 
-	tokens = lexer(input, term);
+	tokens = lexer(input, term, 1);
 	root = ast_creator(tokens, term);
 	if (term->intern_variables->flag_debug == 1)
 		debug_print_tree(root, NULL, 0);
-	free_tokens(tokens);
+	free_tokens(&tokens);
 	return (root);
 }

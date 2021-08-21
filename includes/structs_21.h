@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/06/13 13:17:32 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/15 09:51:25 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 # include "libft.h"
 
 # define KEY_ESC 27
+
+# define HISTORY_SIZE 1024
+# define ALIAS_SIZE 1024
+
+# define HEREDOC_MODE 2
+# define SEARCH_MODE 4
 
 typedef struct s_clist
 {
@@ -34,9 +40,10 @@ typedef struct s_clist
 
 typedef struct s_input
 {
-	t_clist				*hist_cur;
-	t_clist				*history;
-	t_clist				*last_comm;
+	int					hist_i;
+//	t_clist				*hist_cur;
+//	t_clist				*history;
+//	t_clist				*last_comm;
 	char				**ret_str;
 	char				**input_temp;
 	int					*quote;
@@ -53,7 +60,7 @@ typedef struct s_input
 	int					prompt_col;
 	int					cursor_row;
 	int					cursor_col;
-	int					heredoc;
+	int					input_mode;
 }						t_input;
 
 /*
@@ -70,8 +77,23 @@ typedef struct s_input
 **}						t_process;
 */
 
+typedef struct s_hash
+{
+	int					hits;
+	char				*cmd;
+	char				*path;
+}						t_hash;
+
+typedef struct s_alias
+{
+	char				*name;
+	char				*value;
+	int					state;
+}						t_alias;
+
 typedef struct s_process
 {
+	struct s_term		*term_ptr;
 	struct s_process	*next;
 	int					argc;
 	char				**argv;
@@ -103,6 +125,7 @@ typedef struct s_job
 	struct s_job		*next;
 	char				*command;
 	t_process			*first_process;
+	pid_t				job_id;
 	pid_t				pgid;
 	char				notified;
 	struct termios		tmodes;
@@ -110,6 +133,8 @@ typedef struct s_job
 	int					fd_stdin;
 	int					fd_stdout;
 	int					fd_stderr;
+	int					bg;		// bg or fg?
+	int					fg;		// bg or fg?
 }						t_job;
 
 /*
@@ -173,6 +198,8 @@ typedef struct s_job
 typedef struct s_term
 {
 	char				*envp[1024];
+	t_hash				hash_table[1024];			// use macro?
+	char				*history[HISTORY_SIZE];		// use macro?
 	t_input				*input;
 	t_input				*here_input;
 	char				*term_buffer;
@@ -203,15 +230,30 @@ typedef struct s_term
 	int					heredoc_fd;
 	int					last_return;
 	struct s_intrn_vars	*intern_variables;
+	t_alias				alias[ALIAS_SIZE];
 }						t_term;
 
 typedef struct s_intrn_vars
 {
 	int					flag_debug;
+	int					flag_script;
+	const char			*script_file;
+	int					script_fd;
 	int					flag_noclobber;
 	int					flag_rawmode;
 	char				*intern[1024];
 }						t_intrn_vars;
+
+typedef struct s_fc
+{
+	int					i;
+	int					options;
+	int					first;
+	int					last;
+	char				first_str[1024];
+	char				path[1024];
+	char				editor[1024];
+}						t_fc;
 
 /*
 ** GLOBALS

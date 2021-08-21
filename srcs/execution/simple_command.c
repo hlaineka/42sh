@@ -6,11 +6,12 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/06/30 20:01:45 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/19 21:03:33 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes.h"
+#include "execution.h"
+#include "ft_signal.h"
 
 /*
 ** BASH MANUAL says:
@@ -26,71 +27,100 @@
 ** was terminated by signal n.
 */
 
-static int	execve_process(t_process *proc)
+static int	get_abs_path_to_cmd(char *cmd, char **envp, t_hash *ht, char *buf)
 {
-	char	command_path[1024];
 	char	*path_ptr;
 
-	path_ptr = ft_getenv("PATH", proc->envp);
-	if (is_absolute_path(proc->argv[0]))
-		ft_strcpy(command_path, proc->argv[0]);
+	path_ptr = ft_getenv("PATH", envp);
+	if (is_absolute_path(cmd))
+		ft_strcpy(buf, cmd);
+	else if (is_in_hash_table(cmd, ht))
+		create_full_cmd(cmd, ht, buf);
 	else if (!path_ptr)
-		return (err_builtin(E_ENV_PATH_NOT_SET, proc->argv[0], NULL));
-	else if (find_path(proc->argv[0], path_ptr, command_path) <= 0)
-		return (err_builtin(E_NO_COMMAND, proc->argv[0], NULL));
-	if (access(command_path, F_OK == -1))
-		return (err_builtin(E_NOENT, proc->argv[0], NULL));
-	if (access(command_path, X_OK) == -1)
-		return (err_builtin(E_PERM, proc->argv[0], NULL));
-	signals_to_default();
-	exit(execve(command_path, proc->argv, proc->envp));
+		return (err_builtin(E_ENV_PATH_NOT_SET, cmd, NULL));
+	else if (find_path(cmd, path_ptr, buf) <= 0)
+		return (err_builtin(E_NO_COMMAND, cmd, NULL));
+	add_cmd_to_hash_table(cmd, envp, ht, cmd);
+	increase_hash_table_hits(cmd, ht);
+	return (0);
 }
 
-void	get_status_and_condition(t_process *proc, int status)
+static int	execve_process(char *cmd_abs, t_process *proc, t_term *term)
 {
-	if (WIFEXITED(status))
-	{
-		proc->completed = 1;
-		proc->status = WEXITSTATUS(status);
-	}
-	else if (WIFSIGNALED(status))
-	{
-		proc->completed = 1;
-		proc->status = WTERMSIG(status) + 128;
-	}
-	else if (WIFSTOPPED(status))
-	{
-		proc->stopped = 1;
-		proc->status = WIFSTOPPED(status);
-		ft_putchar('\n');
-	}
+	char	*cmd;
+	char	**envp;
+
+	if (proc->envp)
+		envp = proc->envp;
 	else
-	{
-		proc->stopped = 1;
-		proc->status = status;
-	}
+		envp = term->envp;
+	cmd = proc->argv[0];
+	if (access(cmd_abs, F_OK == -1))
+		return (err_builtin(E_NOENT, cmd, NULL));
+	if (access(cmd_abs, X_OK) == -1)
+		return (err_builtin(E_PERM, cmd, NULL));
+	signals_to_default();
+	exit(execve(cmd_abs, proc->argv, envp));
 }
 
-int	simple_command(t_process *proc, t_term *term)
+int	simple_command(t_process *proc, t_job *job, t_term *term)
 {
 	pid_t	pid;
-	int		status;
+	char	cmd_abs[1024];
 
 	if (!proc->argv || !proc->argv[0] || proc->argv[0][0] == '\0')
+	{
+		job->notified = 1;
+		proc->completed = 1; // do we need to do this with all these errors?
 		return (-1);
-	if (!proc->envp)
-		proc->envp = term->envp;
+	}
 	if (is_builtin(proc))
+	{
+		job->notified = 1;
 		return (proc->status);
-	set_signal_execution();
+	}
+	if (get_abs_path_to_cmd(proc->argv[0], term->envp, term->hash_table, cmd_abs) != 0)
+	{
+		job->notified = 1;
+		proc->completed = 1;
+		proc->status = 1;
+		return (-1);
+	}
 	pid = fork();
 	if (pid < 0)
 		return (err_builtin(E_FORK, proc->argv[0], NULL));
 	if (pid == 0)
-		exit(execve_process(proc));
+	{
+		setpgid(0, 0);
+		exit(execve_process(cmd_abs, proc, term));
+	}
+	set_signal_execution();
+	setpgid(pid, 0);
+	job->job_id = get_next_job_pgid(term->jobs->next);
+	job->pgid = pid;
+	if (!job->bg)
+	{
+		tcsetpgrp(term->fd_stderr, pid);
+		job->notified = 1;
+	}
 	proc->pid = pid;
-	signal(SIGCHLD, SIG_DFL);
-	waitpid(pid, &status, WUNTRACED);
-	get_status_and_condition(proc, status);
+	wait_to_get_status(proc, job->bg);
+	tcsetpgrp(term->fd_stderr, getpgrp());	// if not bg
 	return (proc->status);
+}
+
+int	simple_command_pipe(t_process *proc, t_term *term)
+{
+	char	cmd_abs[1024];
+
+	signals_to_default();
+	if (!proc->argv || !proc->argv[0] || proc->argv[0][0] == '\0')
+		exit(1);
+	if (is_builtin(proc))
+		exit(proc->status);
+	if (get_abs_path_to_cmd(proc->argv[0], term->envp, term->hash_table, cmd_abs) != 0)
+		exit (1);
+//		return (proc->status);
+	exit(execve_process(cmd_abs, proc, term));
+	return (-1);
 }
