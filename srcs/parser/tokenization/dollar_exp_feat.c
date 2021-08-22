@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 16:00:21 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/22 14:47:47 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/22 20:54:19 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,22 @@ char	*dollar_split_param(char *param, char *split, int size)
 	if (size == 2)
 		ptr[1] = '\0';
 	return (ptr + size);
+}
+
+char	*substitute_replacement(char *param, t_term *term)
+{
+	char	*replacement;
+	char	*str;
+
+	replacement = dollar_split_param(param, ":+", 2);
+	str = ft_getenv(param, term->envp);		//todo which first, intern or envp?
+	if (!str)
+		str = ft_getenv(param, term->intern_variables->intern);
+	param[ft_strlen(param)] = ':';
+	param[ft_strlen(param)] = '+';
+	if (!str || !str[0] || !replacement)
+		return (NULL);
+	return (ft_strdup(replacement));
 }
 
 char	*substitute_var_or_default(char *param, t_term *term)

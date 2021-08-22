@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 14:36:53 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/22 20:08:41 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/22 21:00:57 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static int	prefix_long(char *var, char *word, char *buf)
 	int		ret;
 
 	ret = 0;
-	ft_printf("%s: var=%s word=%s\n", __FUNCTION__, var, word);
 	if (var == NULL || *var == '\0')
 		return (0);
 	if (word == NULL || *word == '\0')
@@ -41,7 +40,6 @@ char	*remove_longest_prefix(char *var, char *word)
 {
 	char	buf[2056];
 
-	ft_printf("%s: var=%s word=%s\n", __FUNCTION__, var, word);
 	ft_bzero(buf, 2056);
 	if (prefix_long(var, word, buf))
 		return (ft_strdup(buf));
@@ -53,7 +51,6 @@ static int	prefix_shortest(char *var, char *word, char *buf)
 	int		ret;
 
 	ret = 0;
-	ft_printf("%s: var=%s word=%s\n", __FUNCTION__, var, word);
 	if (var == NULL || *var == '\0')
 		return (0);
 	if (word == NULL || *word == '\0')
@@ -76,7 +73,6 @@ char	*remove_shortest_prefix(char *var, char *word)
 {
 	char	buf[2056];
 
-	ft_printf("%s: var=%s word=%s\n", __FUNCTION__, var, word);
 	ft_bzero(buf, 2056);
 	if (prefix_shortest(var, word, buf))
 		return (ft_strdup(buf));
