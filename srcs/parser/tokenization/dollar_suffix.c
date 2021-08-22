@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 14:36:53 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/22 22:09:19 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/22 22:36:28 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static int	suffix_long(char *var, char *word, char *buf, int i)
 	char	temp;
 
 	ret = 0;
-	ft_printf("%s: var=%s word=%s i=%d\n", __FUNCTION__, var, word, i);
-	if ((var == NULL || var[i] == '\0') && (word != NULL || *word != '\0'))
+	if (var == NULL || (i < 0 && (word != NULL && *word != '\0')))
 		return (0);
 	if (word == NULL || *word == '\0')
 	{
@@ -47,7 +46,6 @@ char	*remove_longest_suffix(char *var, char *word)
 	int		i;
 
 	i = ft_strlen(var) - 1;
-	ft_printf("%s: var=%s word=%s\n", __FUNCTION__, var, word);
 	ft_bzero(buf, 2056);
 	if (suffix_long(var, word, buf, i))
 		return (ft_strdup(buf));
@@ -60,9 +58,7 @@ static int	suffix_shortest(char *var, char *word, char *buf, int i)
 	char	temp;
 
 	ret = 0;
-	ft_printf("%s: var=%s word=%s i=%d\n", __FUNCTION__, var, word, i);
-	if (((!var || var[i] == '\0') && (!word || *word != '\0'))
-		|| ((!word || *word == '\0') && (!var || var[i] == '\0')))
+	if (var == NULL || (i < 0 && (word != NULL && *word != '\0')))
 		return (0);
 	if (word == NULL || *word == '\0')
 	{
@@ -89,7 +85,6 @@ static char	*remove_shortest_suffix(char *var, char *word)
 	int		i;
 
 	i = ft_strlen(var) - 1;
-	ft_printf("%s: var=%s word=%s\n", __FUNCTION__, var, word);
 	ft_bzero(buf, 2056);
 	if (suffix_shortest(var, word, buf, i))
 		return (ft_strdup(buf));
