@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/20 21:24:45 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/22 11:42:12 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ t_token				*alias_handling(t_token *first, t_term *term)
 //			ft_printf("%s: 2\n", __FUNCTION__);
 			delete_token(temp);
 //			ft_printf("%s: 3\n", __FUNCTION__);
+			if (!new)
+				break ;
 			if (prev)
 				prev->next = new;
 			else
 				first = new;
-			if (!new)
-				break ;
 			new->prev = prev;
 			temp = new;
 			while (temp->next)

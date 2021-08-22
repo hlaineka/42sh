@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 08:34:35 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/22 11:01:50 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/22 11:31:15 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	do_job_notification(t_job *j_prev, t_term *term)
 			if (!job->notified)
 				print_active_job(job, 0, term);
 			j_prev->next = job->next;
-			free_job(&job);
+			free_job(job);
 			job = NULL;
 		}
 		else if (is_job_stopped(job) && !job->notified)

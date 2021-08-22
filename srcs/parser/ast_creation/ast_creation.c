@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 20:11:26 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/06/30 16:32:22 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/22 19:19:38 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,20 @@ static void	debug_printing(t_token *tokens)
 
 t_node	*ast_creator(t_token *first, t_term *term)
 {
-	t_token	*new_first;
 	t_node	*root;
 
 	if (!first)
 		return (NULL);
 	root = NULL;
-	new_first = add_precedence(first);
+	first = add_precedence(first);
 	if (term->intern_variables->flag_debug == 1)
-		debug_printing(new_first);
-	new_first = shunting_yard(first);
-	if (!new_first)
+		debug_printing(first);
+	first = shunting_yard(first);
+	if (!first)
 		return (NULL);
 	if (term->intern_variables->flag_debug == 1)
-		debug_printing(new_first);
-	root = ast_builder(new_first);
+		debug_printing(first);
+	root = ast_builder(first);
+	free_tokens(&first);
 	return (root);
 }

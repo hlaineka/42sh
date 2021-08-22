@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:33:35 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/22 11:04:56 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/22 11:30:20 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	free_jobs(t_term *term)
 				prev->next = job_to_free->next;
 			else
 				prev->next = NULL;
-			free_job(&job_to_free);
+			free_job(job_to_free);
 			job_to_free = prev->next;
 		}
 		else
@@ -75,28 +75,30 @@ void	free_jobs(t_term *term)
 */
 }
 
-void	free_job(t_job **job_to_free)
+void	free_job(t_job *job_to_free)
 {
 	t_process	*temp_process;
 	t_process	*temp;
 
-	temp_process = job_to_free[0]->first_process;
+	temp_process = job_to_free->first_process;
 	while (temp_process)
 	{
 		temp = temp_process->next;
 		ft_strarray_free(temp_process->argv);
+		temp_process->argv = NULL;
 		if (temp_process->envp)
 			ft_strarray_free(temp_process->envp);
-		ft_memdel((void **)&temp_process);
+		temp_process->envp = NULL;
+		ft_free(temp_process);
 		temp_process = NULL;
 		temp_process = temp;
 	}
-	if (job_to_free[0]->command)
+	if (job_to_free->command)
 	{
-		ft_memdel((void **)&(job_to_free[0]->command));
-		job_to_free[0]->command = NULL;
+		ft_free(job_to_free->command);
+		job_to_free->command = NULL;
 	}
-	ft_memdel((void **)&job_to_free);
+	ft_free(job_to_free);
 	job_to_free = NULL;
 }
 
