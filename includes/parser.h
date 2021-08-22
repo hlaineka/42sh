@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/08/21 10:19:11 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/22 18:33:57 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,6 +308,10 @@ int					dollar_expansion(t_token *tkn, t_term *term, int dollar);
 char				*get_param_colon_word(char *param, char *word, int opt, t_term *term);
 char				*get_param_str(char *param, t_term *term);
 char				*get_param_length(char *param, t_term *term);
+char				*dollar_split_param(char *param, char *split, int size);
+char				*substitute_var_or_default(char *param, t_term *term);
+char				*substitute_var_or_set_dfl(char *param, t_term *term);
+char				*substitute_var_without_prefix(char *param, t_term *term);
 
 
 /*
