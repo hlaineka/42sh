@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/08/22 20:53:10 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/22 21:37:06 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -312,6 +312,7 @@ char				*dollar_split_param(char *param, char *split, int size);
 char				*substitute_var_or_default(char *param, t_term *term);
 char				*substitute_var_or_set_dfl(char *param, t_term *term);
 char				*substitute_var_without_prefix(char *param, t_term *term);
+char				*substitute_var_without_suffix(char *param, t_term *term);
 char				*substitute_replacement(char *param, t_term *term);
 
 
