@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 21:44:33 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/25 21:25:36 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/25 22:06:07 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,21 @@ static int	substitute_dollar(t_token *tkn, t_term *term, int start, int end)
 	else
 		substitution = get_param_str(parameter, term);
 //		substitution = ft_strdup(ft_getenv(parameter, term->envp));
-	ft_memdel((void **)&parameter);
 	if (substitution == NULL)
+	{
+		ft_memdel((void **)&parameter);
 		return (-1);
+	}
 	ft_strcut(tkn->value, start - 2, end + 1);
 	tkn->value = ft_strpastei(tkn->value, substitution, start - 2);
 	add_quotearray(tkn);
 //	ft_free(parameter);
 //	ft_free(substitution);
-	ft_memdel((void **)substitution);
+	ft_printf("%s: 1\n", __FUNCTION__);
+	ft_memdel((void **)&parameter);
+	ft_printf("%s: 2\n", __FUNCTION__);
+	ft_memdel((void **)&substitution);
+	ft_printf("%s: 3\n", __FUNCTION__);
 	return (0);
 }
 
