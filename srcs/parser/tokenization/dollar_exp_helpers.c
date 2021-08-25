@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 13:16:33 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/25 21:50:43 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/25 22:19:01 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@
 
 char	*get_param_str(char *param, t_term *term)
 {
+	char	*val;
+
 	if (param[0] == '#')
 		return (get_param_length(param + 1, term));
 	if (ft_strstr(param, ":-"))
@@ -112,5 +114,10 @@ char	*get_param_str(char *param, t_term *term)
 		return (substitute_var_without_prefix(param, term));
 	if (ft_strstr(param, "%"))
 		return (substitute_var_without_suffix(param, term));
-	return (ft_strdup(ft_getenv(param, term->envp)));
+	val = ft_getenv(param, term->envp);
+	if (!val)
+		val = ft_getenv(param, term->intern_variables->intern);
+	if (!val)
+		return (ft_strdup(""));
+	return (ft_strdup(val));
 }
