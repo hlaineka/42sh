@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 21:44:33 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/31 16:44:54 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/25 21:19:15 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** parameter substitution.
 */
 
-static void	substitute_dollar(t_token *tkn, t_term *term, int start, int end)
+static int	substitute_dollar(t_token *tkn, t_term *term, int start, int end)
 {
 	char	*parameter;
 	char	*substitution;
@@ -30,11 +30,14 @@ static void	substitute_dollar(t_token *tkn, t_term *term, int start, int end)
 	else
 		substitution = get_param_str(parameter, term);
 //		substitution = ft_strdup(ft_getenv(parameter, term->envp));
+	if (substitution == NULL)
+		return (-1);
 	ft_strcut(tkn->value, start - 2, end + 1);
 	tkn->value = ft_strpastei(tkn->value, substitution, start - 2);
 	add_quotearray(tkn);
 	ft_free(parameter);
 	ft_free(substitution);
+	return (0);
 }
 
 static int	dollar_parameter(t_token *tkn, t_term *term, int start)
@@ -53,7 +56,8 @@ static int	dollar_parameter(t_token *tkn, t_term *term, int start)
 		ft_printf_fd(STDERR_FILENO, "syntax error near token $");
 		return (-1);
 	}
-	substitute_dollar(tkn, term, start, end);
+	if (substitute_dollar(tkn, term, start, end) == -1)
+		return (-1);
 	return (1);
 }
 
