@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/08/28 11:54:39 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/28 16:59:35 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,5 +346,11 @@ t_token				*bang_history(t_token *first, t_term *term);
 */
 
 t_token				*alias_handling(t_token *first, t_term *term, t_alias *a);
+
+/*
+** parser/tokenization/remove_token.c
+*/
+
+t_token				*remove_token(t_token **remove);
 
 #endif

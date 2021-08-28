@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/08/22 21:37:28 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/08/28 16:53:47 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,7 +108,8 @@ _SRC_TOKENIZATION = lexer.c \
 					dollar_prehash.c \
 					dollar_exp_feat.c \
 					dollar_prefix.c \
-					dollar_suffix.c
+					dollar_suffix.c \
+					remove_token.c
 
 
 _SRC_AST_CREATION = ast_creation.c \

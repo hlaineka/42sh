@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/28 15:04:02 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/28 18:06:37 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,18 @@ t_token				*alias_handling(t_token *first, t_term *term, t_alias *a)
 				a = alias_cmd_s;
 			else if (a == alias_cmd_s)
 				return (NULL);
-
+			if (!alias_cmd_s->value[0])
+			{
+				if (temp == first)
+				{
+					first = remove_token(&temp);
+				}
+				else
+					temp = remove_token(&temp);
+//				first = first->next;
+//				break ;
+				continue ;
+			}
 			new = lexer(ft_strdup(alias_cmd_s->value), term, 0);
 			new2 = alias_handling(new, term, a);
 			if (!new2)
@@ -92,7 +103,5 @@ t_token				*alias_handling(t_token *first, t_term *term, t_alias *a)
 		temp = next;
 //		temp = NULL;
 	}
-	(void)next;
-	(void)term;
 	return (first);
 }
