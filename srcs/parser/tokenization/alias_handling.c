@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/28 12:41:28 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/28 15:04:02 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,16 @@ t_token				*alias_handling(t_token *first, t_term *term, t_alias *a)
 	t_token		*new;
 	t_token		*new2;
 	t_alias		*alias_cmd_s;
+	int			eka;
 
 	temp = first;
 	prev = NULL;
+	eka = 1;
 	while (temp && term)
 	{
 		next = temp->next;
-
 		alias_cmd_s = find_alias_with_name(temp->value, term->alias);
-		if (alias_cmd_s)
+		if (alias_cmd_s && eka)
 		{
 			if (!a)
 				a = alias_cmd_s;
@@ -61,6 +62,10 @@ t_token				*alias_handling(t_token *first, t_term *term, t_alias *a)
 			if (next)
 				next->prev = temp;
 		}
+		if (ft_strequ(temp->value, ";"))
+			eka = 1;
+		else
+			eka = 0;
 
 		/*
 		// alias_checker ja alias_selector tekemättä, tai sitten ne voi yhdistääkin
@@ -85,6 +90,7 @@ t_token				*alias_handling(t_token *first, t_term *term, t_alias *a)
 
 		prev = temp;
 		temp = next;
+//		temp = NULL;
 	}
 	(void)next;
 	(void)term;
