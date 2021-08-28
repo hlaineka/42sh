@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/28 12:37:18 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/28 12:41:28 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_token				*alias_handling(t_token *first, t_term *term, t_alias *a)
 	t_token		*prev;
 	t_token		*new;
 	t_token		*new2;
-	const char	*alias_cmd;
 	t_alias		*alias_cmd_s;
 
 	temp = first;
@@ -30,10 +29,6 @@ t_token				*alias_handling(t_token *first, t_term *term, t_alias *a)
 		next = temp->next;
 
 		alias_cmd_s = find_alias_with_name(temp->value, term->alias);
-		alias_cmd = find_alias_named_name(temp->value, term->alias);
-//		if (alias_cmd)
-
-
 		if (alias_cmd_s)
 		{
 			if (!a)
