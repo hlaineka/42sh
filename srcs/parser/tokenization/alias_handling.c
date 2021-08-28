@@ -6,20 +6,22 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/22 11:42:12 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/08/28 12:37:18 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "builtins.h"
 
-t_token				*alias_handling(t_token *first, t_term *term)
+t_token				*alias_handling(t_token *first, t_term *term, t_alias *a)
 {
 	t_token		*temp;
 	t_token		*next;
 	t_token		*prev;
 	t_token		*new;
+	t_token		*new2;
 	const char	*alias_cmd;
+	t_alias		*alias_cmd_s;
 
 	temp = first;
 	prev = NULL;
@@ -27,25 +29,37 @@ t_token				*alias_handling(t_token *first, t_term *term)
 	{
 		next = temp->next;
 
+		alias_cmd_s = find_alias_with_name(temp->value, term->alias);
 		alias_cmd = find_alias_named_name(temp->value, term->alias);
-		if (alias_cmd)
+//		if (alias_cmd)
+
+
+		if (alias_cmd_s)
 		{
-			new = lexer(ft_strdup(alias_cmd), term, 0);
-			new = alias_handling(new, term);
-//			ft_printf("%s: 1\n", __FUNCTION__);
+			if (!a)
+				a = alias_cmd_s;
+			else if (a == alias_cmd_s)
+				return (NULL);
+
+			new = lexer(ft_strdup(alias_cmd_s->value), term, 0);
+			new2 = alias_handling(new, term, a);
+			if (!new2)
+			{
+				free_tokens(&new);
+				if (a == alias_cmd_s)
+					break ;
+				return (NULL);
+			}
 			free_tokens(&temp->subtokens);
-//			free_tokens(&temp);
-//			ft_printf("%s: 2\n", __FUNCTION__);
 			delete_token(temp);
-//			ft_printf("%s: 3\n", __FUNCTION__);
-			if (!new)
+			if (!new2)
 				break ;
 			if (prev)
-				prev->next = new;
+				prev->next = new2;
 			else
-				first = new;
+				first = new2;
 			new->prev = prev;
-			temp = new;
+			temp = new2;
 			while (temp->next)
 				temp = temp->next;
 			temp->next = next;

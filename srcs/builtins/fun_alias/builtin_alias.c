@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:21:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/21 11:57:48 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/08/28 12:37:39 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	print_all_aliases(t_alias *alias)
 **   it shouldn't be freed. make a copy from the return value if needed.!
 */
 
-const char *find_alias_named_name(const char *name, t_alias *alias)
+t_alias	*find_alias_with_name(const char *name, t_alias *alias)
 {
 	int		i;
 
@@ -49,9 +49,30 @@ const char *find_alias_named_name(const char *name, t_alias *alias)
 	{
 		if (ft_strequ(alias[i].name, name))
 		{
-			if (alias[i].state == 1)
-				return (NULL);
-			alias[i].state = 1;
+//			if (alias[i].state == 1)
+//				return (NULL);
+//			alias[i].state = 1;
+//			if (!alias[i].value)
+//				return ("");
+			return (&alias[i]);
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+const char	*find_alias_named_name(const char *name, t_alias *alias)
+{
+	int		i;
+
+	i = 0;
+	while (i < ALIAS_SIZE && alias[i].name)
+	{
+		if (ft_strequ(alias[i].name, name))
+		{
+//			if (alias[i].state == 1)
+//				return (NULL);
+//			alias[i].state = 1;
 //			if (!alias[i].value)
 //				return ("");
 			return (alias[i].value);
