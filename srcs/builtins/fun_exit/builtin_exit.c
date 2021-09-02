@@ -6,48 +6,48 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/14 13:15:07 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/02 19:29:01 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes.h"
 
-static int	validate_stdout(t_process *process)
+static int	is_num_str(char *str)
 {
-	if (check_fd(STDOUT_FILENO, 0) == -1)
+	while (str && *str)
 	{
-		ft_printf_fd(STDERR_FILENO, "21sh: echo: ");
-		ft_printf_fd(STDERR_FILENO, "write error: Bad file descriptor\n");
-		process->completed = 1;
-		process->status = 1;
-		return (1);
+		if (!ft_isdigit(*str))
+			return (0);
+		str++;
 	}
-	return (0);
+	return (1);
 }
 
 void	builtin_exit(void *proc)
 {
 	t_process	*process;
 	char		**argv;
-	int			i;
+	int			argc;
+	int			ret;
 
+	ret = 0;
+	ft_printf_fd(STDERR_FILENO, "exit\n");
 	process = proc;
 	argv = process->argv;
-	i = 1;
-	exit(0);
-	if (validate_stdout(proc))
-		return ;
-	if (argv[1] && !ft_strcmp(argv[1], "-n"))
-		i++;
-	while (argv[i])
+	argc = process->argc;
+	if (argc > 2)
 	{
-		ft_putstr_fd(argv[i], STDOUT_FILENO);
-		i++;
-		if (argv[i])
-			ft_putchar_fd(' ', STDOUT_FILENO);
+		ft_printf_fd(STDERR_FILENO, "21sh: exit: too many arguments\n");
+		process->status = 1;
+		return ;
 	}
-	if (!argv[1] || ft_strcmp(argv[1], "-n"))
-		ft_putchar_fd('\n', STDOUT_FILENO);
-	process->completed = 1;
-	process->status = 0;
+	if (argc == 2 && !is_num_str(argv[1]))
+	{
+		ft_printf_fd(STDERR_FILENO,
+			"21sh: %s: numeric argument reguired\n", argv[1]);
+		ret = 255;
+	}
+	else if (argc == 2)
+		ret = ft_atoi(argv[1]);
+	exit(ret);
 }

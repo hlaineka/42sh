@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/19 21:03:33 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/02 18:56:07 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	simple_command(t_process *proc, t_job *job, t_term *term)
 	{
 		job->notified = 1;
 		proc->completed = 1; // do we need to do this with all these errors?
-		return (-1);
+		return (1);
 	}
 	if (is_builtin(proc))
 	{
@@ -84,7 +84,7 @@ int	simple_command(t_process *proc, t_job *job, t_term *term)
 		job->notified = 1;
 		proc->completed = 1;
 		proc->status = 1;
-		return (-1);
+		return (1);
 	}
 	pid = fork();
 	if (pid < 0)
