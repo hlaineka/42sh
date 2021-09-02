@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 20:50:33 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/21 10:26:39 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/02 20:49:59 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,8 @@ void	builtin_unset(void *proc)
 	}
 	while (argv[i])
 	{
-		if (ft_getenv(argv[i], g_term->envp))
-		{
-			if (ft_unsetenv(argv[i], g_term->envp) == -1)
-				process->status = err_builtin(E_INVALID_INPUT, argv[0], argv[i]);
-		}
-		else if (ft_unsetenv(argv[i], g_term->intern_variables->intern) == -1)
+		if (ft_unsetenv(argv[i], g_term->envp) == -1
+			|| ft_unsetenv(argv[i], g_term->intern_variables->intern) == -1)
 			process->status = err_builtin(E_INVALID_INPUT, argv[0], argv[i]);
 		i++;
 	}
