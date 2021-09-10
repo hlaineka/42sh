@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 21:44:33 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/25 22:07:31 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/10 21:05:18 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static int	substitute_dollar(t_token *tkn, t_term *term, int start, int end)
 	}
 	ft_strcut(tkn->value, start - 2, end + 1);
 	tkn->value = ft_strpastei(tkn->value, substitution, start - 2);
+	tkn->maintoken = tkn_word;
 	add_quotearray(tkn);
 //	ft_free(parameter);
 //	ft_free(substitution);
@@ -72,18 +73,18 @@ int	dollar_expansion(t_token *tkn, t_term *term, int dollar)
 		return (0);
 	if (!tkn->next)
 		return (0);
-	if (!tkn->value[dollar + 1] && tkn->next->maintoken == tkn_lpar)
+	if (tkn->value[dollar + 1] && tkn->maintoken == tkn_lpar && tkn->next->maintoken == tkn_rpar)
 		tkn->maintoken = tkn_dollarlpar;
-	else if (!tkn->value[dollar + 1] && tkn->next->maintoken == tkn_lbrace)
+	else if (tkn->value[dollar + 1] && tkn->maintoken == tkn_lbrace && tkn->next->maintoken == tkn_rbrace)
 	{	
-		tkn->value = ft_strjoin_frees1(tkn->value, tkn->next->value);
-		delete_token(tkn->next);
-		if (!tkn->next)
-			return (0);
-		tkn->value = ft_strjoin_frees1(tkn->value, tkn->next->value);
-		delete_token(tkn->next);
-		if (!tkn->next)
-			return (0);
+		//tkn->value = ft_strjoin_frees1(tkn->value, tkn->next->value);
+		//delete_token(tkn->next);
+		//if (!tkn->next)
+		//	return (0);
+		//tkn->value = ft_strjoin_frees1(tkn->value, tkn->next->value);
+		//delete_token(tkn->next);
+		//if (!tkn->next)
+		//	return (0);
 		tkn->value = ft_strjoin_frees1(tkn->value, tkn->next->value);
 		delete_token(tkn->next);
 		if (-1 == dollar_parameter(tkn, term, dollar + 2))

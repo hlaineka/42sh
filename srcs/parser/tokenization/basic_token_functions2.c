@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:54:13 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/11 14:45:26 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/10 19:56:11 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,20 +87,83 @@ t_token	*add_quotearray(t_token *current)
 	return (current);
 }
 
-void	check_quotes(char c, bool *single_quoted, bool *double_quoted,
-		bool *backslash)
+int	copy_until(char *dest, char *src, int c)
 {
-	if (c == 34 && !*single_quoted && !*backslash)
-		*double_quoted = !*double_quoted;
-	if (c == 39 && !*double_quoted && !*backslash)
-		*single_quoted = !*single_quoted;
+	int	i;
+
+	i = 0;
+	dest[i] = src[i];
+	i++;
+	while (src[i] && src[i] != c)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	return (i);
 }
 
-void	check_backslash(char *str, char c, bool *backslash, bool single_quoted)
+int	copy_paranthesis(char *dest, char *src, int c) 
 {
-	if (c == 92 && !single_quoted)
-		*backslash = TRUE;
-	else if (*backslash == TRUE && str && str[0]
-		&& str[ft_strlen(str) - 1] == 92)
-		*backslash = FALSE;
+	int i;
+
+	i = 0;
+	dest[i] = src[i];
+	i++;
+	while (src[i] && src[i] != c)
+	{
+		if (src[i] == 123)
+		{
+			i = i + copy_paranthesis(dest, src, 125);
+			continue;
+		}
+		if (src[i] == 40)
+		{
+			i = i + copy_paranthesis(dest, src, 41);
+			continue;
+		}
+		dest[i] = src[i];
+		i++;
+	}
+	return (i);
+}
+
+/*
+** 92 == \
+** 34 == "
+** 39 == '
+** 123 == {
+** 125 == }
+** 40 == (
+** 41 == )
+** 96 == `
+*/
+
+void	check_quotes(char **source, int *i, char *returnable, int *maintoken)
+{
+	int w;
+
+	w = ft_strlen(returnable);
+	if (source[0][*i] == 92)
+	{
+		returnable[w++] = source[0][*i];
+		*i = *i + 1;
+		returnable[w++] = source[0][*i];
+		*i = *i + 1;
+	}
+	else if (source[0][*i] == 34)
+		*i = *i + copy_until(&returnable[w], &(source[0][*i]), 34);
+	else if (source[0][*i] == 39)
+		*i = *i + copy_until(&returnable[w], &(source[0][*i]), 39);
+	else if (source[0][*i] == 96)
+		*i = *i + copy_until(&returnable[w], &(source[0][*i]), 96);
+	else if (source[0][*i] == 123)
+	{
+		*i = *i + copy_paranthesis(&returnable[w], &(source[0][*i]), 125);
+		*maintoken = tkn_lbrace;
+	}
+	else if (source[0][*i] == 40)
+	{
+		*i = *i + copy_paranthesis(&returnable[w], &(source[0][*i]), 41);
+		*maintoken = tkn_lpar;
+	}
 }

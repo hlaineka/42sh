@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:32:48 by helvi             #+#    #+#             */
-/*   Updated: 2021/07/29 19:27:54 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/10 17:05:43 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,21 +101,29 @@ t_token	*lexer(char *input, t_term *term, int remove_quotes)
 	input = remove_backslash(input);
 	first = define_basic_tokens(input);
 	ft_free(input);
-	if (term->intern_variables->flag_debug == 1)
+	if (term->intern_variables->flag_debug == 1){
+		ft_printf("define_basic_tokens\n");
 		debug_print_tokens(first);
+	}
 	first = validate_operator_tokens(first);
-	if (term->intern_variables->flag_debug == 1)
+	if (term->intern_variables->flag_debug == 1){
+		ft_printf("validate_operator_tokens\n");
 		debug_print_tokens(first);
+	}
 	first = advanced_tokenization(first, term, remove_quotes);
-	if (term->intern_variables->flag_debug == 1)
+	if (term->intern_variables->flag_debug == 1){
+		ft_printf("advanced_tokenization\n");
 		debug_print_tokens(first);
+	}
 	if (!first)
 		return (NULL);
 	if (remove_quotes)
 	{
 		add_full_command(first);
-		if (term->intern_variables->flag_debug == 1)
+		if (term->intern_variables->flag_debug == 1){
+			ft_printf("add_full_command\n");
 			debug_print_tokens(first);
+		}
 		quote_removal(first);
 	}
 	return (first);
