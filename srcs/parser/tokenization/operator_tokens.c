@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 15:57:08 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/20 19:20:55 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/10 20:58:31 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_token	*validate_operator_tokens(t_token *first)
 	current = first;
 	while (current)
 	{
-		if (current->maintoken != tkn_word)
+		if (current->maintoken != tkn_word && current->maintoken != tkn_lbrace && current->maintoken != tkn_lpar)
 		{	
 			if (-1 == handle_basic_optkn(current))
 			{
