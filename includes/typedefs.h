@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:42:02 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/29 09:24:01 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/11 17:32:06 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@
 # define E_UNA_OP_EXP 117
 # define E_NOT_INT 118
 # define E_NOT_FOUND 119
+# define E_EXPORT_FAIL 120
 
 typedef struct stat	t_stat;
 
