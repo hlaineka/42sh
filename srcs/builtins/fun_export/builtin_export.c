@@ -6,12 +6,28 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:54:24 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/01 11:25:08 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/11 14:09:13 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "includes.h"
+
+static int	export_p_option(char **envp)
+{
+	char		*split;
+
+	while (*envp)
+	{
+		split = ft_strchr(*envp, '=');
+		*split = '\0';
+		ft_printf_fd(STDOUT_FILENO,
+			"export %s=%s\n", envp[0], split + 1);
+		*split = '=';
+		envp++;
+	}
+	return (0);
+}
 
 void	builtin_export(void *proc)
 {
@@ -29,11 +45,13 @@ void	builtin_export(void *proc)
 			print_envp(g_term->envp);
 	}
 	i = 1;
+	if (process->argc == 2 && ft_strequ(process->argv[1], "-p"))
+		return ((void)export_p_option(g_term->envp));
 	while (process->argv[i])
 	{
 		ft_bzero(name, STR_LENGTH);
 		ft_bzero(value, STR_LENGTH);
-		if (ft_strchr(process->argv[i], '=') 
+		if (ft_strchr(process->argv[i], '=')
 			&& 0 == get_name_and_value(process->argv[i], value, name))
 		{
 			process->status = err_builtin(E_INVALID_INPUT, "export", NULL);
