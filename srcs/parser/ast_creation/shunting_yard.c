@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 16:07:19 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/30 10:19:55 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/11 15:58:59 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,13 @@ t_token	*shunting_yard(t_token *first)
 		else
 			output = handle_operator(&op_stack, &input, output);
 		input = temp;
+		if (!output)
+		{
+			delete_tokens(op_stack);
+			delete_tokens(output);
+			delete_tokens(first);
+			return (NULL);
+		}
 		//ft_printf("end of while (input)\n");
 	}
 	//ft_printf("after while (input\n");
