@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/02 18:56:07 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/11 14:57:03 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	simple_command(t_process *proc, t_job *job, t_term *term)
 	}
 	if (get_abs_path_to_cmd(proc->argv[0], term->envp, term->hash_table, cmd_abs) != 0)
 	{
+		proc->pid = -1;
 		job->notified = 1;
 		proc->completed = 1;
 		proc->status = 1;
