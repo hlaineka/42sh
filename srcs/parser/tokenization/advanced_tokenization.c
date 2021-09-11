@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:01:44 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/11 18:27:03 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/11 20:27:26 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ t_token	*advanced_tokenization(t_token *first, t_term *term, int remove_quotes)
 	first = alias_handling(first, term, NULL);
 	if (remove_quotes)
 		first = bang_history(first, term);
+	
 	return (first);
 }

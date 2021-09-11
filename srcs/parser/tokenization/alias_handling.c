@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/11 17:39:05 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/11 20:25:27 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_token				*alias_handling(t_token *first, t_term *term, t_alias *a)
 	t_token		*new;
 	int			first_word;
 
+	if (!first)
+		return (NULL);
 	temp = first;
 	prev = first->prev;
 	first_word = 1;
