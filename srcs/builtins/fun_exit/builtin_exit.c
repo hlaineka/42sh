@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/02 19:29:01 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/11 13:23:58 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ void	builtin_exit(void *proc)
 	argc = process->argc;
 	if (argc > 2)
 	{
-		ft_printf_fd(STDERR_FILENO, "21sh: exit: too many arguments\n");
+		ft_printf_fd(STDERR_FILENO, "42sh: exit: too many arguments\n");
 		process->status = 1;
 		return ;
 	}
 	if (argc == 2 && !is_num_str(argv[1]))
 	{
 		ft_printf_fd(STDERR_FILENO,
-			"21sh: %s: numeric argument reguired\n", argv[1]);
+			"42sh: %s: numeric argument reguired\n", argv[1]);
 		ret = 255;
 	}
 	else if (argc == 2)

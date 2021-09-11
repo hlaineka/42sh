@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 14:27:47 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/23 11:53:56 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/11 13:22:56 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ static const char	*g_errstr[] = {
 
 int	err_builtin(int error_no, char *name, char *arg)
 {
-	ft_printf_fd(STDERR_FILENO, "21sh: %s: %s", name, g_errstr[error_no]);
+	ft_printf_fd(STDERR_FILENO, "42sh: %s: %s", name, g_errstr[error_no]);
 	if (arg)
 		ft_printf_fd(STDERR_FILENO, ": %s", arg);
 	ft_putchar_fd('\n', STDERR_FILENO);
