@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/09/11 12:46:02 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/11 15:57:52 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,6 +264,7 @@ t_token				*push_to_end(t_token *input, t_token *output);
 t_token				*delete_token(t_token *tkn);
 void				free_tokens(t_token **tokens);
 void				free_token(t_token **to_free);
+t_token 		*delete_tokens(t_token *tkn);
 
 /*
 ** parser/tokenization/basic_token_functions2.c
