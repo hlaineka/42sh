@@ -6,13 +6,13 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/21 10:24:36 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/11 18:09:49 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int		print_type(char *cmd, t_process *p, t_term *term)
+int	print_type(char *cmd, t_process *p, t_term *term)
 {
 	t_hash		*ht;
 	char		buf[1024];
@@ -27,10 +27,11 @@ int		print_type(char *cmd, t_process *p, t_term *term)
 			cmd, cmd_path_from_hash_table(cmd, ht), cmd);
 	else
 	{
+		if (!cmd[0])
+			return (err_builtin(E_NO_COMMAND, "type", cmd));
 		find_path(cmd, path, buf);
 		if (buf[0] == '\0')
 			return (err_builtin(E_NO_COMMAND, "type", cmd));
-		//if buf is empty error, else this
 		ft_printf("%s is a %s\n", cmd, buf);
 	}
 	return (0);
@@ -53,7 +54,4 @@ void	builtin_type(void *proc)
 		p->status = print_type(*argv, p, g_term);
 		argv++;
 	}
-
-//	if (argc > 4)
-//		return ((void)err_builtin(E_TOO_MANY_ARGS, "test", NULL));
 }
