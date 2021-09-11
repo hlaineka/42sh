@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 20:33:06 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/31 10:48:24 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/11 19:50:03 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_job       *token_lpar(t_job *job, t_term *term, t_node *current)
 {
 	t_job	*returnable;
 
+	if (!current->left)
+		return NULL;
 	returnable = NULL;
 	if (current->operation == tkn_rpar)
 		return (tree_traversal(job, current->left, term));
