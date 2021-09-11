@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/11 16:47:22 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/11 17:09:54 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ t_token				*alias_handling(t_token *first, t_term *term, t_alias *a)
 		{
 			ft_printf("is first word\n");
 			a = find_alias_with_name(temp->value, term->alias);
-			ft_printf("new alias is: %s", a->value);
+			if (a)
+				ft_printf("new alias is: %s", a->value);
 			if (a && a->value && a->value[0])
 			{
 				new = lexer(ft_strdup(a->value), term, 0);
