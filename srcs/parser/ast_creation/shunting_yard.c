@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 16:07:19 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/11 15:58:59 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/11 17:59:31 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_token	*handle_braces(t_token **op_stack, t_token **input,
 		if (!(*op_stack))
 		{
 			ft_printf_fd(STDERR_FILENO, "wrong amount of braces\n");
+			delete_tokens(returnable);
 			return (NULL);
 		}
 		temp = (*op_stack)->prev;
@@ -75,6 +76,7 @@ t_token	*handle_parenthesis(t_token **op_stack, t_token **input,
 		if (!(*op_stack))
 		{
 			ft_printf_fd(STDERR_FILENO, "wrong amount of paranthesis\n");
+			delete_tokens(returnable);
 			return (NULL);
 		}
 		temp = (*op_stack)->prev;
@@ -132,10 +134,8 @@ t_token	*shunting_yard(t_token *first)
 		else
 			output = handle_operator(&op_stack, &input, output);
 		input = temp;
-		if (!output)
+		if (!output && !op_stack)
 		{
-			delete_tokens(op_stack);
-			delete_tokens(output);
 			delete_tokens(first);
 			return (NULL);
 		}
