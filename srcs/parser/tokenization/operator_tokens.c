@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 15:57:08 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/11 13:08:33 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/11 20:30:01 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ t_token	*validate_operator_tokens(t_token *first)
 			{
 				ft_printf_fd(STDERR_FILENO, "syntax error near token %s\n",
 					current->value);
-				free_tokens_sub(first);
+				delete_tokens(first);
 				return (NULL);
 			}
 		}

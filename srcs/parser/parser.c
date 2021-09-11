@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 14:37:51 by helvi             #+#    #+#             */
-/*   Updated: 2021/08/28 18:20:49 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/11 19:59:34 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ t_node	*parser(char *input, t_term *term)
 	tokens = lexer(input, term, 1);
 	if (tokens == NULL)		//todo Helvi onko taa ja seuraava rivi ok?
 		return (NULL);
+	
 	root = ast_creator(tokens, term);
 	if (term->intern_variables->flag_debug == 1)
 		debug_print_tree(root, NULL, 0);
