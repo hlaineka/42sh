@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:21:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/28 12:37:39 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/11 16:45:10 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,54 +32,6 @@ static void	print_all_aliases(t_alias *alias)
 		ft_printf("alias %s='%s'\n", alias[i].name, alias[i].value);
 		i++;
 	}
-}
-
-/*
-** FIND_ALIAS_NAMED_NAME function finds alias value for the alias NAME.
-**   if no alias NAME is found, it returns NULL. Return string is const so
-**   it shouldn't be freed. make a copy from the return value if needed.!
-*/
-
-t_alias	*find_alias_with_name(const char *name, t_alias *alias)
-{
-	int		i;
-
-	i = 0;
-	while (i < ALIAS_SIZE && alias[i].name)
-	{
-		if (ft_strequ(alias[i].name, name))
-		{
-//			if (alias[i].state == 1)
-//				return (NULL);
-//			alias[i].state = 1;
-//			if (!alias[i].value)
-//				return ("");
-			return (&alias[i]);
-		}
-		i++;
-	}
-	return (NULL);
-}
-
-const char	*find_alias_named_name(const char *name, t_alias *alias)
-{
-	int		i;
-
-	i = 0;
-	while (i < ALIAS_SIZE && alias[i].name)
-	{
-		if (ft_strequ(alias[i].name, name))
-		{
-//			if (alias[i].state == 1)
-//				return (NULL);
-//			alias[i].state = 1;
-//			if (!alias[i].value)
-//				return ("");
-			return (alias[i].value);
-		}
-		i++;
-	}
-	return (NULL);
 }
 
 static void	print_alias(const char *name, t_process *p, t_term *term)

@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/08/28 16:53:47 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/09/11 16:44:10 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -249,6 +249,7 @@ _SRC_HASH =			builtin_hash.c \
 					add_cmd_to_hash_table.c
 
 _SRC_ALIAS=			builtin_alias.c \
+					find_alias.c \
 					set_alias.c
 
 _SRC_UNALIAS=		builtin_unalias.c
