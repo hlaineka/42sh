@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/28 18:06:37 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/11 16:47:22 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,52 @@ t_token				*alias_handling(t_token *first, t_term *term, t_alias *a)
 	t_token		*next;
 	t_token		*prev;
 	t_token		*new;
-	t_token		*new2;
-	t_alias		*alias_cmd_s;
-	int			eka;
+	int			first_word;
 
 	temp = first;
-	prev = NULL;
-	eka = 1;
+	prev = first->prev;
+	first_word = 1;
+	new = NULL;
 	while (temp && term)
 	{
 		next = temp->next;
-		alias_cmd_s = find_alias_with_name(temp->value, term->alias);
-		if (alias_cmd_s && eka)
+		ft_printf("alias while: %s\n", temp->value);
+		if (first_word)
 		{
-			if (!a)
+			ft_printf("is first word\n");
+			a = find_alias_with_name(temp->value, term->alias);
+			ft_printf("new alias is: %s", a->value);
+			if (a && a->value && a->value[0])
+			{
+				new = lexer(ft_strdup(a->value), term, 0);
+				free_tokens(&(temp->subtokens));
+				delete_token(temp);
+				if (prev)
+					prev->next = new;
+				else
+					first = new;
+				new->prev = prev;
+				temp = new;
+				while (temp->next)
+					temp = temp->next;
+				temp->next = next;
+				next->prev = temp;
+			}
+		}
+		if (temp->maintoken == tkn_and || temp->maintoken == tkn_pipe
+			|| temp->maintoken == tkn_semi || temp->maintoken == tkn_and_if
+			|| temp->maintoken == tkn_or_if)
+			first_word = 1;
+		else
+			first_word = 0;
+		prev = temp;
+		temp = next;
+	}
+	return (first);
+}
+
+/*
+if (!a)
 				a = alias_cmd_s;
 			else if (a == alias_cmd_s)
 				return (NULL);
@@ -77,31 +109,4 @@ t_token				*alias_handling(t_token *first, t_term *term, t_alias *a)
 			eka = 1;
 		else
 			eka = 0;
-
-		/*
-		// alias_checker ja alias_selector tekemättä, tai sitten ne voi yhdistääkin
-		if (alias_checker(temp->value))
-		{
-			alias_cmd = alias_selector(temp->value, term);
-			new = lexer(ft_strdup(alias_cmd), term, 0);
-			free_tokens(temp->subtokens);
-			delete_token(temp);
-			if (prev)
-				prev->next = new;
-			else
-				first = new;
-			new->prev = prev;
-			temp = new;
-			while (temp->next)
-				temp = temp->next;
-			temp->next = next;
-			next->prev = temp;
-		}
-		*/
-
-		prev = temp;
-		temp = next;
-//		temp = NULL;
-	}
-	return (first);
-}
+*/
