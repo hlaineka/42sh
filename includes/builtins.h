@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/28 11:30:59 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/11 20:39:13 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ int			get_setenvs(int argc, char **argv, char **envp, int i);
 void		builtin_fc(void *proc);
 int			fc_es(t_term *term, t_fc *fc, int options);
 int			parse_and_execute(char *cmd, t_term *term);
+int			hist_to_file(t_fc *fc, char **hist, t_term *term, t_process *proc);
 
 /*
 ** TEST BUILTIN:

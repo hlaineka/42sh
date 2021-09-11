@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/21 10:24:07 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/11 20:44:13 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,52 +16,6 @@
 #include "job_control.h"
 #include "typedefs.h"
 #include "history.h"
-
-static int	open_temp_file_write(void)
-{
-	int			fd;
-
-	fd = open("/Users/hhuhtane/.42sh_oldies_temp", O_WRONLY | O_CREAT | O_TRUNC);
-	return (fd);
-}
-
-static int	open_temp_file_read(void)
-{
-	int			fd;
-
-	fd = open("/Users/hhuhtane/.42sh_oldies_temp", O_RDONLY);
-	return (fd);
-}
-
-static int	write_history_to_file(t_fc *fc, char **hist, t_term *term, t_process *proc)
-{
-	int		i;
-	int		fd;
-	char	*line;
-	int		ret;
-
-	line = NULL;
-	fd = open_temp_file_write();
-	if (fc->first)
-		i = fc->first;
-	else
-		i = get_last_history_index(hist) - 1;
-	while (i <= fc->last)
-		ft_printf_fd(fd, "%s\n", hist[i++]);
-	close(fd);
-	builtin_env(proc);
-	fd = open_temp_file_read();
-	ret = get_next_line(fd, &line);
-	while (ret > 0)
-	{
-		parse_and_execute(line, term);
-		ret = get_next_line(fd, &line);
-	}
-	close(fd);
-	if (line)
-		free(line);
-	return (1);
-}
 
 static int	get_command_index_with_arg(t_fc *fc, t_term *term, t_process *pr)
 {
@@ -209,7 +163,8 @@ void	builtin_fc(void *proc)
 		else
 			temp_proc->argv[1] = fc.editor;
 		temp_proc->argv[2] = "/Users/hhuhtane/.42sh_oldies_temp";
-		write_history_to_file(&fc, term->history, term, temp_proc);
+		hist_to_file(&fc, term->history, term, temp_proc);
+//		write_history_to_file(&fc, term->history, term, temp_proc);
 		ft_free(temp_proc);
 		free(temp_proc->argv);
 	}

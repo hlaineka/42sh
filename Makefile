@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/09/11 16:44:10 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/09/11 20:39:57 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -146,7 +146,8 @@ _SRC_FG =	builtin_fg.c
 _SRC_BG =	builtin_bg.c
 
 _SRC_FC =	builtin_fc.c \
-			fc_es.c
+			fc_es.c \
+			hist_to_file.c
 
 _SRC_TEST =	builtin_test.c \
 			b_operand.c \
