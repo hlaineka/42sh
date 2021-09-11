@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:54:24 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/11 14:09:13 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/11 17:53:12 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,39 @@ static int	export_p_option(char **envp)
 	return (0);
 }
 
+static int	export_arg(char *arg, t_process *process, t_term *term)
+{
+	char		name[STR_LENGTH];
+	char		value[STR_LENGTH];
+
+	ft_bzero(name, STR_LENGTH);
+	ft_bzero(value, STR_LENGTH);
+	if (!ft_strchr(arg, '=')
+		&& !ft_getenv(name, term->intern_variables->intern))
+		return (0);
+	if (!ft_strchr(arg, '='))
+	{
+		ft_strcpy(name, arg);
+		ft_strcpy(value, ft_getenv(name, term->intern_variables->intern));
+	}
+	else if (ft_strchr(arg, '=') && 0 == get_name_and_value(arg, value, name))
+	{
+		process->status = err_builtin(E_INVALID_INPUT, "export", NULL);
+		ft_printf_fd(2,
+			"usage: export [name]=[value] or export to list env variables\n");
+		return (1);
+	}
+	ft_setenv(name, value, 0, term->intern_variables->intern);
+	process->status = ft_setenv(name, value, 1, term->envp);
+	if (process->status)
+		return (err_builtin(E_EXPORT_FAIL, "export", arg));
+	return (0);
+}
+
 void	builtin_export(void *proc)
 {
 	t_process	*process;
 	int			i;
-	char		name[STR_LENGTH];
-	char		value[STR_LENGTH];
 
 	process = proc;
 	if (process->argc == 1)
@@ -49,23 +76,12 @@ void	builtin_export(void *proc)
 		return ((void)export_p_option(g_term->envp));
 	while (process->argv[i])
 	{
-		ft_bzero(name, STR_LENGTH);
-		ft_bzero(value, STR_LENGTH);
-		if (ft_strchr(process->argv[i], '=')
-			&& 0 == get_name_and_value(process->argv[i], value, name))
+		if (export_arg(process->argv[i], process, g_term))
 		{
-			process->status = err_builtin(E_INVALID_INPUT, "export", NULL);
-			ft_printf_fd(2, "usage: export [name]=[value] or export to list env variables\n");
+			g_term->last_return = 1;
+			process->status = 1;
+			break ;
 		}
-		else
-		{
-			ft_strcpy(name, process->argv[i]);
-			ft_strcpy(value, ft_getenv(name, g_term->intern_variables->intern));
-		}
-		ft_setenv(name, value, 0, g_term->intern_variables->intern);
-		process->status = ft_setenv(name, value, 1, g_term->envp);
-		if (process->status)
-			err_builtin(process->status, process->argv[0], process->argv[1]);
 		i++;
 	}
 	process->completed = 1;
