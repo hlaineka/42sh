@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/11 14:57:03 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/11 15:02:36 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	simple_command(t_process *proc, t_job *job, t_term *term)
 
 	if (!proc->argv || !proc->argv[0] || proc->argv[0][0] == '\0')
 	{
+		proc->pid = -1;
 		job->notified = 1;
 		proc->completed = 1; // do we need to do this with all these errors?
 		return (1);
