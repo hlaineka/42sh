@@ -6,12 +6,13 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:32:48 by helvi             #+#    #+#             */
-/*   Updated: 2021/09/10 17:05:43 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/12 10:46:10 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "libft.h"
+#include "execution.h"
 
 /*
 ** Lexer is the main function responsible for tokenization. Tokenization is
@@ -20,12 +21,12 @@
 ** started in debug mode.
 */
 
-static void	debug_print_tokens(t_token *tokens)
+static void	debug_print_tokens(t_token *tokens, char *function_name)
 {
 	t_token	*temp;
 
 	temp = tokens;
-	ft_printf_fd(STDOUT_FILENO, "tokens after first tokenization:\n");
+	ft_printf_fd(STDOUT_FILENO, "tokens after %s:\n", function_name);
 	while (temp)
 	{
 		ft_printf_fd(STDOUT_FILENO, "%s = %i command: %s, ", temp->value,
@@ -93,6 +94,39 @@ char	*remove_backslash(char *str)
 	return (str);
 }
 
+t_token	*check_semicolon(t_token *first, t_term *term)
+{
+	t_token *temp;
+	t_token *returnable;
+	t_token *command_first;
+	t_node	*root;
+
+	temp = first;
+	returnable = first;
+	command_first = NULL;
+	while (temp)
+	{
+		if (!command_first)
+			command_first = temp;
+		if (temp->maintoken == tkn_semi && temp->next)
+		{
+			returnable = temp->next;
+			returnable->prev = NULL;
+			temp->next = NULL;
+			temp = advanced_tokenization(first, term, 1);
+			if (term->intern_variables->flag_debug == 1)
+				debug_print_tokens(first, "advanced_tokenization in semicolon");
+			root = ast_creator(temp, term);
+			execute(root, term);
+			command_first = NULL;
+			temp = returnable;
+		}
+		else
+			temp = temp->next;
+	}
+	return(returnable);
+}
+
 t_token	*lexer(char *input, t_term *term, int remove_quotes)
 {
 	t_token	*first;
@@ -101,30 +135,15 @@ t_token	*lexer(char *input, t_term *term, int remove_quotes)
 	input = remove_backslash(input);
 	first = define_basic_tokens(input);
 	ft_free(input);
-	if (term->intern_variables->flag_debug == 1){
-		ft_printf("define_basic_tokens\n");
-		debug_print_tokens(first);
-	}
+	if (term->intern_variables->flag_debug == 1)
+		debug_print_tokens(first, "define_basic_tokens");
 	first = validate_operator_tokens(first);
-	if (term->intern_variables->flag_debug == 1){
-		ft_printf("validate_operator_tokens\n");
-		debug_print_tokens(first);
-	}
-	first = advanced_tokenization(first, term, remove_quotes);
-	if (term->intern_variables->flag_debug == 1){
-		ft_printf("advanced_tokenization\n");
-		debug_print_tokens(first);
-	}
-	if (!first)
-		return (NULL);
+	if (term->intern_variables->flag_debug == 1)
+		debug_print_tokens(first, "validate_operator_tokens");
 	if (remove_quotes)
-	{
-		add_full_command(first);
-		if (term->intern_variables->flag_debug == 1){
-			ft_printf("add_full_command\n");
-			debug_print_tokens(first);
-		}
-		quote_removal(first);
-	}
+		first = check_semicolon(first, term);
+	first = advanced_tokenization(first, term, remove_quotes);
+	if (term->intern_variables->flag_debug == 1)
+		debug_print_tokens(first, "advanced_tokenization");
 	return (first);
 }
