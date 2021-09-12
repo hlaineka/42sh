@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 14:27:47 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/11 13:22:56 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/11 17:56:22 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,8 @@ static const char	*g_errstr[] = {
 	"binary operator expected",
 	"unary operator expected",
 	"integer expression expected",
-	"not found"
+	"not found",
+	"unable to export file"
 };
 
 int	err_builtin(int error_no, char *name, char *arg)

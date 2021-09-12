@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/11 15:02:36 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/12 12:15:52 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,11 @@ int	simple_command(t_process *proc, t_job *job, t_term *term)
 		proc->completed = 1;
 		proc->status = 1;
 		return (1);
+	}
+	if (job->bg)
+	{
+		exit(execve_process(cmd_abs, proc, term));
+
 	}
 	pid = fork();
 	if (pid < 0)
