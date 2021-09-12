@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 20:11:26 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/22 19:19:38 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/12 10:44:41 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@
 ** Return value: the root of the abstract syntax tree.
 */
 
-static void	debug_printing(t_token *tokens)
+static void	debug_printing(t_token *tokens, char *function_name)
 {
 	t_token	*temp;
 
 	temp = tokens;
-	ft_printf_fd(STDOUT_FILENO, "tokens after shunting yard:\n");
+	ft_printf_fd(STDOUT_FILENO, "tokens after %s:\n", function_name);
 	while (temp)
 	{
 		ft_printf_fd(STDOUT_FILENO, "%s p=%i, ", temp->value, temp->precedence);
@@ -50,12 +50,12 @@ t_node	*ast_creator(t_token *first, t_term *term)
 	root = NULL;
 	first = add_precedence(first);
 	if (term->intern_variables->flag_debug == 1)
-		debug_printing(first);
+		debug_printing(first, "add_precedence");
 	first = shunting_yard(first);
 	if (!first)
 		return (NULL);
 	if (term->intern_variables->flag_debug == 1)
-		debug_printing(first);
+		debug_printing(first, "shunting_yard");
 	root = ast_builder(first);
 	free_tokens(&first);
 	return (root);
