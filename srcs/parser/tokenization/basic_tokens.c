@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 11:59:34 by helvi             #+#    #+#             */
-/*   Updated: 2021/09/11 13:03:12 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/12 09:52:22 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,12 @@ t_token	*define_basic_tokens(char *input)
 	t_token	*prev;
 	t_token	*returnable;
 	char	*str_ptr;
-	int		calc;
 
 	current = NULL;
 	prev = NULL;
 	str_ptr = input;
 	returnable = NULL;
 	current = get_basic_token(&str_ptr);
-	calc = 0;
 	while (current && current->value && current->value[0])
 	{
 		current->prev = prev;
@@ -104,9 +102,6 @@ t_token	*define_basic_tokens(char *input)
 			prev->next = current;
 		prev = current;
 		current = get_basic_token(&str_ptr);
-		calc++;
-		if (calc > 10)
-			while (1);
 	}
 	if (current)
 		free_token(&current);
