@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:47:26 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/31 16:28:38 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/12 11:49:51 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_job	*token_and(t_job *job, t_term *term, t_node *current)
 		{
 			//start process detached instead of next line
 			left->bg = 1;
-			left->first_process->status = simple_command(left->first_process, left, term);
+			//left->first_process->status = simple_command(left->first_process, left, term);
 		}
 	}
 	if (current->right)

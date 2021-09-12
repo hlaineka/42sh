@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:01:44 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/12 10:20:59 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/12 14:47:02 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ static void	debug_print_tokens(t_token *tokens)
 t_token	*advanced_tokenization(t_token *first, t_term *term, int remove_quotes)
 {
 	first = check_paranthesis(first);
+	if (remove_quotes)
+		add_full_command(first);
 	if (!first)
 		return (NULL);
 	first = word_assignment_marking(first);
@@ -91,7 +93,6 @@ t_token	*advanced_tokenization(t_token *first, t_term *term, int remove_quotes)
 		return (NULL);
 	if (remove_quotes)
 	{
-		add_full_command(first);
 		if (term->intern_variables->flag_debug == 1){
 			ft_printf_fd(STDOUT_FILENO,"add_full_command\n");
 			debug_print_tokens(first);

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 17:40:33 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/17 11:48:58 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/12 11:23:11 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static void	get_error_str(char *buf, int error_no)
 		ft_strcpy(buf, "Could not access the termcap data base.\n");
 	else if (error_no == ERR_TERMTYPE_NOT_FOUND)
 		ft_strcpy(buf, "Terminal type `%s' is not defined.\n");
+	else if (error_no == ERR_PARSER)
+		ft_strcpy(buf, "Parser error: %s\n");
 	else
 		ft_strcpy(buf, "Some random error.\n");
 }
