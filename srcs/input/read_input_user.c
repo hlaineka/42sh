@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/19 21:38:33 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/13 11:45:03 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	init_input_tty(t_input *input, int prompt_mode)
 	get_pos(&input->prompt_row, &input->prompt_col);
 	input->cursor_row = input->prompt_row;
 	input->cursor_col = input->prompt_col;
-//	input->hist_cur = input->last_comm;
 	input->hist_i = 0;
 }
 
@@ -141,6 +140,9 @@ char	*get_input(int argc, char **argv, t_term *term, t_input *input)
 	char	*str;
 	int		quote;
 
+	dup2(term->fd_stdin, STDIN_FILENO);
+	dup2(term->fd_stdout, STDOUT_FILENO);
+	dup2(term->fd_stderr, STDERR_FILENO);
 	str = NULL;
 	input->ret_str = &str;
 	signals_to_ignore();

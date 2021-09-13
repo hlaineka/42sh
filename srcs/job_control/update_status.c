@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 09:05:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/11 14:19:46 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/12 20:35:15 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,4 @@ void	update_status(t_term *term)
 	{
 		pid = waitpid (-1, &status, WUNTRACED|WNOHANG);
 	}
-
 }

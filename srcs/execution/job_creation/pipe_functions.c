@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 11:26:20 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/25 17:17:50 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/13 11:17:39 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,12 @@ t_job	*pipe_start(t_job *job, t_term *term, t_node *current)
 	int			rpipe[2];
 
 	set_signal_execution();		// put this to somewhere else
-	job = init_job(current);
-	job->next = term->jobs->next;
-	term->jobs->next = job;
+	if (!job)
+	{
+		job = init_job(current);
+		job->next = term->jobs->next;
+		term->jobs->next = job;
+	}
 	temp_process = job->first_process;
 	pipe(rpipe);
 	temp_process->pid = fork_and_chain_pipes(NULL, rpipe);
@@ -47,7 +50,9 @@ t_job	*pipe_start(t_job *job, t_term *term, t_node *current)
 	}
 	setpgid(temp_process->pid, 0);
 	if (!job->bg)
+	{
 		tcsetpgrp(term->fd_stderr, temp_process->pid);	// if !bg
+	}
 //	ft_printf("%s %d\n", __func__, temp_process->pid);
 	job->job_id = get_next_job_pgid(term->jobs->next);
 	job->pgid = temp_process->pid;
@@ -104,10 +109,14 @@ t_job	*pipe_end(t_job *job, t_term *term, t_node *current)
 	close(job->fd_stderr);
 	wait_job_and_get_status(job, term);
 	if (!job->bg)
+	{
 		job->notified = 1;
-	tcsetpgrp(term->fd_stderr, getpgrp());	// if !bg
+		tcsetpgrp(term->fd_stderr, getpgrp());	// if !bg
+	}
 	dup2(term->fd_stdout, STDOUT_FILENO);	// return_fds_to_normal_fn
 	dup2(term->fd_stdin, STDIN_FILENO);
 	dup2(term->fd_stderr, STDERR_FILENO);
+	if (job->bg)
+		exit(term->last_return);
 	return (job);
 }
