@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:51:19 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/13 11:19:06 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/13 22:55:49 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@
 ** and then executes the commands.
 */
 
+static int	head_parent_is_and(t_node *current)
+{
+	while (current->parent)
+		current = current->parent;
+	return (current->operation == tkn_and);
+}
+
 t_job	*token_pipe(t_job *job, t_term *term, t_node *current)
 {
 	t_job	*returnable;
@@ -31,7 +38,8 @@ t_job	*token_pipe(t_job *job, t_term *term, t_node *current)
 	if (current->left->operation == tkn_pipe)
 		returnable = tree_traversal(returnable, current->left, term);
 	else if (!returnable
-		|| (current->parent && current->parent->operation == tkn_and))
+		|| (current->parent && current->parent->operation == tkn_and)
+		|| (current->parent && head_parent_is_and(current)))
 		returnable = pipe_start(returnable, term, current->left);
 	else if (!current->right)
 		returnable = pipe_end(returnable, term, current->left);
