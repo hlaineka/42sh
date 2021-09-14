@@ -6,12 +6,13 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 15:57:08 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/11 20:30:01 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/12 17:42:18 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "libft.h"
+#include "builtins.h"
 
 /*
 ** tkn_operator and tkn_redirop tokens created in the basic tokenization are 
@@ -92,8 +93,7 @@ t_token	*validate_operator_tokens(t_token *first)
 		{	
 			if (-1 == handle_basic_optkn(current))
 			{
-				ft_printf_fd(STDERR_FILENO, "syntax error near token %s\n",
-					current->value);
+				err_syntax(E_SYNTAX, current->value);
 				delete_tokens(first);
 				return (NULL);
 			}

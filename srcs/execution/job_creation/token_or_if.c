@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:47:10 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/12 11:12:52 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/12 18:23:05 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ t_job	*token_or_if(t_job *job, t_term *term, t_node *current)
 		&& current->left->operation != tkn_pipe
 		&& current->left->operation != tkn_and 
 		&& current->left->operation != tkn_and_if
-		&& current->left->operation != tkn_or_if)
+		&& current->left->operation != tkn_or_if
+		&& current->left->operation != tkn_assignment)
 	{
 		left->next = term->jobs->next;
 		term->jobs->next = left;

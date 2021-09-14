@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:01:44 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/12 14:47:02 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/12 17:50:50 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ t_token *check_paranthesis(t_token *first)
 	return (first);
 }
 
-static void	debug_print_tokens(t_token *tokens)
+static void	debug_print_tokens(t_token *tokens, char *function_name)
 {
 	t_token	*temp;
 
 	temp = tokens;
-	ft_printf_fd(STDOUT_FILENO, "tokens after advanced tokenization:\n");
+	ft_printf_fd(STDOUT_FILENO, "tokens after %s:\n", function_name);
 	while (temp)
 	{
 		ft_printf_fd(STDOUT_FILENO, "%s = %i command: %s, ", temp->value,
@@ -85,18 +85,12 @@ t_token	*advanced_tokenization(t_token *first, t_term *term, int remove_quotes)
 		first = alias_handling(first, term, NULL);
 		first = bang_history(first, term);
 	}
-	if (term->intern_variables->flag_debug == 1){
-		ft_printf_fd(STDOUT_FILENO,"advanced_tokenization\n");
-		debug_print_tokens(first);
-	}
-	if (!first)
-		return (NULL);
-	if (remove_quotes)
+	if (term->intern_variables->flag_debug == 1)
+		debug_print_tokens(first, "advanced_tokenization");
+	if (first && remove_quotes)
 	{
-		if (term->intern_variables->flag_debug == 1){
-			ft_printf_fd(STDOUT_FILENO,"add_full_command\n");
-			debug_print_tokens(first);
-		}
+		if (term->intern_variables->flag_debug == 1)
+			debug_print_tokens(first, "add_full_command");
 		quote_removal(first);
 	}
 	return (first);
