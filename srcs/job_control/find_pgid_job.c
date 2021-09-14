@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 12:34:35 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/10 12:12:18 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/14 09:41:35 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ t_job	*find_pgid_job(t_term *term, pid_t pgid)
 {
 	t_job		*jobs;
 
+	if (pgid == 0)
+		return (NULL);
 	jobs = term->jobs->next;
 	while (jobs)
 	{

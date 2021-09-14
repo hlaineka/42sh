@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 10:24:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/05/02 11:35:03 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/13 11:43:57 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	get_pos(int *y, int *x)
 	ch = 0;
 	ft_bzero(buf, sizeof(char) * 30);
 	write(1, "\033[6n", 4);
-	while (ch != 'R' || i > 30)
+	while (ch != 'R' && i < 30)
 	{
 		if (!(read(0, &ch, 1)))
 		{

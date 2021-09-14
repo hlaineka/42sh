@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:47:26 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/12 18:22:59 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/14 19:00:33 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,20 @@ t_job	*token_and(t_job *job, t_term *term, t_node *current)
 		return (NULL); //todo error
 	if (pid == 0)
 	{
-		update_fds(term);
-//		ft_printf("i'm child process\n");
+		left->bg = 1;
 		left = tree_traversal(left, current->left, term);
 	}
 	if (pid > 0)
 	{
+		update_fds(term);
 		left->first_process->pid = pid;
-//		ft_printf("i'm parent process and i know child process id is %d\n", pid);
 		setpgid(pid, 0);
 		left->job_id = get_next_job_pgid(term->jobs->next);
 		left->pgid = pid;
 		set_signal_execution();
 	}
-//	left = tree_traversal(NULL, current->left, term);
 	if (left && current->left->operation != tkn_semi
-		&& current->left->operation != tkn_pipe
-		&& current->left->operation != tkn_and 
+		&& current->left->operation != tkn_and
 		&& current->left->operation != tkn_and_if
 		&& current->left->operation != tkn_or_if
 		&& current->left->operation != tkn_assignment)
@@ -55,14 +52,17 @@ t_job	*token_and(t_job *job, t_term *term, t_node *current)
 			term->jobs->next = left;
 		}
 		if (left->first_process->pid == 0 && pid == 0)
-		{
-			left->bg = 1;
 			exit(simple_command(left->first_process, left, term));
-		}
 	}
-	else if (pid == 0)
+	if (pid == 0)
 		exit(0);
 	if (current->right)
 		get_right(current, term);
+/*
+	update_fds(term);
+	dup2(term->fd_stdin, STDIN_FILENO);
+	dup2(term->fd_stdout, STDOUT_FILENO);
+	dup2(term->fd_stderr, STDERR_FILENO);
+*/
 	return (term->jobs->next);
 }

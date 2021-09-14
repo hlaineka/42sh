@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/10 21:03:19 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/10 21:06:53 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/14 18:28:31 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,4 @@ t_job	*get_current_job_builtin(t_term *term)
 	if (!job)
 		return (NULL);
 	return (job->next);
-
 }

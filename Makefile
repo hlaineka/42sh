@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/09/11 16:44:10 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/09/14 17:01:20 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,8 @@ _SRC_INPUT = read_input_user.c \
 			cut_copy_paste.c \
 			double_input_mem.c \
 			react_to_eof.c \
-			pre_prompt_jobs_check.c
+			pre_prompt_jobs_check.c \
+			read_input_from_script.c
 
 _SRC_INIT = disable_raw_mode.c \
 			enable_raw_mode.c \

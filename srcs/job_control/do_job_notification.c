@@ -6,14 +6,17 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 08:34:35 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/22 11:31:15 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/13 13:58:35 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <curses.h>
+#include <term.h>
 #include "job_control.h"
 #include "structs_21.h"
 #include "typedefs.h"
 #include "builtins.h"
+#include "input.h"
 
 void	do_job_notification(t_job *j_prev, t_term *term)
 {
@@ -21,6 +24,7 @@ void	do_job_notification(t_job *j_prev, t_term *term)
 
 	update_status(term);
 	job = j_prev->next;
+	tputs(term->cd_string, 1, ft_putc);
 	while (job)
 	{
 		if (is_job_completed(job))

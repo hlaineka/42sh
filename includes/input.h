@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/12 17:14:59 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/14 19:00:46 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char		*get_input(int argc, char **argv, t_term *term, t_input *input);
 char		*get_input_heredoc(char *eof, t_input *input, t_term *term);
 
 char		*read_input_tty(int prompt_mode, t_input *input, t_term *term);
+char		*read_input_from_script(t_term *term);
 int			copy_envp(char **envp, t_term *term);
 
 void		err_fatal(int error_no, char *s_str, t_term *term);

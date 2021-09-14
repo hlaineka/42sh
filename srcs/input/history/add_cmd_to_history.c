@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:16:18 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/20 21:31:22 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/14 15:38:53 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	add_cmd_to_history(char *cmd, char **history)
 		return (-1);
 	history[i] = ft_strdup(cmd);
 	if (!history[i])
-		return (-1);	//todo error
+		return (-1);
 	ptr = ft_strrchr(history[i], '\n');
 	if (ptr)
 		*ptr = '\0';
-	return (0);			//todo or 0;
+	return (0);
 }
