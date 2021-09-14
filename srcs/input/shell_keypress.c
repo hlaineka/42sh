@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/14 14:24:40 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/14 15:48:35 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ int	do_ctrl_c_key(t_input *input, t_term *term)
 	}
 	if (!input->input_mode)
 		*input->quote = PROMPT_NORMAL;
-	if (input->input_mode == PROMPT_SEARCH)
-		ft_printf("DING\n");	//todo remove
 	ft_memdel((void **)input->ret_str);
 	term->last_return = 1;
 	return (-1);
@@ -81,8 +79,6 @@ static int	do_special_keys(char *rc, t_input *input, t_term *term)
 		paste_clipboard_to_input(input, term);
 	else if (rc[0] == 18)
 		history_search_start(input, term);
-//		incremental_history_search(input, term);
-
 	else if (rc[0] == 11)
 		cut_input_to_clipboard(input, term);
 	else if (rc[0] == KEY_ESC)
