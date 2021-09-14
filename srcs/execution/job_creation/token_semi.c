@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 19:42:21 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/12 10:07:09 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/12 18:23:17 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_job	*token_semi(t_job *job, t_term *term, t_node *current)
 		&& current->left->operation != tkn_and 
 		&& current->left->operation != tkn_and_if
 		&& current->left->operation != tkn_or_if
-		&& current->left->operation != tkn_assignment_word)
+		&& current->left->operation != tkn_assignment)
 	{
 		left->next = term->jobs->next;
 		term->jobs->next = left;
