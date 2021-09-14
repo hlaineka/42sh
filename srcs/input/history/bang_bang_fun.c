@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 13:02:28 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/20 21:12:34 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/14 12:46:45 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ const char	*bang_bang_fun(t_term *term)
 
 	i = get_last_history_index(term->history) - 2;
 	if (i == -1)
-		return (NULL);	// todo: error & print no history or something
+		return (NULL);
 	return (term->history[i]);
 }
