@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 14:27:47 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/11 17:56:22 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/12 17:44:24 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,9 @@ static const char	*g_errstr[] = {
 	"unary operator expected",
 	"integer expression expected",
 	"not found",
-	"unable to export file"
+	"unable to export file",
+	"syntax error near token ",
+	"parser error: ",
 };
 
 int	err_builtin(int error_no, char *name, char *arg)
@@ -155,6 +157,15 @@ int	err_builtin(int error_no, char *name, char *arg)
 	ft_printf_fd(STDERR_FILENO, "42sh: %s: %s", name, g_errstr[error_no]);
 	if (arg)
 		ft_printf_fd(STDERR_FILENO, ": %s", arg);
+	ft_putchar_fd('\n', STDERR_FILENO);
+	return (1);
+}
+
+int	err_syntax(int error_no, char *arg)
+{
+	ft_printf_fd(STDERR_FILENO, "42sh: %s", g_errstr[error_no]);
+	if (arg)
+		ft_printf_fd(STDERR_FILENO, " %s", arg);
 	ft_putchar_fd('\n', STDERR_FILENO);
 	return (1);
 }

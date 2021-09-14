@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 14:02:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/14 17:00:44 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/14 19:00:46 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # define ERR_TERMTYPE_NOT_SET 4
 # define ERR_TERMCAPS_NO_ACCESS 5
 # define ERR_TERMTYPE_NOT_FOUND 6
-# define ERR_PARSER 7
 
 # define PROMPT_NORMAL 0
 # define PROMPT_START 1

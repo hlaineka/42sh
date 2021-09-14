@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:44:14 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/12 10:04:35 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/12 18:24:11 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,29 +43,24 @@ t_job       *token_assignment_word(t_job *job, t_term *term, t_node *current)
 	if (current->right)
 		return (NULL);
 	get_name_and_value(current->command, value, name);
+	if (!job)
+	{
+		job = init_job(current);
+		job->first_process->envp = strarr_copy(term->envp);
+		job->next = term->jobs->next;
+		term->jobs->next = job;
+	}
 	if (current->operation == tkn_assignment)
 	{
-		if (!job)
-		{
-			job = init_job(current);
-			job->first_process->envp = strarr_copy(term->envp);
-			job->next = term->jobs->next;
-			term->jobs->next = job;
-		}
 		ft_setenv(name, value, 1, term->envp);
 		ft_setenv(name, value, 1, job->first_process->envp);
+		ft_printf("token_assignment_word: before tree traversal");
 		job = tree_traversal(job, current->left, term);
+		ft_printf("token_assignment_word: after tree traversal");
 	}
 	else
 	{
-		if (!job && !current->left)
-		{
-			job = init_job(current);
-			job->first_process->envp = strarr_copy(term->envp);
-			job->next = term->jobs->next;
-			term->jobs->next = job;
-			job->first_process->pid = -1;
-		}
+		job->first_process->pid = -1;
 		if (ft_getenv(name, term->envp))
 			ft_setenv(name, value, 1, term->envp);
 		ft_setenv(name, value, 1, term->intern_variables->intern);
