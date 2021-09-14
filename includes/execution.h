@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:35:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/22 11:30:41 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/14 19:49:42 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int			fork_and_chain_pipes(int *lpipe, int *rpipe);
 
 int			simple_command(t_process *proc, t_job *job, t_term *term);
 int			simple_command_pipe(t_process *proc, t_term *term);
+int			set_job_and_process_state(t_job *j, t_process *p, int pid, int s);
 
 int			get_next_job_pgid(t_job *jobs);
 pid_t		get_last_process_pid(t_job *job);

@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/09/14 17:01:20 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/09/14 19:48:53 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -208,7 +208,8 @@ _SRC_EXECUTION =	execution.c \
 					get_next_job_pgid.c \
 					get_status_and_condition.c \
 					simple_command.c \
-					wait_to_get_status.c
+					wait_to_get_status.c \
+					set_job_and_process_state.c
 
 _SRC_JOB_CREATION = job_creation.c \
 					job_functions.c \

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/12 12:15:52 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/14 20:01:28 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,44 +63,11 @@ static int	execve_process(char *cmd_abs, t_process *proc, t_term *term)
 	exit(execve(cmd_abs, proc->argv, envp));
 }
 
-int	simple_command(t_process *proc, t_job *job, t_term *term)
+static int	parent_shell_return(t_process *proc, t_job *job, t_term *term)
 {
 	pid_t	pid;
-	char	cmd_abs[1024];
 
-	if (!proc->argv || !proc->argv[0] || proc->argv[0][0] == '\0')
-	{
-		proc->pid = -1;
-		job->notified = 1;
-		proc->completed = 1; // do we need to do this with all these errors?
-		return (1);
-	}
-	if (is_builtin(proc))
-	{
-		job->notified = 1;
-		return (proc->status);
-	}
-	if (get_abs_path_to_cmd(proc->argv[0], term->envp, term->hash_table, cmd_abs) != 0)
-	{
-		proc->pid = -1;
-		job->notified = 1;
-		proc->completed = 1;
-		proc->status = 1;
-		return (1);
-	}
-	if (job->bg)
-	{
-		exit(execve_process(cmd_abs, proc, term));
-
-	}
-	pid = fork();
-	if (pid < 0)
-		return (err_builtin(E_FORK, proc->argv[0], NULL));
-	if (pid == 0)
-	{
-		setpgid(0, 0);
-		exit(execve_process(cmd_abs, proc, term));
-	}
+	pid = proc->pid;
 	set_signal_execution();
 	setpgid(pid, 0);
 	job->job_id = get_next_job_pgid(term->jobs->next);
@@ -112,8 +79,34 @@ int	simple_command(t_process *proc, t_job *job, t_term *term)
 	}
 	proc->pid = pid;
 	wait_to_get_status(proc, job->bg);
-	tcsetpgrp(term->fd_stderr, getpgrp());	// if not bg
+	tcsetpgrp(term->fd_stderr, getpgrp());
 	return (proc->status);
+}
+
+int	simple_command(t_process *proc, t_job *job, t_term *term)
+{
+	pid_t	pid;
+	char	cmd_abs[1024];
+
+	if (!proc->argv || !proc->argv[0] || proc->argv[0][0] == '\0')
+		return (set_job_and_process_state(job, proc, -1, 1));
+	if (is_builtin(proc))
+		return (set_job_and_process_state(job, proc, -1, proc->status));
+	if (get_abs_path_to_cmd(proc->argv[0],
+			term->envp, term->hash_table, cmd_abs) != 0)
+		return (set_job_and_process_state(job, proc, -1, 1));
+	if (job->bg)
+		exit(execve_process(cmd_abs, proc, term));
+	pid = fork();
+	if (pid < 0)
+		return (err_builtin(E_FORK, proc->argv[0], NULL));
+	if (pid == 0)
+	{
+		setpgid(0, 0);
+		exit(execve_process(cmd_abs, proc, term));
+	}
+	proc->pid = pid;
+	return (parent_shell_return(proc, job, term));
 }
 
 int	simple_command_pipe(t_process *proc, t_term *term)
@@ -125,9 +118,9 @@ int	simple_command_pipe(t_process *proc, t_term *term)
 		exit(1);
 	if (is_builtin(proc))
 		exit(proc->status);
-	if (get_abs_path_to_cmd(proc->argv[0], term->envp, term->hash_table, cmd_abs) != 0)
+	if (get_abs_path_to_cmd(proc->argv[0], term->envp,
+			term->hash_table, cmd_abs) != 0)
 		exit (1);
-//		return (proc->status);
 	exit(execve_process(cmd_abs, proc, term));
 	return (-1);
 }
