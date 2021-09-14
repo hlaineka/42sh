@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/13 11:45:03 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/14 17:25:11 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,41 +55,11 @@ char	*read_input_tty(int prompt_mode, t_input *input, t_term *term)
 {
 	char	read_chars[1024];
 	char	*str;
-	char	*tmp;
 	int		ret;
 
 	init_input_tty(input, prompt_mode);
 	if (term->intern_variables->flag_script)
-	{
-		if (term->intern_variables->script_fd == -1)
-		{
-			term->intern_variables->script_fd = open(term->intern_variables->script_file, O_RDONLY);
-			if (term->intern_variables->script_fd < 0)
-			{
-				ft_putendl_fd("Invalid script file", 2);
-				exit(1);
-			}
-		}
-		else if (term->intern_variables->script_fd == -2)
-		{
-			str = ft_strdup("exit");
-			ft_printf("%s\n\r", str);
-			return (str);
-		}
-		if (get_next_line(term->intern_variables->script_fd, &str) == 0)
-		{
-			if (str)
-				free(str);
-			close(term->intern_variables->script_fd);
-			term->intern_variables->script_fd = -2;
-			str = ft_strdup("leaks 42sh");
-		}
-		ft_asprintf(&tmp, "%s\n", str);
-		free(str);
-		str = tmp;
-		ft_printf("%s\r", str);
-		return (str);
-	}
+		return (read_input_from_script(term));
 	while (1)
 	{
 		ft_bzero(read_chars, 1024);
@@ -138,7 +108,6 @@ static char	*get_input_tty(t_term *term, t_input *input)
 char	*get_input(int argc, char **argv, t_term *term, t_input *input)
 {
 	char	*str;
-	int		quote;
 
 	dup2(term->fd_stdin, STDIN_FILENO);
 	dup2(term->fd_stdout, STDOUT_FILENO);
@@ -146,31 +115,19 @@ char	*get_input(int argc, char **argv, t_term *term, t_input *input)
 	str = NULL;
 	input->ret_str = &str;
 	signals_to_ignore();
-	if (term->intern_variables->flag_rawmode || (argc == 1
-		|| (argc == 3 && ft_strequ(argv[1], "script"))))
+	if (term->intern_variables->flag_rawmode
+		|| (argc == 1 || (argc == 3 && ft_strequ(argv[1], "script"))))
 	{
 		set_signal_input();
 		do_job_notification(term->jobs, term);
-//		pre_prompt_jobs_check(term);
 		enable_raw_mode(term);
 		str = get_input_tty(term, input);
-//		input->history = command_to_history(input, str);
-//		if (!input->history)
 		if (command_to_history(str, term))
 			err_fatal(ERR_MALLOC, NULL, term);
 		disable_raw_mode_continue(term);
 	}
 	else
-	{
-		quote = 0;
-		get_next_line(STDIN_FILENO, &str);
-		quote = ft_is_quote_open(quote, str);
-		while (quote)
-		{
-			get_next_line(STDIN_FILENO, &str);
-			quote = ft_is_quote_open(quote, str);
-		}
-	}
+		return (ft_strdup("exit\n\r"));
 	(void)argv;
 	return (str);
 }
