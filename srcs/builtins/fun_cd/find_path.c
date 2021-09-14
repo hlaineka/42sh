@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 11:03:24 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/23 12:46:54 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/14 12:25:47 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 ** buf=path = memory in stack
 */
 
-static int	is_path_file(char *file, char *folder, char *path)
+static int	is_path_file(char *file, char *folder, char *buf)
 {
-	ft_strcpy(path, folder);
-	ft_strcat(path, "/");
-	ft_strcat(path, file);
-	if (!access(path, F_OK))
+	ft_strcpy(buf, folder);
+	ft_strcat(buf, "/");
+	ft_strcat(buf, file);
+	if (!access(buf, F_OK))
 		return (1);
 	return (0);
 }
@@ -31,11 +31,33 @@ static int	is_path_file(char *file, char *folder, char *path)
 **		return (-1); // do proper error printing!!!
 */
 
+static char	*find_file_from_dirs(char **dirs, char *cmd, char *buf)
+{
+	char	*path;
+
+	path = NULL;
+	while (dirs && *dirs)
+	{
+		if (path == NULL && is_path_file(cmd, *dirs, buf))
+			path = *dirs;
+		else
+			free(*dirs);
+		dirs++;
+		if (path)
+			break ;
+	}
+	while (dirs && *dirs)
+	{
+		free(*dirs);
+		dirs++;
+	}
+	return (path);
+}
+
 char	*find_path_for_cmd(char *cmd, char **envp, const char *fn)
 {
 	char	buf[1024];
 	char	**folders;
-	char	**temp;
 	char	*path;
 
 	path = ft_getenv("PATH", envp);
@@ -45,19 +67,10 @@ char	*find_path_for_cmd(char *cmd, char **envp, const char *fn)
 		return (NULL);
 	}
 	folders = ft_strsplit(path, ':');
-	path = NULL;
 	if (!folders)
 		err_builtin(E_NOMEM, (char *)fn, NULL);
-	temp = folders;
-	while (folders && *folders)
-	{
-		if (path == NULL && is_path_file(cmd, *folders, buf))
-			path = *folders;
-		else
-			free(*folders);
-		folders++;
-	}
-	free(temp);
+	path = find_file_from_dirs(folders, cmd, buf);
+	free(folders);
 	if (path == NULL)
 		err_builtin(E_NOT_FOUND, (char *)fn, cmd);
 	return (path);
