@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:32:48 by helvi             #+#    #+#             */
-/*   Updated: 2021/09/12 10:46:10 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/18 20:14:26 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,14 @@ t_token	*check_semicolon(t_token *first, t_term *term)
 			returnable = temp->next;
 			returnable->prev = NULL;
 			temp->next = NULL;
-			temp = advanced_tokenization(first, term, 1);
+			if (temp->prev)
+			{
+				temp->prev->next = NULL;
+				free_token(&temp);
+			}
+			temp = advanced_tokenization(command_first, term, 1);
 			if (term->intern_variables->flag_debug == 1)
-				debug_print_tokens(first, "advanced_tokenization in semicolon");
+				debug_print_tokens(command_first, "advanced_tokenization in semicolon");
 			root = ast_creator(temp, term);
 			execute(root, term);
 			command_first = NULL;
