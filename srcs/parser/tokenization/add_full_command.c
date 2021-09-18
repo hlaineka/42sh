@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 13:40:15 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/12 14:53:02 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/18 19:24:35 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ t_token	*add_full_command(t_token *first)
 		command_first = temp;
 		ft_bzero(command, STR_LENGTH);
 		temp = copy_command(command, temp);
-		ft_printf("Full command: %s\n", command);
 		temp = temp->next;
 		while (command_first != temp)
 		{

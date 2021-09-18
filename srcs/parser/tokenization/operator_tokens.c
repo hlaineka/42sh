@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 15:57:08 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/12 17:42:18 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/18 19:21:23 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,39 @@ int	handle_operation(t_token *current)
 	return (0);
 }
 
+int	handle_and_semi(t_token *first)
+{
+	t_token	*temp;
+	t_token	*temp2;
+
+	temp = first;
+	while (temp)
+	{
+		if (temp->maintoken == tkn_and)
+		{
+			temp2 = first;
+			while (temp2)
+			{
+				if (temp2->maintoken == tkn_semi)
+					return (-1);
+				temp2 = temp2->next;
+			}
+		}
+		if (temp->maintoken == tkn_semi)
+		{
+			temp2 = first;
+			while (temp2)
+			{
+				if (temp2->maintoken == tkn_and)
+					return (-1);
+				temp2 = temp2->next;
+			}
+		}
+		temp = temp->next;
+	}
+	return (0);
+}
+
 int	handle_basic_optkn(t_token *current)
 {
 	int	returnable;
@@ -99,6 +132,12 @@ t_token	*validate_operator_tokens(t_token *first)
 			}
 		}
 		current = current->next;
+	}
+	if (-1 == handle_and_semi(first))
+	{
+		err_syntax(E_SYNTAX, first->value);
+		delete_tokens(first);
+		return (NULL);
 	}
 	return (first);
 }
