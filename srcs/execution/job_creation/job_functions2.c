@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:41:23 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/07/31 16:29:07 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/18 20:00:49 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	get_right(t_node *current, t_term *term)
 		&& current->right->operation != tkn_pipe
 		&& current->right->operation != tkn_and 
 		&& current->right->operation != tkn_and_if
-		&& current->right->operation != tkn_or_if)
+		&& current->right->operation != tkn_or_if
+		&& current->right->operation != tkn_assignment)
 	{
 		right->next = term->jobs->next;
 		term->jobs->next = right;
