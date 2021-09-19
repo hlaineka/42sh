@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:32:48 by helvi             #+#    #+#             */
-/*   Updated: 2021/09/18 20:14:26 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/19 19:30:48 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,11 @@ t_token	*check_semicolon(t_token *first, t_term *term)
 			execute(root, term);
 			command_first = NULL;
 			temp = returnable;
+		}
+		else if (temp->maintoken == tkn_semi && !temp->next && temp->prev)
+		{
+			temp->prev->next = NULL;
+			free_token(&temp);
 		}
 		else
 			temp = temp->next;
