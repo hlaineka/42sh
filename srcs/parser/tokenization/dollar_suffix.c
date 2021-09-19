@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 14:36:53 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/22 22:36:28 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/19 20:19:43 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,11 @@ char	*substitute_var_without_suffix(char *param, t_term *term)
 	}
 	else
 		word = dollar_split_param(param, "%", 1);
-	str = ft_getenv(param, term->envp);		//todo which first, intern or envp?
+	str = ft_getenv(param, term->envp);
 	if (!str)
 		str = ft_getenv(param, term->intern_variables->intern);
 	if (!str)
-		return NULL;
+		return (NULL);
 	ft_strrcat(rev_suffix, word);
 	param[ft_strlen(param)] = '%';
 	if (opt == 0)

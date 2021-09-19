@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 14:36:53 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/22 22:28:20 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/19 20:20:10 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ char	*substitute_var_without_prefix(char *param, t_term *term)
 	}
 	else
 		word = dollar_split_param(param, "#", 1);
-	str = ft_getenv(param, term->envp);		//todo which first, intern or envp?
+	str = ft_getenv(param, term->envp);
 	if (!str)
 		str = ft_getenv(param, term->intern_variables->intern);
 	if (!str)
-		return NULL;
+		return (NULL);
 	param[ft_strlen(param)] = '#';
 	if (opt == 0)
 		return (remove_shortest_prefix(str, word));

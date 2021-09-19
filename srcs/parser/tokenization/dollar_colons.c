@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 18:16:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/31 17:07:22 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/19 20:21:47 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ static char	*get_colon_question(char *name, char *val, char *word)
 	if (!val || !val[0])
 	{
 		if (!word || word[0])
-			ft_printf_fd(STDERR_FILENO, "42sh: %s: parameter null or not set\n", name);
+			ft_printf_fd(STDERR_FILENO,
+				"42sh: %s: parameter null or not set\n", name);
 		else
 			ft_printf_fd(STDERR_FILENO, "42sh: %s: %s\n", name, word);
-		return NULL;	//todo this needs to end process and set status 1
+		return (NULL);
 	}
 	return (ft_strdup(val));
 }
@@ -65,7 +66,6 @@ char	*get_param_colon_word(char *param, char *word, int opt, t_term *term)
 	char	*str;
 
 	str = ft_getenv(param, term->envp);
-//	ft_printf("%s word=%s opt=%d", __FUNCTION__, word, opt);
 	if (opt == COLON_MINUS)
 		return (get_colon_minus(str, word));
 	if (opt == COLON_EQUAL)
