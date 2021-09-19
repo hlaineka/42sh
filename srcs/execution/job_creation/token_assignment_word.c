@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:44:14 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/18 19:57:23 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/19 19:41:40 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,11 @@ t_job       *token_assignment_word(t_job *job, t_term *term, t_node *current)
 	{
 		job = init_job(current);
 		job->first_process->envp = strarr_copy(term->envp);
-		job->next = term->jobs->next;
-		term->jobs->next = job;
+		if (current->operation != tkn_assignment)
+		{
+			job->next = term->jobs->next;
+			term->jobs->next = job;
+		}
 	}
 	if (current->operation == tkn_assignment)
 	{
