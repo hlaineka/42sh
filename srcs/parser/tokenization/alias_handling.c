@@ -6,23 +6,49 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/11 17:39:05 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/12 08:53:12 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "builtins.h"
+#include "includes.h"
+
+t_token	*substitute_token(t_token *first, t_token *new, t_token *current)
+{
+	t_token *prev;
+	t_token	*next;
+	t_token	*returnable;
+
+	returnable = first;
+	prev = current->prev;
+	next = current->next;
+	free_tokens(&(current->subtokens));
+	delete_token(current);
+	if (prev)
+		prev->next = new;
+	else
+		returnable = new;
+	new->prev = prev;
+	while (new->next)
+		new = new->next;
+	new->next = next;
+	if (next)
+		next->prev = new;
+	return (returnable);
+}
 
 t_token				*alias_handling(t_token *first, t_term *term, t_alias *a)
 {
 	t_token		*temp;
 	t_token		*next;
-	t_token		*prev;
 	t_token		*new;
+	t_alias		*original_command;
 	int			first_word;
 
+	if (!first)
+		return (NULL);
 	temp = first;
-	prev = first->prev;
 	first_word = 1;
 	new = NULL;
 	while (temp && term)
@@ -31,21 +57,18 @@ t_token				*alias_handling(t_token *first, t_term *term, t_alias *a)
 		if (first_word)
 		{
 			a = find_alias_with_name(temp->value, term->alias);
-			if (a && a->value && a->value[0])
+			original_command = a;
+			while (a)
 			{
-				new = lexer(ft_strdup(a->value), term, 0);
-				free_tokens(&(temp->subtokens));
-				delete_token(temp);
-				if (prev)
-					prev->next = new;
-				else
-					first = new;
-				new->prev = prev;
-				while (new->next)
-					new = new->next;
-				new->next = next;
-				if (next)
-					next->prev = new;
+				if (a && a->value && a->value[0])
+				{
+					new = lexer(ft_strdup(a->value), term, 0);
+					first = substitute_token(first, new, temp);
+					temp = new;
+				}
+				a = find_alias_with_name(temp->value, term->alias);
+				if (a == original_command)
+					break;
 			}
 		}
 		if (temp->maintoken == tkn_and || temp->maintoken == tkn_pipe
@@ -54,7 +77,6 @@ t_token				*alias_handling(t_token *first, t_term *term, t_alias *a)
 			first_word = 1;
 		else
 			first_word = 0;
-		prev = temp;
 		temp = next;
 	}
 	return (first);

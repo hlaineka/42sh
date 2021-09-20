@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bang_minus_number_fun.c                            :+:      :+:    :+:   */
+/*   set_job_and_process_state.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/12 13:02:28 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/14 15:44:30 by hhuhtane         ###   ########.fr       */
+/*   Created: 2021/09/14 19:45:06 by hhuhtane          #+#    #+#             */
+/*   Updated: 2021/09/14 19:52:39 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structs_21.h"
-#include "history.h"
-#include "input.h"
+#include "execution.h"
 
-const char	*bang_minus_number_fun(char *number_str, t_term *term)
+int	set_job_and_process_state(t_job *j, t_process *p, int pid, int s)
 {
-	int		n;
-	int		last;
-
-	n = ft_atoi(number_str);
-	last = get_last_history_index(term->history);
-	if (last == -1)
-		return (NULL);
-	n = last - n - 1;
-	if (n < 0 || n >= HISTORY_SIZE)
-		return (NULL);
-	if (!term->history[n])
-		return (NULL);
-	return (term->history[n]);
+	j->notified = 1;
+	p->pid = pid;
+	p->completed = 1;
+	p->status = s;
+	return (s);
 }

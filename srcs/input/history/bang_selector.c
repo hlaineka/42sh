@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 12:48:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/21 10:22:25 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/14 15:44:50 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ const char	*bang_selector(char *bang_param, t_term *term)
 	if (!bang_param[0] || !bang_param[1]
 		|| (bang_param[0] == '!' && bang_param[1] == '='))
 		return (bang_param);
-//		return (NULL);
-
 	if (is_bang_bang(bang_param))
 		return (bang_bang_fun(term));
 	if (is_bang_number(bang_param))

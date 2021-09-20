@@ -6,18 +6,18 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 20:53:10 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/01 11:26:35 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/14 11:59:15 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "includes.h"
 
-int print_intern_variables(void)
+int	print_intern_variables(void)
 {
-	t_term	*term;
-	char	**intern;
-	int		i;
+	t_term		*term;
+	char		**intern;
+	int			i;
 
 	term = g_term;
 	intern = term->intern_variables->intern;
@@ -25,7 +25,7 @@ int print_intern_variables(void)
 	ft_printf("debug=%i\n", term->intern_variables->flag_debug);
 	ft_printf("noclobber=%i\n", term->intern_variables->flag_noclobber);
 	ft_printf("rawmode=%i\n", term->intern_variables->flag_rawmode);
-	while(intern[i])
+	while (intern[i])
 	{
 		ft_printf("%s\n", intern[i]);
 		i++;

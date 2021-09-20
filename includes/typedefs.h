@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   typedefs.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 09:42:02 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/11 17:32:06 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/12 17:44:31 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@
 # define E_NOT_INT 118
 # define E_NOT_FOUND 119
 # define E_EXPORT_FAIL 120
+# define E_SYNTAX 121
+# define E_PARSER 122
 
 typedef struct stat	t_stat;
 

@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 13:02:28 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/12 15:27:31 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/14 15:41:43 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ const char	*bang_word_fun(char *word_str, t_term *term)
 	len = ft_strlen(word_str);
 	i = get_last_history_index(term->history);
 	if (i == -1)
-		return (NULL);	// todo: error & print no history or something
-
+		return (NULL);
 	while (i > 0)
 	{
 		i--;

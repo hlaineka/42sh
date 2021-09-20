@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/21 19:21:04 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/19 20:31:08 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,6 @@ void	init_input(t_input *input)
 		free(input->rrs);
 		exit(1);
 	}
-//	input->history = ft_clstnew(NULL, 0);
-//	if (!input->history)
-//		exit(1);
-//	input->last_comm = input->history;
 	input->ls_size = 2048;
 	input->rrs_size = 2048;
 	input->clipboard_size = 2048;
@@ -90,34 +86,24 @@ void	init_term(t_term *term)
 	term->buffer = ft_memalloc(sizeof(char) * 2048);
 	if (!term->buffer)
 		err_fatal(ERR_MALLOC, NULL, term);
-	if (term->intern_variables->flag_rawmode)
-	{
-		term->termtype = getenv("TERM");
-		if (!isatty(1))
-			term->fd_stdout = open(ttyname(ttyslot()), O_RDWR);
-		else
-			term->fd_stdout = STDOUT_FILENO;
-		if (!term->termtype)
-			err_quit(ERR_TERMTYPE_NOT_SET, NULL);
-		success = tgetent(term->term_buffer, term->termtype);
-		if (success < 0)
-			err_quit(ERR_TERMCAPS_NO_ACCESS, NULL);
-		if (success == 0)
-			err_quit(ERR_TERMTYPE_NOT_FOUND, term->termtype);
-		init_term_values(term, term->buffer);
-	}
+	term->termtype = getenv("TERM");
+	if (!isatty(1))
+		term->fd_stdout = open(ttyname(ttyslot()), O_RDWR);
 	else
-	{
-		term->fd_stdin = dup2(STDIN_FILENO, 20);
-		term->fd_stdout = dup2(STDOUT_FILENO, 21);
-		term->fd_stderr = dup2(STDERR_FILENO, 22);
-	}
+		term->fd_stdout = STDOUT_FILENO;
+	if (!term->termtype)
+		err_quit(ERR_TERMTYPE_NOT_SET, NULL);
+	success = tgetent(term->term_buffer, term->termtype);
+	if (success < 0)
+		err_quit(ERR_TERMCAPS_NO_ACCESS, NULL);
+	if (success == 0)
+		err_quit(ERR_TERMTYPE_NOT_FOUND, term->termtype);
+	init_term_values(term, term->buffer);
 }
 
 void	initialize(t_input *input, t_term *term, char **envp, char **argv)
 {
 	ft_bzero(term, sizeof(t_term));
-//	ft_bzero(term->hash_table, sizeof(t_hash *) * 1024);
 	init_flags(term, argv);
 	init_term(term);
 	init_input(input);
@@ -128,7 +114,6 @@ void	initialize(t_input *input, t_term *term, char **envp, char **argv)
 	if (term->intern_variables->flag_rawmode)
 	{
 		get_termios_modes(term);
-//		tputs(term->ti_string, 1, ft_putc);
 		tputs(tgoto(term->cm_string, 0, 0), 1, ft_putc);
 		tputs(term->cd_string, 1, ft_putc);
 	}

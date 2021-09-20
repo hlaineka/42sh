@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:01:44 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/11 18:27:03 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/12 17:50:50 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,21 @@ t_token *check_paranthesis(t_token *first)
 	return (first);
 }
 
+static void	debug_print_tokens(t_token *tokens, char *function_name)
+{
+	t_token	*temp;
+
+	temp = tokens;
+	ft_printf_fd(STDOUT_FILENO, "tokens after %s:\n", function_name);
+	while (temp)
+	{
+		ft_printf_fd(STDOUT_FILENO, "%s = %i command: %s, ", temp->value,
+			temp->maintoken, temp->full_command);
+		temp = temp->next;
+	}
+	ft_printf_fd(STDOUT_FILENO, "\n");
+}
+
 /*
 ** Advanced tokenisation checks for these things and marks the with their
 ** tokens: 
@@ -59,12 +74,24 @@ t_token *check_paranthesis(t_token *first)
 t_token	*advanced_tokenization(t_token *first, t_term *term, int remove_quotes)
 {
 	first = check_paranthesis(first);
+	if (remove_quotes)
+		add_full_command(first);
 	if (!first)
 		return (NULL);
 	first = word_assignment_marking(first);
 	first = word_expansions(first, term);
-	first = alias_handling(first, term, NULL);
 	if (remove_quotes)
+	{
+		first = alias_handling(first, term, NULL);
 		first = bang_history(first, term);
+	}
+	if (term->intern_variables->flag_debug == 1)
+		debug_print_tokens(first, "advanced_tokenization");
+	if (first && remove_quotes)
+	{
+		if (term->intern_variables->flag_debug == 1)
+			debug_print_tokens(first, "add_full_command");
+		quote_removal(first);
+	}
 	return (first);
 }

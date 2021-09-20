@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/11 20:39:13 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/20 20:17:27 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void		builtin_echo(void *proc);
 */
 
 int			err_builtin(int error_no, char *name, char *arg);
+int			err_syntax(int error_no, char *arg);
 
 char		*ft_getenv(const char *name, char **envp);
 int			ft_setenv(const char *name, const char *val, int over, char **envp);

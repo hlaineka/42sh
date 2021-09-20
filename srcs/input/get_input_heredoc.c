@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/20 21:48:18 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/13 19:36:35 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/14 16:11:26 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	heredoc_change_streams_start(t_term *term, int streams[])
 	dup2(term->fd_stdin, STDIN_FILENO);
 	dup2(term->fd_stdout, STDOUT_FILENO);
 	dup2(term->fd_stderr, STDERR_FILENO);
+	enable_raw_mode(term);
 }
 
 static void	heredoc_change_streams_end(int streams[], t_term *term)
@@ -60,25 +61,43 @@ static char	*get_input_heredoc2(char *eof, t_input *input, t_term *term)
 	return (*input->ret_str);
 }
 
+static int	init_heredoc_input(char **str, char **buf, t_input *input)
+{
+	*str = ft_strnew(0);
+	if (*str == NULL)
+		return (1);
+	*buf = ft_strnew(0);
+	if (*buf == NULL)
+	{
+		free(*str);
+		*str = NULL;
+		return (1);
+	}
+	input->ret_str = str;
+	input->input_mode = HEREDOC_MODE;
+	signals_to_ignore();
+	return (0);
+}
+
 char	*get_input_heredoc(char *eof, t_input *input, t_term *term)
 {
 	char	*str;
 	char	*buf;
 	int		streams[3];
 
-	str = ft_strnew(0);
-	buf = ft_strnew(0);
-	input->ret_str = &str;
-	input->input_mode = HEREDOC_MODE;
-	signals_to_ignore();
+	if (init_heredoc_input(&str, &buf, input))
+		return (NULL);
 	if (term->intern_variables->flag_rawmode)
 	{
 		heredoc_change_streams_start(term, streams);
-		enable_raw_mode(term);
 		str = get_input_heredoc2(eof, input, term);
+		free(buf);
+		heredoc_change_streams_end(streams, term);
+		if (ft_strlen(str) > 0)
+			str[ft_strlen(str) - 1] = '\0';
 	}
 	else
-	{	
+	{
 		while (!ft_strequ(eof, buf))
 		{
 			get_next_line(STDIN_FILENO, &buf);
@@ -86,11 +105,5 @@ char	*get_input_heredoc(char *eof, t_input *input, t_term *term)
 		}
 	}
 	input->input_mode = 0;
-	if (term->intern_variables->flag_rawmode)
-	{
-		heredoc_change_streams_end(streams, term);
-		if (ft_strlen(str) > 0)
-			str[ft_strlen(str) - 1] = '\0';
-	}
 	return (str);
 }

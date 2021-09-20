@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 21:44:33 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/10 21:05:18 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/19 20:26:05 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int	substitute_dollar(t_token *tkn, t_term *term, int start, int end)
 		substitution = ft_itoa(term->last_return);
 	else
 		substitution = get_param_str(parameter, term);
-//		substitution = ft_strdup(ft_getenv(parameter, term->envp));
 	if (substitution == NULL)
 	{
 		ft_memdel((void **)&parameter);
@@ -37,10 +36,7 @@ static int	substitute_dollar(t_token *tkn, t_term *term, int start, int end)
 	}
 	ft_strcut(tkn->value, start - 2, end + 1);
 	tkn->value = ft_strpastei(tkn->value, substitution, start - 2);
-	tkn->maintoken = tkn_word;
 	add_quotearray(tkn);
-//	ft_free(parameter);
-//	ft_free(substitution);
 	ft_memdel((void **)&parameter);
 	ft_memdel((void **)&substitution);
 	return (0);
@@ -58,10 +54,7 @@ static int	dollar_parameter(t_token *tkn, t_term *term, int start)
 		end++;
 	}
 	if (tkn->value[end] != '}')
-	{
-		ft_printf_fd(STDERR_FILENO, "syntax error near token $");
 		return (-1);
-	}
 	if (substitute_dollar(tkn, term, start, end) == -1)
 		return (-1);
 	return (1);
@@ -73,20 +66,15 @@ int	dollar_expansion(t_token *tkn, t_term *term, int dollar)
 		return (0);
 	if (!tkn->next)
 		return (0);
-	if (tkn->value[dollar + 1] && tkn->maintoken == tkn_lpar && tkn->next->maintoken == tkn_rpar)
+	if (tkn->value[dollar + 1] && tkn->maintoken == tkn_lpar
+		&& tkn->next->maintoken == tkn_rpar)
 		tkn->maintoken = tkn_dollarlpar;
-	else if (tkn->value[dollar + 1] && tkn->maintoken == tkn_lbrace && tkn->next->maintoken == tkn_rbrace)
-	{	
-		//tkn->value = ft_strjoin_frees1(tkn->value, tkn->next->value);
-		//delete_token(tkn->next);
-		//if (!tkn->next)
-		//	return (0);
-		//tkn->value = ft_strjoin_frees1(tkn->value, tkn->next->value);
-		//delete_token(tkn->next);
-		//if (!tkn->next)
-		//	return (0);
+	else if (tkn->value[dollar + 1] && tkn->maintoken == tkn_lbrace
+		&& tkn->next->maintoken == tkn_rbrace)
+	{
 		tkn->value = ft_strjoin_frees1(tkn->value, tkn->next->value);
 		delete_token(tkn->next);
+		tkn->maintoken = tkn_word;
 		if (-1 == dollar_parameter(tkn, term, dollar + 2))
 			return (-1);
 	}

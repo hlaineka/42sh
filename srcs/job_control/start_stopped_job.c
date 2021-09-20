@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 12:34:35 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/10 23:07:15 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/14 18:29:38 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ int	start_stopped_job(t_job *job, t_term *term)
 	{
 		if (proc->stopped)
 			proc->stopped = 0;
-//			kill(proc->pid, SIGCONT);
 		proc = proc->next;
 	}
-	return (0);		// todo: make this return void or error check -1?
+	return (0);
 }

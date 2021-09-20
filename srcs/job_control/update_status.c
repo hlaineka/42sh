@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 09:05:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/11 14:19:46 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/14 18:33:03 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ static int	mark_process_status(pid_t pid, int status, t_term *term, int o)
 		}
 		j = j->next;
 	}
-	ft_printf("miksi pid=%d status=%d\n", pid, status);
-	return (0);		// todo error or 1?
+	return (1);
 }
 
 void	update_status_jobs(t_term *term)
@@ -50,42 +49,22 @@ void	update_status_jobs(t_term *term)
 	pid_t		pid;
 
 	set_signal_execution();
-	pid = waitpid (-1, &status, WUNTRACED | WNOHANG);
+	pid = waitpid(-1, &status, WUNTRACED | WNOHANG);
 	while (!mark_process_status(pid, status, term, 1))
 	{
-		pid = waitpid (-1, &status, WUNTRACED|WNOHANG);
+		pid = waitpid(-1, &status, WUNTRACED | WNOHANG);
 	}
 }
 
 void	update_status(t_term *term)
 {
-//	t_job		*jobs;
-//	t_process	*proc;
 	int			status;
 	pid_t		pid;
 
-/*
-	jobs = term->jobs->next;
-	while(jobs)
-	{
-		proc = jobs->first_process;
-		while (proc)
-		{
-			if (!proc->completed && !proc->stopped)
-			{
-				pid = waitpid (proc->pid, &status, WUNTRACED|WNOHANG);
-				mark_process_status(term->jobs->next, pid, status, term);
-			}
-			proc = proc->next;
-		}
-		jobs = jobs->next;
-	}
-*/
 	set_signal_execution();
-	pid = waitpid (-1, &status, WUNTRACED | WNOHANG);
+	pid = waitpid(-1, &status, WUNTRACED | WNOHANG);
 	while (!mark_process_status(pid, status, term, 0))
 	{
-		pid = waitpid (-1, &status, WUNTRACED|WNOHANG);
+		pid = waitpid(-1, &status, WUNTRACED | WNOHANG);
 	}
-
 }

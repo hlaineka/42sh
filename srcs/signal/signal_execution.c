@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:07:56 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/11 14:46:32 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/14 18:34:19 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void	sig_child_handler(void)
 			{
 				get_status_and_condition(proc, status);
 				jobs->notified = 0;
-//				handle_process(proc, status);
-//				kill_processes_before_pid(jobs, pid);
 				return ;
 			}
 			proc = proc->next;

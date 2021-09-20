@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 10:34:59 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/13 19:38:49 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/14 18:35:14 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,10 @@ void	sig_ttou_input(int signo)
 void	set_signal_input(void)
 {
 	if ((signal(SIGINT, sig_handler_input) == SIG_ERR)
-//		|| (signal(SIGCONT, sig_handler_input) == SIG_ERR)
-//		|| (signal(SIGCHLD, sig_handler_exec) == SIG_ERR)
-//		|| (signal(SIGINT, sig_handler_input) == SIG_ERR)
-//		|| (signal(SIGTSTP, sig_handler_input) == SIG_ERR)
 		|| (signal(SIGTERM, sig_handler_input) == SIG_ERR)
 		|| (signal(SIGQUIT, sig_handler_input) == SIG_ERR)
 		|| (signal(SIGHUP, sig_handler_input) == SIG_ERR)
-//		|| (signal(SIGPIPE, sig_handler_input) == SIG_ERR)
-//		|| (signal(SIGALRM, sig_handler_input) == SIG_ERR)
 		|| (signal(SIGXCPU, sig_handler_input) == SIG_ERR)
-//		|| (signal(SIGXFSZ, sig_handler_input) == SIG_ERR)
-//		|| (signal(SIGABRT, sig_handler_input) == SIG_ERR)
-//		|| (signal(SIGVTALRM, sig_handler_input) == SIG_ERR)
-//		|| (signal(SIGPROF, sig_handler_input) == SIG_ERR)
 		|| (signal(SIGTTOU, sig_ttou_input) == SIG_ERR))
 		ft_exit(0);
 }
