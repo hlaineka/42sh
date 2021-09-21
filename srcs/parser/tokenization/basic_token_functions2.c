@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:54:13 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/11 18:11:48 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/21 07:03:40 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,14 +113,19 @@ int	copy_paranthesis(char *dest, char *src, int c)
 	{
 		if (src[i] == 123)
 		{
-			i = i + copy_paranthesis(dest, src, 125);
+			i = i + copy_paranthesis(&(dest[i]), &(src[i]), 125);
 			continue;
 		}
 		if (src[i] == 40)
 		{
-			i = i + copy_paranthesis(dest, src, 41);
+			i = i + copy_paranthesis(&(dest[i]), &(src[i]), 41);
 			continue;
 		}
+		dest[i] = src[i];
+		i++;
+	}
+	if (src[i])
+	{
 		dest[i] = src[i];
 		i++;
 	}
