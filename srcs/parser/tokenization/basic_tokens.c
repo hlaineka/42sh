@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 11:59:34 by helvi             #+#    #+#             */
-/*   Updated: 2021/09/12 09:52:22 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/21 07:55:11 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,12 @@ char	*get_tokenstr(char **source, int *maintoken)
 	returnable = ft_strnew(ft_strlen(*source));
 	while (source[0][i])
 	{
-		check_quotes(source, &i, returnable, maintoken);
+		if (-1 == check_quotes(source, &i, returnable, maintoken))
+		{
+			ft_memdel((void**)(&returnable));
+			ft_bzero(*source, ft_strlen(*source));
+			return (NULL);
+		}
 		if (0 == find_delimiters(source, &i, returnable, maintoken))
 			break ;
 		i++;

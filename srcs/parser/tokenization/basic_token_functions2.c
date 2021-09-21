@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:54:13 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/21 07:03:40 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/21 07:58:15 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,11 @@ int	copy_paranthesis(char *dest, char *src, int c)
 		dest[i] = src[i];
 		i++;
 	}
+	else
+	{
+		ft_printf_fd(2, "Wrong amount of braces/paranthesis\n");
+		return (-1);
+	}
 	return (i);
 }
 
@@ -143,9 +148,10 @@ int	copy_paranthesis(char *dest, char *src, int c)
 ** 96 == `
 */
 
-void	check_quotes(char **source, int *i, char *returnable, int *maintoken)
+int	check_quotes(char **source, int *i, char *returnable, int *maintoken)
 {
 	int w;
+	int	copied_letters;
 
 	w = ft_strlen(returnable);
 	if (source[0][*i] == 92)
@@ -163,12 +169,24 @@ void	check_quotes(char **source, int *i, char *returnable, int *maintoken)
 		*i = *i + copy_until(&returnable[w], &(source[0][*i]), 96);
 	else if (source[0][*i] == 123)
 	{
-		*i = *i + copy_paranthesis(&returnable[w], &(source[0][*i]), 125);
+		copied_letters = copy_paranthesis(&returnable[w], &(source[0][*i]), 125);
+		if (copied_letters == -1)
+			return (-1);
+		*i = *i + copied_letters;
 		*maintoken = tkn_lbrace;
 	}
 	else if (source[0][*i] == 40)
 	{
-		*i = *i + copy_paranthesis(&returnable[w], &(source[0][*i]), 41);
+		copied_letters = copy_paranthesis(&returnable[w], &(source[0][*i]), 41);
+		if (copied_letters == -1)
+			return (-1);
+		*i = *i + copied_letters;
 		*maintoken = tkn_lpar;
 	}
+	else if (source[0][*i] == 125 || source[0][*i] == 41)
+	{
+		ft_printf_fd(2, "Wrong amount of braces/paranthesis\n");
+		return (-1);
+	}
+	return (1);
 }
