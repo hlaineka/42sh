@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 19:49:17 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/11 20:46:18 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/20 20:30:13 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,16 @@ static int	open_temp_file_read(t_term *term)
 
 int	hist_to_file(t_fc *fc, char **hist, t_term *term, t_process *proc)
 {
+	char	path[1024];
 	int		i;
 	int		fd;
 	char	*line;
 	int		ret;
 
 	line = NULL;
+	write_path_to_file(path, ft_getenv("HOME", term->envp), ".42sh_oldies_temp");
+	proc->argv[2] = path;
+	proc->envp = term->envp;
 	fd = open_temp_file_write(term);
 	if (fc->first)
 		i = fc->first;

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/11 20:44:13 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/20 20:22:16 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ void	builtin_fc(void *proc)
 			temp_proc->argv[1] = "vim";
 		else
 			temp_proc->argv[1] = fc.editor;
-		temp_proc->argv[2] = "/Users/hhuhtane/.42sh_oldies_temp";
+//		temp_proc->argv[2] = "/Users/hhuhtane/.42sh_oldies_temp";
 		hist_to_file(&fc, term->history, term, temp_proc);
 //		write_history_to_file(&fc, term->history, term, temp_proc);
 		ft_free(temp_proc);
