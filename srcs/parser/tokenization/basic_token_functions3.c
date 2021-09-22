@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 17:58:27 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/21 07:29:54 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/22 09:40:05 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	handle_word_token(char *str, char *source, int *i, int *maintoken)
 {
 	int	w;
 
-	if (*maintoken != tkn_word)
+	if (*maintoken != tkn_word && *maintoken != tkn_lbrace && *maintoken != tkn_lpar)
 		return (0);
 	w = ft_strlen(str);
 	str[w] = source[*i];

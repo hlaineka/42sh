@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 11:59:34 by helvi             #+#    #+#             */
-/*   Updated: 2021/09/21 07:55:11 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/22 19:09:22 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,32 +38,25 @@ int	find_delimiters(char **source, int *i, char *returnable, int *maintoken)
 	return (1);
 }
 
-char	*get_tokenstr(char **source, int *maintoken)
+int get_tokenstr(char **source, int *maintoken, char *returnable)
 {
 	int		i;
-	char	*returnable;
 
 	i = 0;
-	returnable = ft_strnew(ft_strlen(*source));
 	while (source[0][i])
 	{
 		if (-1 == check_quotes(source, &i, returnable, maintoken))
-		{
-			ft_memdel((void**)(&returnable));
-			ft_bzero(*source, ft_strlen(*source));
-			return (NULL);
-		}
+			return (-1);
 		if (0 == find_delimiters(source, &i, returnable, maintoken))
 			break ;
 		i++;
 	}
 	*source = *source + i;
-	return (returnable);
+	return (0);
 }
 
-t_token	*get_basic_token(char **source)
+int get_basic_token(char **source, t_token **current)
 {
-	t_token	*current;
 	char	*str;
 	int		maintoken;
 
@@ -73,17 +66,22 @@ t_token	*get_basic_token(char **source)
 	{
 		if (str)
 			ft_memdel((void **)(&str));
-		str = get_tokenstr(source, &maintoken);
+		str = ft_strnew(ft_strlen(*source));
+		if (-1 == get_tokenstr(source, &maintoken, str))
+		{
+			ft_memdel((void **)(&str));
+			return (-1);
+		}
 	}
-	current = NULL;
+	*current = NULL;
 	if (str)
 	{
-		current = init_token();
-		current->value = str;
-		current->maintoken = maintoken;
-		current = add_quotearray(current);
+		*current = init_token();
+		(*current)->value = str;
+		(*current)->maintoken = maintoken;
+		*current = add_quotearray(*current);
 	}
-	return (current);
+	return (0);
 }
 
 t_token	*define_basic_tokens(char *input)
@@ -92,13 +90,14 @@ t_token	*define_basic_tokens(char *input)
 	t_token	*prev;
 	t_token	*returnable;
 	char	*str_ptr;
+	int		status;
 
 	current = NULL;
 	prev = NULL;
 	str_ptr = input;
 	returnable = NULL;
-	current = get_basic_token(&str_ptr);
-	while (current && current->value && current->value[0])
+	status = get_basic_token(&str_ptr, &current);
+	while (status != -1 && current && current->value && current->value[0])
 	{
 		current->prev = prev;
 		if (!prev)
@@ -106,9 +105,14 @@ t_token	*define_basic_tokens(char *input)
 		else
 			prev->next = current;
 		prev = current;
-		current = get_basic_token(&str_ptr);
+		status = get_basic_token(&str_ptr, &current);
 	}
-	if (current)
+	if (status == -1)
+	{
+		delete_tokens(returnable);
+		returnable = NULL;
+	}
+	else if (current)
 		free_token(&current);
 	return (returnable);
 }
