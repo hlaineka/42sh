@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 21:44:33 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/19 20:26:05 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/21 07:14:27 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,8 @@ int	dollar_expansion(t_token *tkn, t_term *term, int dollar)
 {
 	if (tkn->quotes[dollar] != 0 && tkn->quotes[dollar] != 34)
 		return (0);
-	if (!tkn->next)
-		return (0);
-	if (tkn->value[dollar + 1] && tkn->maintoken == tkn_lpar
-		&& tkn->next->maintoken == tkn_rpar)
-		tkn->maintoken = tkn_dollarlpar;
-	else if (tkn->value[dollar + 1] && tkn->maintoken == tkn_lbrace
-		&& tkn->next->maintoken == tkn_rbrace)
+	else if (tkn->value[dollar + 1])
 	{
-		tkn->value = ft_strjoin_frees1(tkn->value, tkn->next->value);
-		delete_token(tkn->next);
 		tkn->maintoken = tkn_word;
 		if (-1 == dollar_parameter(tkn, term, dollar + 2))
 			return (-1);

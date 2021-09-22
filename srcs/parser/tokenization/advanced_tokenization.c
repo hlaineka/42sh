@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 15:01:44 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/12 17:50:50 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/21 07:07:58 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft.h"
 #include "builtins.h"
 
+/*
 t_token *check_paranthesis(t_token *first)
 {
 	t_token *temp;
@@ -41,6 +42,7 @@ t_token *check_paranthesis(t_token *first)
 	}
 	return (first);
 }
+*/
 
 static void	debug_print_tokens(t_token *tokens, char *function_name)
 {
@@ -73,7 +75,7 @@ static void	debug_print_tokens(t_token *tokens, char *function_name)
 
 t_token	*advanced_tokenization(t_token *first, t_term *term, int remove_quotes)
 {
-	first = check_paranthesis(first);
+	//first = check_paranthesis(first);
 	if (remove_quotes)
 		add_full_command(first);
 	if (!first)
