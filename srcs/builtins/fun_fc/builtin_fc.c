@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/20 20:22:16 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/22 22:26:43 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,41 +91,6 @@ static t_fc	get_fc_options(t_process *proc, t_term *term)
 	}
 	fc.options = fc.options | temp;
 	return (fc);
-}
-
-static void	fc_el(t_term *term, t_fc *fc, int options)
-{
-	int			last;
-	int			i;
-	int			temp_i;
-	char		**history;
-	
-	if (fc->last)
-		last = fc->last;
-	else
-		last = get_last_history_index(term->history) - 1;
-	history = term->history;
-	if (fc->first)
-		i = fc->first;
-	else if (last > 15)
-		i = last - 15;
-	else
-		i = 1;
-	while (i <= last)
-	{
-		if (options & (1 << R_FLAG))
-			temp_i = last;
-		else
-			temp_i = i;
-		if (options & (1 << N_FLAG))
-			ft_printf("\t%s\n", history[temp_i]);
-		else
-			ft_printf("%d\t%s\n", temp_i, history[temp_i]);
-		if (options & (1 << R_FLAG))
-			last--;
-		else
-			i++;
-	}
 }
 
 void	builtin_fc(void *proc)
