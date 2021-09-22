@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 16:07:19 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/11 17:59:31 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/21 07:05:51 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,91 +24,21 @@
 ** funtions need to be added separately. They will need their own token.
 */
 
-t_token	*handle_braces(t_token **op_stack, t_token **input,
-		t_token *output)
-{
-	t_token	*returnable;
-	t_token	*temp;
-
-	returnable = output;
-	if ((*input)->maintoken == tkn_lbrace)
-		*op_stack = push_to_front(*input, *op_stack);
-	else if ((*input)->maintoken == tkn_rbrace)
-	{
-		while (*op_stack && (*op_stack)->maintoken != tkn_lbrace)
-		{
-			temp = (*op_stack)->prev;
-			returnable = push_to_end(*op_stack, returnable);
-			*op_stack = temp;
-		}
-		if (!(*op_stack))
-		{
-			ft_printf_fd(STDERR_FILENO, "wrong amount of braces\n");
-			delete_tokens(returnable);
-			return (NULL);
-		}
-		temp = (*op_stack)->prev;
-		returnable = push_to_end(*op_stack, returnable);
-		*op_stack = temp;
-		returnable = push_to_end(*input, returnable);
-	}
-	return (returnable);
-}
-
-t_token	*handle_parenthesis(t_token **op_stack, t_token **input,
-		t_token *output)
-{
-	t_token	*returnable;
-	t_token	*temp;
-
-	returnable = output;
-	if ((*input)->maintoken == tkn_lpar || (*input)->maintoken == tkn_dollarlpar)
-		*op_stack = push_to_front(*input, *op_stack);
-	else if ((*input)->maintoken == tkn_rpar)
-	{
-		while (*op_stack && (*op_stack)->maintoken != tkn_lpar
-			&& (*op_stack)->maintoken != tkn_dollarlpar)
-		{
-			temp = (*op_stack)->prev;
-			returnable = push_to_end(*op_stack, returnable);
-			*op_stack = temp;
-		}
-		if (!(*op_stack))
-		{
-			ft_printf_fd(STDERR_FILENO, "wrong amount of paranthesis\n");
-			delete_tokens(returnable);
-			return (NULL);
-		}
-		temp = (*op_stack)->prev;
-		returnable = push_to_end(*op_stack, returnable);
-		*op_stack = temp;
-		returnable = push_to_end(*input, returnable);
-	}
-	return (returnable);
-}
-
 t_token	*handle_operator(t_token **op_stack, t_token **input, t_token *output)
 {
 	t_token	*returnable;
 	t_token	*temp;
 
 	returnable = output;
-	if ((*input)->maintoken == tkn_lpar || (*input)->maintoken == tkn_rpar)
-		returnable = handle_parenthesis(op_stack, input, output);
-	else if ((*input)->maintoken == tkn_lbrace || (*input)->maintoken == tkn_rbrace)
-		returnable = handle_braces(op_stack, input, output);
-	else
-	{
-		while (*op_stack && ((*op_stack)->precedence > (*input)->precedence
-				|| ((*op_stack)->precedence == (*input)->precedence
-					&& (*input)->left_associative)))
-		{	
-			temp = (*op_stack)->prev;
-			returnable = push_to_end(*op_stack, returnable);
-			*op_stack = temp;
-		}
-		*op_stack = push_to_front(*input, *op_stack);
+	while (*op_stack && ((*op_stack)->precedence > (*input)->precedence
+		|| ((*op_stack)->precedence == (*input)->precedence
+		&& (*input)->left_associative)))
+	{	
+		temp = (*op_stack)->prev;
+		returnable = push_to_end(*op_stack, returnable);
+		*op_stack = temp;
 	}
+	*op_stack = push_to_front(*input, *op_stack);
 	//ft_printf("end of handle operator\n");
 	return (returnable);
 }
@@ -127,9 +57,7 @@ t_token	*shunting_yard(t_token *first)
 	while (input)
 	{
 		temp = input->next;
-		if (input->precedence == 0 && input->maintoken != tkn_lpar
-		&& input->maintoken != tkn_rpar && input->maintoken != tkn_lbrace
-		&& input->maintoken != tkn_rbrace && input->maintoken != tkn_dollarlpar)
+		if (input->precedence == 0)
 			output = push_to_end(input, output);
 		else
 			output = handle_operator(&op_stack, &input, output);

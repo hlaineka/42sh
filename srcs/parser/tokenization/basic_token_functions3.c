@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 17:58:27 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/11 12:57:58 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/22 09:40:05 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,10 @@
 ** returns 0 when the current tokenstr should be delimited.
 */
 
-int	handle_brackets(char *str, char *source, int *i, int *maintoken)
-{
-	if (!str[0] && source[*i] == '(')
-		*maintoken = tkn_lpar;
-	else if (!str[0] && source[*i] == ')')
-		*maintoken = tkn_rpar;
-	else if (!str[0] && source[*i] == '{')
-		*maintoken = tkn_lbrace;
-	else if (!str[0] && source[*i] == '}')
-		*maintoken = tkn_rbrace;
-	else
-		return (1);
-	str[ft_strlen(str)] = source[*i];
-	*i = *i + 1;
-	return(0);
-}
-
 int	handle_operator_token(char *str, char *source, int *i, int *maintoken)
 {
-	if (ft_strchr(BRACKETS, source[*i]) && 
-		0 == handle_brackets(str, source, i, maintoken))
-			return (0);
+	if (ft_strchr(BRACKETS, source[*i]))
+		return (0);
 	else if (ft_strchr(REDIROPS, source[*i]))
 	{
 		if (*maintoken != tkn_redirop && !ft_is_nbrstr(str))
@@ -62,7 +44,7 @@ int	handle_word_token(char *str, char *source, int *i, int *maintoken)
 {
 	int	w;
 
-	if (*maintoken != tkn_word)
+	if (*maintoken != tkn_word && *maintoken != tkn_lbrace && *maintoken != tkn_lpar)
 		return (0);
 	w = ft_strlen(str);
 	str[w] = source[*i];
