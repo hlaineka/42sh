@@ -6,11 +6,13 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/11 13:23:58 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/25 16:20:31 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes.h"
+#include "builtins.h"
+#include "init.h"
 
 static int	is_num_str(char *str)
 {
@@ -21,6 +23,19 @@ static int	is_num_str(char *str)
 		str++;
 	}
 	return (1);
+}
+
+int	save_history_to_file_and_exit(t_term *term, int exit_status)
+{
+	int			fd;
+
+	fd = open_history_file(term, O_WRONLY | O_CREAT | O_TRUNC);
+	if (fd == -1)
+		exit(err_builtin(E_BADF, "OPEN", NULL));
+	write_history_to_file(fd, term);
+	close(fd);
+	exit(exit_status);
+	return (0);
 }
 
 void	builtin_exit(void *proc)
@@ -49,5 +64,5 @@ void	builtin_exit(void *proc)
 	}
 	else if (argc == 2)
 		ret = ft_atoi(argv[1]);
-	exit(ret);
+	exit(save_history_to_file_and_exit(g_term, ret));
 }

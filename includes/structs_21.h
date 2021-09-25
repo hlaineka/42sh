@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/11 16:35:21 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/25 14:14:05 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,7 @@ typedef struct s_term
 {
 	char				*envp[1024];
 	t_hash				hash_table[1024];			// use macro?
-	char				*history[HISTORY_SIZE];		// use macro?
+	char				*history[HISTORY_SIZE + 1];		// use macro?
 	t_input				*input;
 	t_input				*here_input;
 	char				*term_buffer;

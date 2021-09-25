@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/09/25 19:40:07 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/09/25 21:36:25 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,6 +84,7 @@ _SRC_INPUT = read_input_user.c \
 
 _SRC_INIT = disable_raw_mode.c \
 			enable_raw_mode.c \
+			init_history.c \
 			init_input.c
 
 _SRC_PARSER = 	parser.c \
@@ -149,7 +150,10 @@ _SRC_FG =	builtin_fg.c
 _SRC_BG =	builtin_bg.c
 
 _SRC_FC =	builtin_fc.c \
-			fc_es.c
+			fc_el.c \
+			fc_es.c \
+			fc_get_command_index.c \
+			hist_to_file.c
 
 _SRC_TEST =	builtin_test.c \
 			b_operand.c \
