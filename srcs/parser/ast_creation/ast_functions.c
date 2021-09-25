@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 15:34:07 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/20 20:26:14 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/25 21:34:19 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static void	free_node(t_node **node)
 
 void	free_ast(t_node **root)
 {
-
 	if (*root && (*root)->right)
 	{
 		free_ast(&(*root)->right);

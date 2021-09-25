@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/28 17:58:27 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/22 09:40:05 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/25 19:31:33 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int	handle_word_token(char *str, char *source, int *i, int *maintoken)
 {
 	int	w;
 
-	if (*maintoken != tkn_word && *maintoken != tkn_lbrace && *maintoken != tkn_lpar)
+	if (*maintoken != tkn_word && *maintoken != tkn_lbrace
+		&& *maintoken != tkn_lpar)
 		return (0);
 	w = ft_strlen(str);
 	str[w] = source[*i];
@@ -80,36 +81,16 @@ t_token	*add_subtoken(t_token *current, t_token *sub)
 	return (returnable);
 }
 
-void	free_tokens_sub(t_token *tokens)
+t_token	*init_token(void)
 {
-	t_token	*temp;
-	t_token	*temp_sub;
-	t_token	*next_temp;
-	t_token	*next_temp_sub;
+	t_token	*returnable;
 
-	temp = tokens;
-	while (temp)
-	{
-		next_temp = temp->next;
-		temp_sub = temp->subtokens;
-		while (temp_sub)
-		{
-			next_temp_sub = temp_sub->next;
-			free_token(&temp_sub);
-			temp_sub = next_temp_sub;
-		}
-		free_token(&temp);
-		temp = next_temp;
-	}
-}
-
-int	*init_quotearray(t_token *current)
-{
-	int	*quotearray;
-
-	if (current->quotes)
-		ft_memdel((void **)&current->quotes);
-	quotearray = malloc(sizeof(int) * ft_strlen(current->value) + 1);
-	ft_bzero(quotearray, sizeof(int) * ft_strlen(current->value));
-	return (quotearray);
+	returnable = (t_token *)malloc(sizeof(t_token));
+	ft_bzero(returnable, sizeof(t_token));
+	returnable->full_command = NULL;
+	returnable->value = NULL;
+	returnable->subtokens = NULL;
+	returnable->next = NULL;
+	returnable->prev = NULL;
+	return (returnable);
 }

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 19:27:06 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/21 07:17:25 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/25 20:55:42 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	token_value_expansion(t_token *tkn, t_term *term)
 		if (tkn->value[i] == '~' && (-1 == tilde_expansion(tkn, term, i)))
 			return (-1);
 		if (tkn->value[i] == '$' && (-1 == dollar_expansion(tkn, term, i)))
-				return (-1);
+			return (-1);
 		i++;
 	}
 	return (0);

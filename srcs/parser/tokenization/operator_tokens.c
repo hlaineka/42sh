@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 15:57:08 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/18 19:21:23 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/25 21:29:14 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,30 +70,23 @@ int	handle_operation(t_token *current)
 int	handle_and_semi(t_token *first)
 {
 	t_token	*temp;
-	t_token	*temp2;
 
 	temp = first;
 	while (temp)
 	{
-		if (temp->maintoken == tkn_and)
+		if (temp->maintoken == tkn_and
+			&& (-1 == check_semi_and(first, tkn_semi)))
 		{
-			temp2 = first;
-			while (temp2)
-			{
-				if (temp2->maintoken == tkn_semi)
-					return (-1);
-				temp2 = temp2->next;
-			}
+			err_syntax(E_SYNTAX, first->value);
+			delete_tokens(first);
+			return (-1);
 		}
-		if (temp->maintoken == tkn_semi)
+		if (temp->maintoken == tkn_semi
+			&& (-1 == check_semi_and(first, tkn_and)))
 		{
-			temp2 = first;
-			while (temp2)
-			{
-				if (temp2->maintoken == tkn_and)
-					return (-1);
-				temp2 = temp2->next;
-			}
+			err_syntax(E_SYNTAX, first->value);
+			delete_tokens(first);
+			return (-1);
 		}
 		temp = temp->next;
 	}
@@ -122,7 +115,8 @@ t_token	*validate_operator_tokens(t_token *first)
 	current = first;
 	while (current)
 	{
-		if (current->maintoken != tkn_word && current->maintoken != tkn_lbrace && current->maintoken != tkn_lpar)
+		if (current->maintoken != tkn_word && current->maintoken
+			!= tkn_lbrace && current->maintoken != tkn_lpar)
 		{	
 			if (-1 == handle_basic_optkn(current))
 			{
@@ -134,10 +128,6 @@ t_token	*validate_operator_tokens(t_token *first)
 		current = current->next;
 	}
 	if (-1 == handle_and_semi(first))
-	{
-		err_syntax(E_SYNTAX, first->value);
-		delete_tokens(first);
 		return (NULL);
-	}
 	return (first);
 }
