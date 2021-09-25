@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/09/23 18:17:23 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/09/25 14:28:58 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,6 +84,7 @@ _SRC_INPUT = read_input_user.c \
 
 _SRC_INIT = disable_raw_mode.c \
 			enable_raw_mode.c \
+			init_history.c \
 			init_input.c
 
 _SRC_PARSER = 	parser.c \

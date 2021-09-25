@@ -6,13 +6,13 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 19:49:17 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/25 12:32:53 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/25 13:48:22 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "history.h"
 
-static int	write_path_to_file(char *buf, char *path, char *file)
+int	write_path_to_buffer(char *buf, char *path, char *file)
 {
 	ft_strcpy(buf, path);
 	ft_strcat(buf, "/");
@@ -30,7 +30,7 @@ static int	open_temp_file_write(t_term *term)
 	home = ft_getenv("HOME", term->envp);
 	if (!home)
 		return (-1);
-	write_path_to_file(path, home, ".42sh_oldies_temp");
+	write_path_to_buffer(path, home, ".42sh_oldies_temp");
 	fd = open(path, O_WRONLY | O_CREAT | O_TRUNC);
 	return (fd);
 }
@@ -45,7 +45,7 @@ static int	open_temp_file_read(t_term *term)
 	home = ft_getenv("HOME", term->envp);
 	if (!home)
 		return (-1);
-	write_path_to_file(path, home, ".42sh_oldies_temp");
+	write_path_to_buffer(path, home, ".42sh_oldies_temp");
 	fd = open(path, O_RDONLY);
 	return (fd);
 }
@@ -89,7 +89,7 @@ int	hist_to_file(t_fc *fc, char **hist, t_term *term, t_process *proc)
 	home = ft_getenv("HOME", term->envp);
 	if (!home)
 		return (1);
-	write_path_to_file(path, home, ".42sh_oldies_temp");
+	write_path_to_buffer(path, home, ".42sh_oldies_temp");
 	proc->argv[2] = path;
 	if (setup_exec(fc, hist, proc, term))
 		return (1);

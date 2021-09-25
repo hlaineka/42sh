@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:37:52 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/17 11:44:53 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/25 14:44:34 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ void		get_termios_modes(t_term *term);
 void		enable_raw_mode(t_term *term);
 void		initialize(t_input *input, t_term *term, char **envp, char **argv);
 void		init_input(t_input *input);
+void		init_history(t_term *term);
+void		remove_oldest_and_move(t_term *term, char *cmd);
 
 #endif
