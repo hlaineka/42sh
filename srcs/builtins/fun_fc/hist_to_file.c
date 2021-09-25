@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 19:49:17 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/25 11:37:26 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/25 12:32:53 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,7 @@ static int	setup_exec(t_fc *fc, char **hist, t_process *proc, t_term *term)
 	if (fc->first)
 		i = fc->first - j;
 	else
-	{
-		ft_printf("%s: mysteeri else\n", __FUNCTION__);
 		i = get_last_history_index(hist) - 1;
-	}
 	while (i != fc->last)
 	{
 		i += j;
