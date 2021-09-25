@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/22 22:27:52 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/23 18:16:53 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void		fc_el(t_term *term, t_fc *fc, int options);
 int			fc_es(t_term *term, t_fc *fc, int options);
 int			parse_and_execute(char *cmd, t_term *term);
 int			hist_to_file(t_fc *fc, char **hist, t_term *term, t_process *proc);
+int			fc_get_command_index(t_fc *fc, t_term *term, t_process *proc);
 
 /*
 ** TEST BUILTIN:

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fc_el.c                                            :+:      :+:    :+:   */
+/*   fc_get_command_index.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/25 12:05:39 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/25 12:10:04 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,33 @@
 #include "typedefs.h"
 #include "history.h"
 
-static int	get_fc_el_index(int last, t_fc *fc)
+int	fc_get_command_index(t_fc *fc, t_term *term, t_process *pr)
 {
-	if (fc->first)
-		return (fc->first);
-	else if (last > 15)
-		return (last - 15);
-	return (1);
-}
-
-void	fc_el(t_term *term, t_fc *fc, int options)
-{
+	int			temp;
 	int			i;
-	int			j;
-	int			temp_i;
 
-	j = 1;
-	if (fc->last == 0)
-		fc->last = get_last_history_index(term->history) - 1;
-	i = get_fc_el_index(fc->last, fc);
-	if (i > fc->last || (options & (1 << R_FLAG)))
+	if (!pr->argv[fc->i])
+		return (0);
+	i = get_last_history_index(term->history);
+	temp = ft_atoi(pr->argv[fc->i]);
+	if (temp >= i)
+		return (-1);
+	if (temp == 0)
 	{
-		temp_i = fc->last;
-		fc->last = i;
-		i = temp_i;
+		if (pr->argv[fc->i][0] == '-' && pr->argv[fc->i][1] == '-')
+			return (0);
+		while (i-- > 0)
+		{
+			if (ft_strnstr(term->history[i], pr->argv[fc->i],
+					ft_strlen(pr->argv[fc->i])))
+			{
+				temp = i;
+				break ;
+			}
+		}
 	}
-	if (i > fc->last)
-		j = -1;
-	i -= j;
-	while (i != fc->last)
-	{
-		i += j;
-		if (options & (1 << N_FLAG))
-			ft_printf("\t%s\n", term->history[i]);
-		else
-			ft_printf("%d\t%s\n", i, term->history[i]);
-	}
+	else if (temp < 0)
+		temp = get_last_history_index(term->history) + temp - 1;
+	fc->i++;
+	return (temp);
 }

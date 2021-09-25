@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/23 18:10:34 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/25 12:06:37 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,46 +17,12 @@
 #include "typedefs.h"
 #include "history.h"
 
-static int	get_command_index_with_arg(t_fc *fc, t_term *term, t_process *pr)
-{
-	int			temp;
-	int			i;
-
-	i = get_last_history_index(term->history);
-	if (!pr->argv[fc->i])
-		return (0);
-	temp = ft_atoi(pr->argv[fc->i]);
-	if (temp >= i)
-		return (-1);
-	if (temp == 0)
-	{
-		if (pr->argv[fc->i][0] == '-' && pr->argv[fc->i][1] == '-')
-			return (0);
-		while (i-- > 0)
-		{
-			if (ft_strnstr(term->history[i], pr->argv[fc->i],
-					ft_strlen(pr->argv[fc->i])))
-			{
-				temp = i;
-				break ;
-			}
-			i--;
-		}
-	}
-	else if (temp < 0)
-		temp = get_last_history_index(term->history) - temp - 1;
-	fc->i++;
-	return (temp);
-}
-
 static int	get_first_and_last(t_process *proc, t_term *term, t_fc *fc)
 {
-	fc->first = get_command_index_with_arg(fc, term, proc);
-	fc->last = get_command_index_with_arg(fc, term, proc);
+	fc->first = fc_get_command_index(fc, term, proc);
+	fc->last = fc_get_command_index(fc, term, proc);
 	if (fc->first < 0 || fc->last < 0)
 		return (-1);
-	if (fc->last == 0)
-		fc->last = get_last_history_index(term->history) - 1;
 	if (fc->options & (1 << S_FLAG) && fc->first == 0)
 		fc->first = fc->last;
 	if (fc->first == 0)
@@ -92,19 +58,22 @@ static t_fc	get_fc_options(t_process *proc, t_term *term)
 	return (fc);
 }
 
-void	fc_rest(t_term *term, t_fc *fc)
+static int	fc_rest(t_term *term, t_fc *fc)
 {
 	t_process	*temp_proc;
+	int			ret;
 
+	ret = 0;
 	temp_proc = init_process(term);
 	temp_proc->argv[0] = "env";
 	if (fc->editor[0] == '\0')
 		temp_proc->argv[1] = "vim";
 	else
 		temp_proc->argv[1] = fc->editor;
-	hist_to_file(fc, term->history, term, temp_proc);
+	ret = hist_to_file(fc, term->history, term, temp_proc);
 	free(temp_proc->argv);
 	ft_free(temp_proc);
+	return (ret);
 }
 
 void	builtin_fc(void *proc)
@@ -133,5 +102,5 @@ void	builtin_fc(void *proc)
 	else if (options & (1 << S_FLAG))
 		fc_es(term, &fc, fc.options);
 	else
-		fc_rest(term, &fc);
+		process->status = fc_rest(term, &fc);
 }

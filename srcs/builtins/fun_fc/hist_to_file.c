@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 19:49:17 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/23 17:44:16 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/25 11:37:26 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,28 @@ static int	open_temp_file_read(t_term *term)
 static int	setup_exec(t_fc *fc, char **hist, t_process *proc, t_term *term)
 {
 	int		i;
+	int		j;
 	int		fd;
 
+	j = 1;
 	proc->envp = term->envp;
 	fd = open_temp_file_write(term);
+	if (fc->first > fc->last)
+		j = -1;
+	if (fc->last == 0)
+		fc->last = fc->first;
 	if (fc->first)
-		i = fc->first;
+		i = fc->first - j;
 	else
+	{
+		ft_printf("%s: mysteeri else\n", __FUNCTION__);
 		i = get_last_history_index(hist) - 1;
-	while (i <= fc->last)
-		ft_printf_fd(fd, "%s\n", hist[i++]);
+	}
+	while (i != fc->last)
+	{
+		i += j;
+		ft_printf_fd(fd, "%s\n", hist[i]);
+	}
 	close(fd);
 	builtin_env(proc);
 	return (proc->status);
