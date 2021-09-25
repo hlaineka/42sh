@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 13:39:57 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/25 15:15:31 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/25 16:20:37 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "init.h"
 #include "builtins.h"
 
-static int	open_history_file(t_term *term, int oflag)
+int	open_history_file(t_term *term, int oflag)
 {
 	char	buf[1024];
 	char	*home;
@@ -42,6 +42,20 @@ void	remove_oldest_and_move(t_term *term, char *cmd)
 		term->history[i - 1] = term->history[i];
 	}
 	term->history[i] = cmd;
+	term->history[i + 1] = NULL;
+}
+
+int	write_history_to_file(int fd, t_term *term)
+{
+	int		i;
+
+	i = 1;
+	while (i < HISTORY_SIZE && term->history[i])
+	{
+		ft_printf_fd(fd, "%s\n", term->history[i]);
+		i++;
+	}
+	return (0);
 }
 
 static int	read_history_to_memory(int fd, t_term *term)
@@ -50,14 +64,12 @@ static int	read_history_to_memory(int fd, t_term *term)
 	int		ret;
 	char	*line;
 
-	i = 1;
+	i = 0;
 	ret = get_next_line(fd, &line);
 	while(ret > 0)
 	{
-		if (i < HISTORY_SIZE - 2)
-		{
+		if (i < HISTORY_SIZE - 1)
 			term->history[i++] = line;
-		}
 		else
 			remove_oldest_and_move(term, line);
 		ret = get_next_line(fd, &line);
