@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 11:59:34 by helvi             #+#    #+#             */
-/*   Updated: 2021/09/22 19:09:22 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/24 13:47:57 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 ** tokenization to single out quoted characters.
 */
 
-int	find_delimiters(char **source, int *i, char *returnable, int *maintoken)
+static int	find_delimiters(char **source, int *i, char *returnable,
+	int *maintoken)
 {
 	if (ft_strchr(BLANKS, source[0][*i]))
 	{
@@ -38,7 +39,7 @@ int	find_delimiters(char **source, int *i, char *returnable, int *maintoken)
 	return (1);
 }
 
-int get_tokenstr(char **source, int *maintoken, char *returnable)
+static int	get_tokenstr(char **source, int *maintoken, char *returnable)
 {
 	int		i;
 
@@ -55,7 +56,7 @@ int get_tokenstr(char **source, int *maintoken, char *returnable)
 	return (0);
 }
 
-int get_basic_token(char **source, t_token **current)
+static int	get_basic_token(char **source, t_token **current)
 {
 	char	*str;
 	int		maintoken;
@@ -84,35 +85,41 @@ int get_basic_token(char **source, t_token **current)
 	return (0);
 }
 
-t_token	*define_basic_tokens(char *input)
+static int	get_basic_tokens(char **str_ptr, t_token **returnable)
 {
+	int		status;
 	t_token	*current;
 	t_token	*prev;
-	t_token	*returnable;
-	char	*str_ptr;
-	int		status;
 
 	current = NULL;
 	prev = NULL;
-	str_ptr = input;
-	returnable = NULL;
-	status = get_basic_token(&str_ptr, &current);
+	status = get_basic_token(str_ptr, &current);
 	while (status != -1 && current && current->value && current->value[0])
 	{
 		current->prev = prev;
 		if (!prev)
-			returnable = current;
+			*returnable = current;
 		else
 			prev->next = current;
 		prev = current;
-		status = get_basic_token(&str_ptr, &current);
+		status = get_basic_token(str_ptr, &current);
 	}
-	if (status == -1)
+	if (current && status != -1)
+		free_token(&current);
+	return (status);
+}
+
+t_token	*define_basic_tokens(char *input)
+{
+	t_token	*returnable;
+	char	*str_ptr;
+
+	str_ptr = input;
+	returnable = NULL;
+	if (-1 == get_basic_tokens(&str_ptr, &returnable))
 	{
 		delete_tokens(returnable);
 		returnable = NULL;
 	}
-	else if (current)
-		free_token(&current);
 	return (returnable);
 }

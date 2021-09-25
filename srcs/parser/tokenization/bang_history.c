@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:35:28 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/11 20:55:16 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/25 12:46:47 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,39 @@
 #include "includes.h"
 #include "history.h"
 
+static t_token	*add_new_token(const char *history_cmd, t_term *term,
+	t_token *first, t_token *temp)
+{
+	t_token		*new;
+	t_token		*prev;
+	t_token		*next;
+
+	prev = temp->prev;
+	next = temp->next;
+	new = lexer(ft_strdup(history_cmd), term, 0);
+	free_tokens(&temp->subtokens);
+	delete_token(temp);
+	if (prev)
+		prev->next = new;
+	else
+		first = new;
+	new->prev = prev;
+	temp = new;
+	while (temp->next)
+		temp = temp->next;
+	temp->next = next;
+	if (next)
+		next->prev = temp;
+	return (first);
+}
+
 t_token	*bang_history(t_token *first, t_term *term)
 {
 	t_token		*temp;
 	t_token		*next;
-	t_token		*prev;
-	t_token		*new;
 	const char	*history_cmd;
 
 	temp = first;
-	prev = NULL;
 	while (temp && term)
 	{
 		next = temp->next;
@@ -37,24 +60,9 @@ t_token	*bang_history(t_token *first, t_term *term)
 				delete_tokens(first);
 				return (NULL);
 			}
-			ft_printf("history:%s\n", history_cmd);
-			//ft_printf_fd(STDOUT_FILENO, "value in history: -%s-\n", history_cmd);
-			new = lexer(ft_strdup(history_cmd), term, 0);
-			free_tokens(&temp->subtokens);
-			delete_token(temp);
-			if (prev)
-				prev->next = new;
-			else
-				first = new;
-			new->prev = prev;
-			temp = new;
-			while (temp->next)
-				temp = temp->next;
-			temp->next = next;
-			if (next)
-				next->prev = temp;
+			//ft_printf("history:%s\n", history_cmd); Tän saa varmaan poistaa?
+			first = add_new_token(history_cmd, term, first, temp);
 		}
-		prev = temp;
 		temp = next;
 	}
 	return (first);

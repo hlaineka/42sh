@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 14:54:13 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/21 07:58:15 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/25 19:31:22 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,6 @@
 /*
 ** Functions to help with basic tokenization
 */
-
-t_token	*init_token(void)
-{
-	t_token	*returnable;
-
-	returnable = (t_token *)malloc(sizeof(t_token));
-	ft_bzero(returnable, sizeof(t_token));
-	returnable->full_command = NULL;
-	returnable->value = NULL;
-	returnable->subtokens = NULL;
-	returnable->next = NULL;
-	returnable->prev = NULL;
-	return (returnable);
-}
 
 static int	get_quotevalue(int c, bool *backslash, bool *single_quote,
 bool *double_quote)
@@ -87,106 +73,46 @@ t_token	*add_quotearray(t_token *current)
 	return (current);
 }
 
-int	copy_until(char *dest, char *src, int c)
+int	*init_quotearray(t_token *current)
 {
-	int	i;
+	int	*quotearray;
 
-	i = 0;
-	dest[i] = src[i];
-	i++;
-	while (src[i] && src[i] != c)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	return (i);
+	if (current->quotes)
+		ft_memdel((void **)&current->quotes);
+	quotearray = malloc(sizeof(int) * ft_strlen(current->value) + 1);
+	ft_bzero(quotearray, sizeof(int) * ft_strlen(current->value));
+	return (quotearray);
 }
 
-int	copy_paranthesis(char *dest, char *src, int c) 
+t_token	*push_to_front(t_token *input, t_token *stack)
 {
-	int i;
+	input->next = NULL;
+	input->prev = stack;
+	if (stack)
+		stack->next = input;
+	return (input);
+}
 
-	i = 0;
-	dest[i] = src[i];
-	i++;
-	while (src[i] && src[i] != c)
+t_token	*push_to_end(t_token *input, t_token *output)
+{
+	t_token	*returnable;
+	t_token	*temp;
+
+	returnable = output;
+	temp = output;
+	if (!output)
 	{
-		if (src[i] == 123)
-		{
-			i = i + copy_paranthesis(&(dest[i]), &(src[i]), 125);
-			continue;
-		}
-		if (src[i] == 40)
-		{
-			i = i + copy_paranthesis(&(dest[i]), &(src[i]), 41);
-			continue;
-		}
-		dest[i] = src[i];
-		i++;
-	}
-	if (src[i])
-	{
-		dest[i] = src[i];
-		i++;
+		returnable = input;
+		returnable->next = NULL;
+		returnable->prev = NULL;
 	}
 	else
 	{
-		ft_printf_fd(2, "Wrong amount of braces/paranthesis\n");
-		return (-1);
+		while (temp->next)
+			temp = temp->next;
+		temp->next = input;
+		input->next = NULL;
+		input->prev = temp;
 	}
-	return (i);
-}
-
-/*
-** 92 == \
-** 34 == "
-** 39 == '
-** 123 == {
-** 125 == }
-** 40 == (
-** 41 == )
-** 96 == `
-*/
-
-int	check_quotes(char **source, int *i, char *returnable, int *maintoken)
-{
-	int w;
-	int	copied_letters;
-
-	w = ft_strlen(returnable);
-	if (source[0][*i] == 92)
-	{
-		returnable[w++] = source[0][*i];
-		*i = *i + 1;
-		returnable[w++] = source[0][*i];
-		*i = *i + 1;
-	}
-	else if (source[0][*i] == 34)
-		*i = *i + copy_until(&returnable[w], &(source[0][*i]), 34);
-	else if (source[0][*i] == 39)
-		*i = *i + copy_until(&returnable[w], &(source[0][*i]), 39);
-	else if (source[0][*i] == 96)
-		*i = *i + copy_until(&returnable[w], &(source[0][*i]), 96);
-	else if (source[0][*i] == 123)
-	{
-		copied_letters = copy_paranthesis(&returnable[w], &(source[0][*i]), 125);
-		if (copied_letters == -1)
-			return (-1);
-		*i = *i + copied_letters;
-		*maintoken = tkn_lbrace;
-	}
-	else if (source[0][*i] == 40)
-	{
-		copied_letters = copy_paranthesis(&returnable[w], &(source[0][*i]), 41);
-		if (copied_letters == -1)
-			return (-1);
-		*i = *i + copied_letters;
-		*maintoken = tkn_lpar;
-	}
-	else if (source[0][*i] == 125 || source[0][*i] == 41)
-	{
-		ft_printf_fd(2, "Wrong amount of braces/paranthesis\n");
-		return (-1);
-	}
-	return (1);
+	return (returnable);
 }

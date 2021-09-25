@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 16:07:19 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/21 07:05:51 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/25 21:33:18 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,27 @@ t_token	*handle_operator(t_token **op_stack, t_token **input, t_token *output)
 
 	returnable = output;
 	while (*op_stack && ((*op_stack)->precedence > (*input)->precedence
-		|| ((*op_stack)->precedence == (*input)->precedence
-		&& (*input)->left_associative)))
+			|| ((*op_stack)->precedence == (*input)->precedence
+				&& (*input)->left_associative)))
 	{	
 		temp = (*op_stack)->prev;
 		returnable = push_to_end(*op_stack, returnable);
 		*op_stack = temp;
 	}
 	*op_stack = push_to_front(*input, *op_stack);
-	//ft_printf("end of handle operator\n");
 	return (returnable);
+}
+
+static void	push_opstack(t_token *op_stack, t_token **output)
+{
+	t_token	*temp;
+
+	while (op_stack)
+	{
+		temp = op_stack->prev;
+		*output = push_to_end(op_stack, *output);
+		op_stack = temp;
+	}
 }
 
 t_token	*shunting_yard(t_token *first)
@@ -67,16 +78,7 @@ t_token	*shunting_yard(t_token *first)
 			delete_tokens(first);
 			return (NULL);
 		}
-		//ft_printf("end of while (input)\n");
 	}
-	//ft_printf("after while (input\n");
-	while (op_stack)
-	{
-		temp = op_stack->prev;
-		output = push_to_end(op_stack, output);
-		op_stack = temp;
-		//ft_printf("endo of while (op_stack\n");
-	}
-	//ft_printf("after while(op_stack)\n");
+	push_opstack(op_stack, &output);
 	return (output);
 }

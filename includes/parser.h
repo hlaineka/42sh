@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/09/22 09:38:09 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/25 21:15:33 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,11 +219,20 @@ t_token				*add_precedence(t_token *first);
 
 t_token				*shunting_yard(t_token *first);
 
+
+/*
+** parser/tokenization/lexer_functions.c
+*/
+
+char				*remove_backslash(char *str);
+t_token				*check_semicolon(t_token *first, t_term *term);
+
 /*
 ** parser/tokenization/lexer.c
 */
 
 t_token				*lexer(char *input, t_term *term, int remove_quotes);
+void				debug_print_tokens(t_token *tokens, char *function_name);
 
 /*
 ** parser/tokenization/advanced_tokenization.c
@@ -242,6 +251,7 @@ t_token				*io_numbers(t_token *first);
 */
 int					handle_tkn_io_number(t_token *current);
 int					add_filename_tkn(t_token *current);
+int					check_semi_and(t_token *first, int token);
 
 /*
 ** parser/tokenization/operator_tokens.c
@@ -259,8 +269,6 @@ void				quote_removal(t_token *first);
 ** parser/tokenization/basic_token_functions.c
 */
 
-t_token				*push_to_front(t_token *input, t_token *stack);
-t_token				*push_to_end(t_token *input, t_token *output);
 t_token				*delete_token(t_token *tkn);
 void				free_tokens(t_token **tokens);
 void				free_token(t_token **to_free);
@@ -284,7 +292,14 @@ int					handle_operator_token(char *str, char *source, int *i,
 int					handle_word_token(char *str, char *source, int *i,
 						int *maintoken);
 void				free_tokens_sub(t_token *tokens);
+
+/*
+** parser/tokenization/basic_token_functions3.c
+*/
+
 int					*init_quotearray(t_token *current);
+t_token				*push_to_front(t_token *input, t_token *stack);
+t_token				*push_to_end(t_token *input, t_token *output);
 
 /*
 ** parser/tokenization/basic_tokens.c

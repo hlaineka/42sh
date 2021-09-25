@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 14:39:32 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/11 18:23:13 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/25 21:26:11 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 #include "builtins.h"
 #include "includes.h"
 
-int	check_assignment_word (t_token *tkn)
+int	check_assignment_word(t_token *tkn)
 {
 	char	name[STR_LENGTH];
 	int		i;
 	int		returnable;
-	int 	i_equal_sign;
+	int		i_equal_sign;
 
 	returnable = 1;
 	ft_bzero(name, STR_LENGTH);
@@ -47,19 +47,49 @@ int	check_assignment_word (t_token *tkn)
 int	is_splitting_operator(t_token *tkn)
 {
 	if (tkn->maintoken == tkn_and || tkn->maintoken == tkn_lpar
-	|| tkn->maintoken == tkn_rpar || tkn->maintoken == tkn_semi
-	|| tkn->maintoken == tkn_nl || tkn->maintoken == tkn_pipe
-	|| tkn->maintoken == tkn_and_if || tkn->maintoken == tkn_or_if
-	|| tkn->maintoken == tkn_lbrace || tkn->maintoken == tkn_rbrace
-	|| tkn->maintoken == tkn_lesslpar || tkn->maintoken == tkn_greatlpar
-	|| tkn->maintoken == tkn_dollarlpar)
+		|| tkn->maintoken == tkn_rpar || tkn->maintoken == tkn_semi
+		|| tkn->maintoken == tkn_nl || tkn->maintoken == tkn_pipe
+		|| tkn->maintoken == tkn_and_if || tkn->maintoken == tkn_or_if
+		|| tkn->maintoken == tkn_lbrace || tkn->maintoken == tkn_rbrace
+		|| tkn->maintoken == tkn_lesslpar || tkn->maintoken == tkn_greatlpar
+		|| tkn->maintoken == tkn_dollarlpar)
 		return (1);
 	return (0);
 }
 
+static void	assign_tkn_assignment(t_token *first)
+{
+	t_token	*temp;
+
+	temp = first;
+	while (temp)
+	{
+		if (temp->maintoken == tkn_assignment_word)
+			temp->maintoken = tkn_assignment;
+		temp = temp->next;
+	}
+}
+
+static void	check_token_assignment(t_token *temp, int *is_first_command_word,
+	int *only_assignments)
+{
+	if (is_splitting_operator(temp))
+		*is_first_command_word = 1;
+	else if (*is_first_command_word)
+	{
+		if (check_assignment_word(temp) == 0)
+		{
+			*only_assignments = 0;
+			*is_first_command_word = 0;
+		}	
+	}
+	else
+		*only_assignments = 0;
+}
+
 t_token	*word_assignment_marking(t_token *first)
 {
-	t_token *temp;
+	t_token	*temp;
 	int		is_first_command_word;
 	int		only_assignments;
 
@@ -68,29 +98,10 @@ t_token	*word_assignment_marking(t_token *first)
 	is_first_command_word = 1;
 	while (temp)
 	{
-		if (is_splitting_operator(temp))
-			is_first_command_word = 1;
-		else if (is_first_command_word)
-		{
-			if (check_assignment_word(temp) == 0)
-			{
-				only_assignments = 0;
-				is_first_command_word = 0;
-			}	
-		}
-		else
-			only_assignments = 0;
+		check_token_assignment(temp, &is_first_command_word, &only_assignments);
 		temp = temp->next;
 	}
 	if (!only_assignments)
-	{
-		temp = first;
-		while (temp)
-		{
-			if (temp->maintoken == tkn_assignment_word)
-				temp->maintoken = tkn_assignment;
-			temp = temp->next;
-		}
-	}
+		assign_tkn_assignment(first);
 	return (first);
 }

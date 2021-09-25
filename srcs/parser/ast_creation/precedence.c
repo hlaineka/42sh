@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 16:01:36 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/01 10:57:17 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/25 21:34:02 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 
 int	is_redirectionop(t_token *tkn)
 {
-	if (tkn && (tkn->maintoken == tkn_assignment_word || tkn->maintoken == tkn_less
+	if (tkn && (tkn->maintoken == tkn_assignment_word
+			|| tkn->maintoken == tkn_less
 			|| tkn->maintoken == tkn_great || tkn->maintoken == tkn_dless
 			|| tkn->maintoken == tkn_dgreat || tkn->maintoken == tkn_lessand
 			|| tkn->maintoken == tkn_greatand || tkn->maintoken == tkn_lessgreat

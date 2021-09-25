@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 09:58:07 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/05/02 12:03:14 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/25 21:18:13 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,19 @@ int	add_filename_tkn(t_token *current)
 	if (!current->next || current->next->maintoken != tkn_word)
 		return (-1);
 	add_subtoken(current, current->next);
+	return (0);
+}
+
+int	check_semi_and(t_token *first, int token)
+{
+	t_token	*temp2;
+
+	temp2 = first;
+	while (temp2)
+	{
+		if (temp2->maintoken == token)
+			return (-1);
+		temp2 = temp2->next;
+	}
 	return (0);
 }
