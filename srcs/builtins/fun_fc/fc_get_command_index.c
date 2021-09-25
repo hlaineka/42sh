@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/25 12:10:04 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/25 12:31:32 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 #include "job_control.h"
 #include "typedefs.h"
 #include "history.h"
+
+static int	cmd_found_in_history(int i, t_fc *fc, t_process *pr, t_term *term)
+{
+	if (ft_strnstr(term->history[i], pr->argv[fc->i],
+			ft_strlen(pr->argv[fc->i])))
+	{
+		return (i);
+	}
+	return (0);
+}
 
 int	fc_get_command_index(t_fc *fc, t_term *term, t_process *pr)
 {
@@ -33,12 +43,9 @@ int	fc_get_command_index(t_fc *fc, t_term *term, t_process *pr)
 			return (0);
 		while (i-- > 0)
 		{
-			if (ft_strnstr(term->history[i], pr->argv[fc->i],
-					ft_strlen(pr->argv[fc->i])))
-			{
-				temp = i;
+			temp = cmd_found_in_history(i, fc, pr, term);
+			if (temp == i)
 				break ;
-			}
 		}
 	}
 	else if (temp < 0)
