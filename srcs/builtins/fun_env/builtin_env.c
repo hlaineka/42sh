@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:21:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/19 19:50:59 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/25 12:37:41 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,20 +94,20 @@ static void	execute_env_child(int argc, char **argv, char **envp)
 void	builtin_env(void *proc)
 {
 	int		argc;
+	int		status;
 	char	**argv;
 	char	**envp;
 
+	status = 0;
 	argc = ((t_process *)proc)->argc;
 	argv = ((t_process *)proc)->argv;
 	envp = ((t_process *)proc)->envp;
-//	tputs(g_term->ti_string, 1, ft_putc);
 	g_pid = fork();
 	if (g_pid < 0)
 		return ((void)err_builtin(E_FORK, argv[0], NULL));
 	else if (g_pid == 0)
 		execute_env_child(argc, argv, envp);
-//	else
-	wait(NULL);
-//	tputs(g_term->te_string, 1, ft_putc);
+	waitpid(g_pid, &status, 0);
+	((t_process *)proc)->status = status;
 	g_pid = 0;
 }
