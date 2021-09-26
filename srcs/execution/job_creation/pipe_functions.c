@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 11:26:20 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/26 09:13:20 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/26 11:06:08 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_job	*pipe_start(t_job *job, t_term *term, t_node *current)
 	t_process	*temp_process;
 	int			rpipe[2];
 
-	set_signal_execution();// put this to somewhere else
+	set_signal_execution();
 	if (!job)
 	{
 		job = init_job(current);
@@ -43,12 +43,9 @@ t_job	*pipe_start(t_job *job, t_term *term, t_node *current)
 	temp_process = job->first_process;
 	pipe(rpipe);
 	temp_process->pid = fork_and_chain_pipes(NULL, rpipe);
-	if (temp_process->pid == 0)
-	{
-		setpgid(0, 0);
-		execute_child(job, current, term);
-	}
 	setpgid(temp_process->pid, 0);
+	if (temp_process->pid == 0)
+		execute_child(job, current, term);
 	if (!job->bg)
 		tcsetpgrp(term->fd_stderr, temp_process->pid);
 	job->job_id = get_next_job_pgid(term->jobs->next);
@@ -84,6 +81,13 @@ t_job	*pipe_middle(t_job *job, t_term *term, t_node *current)
 	return (job);
 }
 
+static void	set_stardards_back(t_term *term)
+{
+	dup2(term->fd_stdout, STDOUT_FILENO);
+	dup2(term->fd_stdin, STDIN_FILENO);
+	dup2(term->fd_stderr, STDERR_FILENO);
+}
+
 t_job	*pipe_end(t_job *job, t_term *term, t_node *current)
 {
 	t_process	*temp_process;
@@ -95,12 +99,9 @@ t_job	*pipe_end(t_job *job, t_term *term, t_node *current)
 	lpipe[0] = job->fd_stdin;
 	lpipe[1] = job->fd_stdout;
 	temp_process->pid = fork_and_chain_pipes(lpipe, NULL);
-	if (temp_process->pid == 0)
-	{
-		setpgid(0, job->pgid);
-		execute_child(job, current, term);
-	}
 	setpgid(temp_process->pid, job->pgid);
+	if (temp_process->pid == 0)
+		execute_child(job, current, term);
 	close(lpipe[0]);
 	close(lpipe[1]);
 	close(job->fd_stderr);
@@ -110,9 +111,7 @@ t_job	*pipe_end(t_job *job, t_term *term, t_node *current)
 		job->notified = 1;
 		tcsetpgrp(term->fd_stderr, getpgrp());
 	}
-	dup2(term->fd_stdout, STDOUT_FILENO);
-	dup2(term->fd_stdin, STDIN_FILENO);
-	dup2(term->fd_stderr, STDERR_FILENO);
+	set_standards_back(term);
 	if (job->bg)
 		exit(term->last_return);
 	return (job);
