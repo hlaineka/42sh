@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 20:53:10 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/26 16:36:03 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 19:25:04 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,39 @@ int	print_intern_variables(char **variables)
 	return (0);
 }
 
+static int	is_in_envp(char *var, char **envp)
+{
+	int			i;
+
+	i = 0;
+	while (envp[i])
+	{
+		if (!ft_strcmp(var, envp[i]))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+static int	print_env_and_internal(void)
+{
+	char		**vars;
+	char		**envp;
+	int			i;
+
+	i = 0;
+	vars = g_term->intern_variables->intern;
+	envp = g_term->envp;
+	while (vars[i])
+	{
+		ft_printf("%s: i=%d\n", __FUNCTION__, i);
+		if (!is_in_envp(vars[i], envp))
+			ft_printf("%s\n", vars[i]);
+		i++;
+	}
+	return (0);
+}
+
 void	builtin_set(void *proc)
 {
 	t_process	*process;
@@ -44,7 +77,7 @@ void	builtin_set(void *proc)
 	if (process->argc == 1)
 	{
 		errors = print_intern_variables(g_term->envp);
-		errors = print_intern_variables(g_term->intern_variables->intern);
+		errors = print_env_and_internal();
 	}
 	else if (process->argc == 2 && !ft_strcmp(process->argv[1], "-i"))
 		errors = print_intern_variables(g_term->intern_variables->intern);
