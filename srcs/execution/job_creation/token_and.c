@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:47:26 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/26 09:05:31 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/26 11:07:54 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_job	*token_and(t_job *job, t_term *term, t_node *current)
 	left = init_job(current);
 	pid = fork();
 	if (pid < 0)
-		return (NULL); //todo error
+		return (NULL);
 	if (pid == 0)
 	{
 		left->bg = 1;
