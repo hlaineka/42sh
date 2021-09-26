@@ -1,4 +1,5 @@
-# 42sh shell made by @hlaineka and @huhtasheikki as a part of our Hive Helsinki studies
+# 42sh shell 
+### made by @hlaineka and @huhtasheikki as a part of our Hive Helsinki studies
 
 To compile, download the whole repo and `make` on the root folder. The executable will be named 42sh.
 Makefile has rules all, libft (to only compile the library), clean, fclean and re.
