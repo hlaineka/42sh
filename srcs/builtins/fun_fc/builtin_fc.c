@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/25 12:06:37 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 20:46:24 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@ static int	get_first_and_last(t_process *proc, t_term *term, t_fc *fc)
 		return (-1);
 	if (fc->options & (1 << S_FLAG) && fc->first == 0)
 		fc->first = fc->last;
-	if (fc->first == 0)
-	{
-		if (fc->last > 15)
-			fc->first = fc->last - 15;
-		else
-			fc->first = 1;
-	}
 	return (0);
 }
 
@@ -64,6 +57,8 @@ static int	fc_rest(t_term *term, t_fc *fc)
 	int			ret;
 
 	ret = 0;
+	if (fc->first == 0)
+		fc->first = get_last_history_index(term->history) - 1;
 	temp_proc = init_process(term);
 	temp_proc->argv[0] = "env";
 	if (fc->editor[0] == '\0')
