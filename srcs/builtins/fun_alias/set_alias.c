@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 20:19:36 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/11 16:35:06 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 21:25:56 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,5 @@ int	unset_alias(const char *name, t_alias *alias)
 		}
 		i++;
 	}
-	return (1);
+	return (0);
 }

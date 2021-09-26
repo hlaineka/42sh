@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:21:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/14 11:58:04 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 21:30:52 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,17 @@ static void	remove_all_aliases(t_alias *alias)
 
 static void	unalias_react_to_arg(char *arg, t_process *p, t_term *term)
 {
-	if (arg)
+	if (arg && arg[0] == '-')
 	{
-		p->status = unset_alias(arg, term->alias);
+		p->status = 1;
+		ft_printf_fd(STDERR_FILENO, "42sh: unalias: %s: illegal option\n");
 	}
+	else if (arg)
+		p->status = unset_alias(arg, term->alias);
 	else
 	{
 		p->status = 1;
-		ft_printf_fd(STDERR_FILENO, "42sh: unalias: %s: not found");
+		ft_printf_fd(STDERR_FILENO, "42sh: unalias: %s: not found\n");
 	}
 }
 
@@ -70,6 +73,8 @@ void	builtin_unalias(void *proc)
 	while (i < argc)
 	{
 		unalias_react_to_arg(argv[i], proc, term);
+		if (((t_process *)proc)->status)
+			return ;
 		i++;
 	}
 }
