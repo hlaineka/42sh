@@ -34,54 +34,54 @@ Features of the project:
     * Line editing over multiple lines.
     * ${} handling for internal variables, ~ parsing (home directory / homedirectory of the user given after ~)
     * builtins:
-     * echo no options, checks that the fd is valid.
-     * cd with absolute and relative path, options: -
-     * setenv and unsetenv to set environment variables in from 'key value'
-     * exit
+     - echo no options, checks that the fd is valid.
+     - cd with absolute and relative path, options: -
+     - setenv and unsetenv to set environment variables in from 'key value'
+     - exit
     * ctrl+D, ctrl+C signal handling.
 
 3. 42sh mandatory features
-  * Operators as in 21sh, plus && and || and &
-  * Monitoring of the shell intern and environment variables with creation of variables with name=variable leading a command.
-  * builtins filling the posix requirements:
-    * echo
-    * cd, with flags -L and -P and handling of CDPATH
-    * exit with return correct return values
-    * type
-    * export
-    * set (not POSIX-compliant, no flags)
-    * unset
-    * jobs
-    * fg
-    * bg
-    * env, setenv and unsetenv not implemented in this version
+    * Operators as in 21sh, plus && and || and &
+    * Monitoring of the shell intern and environment variables with creation of variables with name=variable leading a command.
+    * builtins filling the posix requirements:
+     - echo
+     - cd, with flags -L and -P and handling of CDPATH
+     - exit with return correct return values
+     - type
+     - export
+     - set (not POSIX-compliant, no flags)
+     - unset
+     - jobs
+     - fg
+     - bg
+     - env, setenv and unsetenv not implemented in this version
 
 4. Modular parts
-  * Complete management of quotes (singlequotes, doublequotes and backslash)
-  * Tilde expansion and additional parameter formats:
-     * ~
-     * ${parameter:-word}
-     * ${parameter:=word}
-     * ${parameter:?word}
-     * ${parameter:+word}
-     * ${#parameter}
-     * ${parameter%}
-     * ${parameter%%}
-     * ${parameter#}
-     * ${parameter##}
-  * Complete management of the history:
-     * Expansions:
+    * Complete management of quotes (singlequotes, doublequotes and backslash)
+    * Tilde expansion and additional parameter formats:
+     - ~
+     - ${parameter:-word}
+     - ${parameter:=word}
+     - ${parameter:?word}
+     - ${parameter:+word}
+     - ${#parameter}
+     - ${parameter%}
+     - ${parameter%%}
+     - ${parameter#}
+     - ${parameter##}
+    * Complete management of the history:
+     - Expansions:
         ∗ !!
         ∗ !word
         ∗ !number
         ∗ !-number
-     * Saving to a file so that it can be used over several sessions
-     * Built-in fc (all POSIX options)
-     * Incremental search in the history with CTRL-R
-  * Alias management via built-ins alias and unalias
-  * A hash table and built-in hash to interact with it
-
+     - Saving to a file so that it can be used over several sessions
+     - Built-in fc (all POSIX options)
+     - Incremental search in the history with CTRL-R
+    * Alias management via built-ins alias and unalias
+    * A hash table and built-in hash to interact with it
+  
 5. Other features
-  * No leaks, no extra fd:s, error handling done by hand withour errno.
-  * The shell can be started with option 'debug' that prints more info of how the shell handles data.
-  * The shell can be started with option script that can run unit test files for example `./42sh script scripts/basic_tests.txt`
+    * No leaks, no extra fd:s, error handling done by hand withour errno.
+    * The shell can be started with option 'debug' that prints more info of how the shell handles data.
+    * The shell can be started with option script that can run unit test files for example `./42sh script scripts/basic_tests.txt`
