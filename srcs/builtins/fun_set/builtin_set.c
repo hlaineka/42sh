@@ -6,28 +6,26 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 20:53:10 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/14 11:59:15 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 16:36:03 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "includes.h"
 
-int	print_intern_variables(void)
+int	print_intern_variables(char **variables)
 {
 	t_term		*term;
-	char		**intern;
 	int			i;
 
 	term = g_term;
-	intern = term->intern_variables->intern;
 	i = 0;
 	ft_printf("debug=%i\n", term->intern_variables->flag_debug);
 	ft_printf("noclobber=%i\n", term->intern_variables->flag_noclobber);
 	ft_printf("rawmode=%i\n", term->intern_variables->flag_rawmode);
-	while (intern[i])
+	while (variables[i])
 	{
-		ft_printf("%s\n", intern[i]);
+		ft_printf("%s\n", variables[i]);
 		i++;
 	}
 	return (0);
@@ -44,13 +42,19 @@ void	builtin_set(void *proc)
 	argv = process->argv;
 	process->status = 0;
 	if (process->argc == 1)
-		errors = print_intern_variables();
+	{
+		errors = print_intern_variables(g_term->envp);
+		errors = print_intern_variables(g_term->intern_variables->intern);
+	}
+	else if (process->argc == 2 && !ft_strcmp(process->argv[1], "-i"))
+		errors = print_intern_variables(g_term->intern_variables->intern);
 	else
 		errors = 1;
 	if (errors)
 	{
 		process->status = err_builtin(E_INVALID_INPUT, argv[0], NULL);
-		ft_printf_fd(2, "usage: set to print internal variables. No flags.\n");
+		ft_printf_fd(2, "usage: set to print internal variables..\n");
+		ft_printf_fd(2, "\t optional: flag -i to print only internal.\n");
 	}
 	process->completed = 1;
 }
