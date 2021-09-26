@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/26 19:32:28 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 21:55:15 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	get_status_and_condition(t_process *proc, int status)
 	{
 		proc->completed = 1;
 		proc->status = WTERMSIG(status) + 128;
-		if ((WTERMSIG(status) != 2)
+		if ((WTERMSIG(status) != 2 && WTERMSIG(status) != 13)
 			&& (WTERMSIG(status) < 16 || WTERMSIG(status) > 24))
 			ft_printf("%s: %d",
 				g_signal_str[WTERMSIG(status)], WTERMSIG(status));
