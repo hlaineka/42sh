@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 14:22:43 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/26 10:13:05 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 15:48:16 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static int	cd_get_option(int *option, t_process *p, int argc)
 	while (i < argc && p->argv[i][0] == '-')
 	{
 		j = 1;
+		if (!ft_strcmp(p->argv[i], "-"))
+			return (i);
 		while (p->argv[i][j])
 		{
 			if (p->argv[i][j] == 'L')
