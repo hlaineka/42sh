@@ -80,6 +80,7 @@ Features of the project:
      * Incremental search in the history with CTRL-R
   * Alias management via built-ins alias and unalias
   * A hash table and built-in hash to interact with it
+  * The built-in test with the following operators: texttt-b, -c, -d, -e, -f, -g, -L, -p, -r, -S, -s, -u, -w, -x, -z, =, !=, -eq, -ne, -ge, -lt, -le, !. As well as the possibility of a simple operand, without operator.
 
 5. Other features
   * No leaks, no extra fd:s, error handling done by hand withour errno.
