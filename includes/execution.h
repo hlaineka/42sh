@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:35:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/26 08:15:43 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/26 08:40:29 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void		restore_fds(t_term *term);
 
 void		update_fds(t_term *term);
 void		get_right(t_node *current, t_term *term);
+int			run_non_recursive(t_job *job, t_node *current, t_term *term);
 
 /*
 ** execution/job_creation/pipe_functions.c
