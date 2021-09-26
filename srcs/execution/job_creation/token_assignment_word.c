@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:44:14 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/26 18:35:41 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/26 20:46:53 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ static t_job	*init_assignment_word_job(t_node *current, t_term *term)
 	return (job);
 }
 
+static void	set_process_envp(char *name, char *value, t_term *term, t_job *job)
+{
+	if (ft_getenv(name, term->envp))
+		ft_setenv(name, value, 1, term->envp);
+	ft_setenv(name, value, 1, job->first_process->envp);
+}
+
 t_job	*token_assignment_word(t_job *job, t_term *term, t_node *current)
 {
 	char	name[ARGV_SIZE];
@@ -63,18 +70,14 @@ t_job	*token_assignment_word(t_job *job, t_term *term, t_node *current)
 		job->first_process->envp = strarr_copy(term->envp);
 	if (current->operation == tkn_assignment)
 	{
-		if (ft_getenv(name, term->envp))
-			ft_setenv(name, value, 1, term->envp);
-		ft_setenv(name, value, 1, job->first_process->envp);
+		set_process_envp(name, value, term, job);
 		job = tree_traversal(job, current->left, term);
 	}
 	else
 	{
 		job->first_process->pid = -1;
-		if (ft_getenv(name, term->envp))
-			ft_setenv(name, value, 1, term->envp);
+		set_process_envp(name, value, term, job);
 		ft_setenv(name, value, 1, term->intern_variables->intern);
-		ft_setenv(name, value, 1, job->first_process->envp);
 		if (current->left)
 			job = tree_traversal(job, current->left, term);
 	}
