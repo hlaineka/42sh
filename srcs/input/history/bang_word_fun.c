@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 13:02:28 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/14 15:41:43 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 10:54:55 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ const char	*bang_word_fun(char *word_str, t_term *term)
 		if (!ft_strncmp(term->history[i], word_str, len))
 			return (term->history[i]);
 	}
-	ft_printf_fd(STDERR_FILENO, "42sh: %s: bad word specifier\n", word_str);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:35:28 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/26 10:49:25 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 10:57:06 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ t_token	*bang_history(t_token *first, t_term *term)
 			if (!history_cmd)
 			{
 				term->last_return = 1;
-				ft_printf_fd(2, "history not found\n");
+				ft_printf_fd(2, "42sh: %s: history event not found\n",
+					temp->value);
 				delete_tokens(first);
 				return (NULL);
 			}
