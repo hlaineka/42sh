@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 10:11:01 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/25 21:31:00 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 10:20:20 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int			is_valid_folder(char *path, char *progname);
 char		*get_absolute_path_to_buf(char *rel, char **envp, char *buf);
 void		change_folder_and_save_pwds(t_process *proc, char path[]);
 void		cd_l_flag(char *path, t_process *p, t_term *term);
+void		cd_remove_dots(t_list *lst);
+void		cd_lst_delete(void *data, size_t size);
 
 /*
 ** ECHO BUILTIN

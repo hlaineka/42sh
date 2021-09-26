@@ -6,59 +6,11 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 19:47:03 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/26 10:05:40 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 10:21:00 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-
-static void	lst_delete(void *data, size_t size)
-{
-	ft_bzero(data, size);
-	free(data);
-}
-
-static void	remove_dots(t_list *lst)
-{
-	t_list	*start;
-	t_list	*prev;
-	t_list	*temp;
-
-	start = lst;
-	prev = lst;
-	lst = lst->next;
-	while (lst)
-	{
-		if (!ft_strcmp(lst->content, "."))
-		{
-			prev->next = lst->next;
-			ft_lstdelone(&lst, &lst_delete);
-			lst = prev->next;
-			continue ;
-		}
-		else if (!ft_strcmp(lst->content, ".."))
-		{
-			temp = start;
-			if (temp == prev)
-			{
-				prev->next = lst->next;
-				ft_lstdelone(&lst, &lst_delete);
-				lst = prev->next;
-				continue ;
-			}
-			while (temp->next != prev)
-				temp = temp->next;
-			temp->next = lst->next;
-			ft_lstdelone(&lst, &lst_delete);
-			ft_lstdelone(&prev, &lst_delete);
-			lst = temp->next;
-			prev = temp;
-			continue ;
-		}
-		lst = lst->next;
-		prev = prev->next;
-	}
-}
 
 static void	create_path_lst(char **folders, t_list *lst)
 {
@@ -86,11 +38,11 @@ static void	write_curpath_from_lst(char *curpath, t_list *lst)
 	{
 		temp = lst;
 		lst = lst->next;
-		ft_lstdelone(&temp, &lst_delete);
+		ft_lstdelone(&temp, &cd_lst_delete);
 		ft_strcat(curpath, "/");
 		ft_strcat(curpath, lst->content);
 	}
-	ft_lstdelone(&lst, &lst_delete);
+	ft_lstdelone(&lst, &cd_lst_delete);
 }
 
 static int	set_cwd_and_env(char *curpath, t_process *p)
@@ -132,7 +84,7 @@ static void	clean_the_path(char *path, t_process *p)
 		return ;
 	}
 	create_path_lst(folders, lst);
-	remove_dots(lst);
+	cd_remove_dots(lst);
 	write_curpath_from_lst(curpath, lst);
 	set_cwd_and_env(curpath, p);
 }
