@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/09/25 21:36:25 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/09/26 10:01:28 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -141,6 +141,7 @@ _SRC_CD =	builtin_cd.c \
 			find_path.c \
 			ft_is_absolute_path.c \
 			get_absolute_path.c \
+			cd_l_flag.c \
 			is_valid_path.c
 
 _SRC_ECHO =	builtin_echo.c
