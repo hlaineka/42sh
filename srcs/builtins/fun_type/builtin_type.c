@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/11 18:09:49 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 12:06:44 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	print_type(char *cmd, t_process *p, t_term *term)
 	if (is_builtin_type(cmd))
 		ft_printf("%s is a shell builtin\n", cmd);
 	else if (is_in_hash_table(cmd, term->hash_table))
-		ft_printf("%s is hashed (%s%s)\n",
+		ft_printf("%s is hashed (%s/%s)\n",
 			cmd, cmd_path_from_hash_table(cmd, ht), cmd);
 	else
 	{
