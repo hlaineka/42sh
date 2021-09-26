@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/09/25 21:15:33 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/26 08:15:04 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@
 # define BRACKETS "(){}"
 # define NODE_STACK_SIZE 50
 
-#define COLON_MINUS 1
-#define COLON_EQUAL 2
-#define COLON_QUESTION 4
-#define COLON_PLUS 8
-#define PRE_HASH 16
-#define PROCENT 32
-#define DPROCENT 64
-#define POST_HASH 128
-#define POST_DHASH 256
+# define COLON_MINUS 1
+# define COLON_EQUAL 2
+# define COLON_QUESTION 4
+# define COLON_PLUS 8
+# define PRE_HASH 16
+# define PROCENT 32
+# define DPROCENT 64
+# define POST_HASH 128
+# define POST_DHASH 256
 
 /*
 **enum e_token
@@ -176,7 +176,7 @@ typedef struct s_node
 	char			*full_command;
 }					t_node;
 
-typedef t_job *(*t_op_function)(t_job *job, t_term *term, t_node *current);
+typedef t_job*(*t_op_function)(t_job *job, t_term *term, t_node *current);
 
 /*
 ** parser/parser.c
@@ -219,7 +219,6 @@ t_token				*add_precedence(t_token *first);
 
 t_token				*shunting_yard(t_token *first);
 
-
 /*
 ** parser/tokenization/lexer_functions.c
 */
@@ -238,7 +237,8 @@ void				debug_print_tokens(t_token *tokens, char *function_name);
 ** parser/tokenization/advanced_tokenization.c
 */
 
-t_token				*advanced_tokenization(t_token *first, t_term *term, int remove_quotes);
+t_token				*advanced_tokenization(t_token *first, t_term *term,
+						int remove_quotes);
 
 /*
 ** parser/tokenization/io_numbers.c
@@ -272,7 +272,7 @@ void				quote_removal(t_token *first);
 t_token				*delete_token(t_token *tkn);
 void				free_tokens(t_token **tokens);
 void				free_token(t_token **to_free);
-t_token 		*delete_tokens(t_token *tkn);
+t_token				*delete_tokens(t_token *tkn);
 
 /*
 ** parser/tokenization/basic_token_functions2.c
@@ -280,7 +280,8 @@ t_token 		*delete_tokens(t_token *tkn);
 
 t_token				*init_token(void);
 t_token				*add_quotearray(t_token *current);
-int					check_quotes(char **source,int *i, char *returnable, int *maintoken);
+int					check_quotes(char **source, int *i, char *returnable,
+						int *maintoken);
 
 /*
 ** parser/tokenization/basic_token_functions3.c
@@ -318,7 +319,8 @@ int					tilde_expansion(t_token *tkn, t_term *term, int tilde);
 */
 
 int					dollar_expansion(t_token *tkn, t_term *term, int dollar);
-char				*get_param_colon_word(char *param, char *word, int opt, t_term *term);
+char				*get_param_colon_word(char *param, char *word, int opt,
+						t_term *term);
 char				*get_param_str(char *param, t_term *term);
 char				*get_param_length(char *param, t_term *term);
 char				*dollar_split_param(char *param, char *split, int size);
@@ -328,7 +330,6 @@ char				*substitute_var_without_prefix(char *param, t_term *term);
 char				*substitute_var_without_suffix(char *param, t_term *term);
 char				*substitute_replacement(char *param, t_term *term);
 char				*substitute_var_or_error_msg(char *param, t_term *term);
-
 
 /*
 ** parser/tokenization/word_assignment_marking.c

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/27 11:35:38 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/14 19:49:42 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 08:15:43 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,11 @@ t_job		*token_lessand(t_job *job, t_term *term, t_node *current);
 t_job		*token_dless(t_job *job, t_term *term, t_node *current);
 t_job		*token_and_if(t_job *job, t_term *term, t_node *current);
 t_job		*token_or_if(t_job *job, t_term *term, t_node *current);
-t_job       *token_and(t_job *job, t_term *term, t_node *current);
-t_job       *token_assignment_word(t_job *job, t_term *term, t_node *current);
-t_job       *token_lpar(t_job *job, t_term *term, t_node *current);
-t_job       *token_lbrace(t_job *job, t_term *term, t_node *current);
-t_job       *token_dollarlpar(t_job *job, t_term *term, t_node *current);
-
+t_job		*token_and(t_job *job, t_term *term, t_node *current);
+t_job		*token_assignment_word(t_job *job, t_term *term, t_node *current);
+t_job		*token_lpar(t_job *job, t_term *term, t_node *current);
+t_job		*token_lbrace(t_job *job, t_term *term, t_node *current);
+t_job		*token_dollarlpar(t_job *job, t_term *term, t_node *current);
 
 void		get_right(t_node *current, t_term *term);
 void		update_fds(t_term *term);
