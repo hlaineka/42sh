@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 14:49:33 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/06/30 14:57:38 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/26 12:43:32 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_is_name(char *str)
 	i = 1;
 	while (str[i])
 	{
-		if (!ft_isalnum(str[i]) && str[0] != '_')
+		if (!ft_isalnum(str[i]) && str[i] != '_')
 			return (0);
 		i++;
 	}
