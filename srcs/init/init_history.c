@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 13:39:57 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/26 13:17:26 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 16:11:00 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	open_history_file(t_term *term, int oflag)
 	if (!home)
 		return (-1);
 	write_path_to_buffer(buf, home, ".42sh_history");
-	fd = open(buf, oflag);
+	fd = open(buf, oflag, 0666);
 	return (fd);
 }
 
@@ -85,7 +85,10 @@ void	init_history(t_term *term)
 
 	fd = open_history_file(term, O_RDONLY | O_CREAT);
 	if (fd == -1)
+	{
+		close(fd);
 		return ((void)err_builtin(E_BADF, "OPEN", NULL));
+	}
 	read_history_to_memory(fd, term);
 	close(fd);
 }
