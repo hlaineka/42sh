@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 19:49:17 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/25 13:48:22 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 16:06:46 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	open_temp_file_write(t_term *term)
 	if (!home)
 		return (-1);
 	write_path_to_buffer(path, home, ".42sh_oldies_temp");
-	fd = open(path, O_WRONLY | O_CREAT | O_TRUNC);
+	fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	return (fd);
 }
 
