@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:21:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/11 16:45:10 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 22:07:01 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void	builtin_alias(void *proc)
 	while (i < argc)
 	{
 		alias_react_to_arg(argv[i], proc, term);
+		if (((t_process *)proc)->status)
+			return ;
 		i++;
 	}
 }
