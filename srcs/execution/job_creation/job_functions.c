@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:33:35 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/08/22 11:30:20 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/26 09:07:11 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,35 +44,6 @@ void	free_jobs(t_term *term)
 			prev = prev->next;
 		}
 	}
-
-/*
-	t_job		*next;
-	t_job		*job_to_free;
-	t_job		*prev;
-
-	job_to_free = term->jobs;
-	prev = job_to_free;
-	while (job_to_free)
-	{
-		next = job_to_free->next;
-//		if (job_to_free->first_process->completed == 1
-//			|| job_to_free->first_process->stopped == 1)
-		if (is_job_completed(job_to_free))
-		{
-			if (prev == term->jobs)
-			{
-				term->jobs = job_to_free->next;
-				prev = term->jobs;
-			}
-			else
-				prev->next = job_to_free->next;
-			free_job(job_to_free);
-		}
-		else
-			prev = job_to_free;
-		job_to_free = next;
-	}
-*/
 }
 
 void	free_job(t_job *job_to_free)
@@ -138,36 +109,4 @@ t_process	*init_process(t_term *term)
 	ft_bzero(first_process->argv, ARGV_SIZE);
 	first_process->envp = NULL;
 	return (first_process);
-}
-
-void	restore_fds(t_term *term)
-{
-	int	fd_status;
-
-	if (term->intern_variables->flag_rawmode)
-	{
-		fd_status = check_fd(0, 0);
-		if (-1 != fd_status)
-			close(0);
-		dup(term->fd_stdin);
-		dup2(0, STDIN_FILENO);
-		fd_status = check_fd(1, 0);
-		if (-1 != fd_status)
-			close(1);
-		dup(term->fd_stdout);
-		dup2(1, STDOUT_FILENO);
-		fd_status = check_fd(2, 0);
-		if (-1 != fd_status)
-			close(2);
-		dup(term->fd_stderr);
-		dup2(2, STDERR_FILENO);
-		if (term->heredoc_fd != -1)
-			close(term->heredoc_fd);
-	}
-	else
-	{
-		dup2(term->fd_stdin, STDIN_FILENO);
-		dup2(term->fd_stdout, STDOUT_FILENO);
-		dup2(term->fd_stderr, STDERR_FILENO);
-	}
 }

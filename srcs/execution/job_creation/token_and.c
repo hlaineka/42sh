@@ -6,13 +6,42 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 12:47:26 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/14 19:00:33 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/26 09:05:31 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "execution.h"
 #include "ft_signal.h"
+
+static void	parent_duties(t_term *term, t_job *left, int pid)
+{
+	update_fds(term);
+	left->first_process->pid = pid;
+	setpgid(pid, 0);
+	left->job_id = get_next_job_pgid(term->jobs->next);
+	left->pgid = pid;
+	set_signal_execution();
+}
+
+static void	run_command_child(t_job *left, t_node *current, int pid,
+	t_term *term)
+{
+	if (left && current->left->operation != tkn_semi
+		&& current->left->operation != tkn_and
+		&& current->left->operation != tkn_and_if
+		&& current->left->operation != tkn_or_if
+		&& current->left->operation != tkn_assignment)
+	{
+		if (pid > 0)
+		{
+			left->next = term->jobs->next;
+			term->jobs->next = left;
+		}
+		if (left->first_process->pid == 0 && pid == 0)
+			exit(simple_command(left->first_process, left, term));
+	}
+}
 
 t_job	*token_and(t_job *job, t_term *term, t_node *current)
 {
@@ -32,37 +61,11 @@ t_job	*token_and(t_job *job, t_term *term, t_node *current)
 		left = tree_traversal(left, current->left, term);
 	}
 	if (pid > 0)
-	{
-		update_fds(term);
-		left->first_process->pid = pid;
-		setpgid(pid, 0);
-		left->job_id = get_next_job_pgid(term->jobs->next);
-		left->pgid = pid;
-		set_signal_execution();
-	}
-	if (left && current->left->operation != tkn_semi
-		&& current->left->operation != tkn_and
-		&& current->left->operation != tkn_and_if
-		&& current->left->operation != tkn_or_if
-		&& current->left->operation != tkn_assignment)
-	{
-		if (pid > 0)
-		{
-			left->next = term->jobs->next;
-			term->jobs->next = left;
-		}
-		if (left->first_process->pid == 0 && pid == 0)
-			exit(simple_command(left->first_process, left, term));
-	}
+		parent_duties(term, left, pid);
+	run_command_child(left, current, pid, term);
 	if (pid == 0)
 		exit(0);
 	if (current->right)
 		get_right(current, term);
-/*
-	update_fds(term);
-	dup2(term->fd_stdin, STDIN_FILENO);
-	dup2(term->fd_stdout, STDOUT_FILENO);
-	dup2(term->fd_stderr, STDERR_FILENO);
-*/
 	return (term->jobs->next);
 }

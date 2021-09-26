@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:44:14 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/19 19:52:34 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/26 08:47:08 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,30 @@ static char	**strarr_copy(char **src)
 	return (returnable);
 }
 
-t_job       *token_assignment_word(t_job *job, t_term *term, t_node *current)
+static t_job	*init_assignment_word_job(t_node *current, t_term *term)
+{
+	t_job	*job;
+
+	job = init_job(current);
+	job->first_process->envp = strarr_copy(term->envp);
+	if (current->operation != tkn_assignment)
+	{
+		job->next = term->jobs->next;
+		term->jobs->next = job;
+	}
+	return (job);
+}
+
+t_job	*token_assignment_word(t_job *job, t_term *term, t_node *current)
 {
 	char	name[ARGV_SIZE];
 	char	value[ARGV_SIZE];
-	
+
 	if (current->right)
 		return (NULL);
 	get_name_and_value(current->command, value, name);
 	if (!job)
-	{
-		job = init_job(current);
-		job->first_process->envp = strarr_copy(term->envp);
-		if (current->operation != tkn_assignment)
-		{
-			job->next = term->jobs->next;
-			term->jobs->next = job;
-		}
-	}
+		job = init_assignment_word_job(current, term);
 	if (current->operation == tkn_assignment)
 	{
 		ft_setenv(name, value, 1, term->envp);
@@ -69,5 +75,5 @@ t_job       *token_assignment_word(t_job *job, t_term *term, t_node *current)
 		if (current->left)
 			job = tree_traversal(job, current->left, term);
 	}
-	return(job);
+	return (job);
 }
