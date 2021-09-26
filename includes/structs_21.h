@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:36:08 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/25 14:14:05 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 08:11:19 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,6 @@ typedef struct s_clist
 typedef struct s_input
 {
 	int					hist_i;
-//	t_clist				*hist_cur;
-//	t_clist				*history;
-//	t_clist				*last_comm;
 	char				**ret_str;
 	char				**input_temp;
 	int					*quote;
@@ -132,8 +129,8 @@ typedef struct s_job
 	int					fd_stdin;
 	int					fd_stdout;
 	int					fd_stderr;
-	int					bg;		// bg or fg?
-	int					fg;		// bg or fg?
+	int					bg;
+	int					fg;
 }						t_job;
 
 /*
@@ -197,8 +194,8 @@ typedef struct s_job
 typedef struct s_term
 {
 	char				*envp[1024];
-	t_hash				hash_table[1024];			// use macro?
-	char				*history[HISTORY_SIZE + 1];		// use macro?
+	t_hash				hash_table[1024];
+	char				*history[HISTORY_SIZE + 1];
 	t_input				*input;
 	t_input				*here_input;
 	char				*term_buffer;
@@ -262,4 +259,3 @@ t_term					*g_term;
 t_input					*g_input;
 
 #endif
-

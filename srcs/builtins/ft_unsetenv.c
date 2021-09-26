@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unsetenv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 21:33:16 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/04/11 12:34:05 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 08:20:01 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes.h"
+
 /*
 ** The ft_unsetenv() function deletes all instances of the variable name
 ** pointed to by name from the list.  Note that only the variable name
