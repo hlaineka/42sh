@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 19:47:03 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/26 10:21:00 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 15:40:13 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,10 @@ void	cd_l_flag(char *path, t_process *p, t_term *term)
 	if (path[0] != '/')
 	{
 		if (pwd)
-			ft_strcpy(curpath, pwd);
+		{
+			if (ft_strcmp(pwd, "/"))
+				ft_strcpy(curpath, pwd);
+		}
 		else
 			getcwd(curpath, 1024);
 		ft_strcat(curpath, "/");

@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 19:47:03 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/26 10:46:03 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 15:40:22 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	cd_remove_dotdot(t_list *start, t_list **prev, t_list **lst)
 	{
 		prev_ptr->next = lst_ptr->next;
 		ft_lstdelone(&lst_ptr, &cd_lst_delete);
-		lst_ptr = prev_ptr->next;
+		*lst = prev_ptr->next;
 		return (1);
 	}
 	while (start->next != prev_ptr)
