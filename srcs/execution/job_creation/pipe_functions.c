@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 11:26:20 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/26 11:06:08 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 11:36:46 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_job	*pipe_middle(t_job *job, t_term *term, t_node *current)
 	return (job);
 }
 
-static void	set_stardards_back(t_term *term)
+static void	set_standards_back(t_term *term)
 {
 	dup2(term->fd_stdout, STDOUT_FILENO);
 	dup2(term->fd_stdin, STDIN_FILENO);
