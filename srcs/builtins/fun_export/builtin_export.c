@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 20:54:24 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/11 17:53:12 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 12:21:10 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,11 @@ static int	export_arg(char *arg, t_process *process, t_term *term)
 
 	ft_bzero(name, STR_LENGTH);
 	ft_bzero(value, STR_LENGTH);
-	if (!ft_strchr(arg, '=')
-		&& !ft_getenv(name, term->intern_variables->intern))
-		return (0);
 	if (!ft_strchr(arg, '='))
 	{
 		ft_strcpy(name, arg);
+		if (!ft_getenv(name, term->intern_variables->intern))
+			return (0);
 		ft_strcpy(value, ft_getenv(name, term->intern_variables->intern));
 	}
 	else if (ft_strchr(arg, '=') && 0 == get_name_and_value(arg, value, name))
