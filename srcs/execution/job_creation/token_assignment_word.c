@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:44:14 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/26 13:12:52 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/26 18:35:41 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,12 @@ t_job	*token_assignment_word(t_job *job, t_term *term, t_node *current)
 	get_name_and_value(current->command, value, name);
 	if (!job)
 		job = init_assignment_word_job(current, term);
-	else
+	else if (!job->first_process->envp)
 		job->first_process->envp = strarr_copy(term->envp);
 	if (current->operation == tkn_assignment)
 	{
-		ft_setenv(name, value, 1, term->envp);
+		if (ft_getenv(name, term->envp))
+			ft_setenv(name, value, 1, term->envp);
 		ft_setenv(name, value, 1, job->first_process->envp);
 		job = tree_traversal(job, current->left, term);
 	}
