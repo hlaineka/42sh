@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/26 12:06:44 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 21:36:17 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,12 @@ void	builtin_type(void *proc)
 	argv++;
 	while (*argv)
 	{
-		p->status = print_type(*argv, p, g_term);
+		if (*argv[0] == '-')
+			p->status = err_builtin(E_ILLEGAL_OPTION, "type", NULL);
+		else
+			p->status = print_type(*argv, p, g_term);
+		if (p->status)
+			return ;
 		argv++;
 	}
 }
