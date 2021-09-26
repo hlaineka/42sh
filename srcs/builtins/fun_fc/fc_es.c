@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 07:35:20 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/07/20 20:56:42 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 20:39:02 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ int	fc_es(t_term *term, t_fc *fc, int options)
 	int		temp_i;
 	char	*cmd;
 
+	if (fc->first == 0)
+		fc->first = get_last_history_index(term->history) - 1;
+	if (fc->last == 0)
+		fc->last = get_last_history_index(term->history) - 1;
 	while (fc->first <= fc->last)
 	{
 		if (options & (1 << R_FLAG))
