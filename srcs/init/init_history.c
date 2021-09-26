@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 13:39:57 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/26 10:02:37 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 13:17:26 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	init_history(t_term *term)
 {
 	int		fd;
 
-	fd = open_history_file(term, O_RDONLY);
+	fd = open_history_file(term, O_RDONLY | O_CREAT);
 	if (fd == -1)
 		return ((void)err_builtin(E_BADF, "OPEN", NULL));
 	read_history_to_memory(fd, term);
