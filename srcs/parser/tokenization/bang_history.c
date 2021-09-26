@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/11 16:35:28 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/25 12:46:47 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/26 10:49:25 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_token	*bang_history(t_token *first, t_term *term)
 				delete_tokens(first);
 				return (NULL);
 			}
-			//ft_printf("history:%s\n", history_cmd); Tän saa varmaan poistaa?
+			ft_printf("%s\n", history_cmd);
 			first = add_new_token(history_cmd, term, first, temp);
 		}
 		temp = next;
