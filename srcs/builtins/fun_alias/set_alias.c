@@ -6,33 +6,43 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 20:19:36 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/26 22:13:58 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 22:24:36 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int	set_alias(const char *name, const char *value, t_alias *alias)
+static int	is_unvalid_name(const char *name)
 {
-	int		i;
-
-	i = 0;
 	if (ft_strequ(name, ""))
 		return (err_builtin(E_INVALID_INPUT, "alias", NULL));
 	if (name[0] == '-')
 		return (err_builtin(E_ILLEGAL_OPTION, "alias", NULL));
 	if (!ft_is_name((char *)name))
 		return (err_builtin(E_INVALID_INPUT, "alias", NULL));
+	return (0);
+}
+
+static int	replace_alias(int i, const char *value, t_alias *alias)
+{
+	free(alias[i].value);
+	alias[i].value = ft_strdup(value);
+	if (!alias[i].value)
+		return (err_builtin(E_NOMEM, "alias", NULL));
+	return (0);
+}
+
+int	set_alias(const char *name, const char *value, t_alias *alias)
+{
+	int		i;
+
+	i = 0;
+	if (is_unvalid_name(name))
+		return (1);
 	while (i < ALIAS_SIZE && alias[i].name)
 	{
 		if (ft_strequ(alias[i].name, name))
-		{
-			free(alias[i].value);
-			alias[i].value = ft_strdup(value);
-			if (!alias[i].value)
-				return (err_builtin(E_NOMEM, "alias", NULL));
-			return (0);
-		}
+			return (replace_alias(i, value, alias));
 		i++;
 	}
 	alias[i].name = ft_strdup(name);
