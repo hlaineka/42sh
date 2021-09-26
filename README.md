@@ -17,28 +17,28 @@ The use of global variables are allowed only when the use of them is defendable.
 
 Features of the project:
 1. Minishell prerequisites
-  * Prompt display
-  * Run commands with their parameters and PATH monitoring
-  * Error monitoring, without using erno, and return values of commands
+    * Prompt display
+    * Run commands with their parameters and PATH monitoring
+    * Error monitoring, without using erno, and return values of commands
   
 2. 21sh prerequisites and optional features
-  * Operators: ;, |, >>, >, <<, <, >&, <&, &&, || 
-  * Line edition using termcaps-library.
-  * History of commands using up and down arrows
-  * Movement in line with left and right arrows.
-  * Movement word by word with shift + left and right arrows.
-  * Movement one line up and down shift + up and down arrows.
-  * ctrl+Y to copy line, ctrl+k to cut line, ctrl+p to paste line in app.
-  * copy/paste works from outside of the app with the basic combination of keys as usual
-  * Home and end to go to the beginning and end of the command.
-  * Line editing over multiple lines.
-  * ${} handling for internal variables, ~ parsing (home directory / homedirectory of the user given after ~)
-  * builtins:
-    * echo no options, checks that the fd is valid.
-    * cd with absolute and relative path, options: -
-    * setenv and unsetenv to set environment variables in from 'key value'
-    * exit
-  * ctrl+D, ctrl+C signal handling.
+    * Operators: ;, |, >>, >, <<, <, >&, <&, &&, || 
+    * Line edition using termcaps-library.
+    * History of commands using up and down arrows
+    * Movement in line with left and right arrows.
+    * Movement word by word with shift + left and right arrows.
+    * Movement one line up and down shift + up and down arrows.
+    * ctrl+Y to copy line, ctrl+k to cut line, ctrl+p to paste line in app.
+    * copy/paste works from outside of the app with the basic combination of keys as usual
+    * Home and end to go to the beginning and end of the command.
+    * Line editing over multiple lines.
+    * ${} handling for internal variables, ~ parsing (home directory / homedirectory of the user given after ~)
+    * builtins:
+     * echo no options, checks that the fd is valid.
+     * cd with absolute and relative path, options: -
+     * setenv and unsetenv to set environment variables in from 'key value'
+     * exit
+    * ctrl+D, ctrl+C signal handling.
 
 3. 42sh mandatory features
   * Operators as in 21sh, plus && and || and &
