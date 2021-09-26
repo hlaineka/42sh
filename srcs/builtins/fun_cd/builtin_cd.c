@@ -6,13 +6,11 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 14:22:43 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/26 09:57:07 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/26 10:13:05 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes.h"
-
-//int	builtin_cd(int argc, char **argv, char **envp)
 
 void	get_cwd_and_set_env(char *set_env, char **envp)
 {
@@ -32,7 +30,6 @@ void	change_folder_and_save_pwds(t_process *proc, char path[])
 	}
 	get_cwd_and_set_env("PWD", proc->envp);
 }
-
 
 static int	cd_get_option(int *option, t_process *p, int argc)
 {
@@ -61,56 +58,17 @@ static int	cd_get_option(int *option, t_process *p, int argc)
 	return (i);
 }
 
-/*
-static int	cd_get_option_and_dir(char *path, int *option, t_proc *p, int argc)
+static void	change_folder(char *path, int option, t_process *p)
 {
-	int		i;
-	char	*home;
-
-	i = cd_get_option(option, p, argc);
-	home = ft_getenv("HOME", p->envp);
-	if (i == -1)
-		return (-1);
-	if (i == argc && !home)
-	{
-		p->status = err_builtin(E_HOME_NOT_SET, p->argv[0], NULL);
-		return (-1);
-	}
-	if (i == argc && home)
-	{
-		ft_strcpy(path, ft_getenv("HOME", p->envp));
-		return (4);
-	}
-	if (argc > i + 1)
-	{
-		p->status = err_builtin(E_TOO_MANY_ARGS, p->argv[0], NULL);
-		return (-1);
-	}
-	ft_strcpy(path, p->argv[i]);
-	return (i);
-}
-*/
-
-/*
-void	builtin_cd_two(void *proc)
-{
-	t_process	*p;
-	char		path[1024];
-	char		curpath[1024];
-	int			options;
-
-	p = proc;
-	if (cd_get_option_and_dir(path, &options, p, p->argc) == -1)
+	if (is_valid_folder(path, "cd") != 0)
+		p->status = 1;
+	if (p->status)
 		return ;
-	if (is_absolute_path(path))
-		ft_strcpy(curpath, path);
+	if (option == 1 << P_FLAG)
+		change_folder_and_save_pwds(p, path);
 	else
-	{
-		ft_s
-	}
-	get_absolute_path_to_buf(path, p->envp, curpath);
+		cd_l_flag(path, p, g_term);
 }
-*/
 
 void	builtin_cd(void *proc)
 {
@@ -123,7 +81,6 @@ void	builtin_cd(void *proc)
 	p = proc;
 	argc = ((t_process *)proc)->argc;
 	i = cd_get_option(&option, p, argc);
-
 	if (argc > i + 1)
 		p->status = err_builtin(E_TOO_MANY_ARGS, p->argv[0], NULL);
 	else if (argc == i + 1 && !ft_strcmp(p->argv[i], "-")
@@ -137,12 +94,5 @@ void	builtin_cd(void *proc)
 		p->status = err_builtin(E_HOME_NOT_SET, p->argv[0], NULL);
 	if (p->status)
 		return ;
-	if (is_valid_folder(path, "cd") != 0)
-		p->status = 1;
-	if (p->status)
-		return ;
-	if (option == 1 << P_FLAG)
-		change_folder_and_save_pwds(proc, path);
-	else
-		cd_l_flag(path, p, g_term);
+	change_folder(path, option, p);
 }
