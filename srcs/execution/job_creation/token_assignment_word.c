@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:44:14 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/26 08:47:08 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/26 13:12:52 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ t_job	*token_assignment_word(t_job *job, t_term *term, t_node *current)
 	get_name_and_value(current->command, value, name);
 	if (!job)
 		job = init_assignment_word_job(current, term);
+	else
+		job->first_process->envp = strarr_copy(term->envp);
 	if (current->operation == tkn_assignment)
 	{
 		ft_setenv(name, value, 1, term->envp);
