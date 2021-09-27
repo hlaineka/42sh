@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 21:42:57 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/12 17:48:05 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/27 21:07:05 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	tilde_expansion(t_token *tkn, t_term *term, int tilde)
 	if (end - tilde == 1)
 	{
 		homedir = ft_getenv("HOME", term->envp);
+		if (!homedir)
+			homedir = ft_getenv("HOME", term->intern_variables->intern);
 		if (!homedir)
 			err_syntax(E_HOME_NOT_SET, NULL);
 		ft_strcut(tkn->value, tilde, tilde + 1);

@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 18:16:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/19 20:21:47 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/27 21:09:53 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static char	*get_colon_equal(char *name, char *val, char *word, t_term *term)
 			ft_setenv(name, val, 1, term->envp);
 	}
 	val = ft_getenv(name, term->envp);
+	if (!val)
+		val = ft_getenv(name, term->intern_variables->intern);
 	return (ft_strdup(val));
 }
 
@@ -66,6 +68,8 @@ char	*get_param_colon_word(char *param, char *word, int opt, t_term *term)
 	char	*str;
 
 	str = ft_getenv(param, term->envp);
+	if (!str)
+		str = ft_getenv(param, term->intern_variables->intern);
 	if (opt == COLON_MINUS)
 		return (get_colon_minus(str, word));
 	if (opt == COLON_EQUAL)

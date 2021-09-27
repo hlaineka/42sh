@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 13:39:57 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/27 18:11:21 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/27 21:05:43 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	open_history_file(t_term *term, int oflag)
 	fd = 0;
 	ft_bzero(buf, sizeof(char) * 1024);
 	home = ft_getenv("HOME", term->envp);
+	if (!home)
+		home = ft_getenv("HOME", term->intern_variables->intern);
 	if (!home)
 		return (-1);
 	write_path_to_buffer(buf, home, ".42sh_history");
