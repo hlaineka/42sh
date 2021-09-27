@@ -1,6 +1,29 @@
 # 42sh shell 
 ### made by @hlaineka and @huhtasheikki as a part of our Hive Helsinki studies
 
+Made by @hlaineka:
+- parts of libft
+- parser
+- job creation
+- quote handling
+- tilde expansion
+- parser side of other modular parts
+- internal variable handling on parser side
+
+Made by @huhtasheikki:
+- parts of libft, including the ft_printf function
+- builtins
+- execution
+- input reading
+- job control
+- signal handling
+- additional parameter handling
+- history
+- alias
+- hash-table
+- internal variable builtins
+- test
+
 To compile, download the whole repo and `make` on the root folder. The executable will be named 42sh.
 Makefile has rules all, libft (to only compile the library), clean, fclean and re.
 
