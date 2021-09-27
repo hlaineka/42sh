@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/27 17:27:05 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/27 17:51:16 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ static int	get_abs_path_to_cmd(char *cmd, char **envp, t_hash *ht, char *buf)
 	else if (is_in_hash_table(cmd, ht))
 		create_full_cmd(cmd, ht, buf);
 	else if (!path_ptr)
+	{
 		return (err_builtin(E_ENV_PATH_NOT_SET, cmd, NULL));
+	}
 	else if (find_path(cmd, path_ptr, buf) <= 0)
 		return (err_builtin(E_NO_COMMAND, cmd, NULL));
 	add_cmd_to_hash_table(cmd, envp, ht, cmd);

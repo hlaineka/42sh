@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 11:03:24 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/14 12:25:47 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/27 17:50:47 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ char	*find_path_for_cmd(char *cmd, char **envp, const char *fn)
 	char	*path;
 
 	path = ft_getenv("PATH", envp);
+	if (!path)
+		path = ft_getenv("PATH", g_term->intern_variables->intern);
 	if (!path)
 	{
 		err_builtin(E_ENV_PATH_NOT_SET, (char *)fn, NULL);
