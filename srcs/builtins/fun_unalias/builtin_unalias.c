@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:21:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/26 21:30:52 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/27 19:04:06 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static void	unalias_react_to_arg(char *arg, t_process *p, t_term *term)
 	if (arg && arg[0] == '-')
 	{
 		p->status = 1;
-		ft_printf_fd(STDERR_FILENO, "42sh: unalias: %s: illegal option\n");
+		ft_printf_fd(STDERR_FILENO,
+			"42sh: unalias: %s: illegal option\n", arg);
 	}
 	else if (arg)
 		p->status = unset_alias(arg, term->alias);
