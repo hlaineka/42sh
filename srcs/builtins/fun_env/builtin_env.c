@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:21:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/25 12:37:41 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/27 18:02:45 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,32 @@
 ** - ENV with -i flag will print info that env has been cleared.
 */
 
+static char	*find_path_env(char **envp)
+{
+	char	*path;
+
+	path = ft_getenv("PATH", envp);
+	if (path)
+		path = ft_getenv("PATH", g_term->intern_variables->intern);
+	return (path);
+}
+
 int	execute_env(char **argv, char **envp, char *altpath, int options)
 {
 	char	path[1024];
+	char	*env_path;
 	int		ret;
 
+	env_path = find_path_env(envp);
 	if (argv[0])
 	{
 		if (options & ENV_P_FLAG)
 			ret = find_path(argv[0], altpath, path);
 		else
 		{
-			if (!ft_getenv("PATH", envp))
+			if (!env_path)
 				return (err_builtin(E_ENV_PATH_NOT_SET, "env", NULL));
-			ret = find_path(argv[0], ft_getenv("PATH", envp), path);
+			ret = find_path(argv[0], env_path, path);
 		}
 		if (ret < 0)
 			return (-1);
