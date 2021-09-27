@@ -6,11 +6,21 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/26 21:36:17 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/27 18:06:51 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+
+static char	*find_path_env(t_process *p, t_term *term)
+{
+	char	*path;
+
+	path = ft_getenv("PATH", p->envp);
+	if (!path)
+		path = ft_getenv("PATH", term->intern_variables->intern);
+	return (path);
+}
 
 int	print_type(char *cmd, t_process *p, t_term *term)
 {
@@ -19,7 +29,7 @@ int	print_type(char *cmd, t_process *p, t_term *term)
 	char		*path;
 
 	ht = term->hash_table;
-	path = ft_getenv("PATH", p->envp);
+	path = find_path_env(p, term);
 	if (is_builtin_type(cmd))
 		ft_printf("%s is a shell builtin\n", cmd);
 	else if (is_in_hash_table(cmd, term->hash_table))
