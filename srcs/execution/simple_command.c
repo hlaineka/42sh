@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/14 20:01:28 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/27 17:27:05 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static int	get_abs_path_to_cmd(char *cmd, char **envp, t_hash *ht, char *buf)
 	char	*path_ptr;
 
 	path_ptr = ft_getenv("PATH", envp);
+	if (!path_ptr)
+		path_ptr = ft_getenv("PATH", g_term->intern_variables->intern);
 	if (is_absolute_path(cmd))
 		ft_strcpy(buf, cmd);
 	else if (is_in_hash_table(cmd, ht))
