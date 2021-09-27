@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 12:21:09 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/21 10:25:57 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/27 19:25:29 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,13 @@ void	builtin_hash(void *proc)
 	envp = ((t_process *)proc)->envp;
 	if (argc == 1)
 		return (hash_list(g_term));
+	get_argv_options(argv, &options);
 	if (options != 0 && options != (1 << R_FLAG))
-		return ((void)err_builtin(E_ILLEGAL_OPTION, "hash", NULL));
+	{
+		((t_process *)proc)->status = err_builtin(E_ILLEGAL_OPTION,
+				"hash", NULL);
+		return ;
+	}
 	if (options == (1 << R_FLAG))
 		return (hash_r(g_term));
 	args_to_hash_table(argv, envp);
