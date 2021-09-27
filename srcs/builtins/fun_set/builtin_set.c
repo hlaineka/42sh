@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 20:53:10 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/26 19:25:04 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/27 17:24:25 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static int	print_env_and_internal(void)
 	envp = g_term->envp;
 	while (vars[i])
 	{
-		ft_printf("%s: i=%d\n", __FUNCTION__, i);
 		if (!is_in_envp(vars[i], envp))
 			ft_printf("%s\n", vars[i]);
 		i++;
