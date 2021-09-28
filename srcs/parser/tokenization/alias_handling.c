@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/26 21:22:43 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/28 20:18:44 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static int	check_first_word(t_alias *a, t_token *temp, t_term *term,
 	returnable = 0;
 	while (a)
 	{
+		if (a == original_command)
+			break ;
 		if (a && a->value && a->value[0])
 		{
 			new = lexer(ft_strdup(a->value), term, 0);
@@ -60,8 +62,6 @@ static int	check_first_word(t_alias *a, t_token *temp, t_term *term,
 			returnable = 2;
 		}
 		a = find_alias_with_name(temp->value, term->alias);
-		if (a == original_command)
-			break ;
 	}
 	return (returnable);
 }
