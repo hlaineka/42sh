@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 14:36:53 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/19 20:20:10 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/28 20:32:13 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	prefix_shortest(char *var, char *word, char *buf)
 	}
 	else if (var[0] == word[0])
 		return (prefix_shortest(var + 1, word + 1, buf));
-	return (-1);
+	return (0);
 }
 
 char	*remove_shortest_prefix(char *var, char *word)
@@ -76,6 +76,8 @@ char	*remove_shortest_prefix(char *var, char *word)
 	ft_bzero(buf, 2056);
 	if (prefix_shortest(var, word, buf))
 		return (ft_strdup(buf));
+	if (var)
+		return (ft_strdup(var));
 	return (NULL);
 }
 
