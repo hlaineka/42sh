@@ -25,7 +25,7 @@ static char	*find_path_env(char **envp)
 	char	*path;
 
 	path = ft_getenv("PATH", envp);
-	if (path)
+	if (!path)
 		path = ft_getenv("PATH", g_term->intern_variables->intern);
 	return (path);
 }
