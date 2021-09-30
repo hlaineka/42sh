@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 14:36:53 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/19 20:19:43 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/28 20:43:33 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	suffix_long(char *var, char *word, char *buf, int i)
 	}
 	else if (var[i] == word[0])
 		return (suffix_long(var, word + 1, buf, i - 1));
-	return (-1);
+	return (0);
 }
 
 char	*remove_longest_suffix(char *var, char *word)
@@ -49,6 +49,8 @@ char	*remove_longest_suffix(char *var, char *word)
 	ft_bzero(buf, 2056);
 	if (suffix_long(var, word, buf, i))
 		return (ft_strdup(buf));
+	if (var)
+		return (ft_strdup(var));
 	return (NULL);
 }
 
@@ -76,7 +78,7 @@ static int	suffix_shortest(char *var, char *word, char *buf, int i)
 	}
 	else if (var[i] == word[0])
 		return (suffix_shortest(var, word + 1, buf, i - 1));
-	return (-1);
+	return (0);
 }
 
 static char	*remove_shortest_suffix(char *var, char *word)
@@ -88,6 +90,8 @@ static char	*remove_shortest_suffix(char *var, char *word)
 	ft_bzero(buf, 2056);
 	if (suffix_shortest(var, word, buf, i))
 		return (ft_strdup(buf));
+	if (var)
+		return (ft_strdup(var));
 	return (NULL);
 }
 
