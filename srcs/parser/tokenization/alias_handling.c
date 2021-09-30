@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/30 21:40:28 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/30 21:47:51 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,13 @@ int	check_and_add_alias(t_alias **orig_commands, t_alias *a, int *first_word)
 	return (0);
 }
 
+static int	init_check_first_word(t_token **new, t_alias **oc)
+{
+	*new = NULL;
+	ft_bzero((void *)oc, (sizeof(t_alias *) * STR_LENGTH));
+	return (1);
+}
+
 static int	check_first_word(t_alias *a, t_token *temp, t_term *term,
 	t_token **first)
 {
@@ -72,10 +79,8 @@ static int	check_first_word(t_alias *a, t_token *temp, t_term *term,
 	t_alias		*original_commands[STR_LENGTH];
 	int			returnable;
 
-	new = NULL;
-	ft_bzero((void *)original_commands, (sizeof(t_alias *) * STR_LENGTH));
+	returnable = init_check_first_word(&new, original_commands);
 	a = find_alias_with_name(temp->value, term->alias);
-	returnable = 1;
 	while (a)
 	{
 		if (-1 == check_and_add_alias(original_commands, a, &returnable))
