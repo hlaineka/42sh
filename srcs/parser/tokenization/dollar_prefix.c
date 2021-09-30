@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 14:36:53 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/28 20:35:03 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/30 19:35:21 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 static int	prefix_long(char *var, char *word, char *buf)
 {
-	int		ret;
-
-	ret = 0;
 	if (var == NULL || (*var == '\0' && (word && *word != '\0')))
 		return (0);
 	if (word == NULL || *word == '\0')
@@ -50,9 +47,6 @@ char	*remove_longest_prefix(char *var, char *word)
 
 static int	prefix_shortest(char *var, char *word, char *buf)
 {
-	int		ret;
-
-	ret = 0;
 	if (var == NULL || (*var == '\0' && (word && *word == '\0')))
 		return (0);
 	if (word == NULL || *word == '\0')

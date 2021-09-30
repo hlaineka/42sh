@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 14:22:43 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/26 15:48:16 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/30 19:44:24 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	cd_get_option(int *option, t_process *p, int argc)
 	return (i);
 }
 
-static void	change_folder(char *path, int option, t_process *p)
+static void	change_folder(char path[], int option, t_process *p)
 {
 	if (is_valid_folder(path, "cd") != 0)
 		p->status = 1;
@@ -81,6 +81,8 @@ void	builtin_cd(void *proc)
 	int			i;
 
 	p = proc;
+	option = 0;
+	ft_bzero(path, sizeof(char) * 1024);
 	argc = ((t_process *)proc)->argc;
 	i = cd_get_option(&option, p, argc);
 	if (argc > i + 1)

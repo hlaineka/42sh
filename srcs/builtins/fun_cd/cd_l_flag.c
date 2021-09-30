@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 19:47:03 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/26 15:49:42 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/30 19:34:16 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,8 @@ static int	set_cwd_and_env(char *curpath, t_process *p)
 {
 	char	temp[1024];
 	char	*pwd;
-	char	*oldpwd;
 
 	pwd = ft_getenv("PWD", g_term->envp);
-	oldpwd = ft_getenv("OLDPWD", g_term->envp);
 	if (chdir(curpath) == -1)
 	{
 		p->status = err_builtin(E_CD_CHANGE_FAIL, "cd", curpath);

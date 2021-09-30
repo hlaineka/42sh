@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 14:36:53 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/28 20:43:33 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/30 19:37:01 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 
 static int	suffix_long(char *var, char *word, char *buf, int i)
 {
-	int		ret;
 	char	temp;
 
-	ret = 0;
 	if (var == NULL || (i < 0 && (word != NULL && *word != '\0')))
 		return (0);
 	if (word == NULL || *word == '\0')
@@ -56,10 +54,8 @@ char	*remove_longest_suffix(char *var, char *word)
 
 static int	suffix_shortest(char *var, char *word, char *buf, int i)
 {
-	int		ret;
 	char	temp;
 
-	ret = 0;
 	if (var == NULL || (i < 0 && (word != NULL && *word != '\0')))
 		return (0);
 	if (word == NULL || *word == '\0')
