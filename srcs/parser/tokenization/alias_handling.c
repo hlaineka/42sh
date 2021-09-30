@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/30 18:40:01 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/30 20:10:59 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,41 @@ static t_token	*substitute_token(t_token *first, t_token *new,
 	return (returnable);
 }
 
+int	check_and_add_alias(t_alias **original_commands, t_alias *a, int *first_word)
+{
+	int	i;
+
+	i = 0;
+	while (original_commands[i])
+	{
+		if (original_commands[i] == a)
+			return (-1);
+		i++;
+	}
+	original_commands[i] = a;
+	if (a && (a->value[ft_strlen(a->value) - 1] == ' '
+		|| a->value[ft_strlen(a->value) - 1] == '\t'
+		|| a->value[ft_strlen(a->value) - 1] == '\n'))
+		*first_word = 2;
+	else
+		*first_word = 0;
+	return (0);
+}
+
 static int	check_first_word(t_alias *a, t_token *temp, t_term *term,
 	t_token **first)
 {
 	t_token		*new;
-	t_alias		*original_command;
+	t_alias		*original_commands[STR_LENGTH];
 	int			returnable;
-	int			first_round;
 
 	new = NULL;
+	ft_bzero((void *)original_commands, (sizeof(t_alias *) * STR_LENGTH));
 	a = find_alias_with_name(temp->value, term->alias);
-	original_command = a;
-	returnable = 0;
-	first_round = 1;
+	returnable = 1;
 	while (a)
 	{
-		if (!first_round && a == original_command)
+		if (-1 == check_and_add_alias(original_commands, a, &returnable))
 			break ;
 		if (a && a->value)
 		{
@@ -68,12 +87,12 @@ static int	check_first_word(t_alias *a, t_token *temp, t_term *term,
 			new = lexer(ft_strdup(a->value), term, 0);
 			*first = substitute_token(*first, new, temp);
 			temp = new;
-			returnable = 2;
 		}
 		if (!temp)
 			break ;
+		if (returnable == 1)
+			returnable = 0;
 		a = find_alias_with_name(temp->value, term->alias);
-		first_round = 0;
 	}
 	return (returnable);
 }
