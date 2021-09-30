@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:56:34 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/26 08:18:05 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/28 20:39:34 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	prompt_cycle(char **argv, t_term *term, t_input *input)
 
 	input_str = get_input(1, argv, term, input);
 	root = parser(input_str, term);
-	execute(root, term);
+	if (root)
+		execute(root, term);
 	return (0);
 }
 

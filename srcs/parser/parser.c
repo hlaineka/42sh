@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 14:37:51 by helvi             #+#    #+#             */
-/*   Updated: 2021/09/24 13:47:37 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/28 20:38:08 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ t_node	*parser(char *input, t_term *term)
 	t_token	*tokens;
 	t_node	*root;
 
+	if (ft_strequ(input, "\n"))
+		return (NULL);
 	tokens = lexer(input, term, 1);
 	if (tokens == NULL)
 		return (NULL);
