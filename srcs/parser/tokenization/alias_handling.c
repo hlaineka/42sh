@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/28 20:18:44 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/30 18:40:01 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,20 @@ static t_token	*substitute_token(t_token *first, t_token *new,
 	prev = current->prev;
 	next = current->next;
 	free_tokens(&(current->subtokens));
-	delete_token(current);
+	free_token(&current);
 	if (prev)
 		prev->next = new;
-	else
+	else if (new)
 		returnable = new;
-	new->prev = prev;
-	while (new->next)
-		new = new->next;
-	new->next = next;
+	else
+		returnable = next;
+	if (new)
+	{
+		new->prev = prev;
+		while (new->next)
+			new = new->next;
+		new->next = next;
+	}
 	if (next)
 		next->prev = new;
 	return (returnable);
@@ -45,23 +50,30 @@ static int	check_first_word(t_alias *a, t_token *temp, t_term *term,
 	t_token		*new;
 	t_alias		*original_command;
 	int			returnable;
+	int			first_round;
 
 	new = NULL;
 	a = find_alias_with_name(temp->value, term->alias);
 	original_command = a;
 	returnable = 0;
+	first_round = 1;
 	while (a)
 	{
-		if (a == original_command)
+		if (!first_round && a == original_command)
 			break ;
-		if (a && a->value && a->value[0])
+		if (a && a->value)
 		{
+			if (!a->value[0])
+				a->value[0] = ' ';
 			new = lexer(ft_strdup(a->value), term, 0);
 			*first = substitute_token(*first, new, temp);
 			temp = new;
 			returnable = 2;
 		}
+		if (!temp)
+			break ;
 		a = find_alias_with_name(temp->value, term->alias);
+		first_round = 0;
 	}
 	return (returnable);
 }

@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:32:48 by helvi             #+#    #+#             */
-/*   Updated: 2021/09/25 12:30:44 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/28 20:41:50 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ t_token	*lexer(char *input, t_term *term, int remove_quotes)
 {
 	t_token	*first;
 
+	if (ft_strequ(input, "\n"))
+		return (NULL);
 	first = NULL;
 	input = remove_backslash(input);
 	first = define_basic_tokens(input);
