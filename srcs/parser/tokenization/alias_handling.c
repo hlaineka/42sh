@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/30 20:10:59 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/30 21:40:28 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,21 @@ static t_token	*substitute_token(t_token *first, t_token *new,
 	return (returnable);
 }
 
-int	check_and_add_alias(t_alias **original_commands, t_alias *a, int *first_word)
+int	check_and_add_alias(t_alias **orig_commands, t_alias *a, int *first_word)
 {
 	int	i;
 
 	i = 0;
-	while (original_commands[i])
+	while (orig_commands[i])
 	{
-		if (original_commands[i] == a)
+		if (orig_commands[i] == a)
 			return (-1);
 		i++;
 	}
-	original_commands[i] = a;
+	orig_commands[i] = a;
 	if (a && (a->value[ft_strlen(a->value) - 1] == ' '
-		|| a->value[ft_strlen(a->value) - 1] == '\t'
-		|| a->value[ft_strlen(a->value) - 1] == '\n'))
+			|| a->value[ft_strlen(a->value) - 1] == '\t'
+			|| a->value[ft_strlen(a->value) - 1] == '\n'))
 		*first_word = 2;
 	else
 		*first_word = 0;
