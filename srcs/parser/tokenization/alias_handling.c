@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/28 20:59:22 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/09/30 18:40:01 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	check_first_word(t_alias *a, t_token *temp, t_term *term,
 		if (a && a->value)
 		{
 			if (!a->value[0])
-				a->value[0] = '\n';
+				a->value[0] = ' ';
 			new = lexer(ft_strdup(a->value), term, 0);
 			*first = substitute_token(*first, new, temp);
 			temp = new;
