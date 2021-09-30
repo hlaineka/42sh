@@ -6,11 +6,12 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 12:34:35 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/14 18:29:38 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/09/30 22:49:19 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "job_control.h"
+#include "ft_signal.h"
 
 int	start_stopped_job(t_job *job, t_term *term)
 {
@@ -18,6 +19,7 @@ int	start_stopped_job(t_job *job, t_term *term)
 
 	if (!job || !job->first_process)
 		return (0);
+	signals_to_default();
 	proc = job->first_process;
 	kill(-(job->pgid), SIGCONT);
 	if (!job->bg)
