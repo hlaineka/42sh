@@ -33,7 +33,7 @@ void	sig_handler_input(int signo)
 	*input->quote = PROMPT_NORMAL;
 	ft_putstr_fd("\n\r", STDOUT_FILENO);
 	ft_memdel((void **)input->ret_str);
-	*input->input_temp = NULL;
+	ft_memdel((void **)input->input_temp);
 	if (input->input_mode == HEREDOC_MODE)
 		init_input_tty(input, PROMPT_HEREDOC);
 	else
