@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/10/01 18:31:27 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/01 18:34:12 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	check_and_add_alias(t_alias **orig_commands, t_alias *a, int *first_word)
 		i++;
 	}
 	orig_commands[i] = a;
-	if (a && a->value && a->value[0] &&
-		(a->value[ft_strlen(a->value) - 1] == ' '
+	if (a && a->value && a->value[0]
+		&& (a->value[ft_strlen(a->value) - 1] == ' '
 			|| a->value[ft_strlen(a->value) - 1] == '\t'
 			|| a->value[ft_strlen(a->value) - 1] == '\n'))
 		*first_word = 2;
@@ -119,8 +119,8 @@ t_token	*alias_handling(t_token *first, t_term *term, t_alias *a)
 		if (first_word)
 			first_word = check_first_word(a, &temp, term, &first);
 		if (temp && (temp->maintoken == tkn_and || temp->maintoken == tkn_pipe
-			|| temp->maintoken == tkn_semi || temp->maintoken == tkn_and_if
-			|| temp->maintoken == tkn_or_if || first_word == 2))
+				|| temp->maintoken == tkn_semi || temp->maintoken == tkn_and_if
+				|| temp->maintoken == tkn_or_if || first_word == 2))
 			first_word = 1;
 		else
 			first_word = 0;
