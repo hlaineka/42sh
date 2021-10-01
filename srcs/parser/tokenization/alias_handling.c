@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/30 21:47:51 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/01 17:12:53 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int	check_and_add_alias(t_alias **orig_commands, t_alias *a, int *first_word)
 		i++;
 	}
 	orig_commands[i] = a;
-	if (a && (a->value[ft_strlen(a->value) - 1] == ' '
+	if (a && a->value && a->value[0] &&
+		(a->value[ft_strlen(a->value) - 1] == ' '
 			|| a->value[ft_strlen(a->value) - 1] == '\t'
 			|| a->value[ft_strlen(a->value) - 1] == '\n'))
 		*first_word = 2;
@@ -72,7 +73,7 @@ static int	init_check_first_word(t_token **new, t_alias **oc)
 	return (1);
 }
 
-static int	check_first_word(t_alias *a, t_token *temp, t_term *term,
+static int	check_first_word(t_alias *a, t_token **temp, t_term *term,
 	t_token **first)
 {
 	t_token		*new;
@@ -80,24 +81,24 @@ static int	check_first_word(t_alias *a, t_token *temp, t_term *term,
 	int			returnable;
 
 	returnable = init_check_first_word(&new, original_commands);
-	a = find_alias_with_name(temp->value, term->alias);
-	while (a)
+	a = find_alias_with_name((*temp)->value, term->alias);
+	while (a && returnable)
 	{
 		if (-1 == check_and_add_alias(original_commands, a, &returnable))
 			break ;
 		if (a && a->value)
 		{
 			if (!a->value[0])
-				a->value[0] = ' ';
+				a->value = ft_strdup(" ");
 			new = lexer(ft_strdup(a->value), term, 0);
-			*first = substitute_token(*first, new, temp);
-			temp = new;
+			*first = substitute_token(*first, new, *temp);
+			*temp = new;
 		}
-		if (!temp)
+		if (!*temp)
 			break ;
 		if (returnable == 1)
 			returnable = 0;
-		a = find_alias_with_name(temp->value, term->alias);
+		a = find_alias_with_name((*temp)->value, term->alias);
 	}
 	return (returnable);
 }
@@ -105,7 +106,6 @@ static int	check_first_word(t_alias *a, t_token *temp, t_term *term,
 t_token	*alias_handling(t_token *first, t_term *term, t_alias *a)
 {
 	t_token		*temp;
-	t_token		*next;
 	int			first_word;
 
 	if (!first)
@@ -114,16 +114,16 @@ t_token	*alias_handling(t_token *first, t_term *term, t_alias *a)
 	first_word = 1;
 	while (temp && term)
 	{
-		next = temp->next;
 		if (first_word)
-			first_word = check_first_word(a, temp, term, &first);
-		if (temp->maintoken == tkn_and || temp->maintoken == tkn_pipe
+			first_word = check_first_word(a, &temp, term, &first);
+		if (temp && (temp->maintoken == tkn_and || temp->maintoken == tkn_pipe
 			|| temp->maintoken == tkn_semi || temp->maintoken == tkn_and_if
-			|| temp->maintoken == tkn_or_if || first_word == 2)
+			|| temp->maintoken == tkn_or_if || first_word == 2))
 			first_word = 1;
 		else
 			first_word = 0;
-		temp = next;
+		if (temp)
+			temp = temp->next;
 	}
 	return (first);
 }

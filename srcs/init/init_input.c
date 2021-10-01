@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 22:25:58 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/25 14:50:49 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/01 16:36:28 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ void	init_flags(t_term *term, char **argv)
 	t_intrn_vars	*intern_variables;
 
 	intern_variables = malloc(sizeof(t_intrn_vars));
+	ft_bzero(intern_variables, sizeof(t_intrn_vars));
+	ft_bzero(intern_variables->intern, 1024);
 	term->intern_variables = intern_variables;
-	ft_bzero(term->intern_variables, sizeof(term->intern_variables));
-	ft_bzero(term->intern_variables->intern, 1024);
 	term->intern_variables->flag_rawmode = 1;
 	if (ft_array_length(argv) == 3 && ft_strequ(argv[1], "script"))
 	{
