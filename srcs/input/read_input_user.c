@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 17:34:41 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/14 17:25:11 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/01 18:02:01 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ static char	*get_input_tty(t_term *term, t_input *input)
 		else
 			temp2 = ft_strjoin(*input->ret_str, temp);
 		free(*input->ret_str);
-		free(temp);
 		*input->ret_str = temp2;
+		free(temp);
 		temp = NULL;
 		quote = ft_is_quote_open(quote, *input->ret_str + len);
 	}

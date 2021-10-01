@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 17:02:17 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/10/01 17:12:53 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/10/01 18:31:27 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ static int	check_first_word(t_alias *a, t_token **temp, t_term *term,
 		if (returnable == 1)
 			returnable = 0;
 		a = find_alias_with_name((*temp)->value, term->alias);
+		if (a)
+			returnable = 1;
 	}
 	return (returnable);
 }
