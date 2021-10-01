@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/09/26 10:21:28 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/10/01 16:32:35 by hlaineka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = 42sh
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g -I$(DIR_INC) -Ilibft/includes
+CFLAGS = -g -I$(DIR_INC) -Ilibft/includes 
+# -Wall -Wextra -Werror 
 TERMCAPS = -ltermcap
 
 DIR_INC = includes/
