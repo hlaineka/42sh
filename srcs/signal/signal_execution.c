@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:07:56 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/10/01 18:05:44 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/01 18:07:18 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	sig_handler_exec(int signo)
 	if (signo == SIGINT)
 	{
 		ft_memdel((void **)g_input->ret_str);
-		sleep(1);
 		jobs = g_term->jobs->next;
 		while (jobs)
 		{
