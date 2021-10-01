@@ -99,8 +99,8 @@ static char	*get_input_tty(t_term *term, t_input *input)
 		free(*input->ret_str);
 		free(temp);
 		*input->ret_str = temp2;
-		temp = *input->ret_str + len;
-		quote = ft_is_quote_open(quote, temp);
+		temp = NULL;
+		quote = ft_is_quote_open(quote, *input->ret_str + len);
 	}
 	return (*input->ret_str);
 }
