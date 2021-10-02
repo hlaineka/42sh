@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:16:18 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/10/02 17:23:12 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/02 18:22:20 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	add_cmd_to_history(char *cmd, char **history)
 	int		i;
 	char	*ptr;
 
+	if (!cmd || (cmd[0] == '\n' && !cmd[1]))
+		return (0);
 	i = get_last_history_index(history);
 	if (i < 0)
 		return (-1);
