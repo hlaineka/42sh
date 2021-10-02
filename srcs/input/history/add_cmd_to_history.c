@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:16:18 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/25 15:16:44 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/02 17:09:59 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	add_cmd_to_history(char *cmd, char **history)
 	ptr = ft_strdup(cmd);
 	if (!ptr)
 		return (-1);
-	if (i > HISTORY_SIZE - 2)
+	if (i > HISTORY_SIZE - 1)
 		remove_oldest_and_move(g_term, ptr);
 	else
 		history[i] = ptr;

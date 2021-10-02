@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/12 09:20:40 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/25 15:14:14 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/02 17:18:40 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	get_last_history_index(char **history)
 {
 	int		i;
 
-	i = 0;
+	i = 1;
 	while (i < HISTORY_SIZE && history[i])
 		i++;
 	if (i == HISTORY_SIZE)
