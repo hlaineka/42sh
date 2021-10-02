@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 13:39:57 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/27 21:05:43 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/02 18:00:52 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static int	read_history_to_memory(int fd, t_term *term)
 	char	*line;
 
 	i = 1;
+	term->history[0] = ft_strnew(0);
 	ret = get_next_line(fd, &line);
 	while (ret > 0)
 	{
