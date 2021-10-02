@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 12:17:39 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/10/02 12:24:43 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/10/02 18:50:30 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ t_token	*parse_new_command(t_alias *a, t_term *term, t_token **first,
 {
 	t_token	*new;
 
-	if (!a->value[0])
-		a->value = ft_strdup(" ");
 	new = lexer(ft_strdup(a->value), term, 0);
 	*first = substitute_token(*first, new, *temp);
 	return (new);
