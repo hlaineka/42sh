@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/16 10:34:59 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/14 18:35:14 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/02 15:59:25 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,6 @@ void	sig_handler_input(int signo)
 		init_input_tty(input, PROMPT_START);
 }
 
-void	sig_ttou_input(int signo)
-{
-	ft_printf("INPUT: SIGTTOU signal %d\n", signo);
-}
-
 void	set_signal_input(void)
 {
 	if ((signal(SIGINT, sig_handler_input) == SIG_ERR)
@@ -52,6 +47,6 @@ void	set_signal_input(void)
 		|| (signal(SIGQUIT, sig_handler_input) == SIG_ERR)
 		|| (signal(SIGHUP, sig_handler_input) == SIG_ERR)
 		|| (signal(SIGXCPU, sig_handler_input) == SIG_ERR)
-		|| (signal(SIGTTOU, sig_ttou_input) == SIG_ERR))
+		|| (signal(SIGTTOU, SIG_IGN) == SIG_ERR))
 		ft_exit(0);
 }
