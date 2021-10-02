@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 11:07:56 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/10/02 15:21:00 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/02 15:55:46 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	sig_child_handler(void)
 	pid = waitpid(-1, &status, WNOHANG);
 	jobs = g_term->jobs->next;
 	ft_memdel((void **)g_input->ret_str);
+	ft_memdel((void **)g_input->input_temp);
 	while (jobs)
 	{
 		proc = jobs->first_process;
@@ -65,6 +66,8 @@ void	sig_tstp_handler(void)
 	t_process	*proc;
 
 	jobs = g_term->jobs->next;
+	ft_memdel((void **)g_input->ret_str);
+	ft_memdel((void **)g_input->input_temp);
 	while (jobs)
 	{
 		proc = jobs->first_process;
@@ -89,6 +92,7 @@ void	sig_handler_exec(int signo)
 	if (signo == SIGINT)
 	{
 		ft_memdel((void **)g_input->ret_str);
+		ft_memdel((void **)g_input->input_temp);
 		jobs = g_term->jobs->next;
 		while (jobs)
 		{
