@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/28 20:19:36 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/10/02 14:40:37 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/02 14:55:28 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	is_unvalid_name(const char *name)
 
 static int	replace_alias(int i, const char *value, t_alias *alias)
 {
-	ft_memdel(&alias[i].value);
+	ft_memdel((void **)(&alias[i].value));
 	if (!value)
 		alias[i].value = ft_strnew(0);
 	else
