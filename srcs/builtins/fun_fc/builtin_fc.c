@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/10/02 15:13:58 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/02 15:41:34 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,13 @@ void	builtin_fc(void *proc)
 {
 	t_process	*process;
 	char		**history;
-	int			options;
 	t_fc		fc;
 
 	signals_to_default();
 	process = proc;
 	history = g_term->history;
 	fc = get_fc_options(process, g_term);
-	options = fc.options;
-	if (options & ~((1 << E_FLAG) | (1 << L_FLAG) | (1 << N_FLAG)
+	if (fc.options & ~((1 << E_FLAG) | (1 << L_FLAG) | (1 << N_FLAG)
 			| (1 << R_FLAG) | (1 << S_FLAG)))
 	{
 		process->status = err_builtin(E_ILLEGAL_OPTION, "fc", NULL);
@@ -93,9 +91,9 @@ void	builtin_fc(void *proc)
 		ft_memdel((void **)(&history[get_last_history_index(history) - 1]));
 	if (get_first_and_last(proc, g_term, &fc) == -1)
 		return ;
-	if (options & (1 << L_FLAG))
+	if (fc.options & (1 << L_FLAG))
 		fc_el(g_term, &fc, fc.options);
-	else if (options & (1 << S_FLAG))
+	else if (fc.options & (1 << S_FLAG))
 		fc_es(g_term, &fc, fc.options);
 	else
 		process->status = fc_rest(g_term, &fc);
