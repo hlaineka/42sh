@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/09/26 08:15:04 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/10/02 12:24:30 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -360,6 +360,18 @@ t_token				*bang_history(t_token *first, t_term *term);
 */
 
 t_token				*alias_handling(t_token *first, t_term *term, t_alias *a);
+
+/*
+** parser/tokenization/alias_handling_functions.c
+*/
+
+t_token				*substitute_token(t_token *first, t_token *new,
+						t_token *current);
+int					check_and_add_alias(char **orig_commands, t_alias *a,
+						int *first_word);
+int					init_check_first_word(char ***oc, t_token *temp);
+t_token				*parse_new_command(t_alias *a, t_term *term,
+						t_token **first, t_token **temp);
 
 /*
 ** parser/tokenization/remove_token.c
