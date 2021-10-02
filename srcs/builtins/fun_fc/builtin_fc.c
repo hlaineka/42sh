@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 16:57:52 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/26 20:46:24 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/02 15:13:58 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ static int	fc_rest(t_term *term, t_fc *fc)
 
 void	builtin_fc(void *proc)
 {
-	t_term		*term;
 	t_process	*process;
 	char		**history;
 	int			options;
@@ -81,21 +80,23 @@ void	builtin_fc(void *proc)
 
 	signals_to_default();
 	process = proc;
-	term = g_term;
-	history = term->history;
-	fc = get_fc_options(process, term);
+	history = g_term->history;
+	fc = get_fc_options(process, g_term);
 	options = fc.options;
 	if (options & ~((1 << E_FLAG) | (1 << L_FLAG) | (1 << N_FLAG)
 			| (1 << R_FLAG) | (1 << S_FLAG)))
-		return ((void)err_builtin(E_ILLEGAL_OPTION, "fc", NULL));
+	{
+		process->status = err_builtin(E_ILLEGAL_OPTION, "fc", NULL);
+		return ;
+	}
 	if (!(fc.options & (1 << L_FLAG)))
 		ft_memdel((void **)(&history[get_last_history_index(history) - 1]));
-	if (get_first_and_last(proc, term, &fc) == -1)
+	if (get_first_and_last(proc, g_term, &fc) == -1)
 		return ;
 	if (options & (1 << L_FLAG))
-		fc_el(term, &fc, fc.options);
+		fc_el(g_term, &fc, fc.options);
 	else if (options & (1 << S_FLAG))
-		fc_es(term, &fc, fc.options);
+		fc_es(g_term, &fc, fc.options);
 	else
-		process->status = fc_rest(term, &fc);
+		process->status = fc_rest(g_term, &fc);
 }
