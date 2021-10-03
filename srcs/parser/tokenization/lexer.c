@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 15:32:48 by helvi             #+#    #+#             */
-/*   Updated: 2021/10/02 19:40:03 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/10/03 19:27:43 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ t_token	*lexer(char *input, t_term *term, int remove_quotes)
 	first = validate_operator_tokens(first);
 	if (term->intern_variables->flag_debug == 1)
 		debug_print_tokens(first, "validate_operator_tokens");
-	if (remove_quotes)
-		first = check_semicolon(first, term);
+	first = check_semicolon(first, term);
 	first = advanced_tokenization(first, term, remove_quotes);
 	if (term->intern_variables->flag_debug == 1)
 		debug_print_tokens(first, "advanced_tokenization");
