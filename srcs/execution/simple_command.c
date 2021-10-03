@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 13:04:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/27 17:51:16 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/03 22:59:21 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,11 @@ static int	parent_shell_return(t_process *proc, t_job *job, t_term *term)
 	job->job_id = get_next_job_pgid(term->jobs->next);
 	job->pgid = pid;
 	if (!job->bg)
-	{
 		tcsetpgrp(term->fd_stderr, pid);
-		job->notified = 1;
-	}
 	proc->pid = pid;
 	wait_to_get_status(proc, job->bg);
+	if (!job->bg && job->first_process->stopped == 0)
+		job->notified = 1;
 	tcsetpgrp(term->fd_stderr, getpgrp());
 	return (proc->status);
 }
