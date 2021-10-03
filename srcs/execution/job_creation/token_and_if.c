@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:39:06 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/10/02 19:28:17 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/10/03 18:52:28 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_job	*token_and_if(t_job *job, t_term *term, t_node *current)
 	}
 	if (left->first_process->pid == 0)
 	{
-		ft_printf("running command: %s\n", left->first_process->argv[0]);
 		left->first_process->status = simple_command(left->first_process,
 			left, term);
 	}
