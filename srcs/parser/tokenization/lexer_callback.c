@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/03 21:43:43 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/10/03 21:44:10 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/03 21:56:45 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,3 @@ void	lexer_callback(t_token **temp, t_token **command_first,
 	*command_first = callback(command_first, term, temp);
 	*temp = *command_first;
 }
-
