@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/10/02 12:24:30 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/10/03 20:34:08 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,10 +220,17 @@ t_token				*add_precedence(t_token *first);
 t_token				*shunting_yard(t_token *first);
 
 /*
-** parser/tokenization/lexer_functions.c
+** parser/tokenization/lexer_remove_fun.c
 */
 
 char				*remove_backslash(char *str);
+t_token				*delete_until_token(t_token *tkn);
+t_token				*delete_until(t_token *temp, t_term *term);
+
+/*
+** parser/tokenization/lexer_functions.c
+*/
+
 t_token				*check_semicolon(t_token *first, t_term *term);
 
 /*

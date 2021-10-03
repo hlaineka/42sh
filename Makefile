@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/10/02 12:16:52 by hlaineka         ###   ########.fr        #
+#    Updated: 2021/10/03 20:34:35 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -115,6 +115,7 @@ _SRC_TOKENIZATION = lexer.c \
 					dollar_suffix.c \
 					remove_token.c \
 					lexer_functions.c \
+					lexer_remove_fun.c \
 					alias_handling_functions.c
 
 
