@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:41:23 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/10/02 19:28:54 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/10/03 20:19:57 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	get_right(t_node *current, t_term *term)
 	}
 	if (right->first_process->pid == 0)
 		right->first_process->status = simple_command(right->first_process,
-			right, term);
+				right, term);
 }
 
 int	run_non_recursive(t_job *job, t_node *current, t_term *term)
