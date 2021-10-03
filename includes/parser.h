@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/10/03 20:34:08 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/03 21:53:24 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,6 +232,14 @@ t_token				*delete_until(t_token *temp, t_term *term);
 */
 
 t_token				*check_semicolon(t_token *first, t_term *term);
+
+/*
+** parser/tokenization/lexer_callback.c
+*/
+
+void				lexer_callback(t_token **temp, t_token **command_first,
+						t_term *term,
+						t_token *(*callback)(t_token **, t_term *, t_token **));
 
 /*
 ** parser/tokenization/lexer.c

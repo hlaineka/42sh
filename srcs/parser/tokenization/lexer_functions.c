@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 12:26:22 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/10/03 21:39:57 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/03 21:50:44 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,14 @@ static t_token	*run_or_if_command(t_token **command_first, t_term *term,
 	return (returnable);
 }
 
+/*
 static void	callback_and_set(t_token **temp, t_token **command_first,
 	t_term *term, t_token *(*callback)(t_token **, t_term *, t_token **))
 {
 	*command_first = callback(command_first, term, temp);
 	*temp = *command_first;
 }
+*/
 
 t_token	*check_semicolon(t_token *first, t_term *term)
 {
@@ -119,16 +121,16 @@ t_token	*check_semicolon(t_token *first, t_term *term)
 		if (!cmd_first)
 			cmd_first = temp;
 		if (temp->maintoken == tkn_semi && temp->next)
-			callback_and_set(&temp, &cmd_first, term, &run_semicolon_command);
+			lexer_callback(&temp, &cmd_first, term, &run_semicolon_command);
 		else if (temp->maintoken == tkn_semi && !temp->next && temp->prev)
 		{
 			temp->prev->next = NULL;
 			free_token(&temp);
 		}
 		else if (temp->maintoken == tkn_and_if)
-			callback_and_set(&temp, &cmd_first, term, &run_and_if_command);
+			lexer_callback(&temp, &cmd_first, term, &run_and_if_command);
 		else if (temp->maintoken == tkn_or_if)
-			callback_and_set(&temp, &cmd_first, term, &run_or_if_command);
+			lexer_callback(&temp, &cmd_first, term, &run_or_if_command);
 		else
 			temp = temp->next;
 	}
