@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/25 12:26:22 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/10/03 21:20:37 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/03 21:29:24 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,23 @@
 #include "execution.h"
 
 static t_token	*run_semicolon_command(t_token **command_first, t_term *term,
-	t_token *temp)
+	t_token **temp)
 {
 	t_node	*root;
 	t_token	*returnable;
 
-	returnable = temp->next;
+	returnable = (*temp)->next;
 	returnable->prev = NULL;
-	temp->next = NULL;
-	if (temp->prev)
+	(*temp)->next = NULL;
+	if ((*temp)->prev)
 	{
-		temp->prev->next = NULL;
-		free_token(&temp);
+		(*temp)->prev->next = NULL;
+		free_token(temp);
 	}
-	temp = advanced_tokenization(*command_first, term, 1);
+	*temp = advanced_tokenization(*command_first, term, 1);
 	if (term->intern_variables->flag_debug == 1)
 		debug_print_tokens(*command_first, "advanced_tokenization in semi");
-	root = ast_creator(temp, term);
+	root = ast_creator(*temp, term);
 	execute(root, term);
 	*command_first = NULL;
 	return (returnable);
