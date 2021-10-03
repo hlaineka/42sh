@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 19:41:23 by hlaineka          #+#    #+#             */
-/*   Updated: 2021/09/26 09:16:40 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/10/02 19:28:54 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void	get_right(t_node *current, t_term *term)
 	{
 		right->next = term->jobs->next;
 		term->jobs->next = right;
-		if (right->first_process->pid == 0)
-			right->first_process->status = simple_command(right->first_process,
-					right, term);
 	}
+	if (right->first_process->pid == 0)
+		right->first_process->status = simple_command(right->first_process,
+			right, term);
 }
 
 int	run_non_recursive(t_job *job, t_node *current, t_term *term)
