@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 13:16:33 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/08/25 22:19:01 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/10 10:46:46 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,5 @@ char	*get_param_str(char *param, t_term *term)
 		val = ft_getenv(param, term->intern_variables->intern);
 	if (!val)
 		return (ft_strdup(""));
-	return (ft_strdup(val));
+	return (ft_strdup_escape(val));
 }

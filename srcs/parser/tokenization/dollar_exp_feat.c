@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 16:00:21 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/10/10 10:16:36 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/10 10:46:17 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*substitute_replacement(char *param, t_term *term)
 	param[ft_strlen(param)] = '+';
 	if (!str || !str[0] || !replacement)
 		return (ft_strdup(""));
-	return (ft_strdup_escape(replacement));
+	return (ft_strdup(replacement));
 }
 
 char	*substitute_var_or_default(char *param, t_term *term)
@@ -57,7 +57,7 @@ char	*substitute_var_or_default(char *param, t_term *term)
 			return (ft_strdup(""));
 		str = dfl;
 	}
-	return (ft_strdup_escape(str));
+	return (ft_strdup(str));
 }
 
 char	*substitute_var_or_set_dfl(char *param, t_term *term)
@@ -79,7 +79,7 @@ char	*substitute_var_or_set_dfl(char *param, t_term *term)
 	param[ft_strlen(param)] = '=';
 	if (!str)
 		return (ft_strdup(""));
-	return (ft_strdup_escape(str));
+	return (ft_strdup(str));
 }
 
 char	*substitute_var_or_error_msg(char *param, t_term *term)
@@ -101,5 +101,5 @@ char	*substitute_var_or_error_msg(char *param, t_term *term)
 	}
 	param[ft_strlen(param)] = ':';
 	param[ft_strlen(param)] = '?';
-	return (ft_strdup_escape(str));
+	return (ft_strdup(str));
 }
