@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/22 14:36:53 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/30 19:37:01 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/10 10:19:30 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ char	*remove_longest_suffix(char *var, char *word)
 	i = ft_strlen(var) - 1;
 	ft_bzero(buf, 2056);
 	if (suffix_long(var, word, buf, i))
-		return (ft_strdup(buf));
+		return (ft_strdup_escape(buf));
 	if (var)
-		return (ft_strdup(var));
+		return (ft_strdup_escape(var));
 	return (NULL);
 }
 
@@ -85,9 +85,9 @@ static char	*remove_shortest_suffix(char *var, char *word)
 	i = ft_strlen(var) - 1;
 	ft_bzero(buf, 2056);
 	if (suffix_shortest(var, word, buf, i))
-		return (ft_strdup(buf));
+		return (ft_strdup_escape(buf));
 	if (var)
-		return (ft_strdup(var));
+		return (ft_strdup_escape(var));
 	return (NULL);
 }
 

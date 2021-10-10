@@ -6,7 +6,7 @@
 /*   By: hhuhtane <hhuhtane@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/30 18:16:31 by hhuhtane          #+#    #+#             */
-/*   Updated: 2021/09/27 21:09:53 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/10 10:11:47 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static char	*get_colon_minus(char *val, char *word)
 	{
 		if (!word)
 			return (ft_strnew(0));
-		return (ft_strdup(word));
+		return (ft_strdup_escape(word));
 	}
-	return (ft_strdup(val));
+	return (ft_strdup_escape(val));
 }
 
 static char	*get_colon_equal(char *name, char *val, char *word, t_term *term)
@@ -37,7 +37,7 @@ static char	*get_colon_equal(char *name, char *val, char *word, t_term *term)
 	val = ft_getenv(name, term->envp);
 	if (!val)
 		val = ft_getenv(name, term->intern_variables->intern);
-	return (ft_strdup(val));
+	return (ft_strdup_escape(val));
 }
 
 static char	*get_colon_question(char *name, char *val, char *word)
@@ -51,7 +51,7 @@ static char	*get_colon_question(char *name, char *val, char *word)
 			ft_printf_fd(STDERR_FILENO, "42sh: %s: %s\n", name, word);
 		return (NULL);
 	}
-	return (ft_strdup(val));
+	return (ft_strdup_escape(val));
 }
 
 static char	*get_colon_plus(char *val, char *word)
@@ -60,7 +60,7 @@ static char	*get_colon_plus(char *val, char *word)
 		return (ft_strnew(0));
 	if (!word)
 		return (ft_strnew(0));
-	return (ft_strdup(word));
+	return (ft_strdup_escape(word));
 }
 
 char	*get_param_colon_word(char *param, char *word, int opt, t_term *term)

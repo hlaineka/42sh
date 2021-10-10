@@ -6,7 +6,7 @@
 #    By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 12:00:35 by hlaineka          #+#    #+#              #
-#    Updated: 2021/10/03 21:49:17 by hhuhtane         ###   ########.fr        #
+#    Updated: 2021/10/10 10:08:54 by hhuhtane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,6 +117,7 @@ _SRC_TOKENIZATION = lexer.c \
 					lexer_callback.c \
 					lexer_functions.c \
 					lexer_remove_fun.c \
+					ft_strdup_escape.c \
 					alias_handling_functions.c
 
 

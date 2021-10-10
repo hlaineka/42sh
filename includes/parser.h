@@ -6,7 +6,7 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 11:58:30 by helvi             #+#    #+#             */
-/*   Updated: 2021/10/03 21:53:24 by hhuhtane         ###   ########.fr       */
+/*   Updated: 2021/10/10 10:09:42 by hhuhtane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -345,6 +345,7 @@ char				*substitute_var_without_prefix(char *param, t_term *term);
 char				*substitute_var_without_suffix(char *param, t_term *term);
 char				*substitute_replacement(char *param, t_term *term);
 char				*substitute_var_or_error_msg(char *param, t_term *term);
+char				*ft_strdup_escape(const char *s);
 
 /*
 ** parser/tokenization/word_assignment_marking.c
