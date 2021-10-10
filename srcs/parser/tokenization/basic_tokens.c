@@ -6,12 +6,13 @@
 /*   By: hlaineka <hlaineka@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/14 11:59:34 by helvi             #+#    #+#             */
-/*   Updated: 2021/09/24 13:47:57 by hlaineka         ###   ########.fr       */
+/*   Updated: 2021/10/10 10:11:44 by hlaineka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "libft.h"
+#include "includes.h"
 
 /*
 ** The basic tokenization read the input string and divides it into words,
@@ -53,6 +54,11 @@ static int	get_tokenstr(char **source, int *maintoken, char *returnable)
 		i++;
 	}
 	*source = *source + i;
+	if (ft_strlen(returnable) > STR_LENGTH)
+	{
+		ft_printf_fd(2, "42sh: parsererror: word too long\n");
+		return (-1);
+	}
 	return (0);
 }
 
